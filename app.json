@@ -1,0 +1,4107 @@
+{
+  "id": "se.swefa",
+  "name": {
+    "en": "Swedish Weather Forecast"
+  },
+  "version": "0.1.9",
+  "compatibility": ">=1.5.0",
+  "sdk": 2,
+  "description": {
+    "en": "Weather information and prognoses for Sweden",
+    "sv": "Väderinformation och prognoser för Sverige"
+  },
+  "author": {
+    "name": "Johan Bendz",
+    "email": "johan_bendz@hotmail.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Johan Bendz",
+        "email": "johan_bendz@hotmail.com"
+      }
+    ]
+  },
+  "category": [ "climate" ],
+  "brandColor": "#689eb8",
+  "permissions": [
+  "homey:manager:geolocation"
+  ],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "drivers": [
+    {
+      "id": "weather",
+      "name": {
+        "en": "Swedish Weather Forecast from SMHI",
+        "sv": "Svensk Väderprognos från SMHI"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "forecast_for_cp",
+        "measure_weather_situation_cp",
+        "measure_air_temperature_cp",
+        "measure_precipitation_situation_cp",
+        "air_temperature_feels_like_cp",
+        "measure_wind_direction_heading_cp",
+        "measure_relative_humidity_cp",
+        "measure_wind_speed_cp",
+        "measure_air_pressure_cp",
+        "wind_gust_speed_cp",
+        "measure_thunder_probability_cp",
+        "horizontal_visibility_cp",
+        "mean_value_of_total_cloud_cover_cp",
+        "mean_value_of_low_level_cloud_cover_cp",
+        "mean_value_of_medium_level_cloud_cover_cp",
+        "mean_value_of_high_level_cloud_cover_cp",
+        "minimum_precipitation_intensity_cp",
+        "maximum_precipitation_intensity_cp",
+        "percent_of_precipitation_in_frozen_form_cp",
+        "mean_precipitation_intensity_cp",
+        "median_precipitation_intensity_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [{
+        "id": "list_devices",
+        "template": "list_devices",
+        "navigation": {
+          "next": "add_devices"
+        }
+      },
+      {
+        "id": "add_devices",
+        "template": "add_devices"
+      }],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Weather settings"
+          },
+          "children": [
+          {
+          "id": "fcTime",
+          "type": "radio",
+          "label": {
+            "en": "Select forecast"
+          },
+          "value": "1",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Now"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "1 hour"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "2 hours"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "3 hours"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "4 hours"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "5 hours"
+              }
+            },
+            {
+              "id": "9",
+              "label": {
+                "en": "8 hours"
+              }
+            },
+            {
+              "id": "13",
+              "label": {
+                "en": "12 hours"
+              }
+            },
+            {
+              "id": "25",
+              "label": {
+                "en": "24 hours"
+              }
+            },
+            {
+              "id": "37",
+              "label": {
+                "en": "36 hours"
+              }
+            },
+            {
+              "id": "44",
+              "label": {
+                "en": "2 days"
+              }
+            },
+            {
+              "id": "47",
+              "label": {
+                "en": "3 days"
+              }
+            },
+            {
+              "id": "51",
+              "label": {
+                "en": "4 days"
+              }
+            },
+            {
+              "id": "55",
+              "label": {
+                "en": "5 days"
+              }
+            },
+            {
+              "id": "59",
+              "label": {
+                "en": "6 days"
+              }
+            },
+            {
+              "id": "63",
+              "label": {
+                "en": "7 days"
+              }
+            },
+            {
+              "id": "65",
+              "label": {
+                "en": "8 days"
+              }
+            }
+          ]
+          }]
+        }
+      ]
+    },
+    {
+      "id": "pollen",
+      "name": {
+        "en": "Swedish Pollen Forecast",
+        "sv": "Svensk Pollenprognos"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "al_pollen_0",
+        "alm_pollen_0",
+        "ambrosia_pollen_0",
+        "bjork_pollen_0",
+        "bok_pollen_0",
+        "ek_pollen_0",
+        "gras_pollen_0",
+        "grabo_pollen_0",
+        "hassel_pollen_0",
+        "salg_vide_pollen_0",
+        "al_pollen_1",
+        "alm_pollen_1",
+        "ambrosia_pollen_1",
+        "bjork_pollen_1",
+        "bok_pollen_1",
+        "ek_pollen_1",
+        "gras_pollen_1",
+        "grabo_pollen_1",
+        "hassel_pollen_1",
+        "salg_vide_pollen_1",
+        "al_pollen_2",
+        "alm_pollen_2",
+        "ambrosia_pollen_2",
+        "bjork_pollen_2",
+        "bok_pollen_2",
+        "ek_pollen_2",
+        "gras_pollen_2",
+        "grabo_pollen_2",
+        "hassel_pollen_2",
+        "salg_vide_pollen_2"
+      ],
+      "images": {
+        "large": "/drivers/pollen/assets/images/large.png",
+        "small": "/drivers/pollen/assets/images/small.png"
+      },
+      "pair": [{
+        "id": "list_devices",
+        "template": "list_devices",
+        "navigation": {
+          "next": "add_devices"
+        }
+      },
+      {
+        "id": "add_devices",
+        "template": "add_devices"
+      }],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Pollen settings"
+          },
+          "children": [
+          {
+          "id": "radio1",
+          "type": "radio",
+          "label": {
+            "en": "Select pollen city"
+          },
+          "value": "97",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Älvsbyn"
+              }
+            },
+            {
+              "id": "101",
+              "label": {
+                "en": "Västervik"
+              }
+            },
+            {
+              "id": "102",
+              "label": {
+                "en": "Östersund"
+              }
+            },
+            {
+              "id": "100",
+              "label": {
+                "en": "Visby"
+              }
+            },
+            {
+              "id": "99",
+              "label": {
+                "en": "Umeå"
+              }
+            },
+            {
+              "id": "98",
+              "label": {
+                "en": "Sundsvall"
+              }
+            },
+            {
+              "id": "97",
+              "label": {
+                "en": "Stockholm"
+              }
+            },
+            {
+              "id": "96",
+              "label": {
+                "en": "Skövde"
+              }
+            },
+            {
+              "id": "95",
+              "label": {
+                "en": "Nässjö"
+              }
+            },
+            {
+              "id": "94",
+              "label": {
+                "en": "Norrköping"
+              }
+            },
+            {
+              "id": "93",
+              "label": {
+                "en": "Malmö"
+              }
+            },
+            {
+              "id": "91",
+              "label": {
+                "en": "Kristianstad"
+              }
+            },
+            {
+              "id": "90",
+              "label": {
+                "en": "Jönköping"
+              }
+            },
+            {
+              "id": "85",
+              "label": {
+                "en": "Hässleholm"
+              }
+            },
+            {
+              "id": "84",
+              "label": {
+                "en": "Göteborg"
+              }
+            },
+            {
+              "id": "64",
+              "label": {
+                "en": "Gävle"
+              }
+            },
+            {
+              "id": "63",
+              "label": {
+                "en": "Forshaga"
+              }
+            },
+            {
+              "id": "62",
+              "label": {
+                "en": "Eskilstuna"
+              }
+            },
+            {
+              "id": "61",
+              "label": {
+                "en": "Bräkne-Hoby"
+              }
+            },
+            {
+              "id": "60",
+              "label": {
+                "en": "Borlänge"
+            }
+            }
+          ]
+          }]
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "triggers": [
+      {
+        "id": "WeatherSituationChange",
+        "title": {
+            "en": "Weather change"
+        },
+        "tokens": [
+        {
+          "name": "measure_weather_situation_cp",
+          "title": {
+            "en": "Weather situation"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedSituation",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "AirTemperatureChange",
+        "title": {
+            "en": "Air temperature change"
+        },
+        "tokens": [
+        {
+          "name": "measure_air_temperature_cp",
+          "title": {
+            "en": "Air temperature"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedAirTemperature",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "WindSpeedChange",
+        "title": {
+            "en": "Wind speed change"
+        },
+        "tokens": [
+        {
+          "name": "measure_wind_speed_cp",
+          "title": {
+            "en": "Wind speed"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedWindSpeed",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "WindDirectionHeadingChange",
+        "title": {
+            "en": "Wind direction change"
+        },
+        "tokens": [
+        {
+          "name": "measure_wind_direction_heading_cp",
+          "title": {
+            "en": "Wind direction"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedWindDirection",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "RelativeHumidityChange",
+        "title": {
+            "en": "Relative humidity change"
+        },
+        "tokens": [
+        {
+          "name": "measure_relative_humidity_cp",
+          "title": {
+            "en": "Relative humidity"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedRelativeHumidity",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "AirPressureChange",
+        "title": {
+            "en": "Air pressure change"
+        },
+        "tokens": [
+        {
+          "name": "measure_air_pressure_cp",
+          "title": {
+            "en": "Air pressure"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedAirPressure",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "ThunderProbabilityChange",
+        "title": {
+            "en": "Thunderstorm warning change"
+        },
+        "tokens": [
+        {
+          "name": "measure_thunder_probability_cp",
+          "title": {
+            "en": "Thunderstorm warning"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedThunderProbability",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "MeanValueOfTotalCloudCoverChange",
+        "title": {
+            "en": "Cloud cover change"
+        },
+        "tokens": [
+        {
+          "name": "mean_value_of_total_cloud_cover_cp",
+          "title": {
+            "en": "Cloud cover"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedMeanValueOfTotalCloudCover",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
+        "id": "al_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Al pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "al_pollen_0",
+          "title": {
+            "en": "Al idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_al_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "al_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Al pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "al_pollen_1",
+          "title": {
+            "en": "Al imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_al_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "al_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Al pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "al_pollen_2",
+          "title": {
+            "en": "Al i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_al_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "alm_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Alm pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "alm_pollen_0",
+          "title": {
+            "en": "Alm idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_alm_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "alm_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Alm pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "alm_pollen_1",
+          "title": {
+            "en": "Alm imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_alm_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "alm_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Alm pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "alm_pollen_2",
+          "title": {
+            "en": "Alm i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_alm_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ambrosia_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Ambrosia pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "ambrosia_pollen_0",
+          "title": {
+            "en": "Ambrosia idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ambrosia_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ambrosia_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Ambrosia pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "ambrosia_pollen_1",
+          "title": {
+            "en": "Ambrosia imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ambrosia_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ambrosia_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Ambrosia pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "ambrosia_pollen_2",
+          "title": {
+            "en": "Ambrosia i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ambrosia_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bjork_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Björk pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "bjork_pollen_0",
+          "title": {
+            "en": "Björk idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bjork_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bjork_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Björk pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "bjork_pollen_1",
+          "title": {
+            "en": "Björk imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bjork_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bjork_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Björk pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "bjork_pollen_2",
+          "title": {
+            "en": "Björk i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bjork_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bok_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Bok pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "bok_pollen_0",
+          "title": {
+            "en": "Bok idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bok_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bok_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Bok pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "bok_pollen_1",
+          "title": {
+            "en": "Bok imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bok_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "bok_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Bok pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "bok_pollen_2",
+          "title": {
+            "en": "Bok i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bok_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ek_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Ek pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "ek_pollen_0",
+          "title": {
+            "en": "Ek idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ek_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ek_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Ek pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "ek_pollen_1",
+          "title": {
+            "en": "Ek imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ek_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "ek_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Ek pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "ek_pollen_2",
+          "title": {
+            "en": "Ek i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_ek_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "gras_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Gräs pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "gras_pollen_0",
+          "title": {
+            "en": "Gräs idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_gras_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "gras_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Gräs pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "gras_pollen_1",
+          "title": {
+            "en": "Gräs imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_gras_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "gras_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Gräs pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "gras_pollen_2",
+          "title": {
+            "en": "Gräs i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_gras_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "grabo_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Gråbo pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "grabo_pollen_0",
+          "title": {
+            "en": "Gråbo idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_grabo_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "grabo_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Gråbo pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "grabo_pollen_1",
+          "title": {
+            "en": "Gråbo imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_grabo_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "grabo_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Gråbo pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "grabo_pollen_2",
+          "title": {
+            "en": "Gråbo i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_grabo_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "hassel_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Hassel pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "hassel_pollen_0",
+          "title": {
+            "en": "Hassel idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_hassel_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "hassel_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Hassel pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "hassel_pollen_1",
+          "title": {
+            "en": "Hassel imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_hassel_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "hassel_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Hassel pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "hassel_pollen_2",
+          "title": {
+            "en": "Hassel i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_hassel_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "salg_vide_pollen_0_Change",
+        "title": {
+            "en": "Ändrad nivå av Sälg/Vide pollen idag"
+        },
+        "tokens": [
+        {
+          "name": "salg_vide_pollen_0",
+          "title": {
+            "en": "Sälg/Vide idag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_salg_vide_pollen_0",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "salg_vide_pollen_1_Change",
+        "title": {
+            "en": "Ändrad nivå av Sälg/Vide pollen imorgon"
+        },
+        "tokens": [
+        {
+          "name": "salg_vide_pollen_1",
+          "title": {
+            "en": "Sälg/Vide imorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_salg_vide_pollen_1",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      },
+      {
+        "id": "salg_vide_pollen_2_Change",
+        "title": {
+            "en": "Ändrad nivå av Sälg/Vide pollen i övermorgon"
+        },
+        "tokens": [
+        {
+          "name": "salg_vide_pollen_2",
+          "title": {
+            "en": "Sälg/Vide i övermorgon"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_salg_vide_pollen_2",
+					"type": "device",
+					"filter": "driver_id=pollen"
+				}]
+      }
+
+        ],
+    "conditions": [
+      {
+        "id": "measure_weather_situation_cp",
+        "title": {
+          "en": "Weather situation !{{is|isn't}}"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+						"name": "weather_situation_condition",
+						"type": "dropdown",
+						"values": [
+              {
+								"id": "Clearsky",
+								"label": {
+									"en": "Clear sky"
+								}
+							},
+							{
+								"id": "Nearlyclearsky",
+								"label": {
+									"en": "Nearly clear sky"
+								}
+							},
+							{
+								"id": "Variablecloudiness",
+								"label": {
+									"en": "Variable cloudiness"
+								}
+							},
+							{
+								"id": "Halfclearsky",
+								"label": {
+									"en": "Halfclear sky"
+								}
+							},
+							{
+								"id": "Cloudysky",
+								"label": {
+									"en": "Cloudy sky"
+								}
+							},
+							{
+								"id": "Overcast",
+								"label": {
+									"en": "Overcast"
+								}
+							},
+							{
+								"id": "Fog",
+								"label": {
+									"en": "Fog"
+								}
+							},
+							{
+								"id": "Lightrainshowers",
+								"label": {
+									"en": "Light rain showers"
+								}
+              },
+              {
+								"id": "Moderaterainshowers",
+								"label": {
+									"en": "Moderate rain showers"
+								}
+              },
+              {
+								"id": "Heavyrainshowers",
+								"label": {
+									"en": "Heavy rain showers"
+								}
+              },
+              {
+								"id": "Thunderstorm",
+								"label": {
+									"en": "Thunderstorm"
+								}
+              },
+              {
+								"id": "Lightsleetshowers",
+								"label": {
+									"en": "Light sleet showers"
+								}
+              },
+              {
+								"id": "Moderatesleetshowers",
+								"label": {
+									"en": "Moderate sleet showers"
+								}
+              },
+              {
+								"id": "Heavysleetshowers",
+								"label": {
+									"en": "Heavy sleet showers"
+								}
+              },
+              {
+								"id": "Lightsnowshowers",
+								"label": {
+									"en": "Light snow showers"
+								}
+              },
+              {
+								"id": "Moderatesnowshowers",
+								"label": {
+									"en": "Moderate snow showers"
+								}
+              },
+              {
+								"id": "Heavysnowshowers",
+								"label": {
+									"en": "Heavy snow showers"
+								}
+              },
+              {
+								"id": "Lightrain",
+								"label": {
+									"en": "Light rain"
+								}
+              },
+              {
+								"id": "Moderaterain",
+								"label": {
+									"en": "Moderate rain"
+								}
+              },
+              {
+								"id": "Heavyrain",
+								"label": {
+									"en": "Heavy rain"
+								}
+              },
+              {
+								"id": "Thunder",
+								"label": {
+									"en": "Thunder"
+								}
+              },
+              {
+								"id": "Lightsleet",
+								"label": {
+									"en": "Light sleet"
+								}
+              },
+              {
+								"id": "Moderatesleet",
+								"label": {
+									"en": "Moderate sleet"
+								}
+              },
+              {
+								"id": "Heavysleet",
+								"label": {
+									"en": "Heavy sleet"
+								}
+              },
+              {
+								"id": "Lightsnowfall",
+								"label": {
+									"en": "Light snowfall"
+								}
+              },
+              {
+								"id": "Moderatesnowfall",
+								"label": {
+									"en": "Moderate snowfall"
+								}
+              },
+              {
+								"id": "Heavysnowfall",
+								"label": {
+									"en": "Heavy snowfall"
+								}
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "measure_air_temperature_cp",
+        "title": {
+          "en": "Air temperature !{{is|isn't}} above"
+        },
+        "hint": {
+					"en": "Air temperature in °C."
+				},
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+						"name": "degree",
+            "type": "number"
+          }
+          ]
+      },
+      {
+        "id": "measure_wind_speed_cp",
+        "title": {
+          "en": "Wind speed !{{is|isn't}} above"
+        },
+        "hint": {
+					"en": "Wind speed in m/s."
+				},
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "mps",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "measure_wind_direction_heading_cp",
+        "title": {
+          "en": "Wind direction heading !{{is|isn't}}"
+        },
+        "hint": {
+					"en": "Compass wind direction."
+				},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "direction",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "North",
+              "label": {
+                "en": "North"
+              }
+            },
+            {
+              "id": "North-West",
+              "label": {
+                "en": "North-West"
+              }
+            },
+            {
+              "id": "West",
+              "label": {
+                "en": "West"
+              }
+            },
+            {
+              "id": "South-West",
+              "label": {
+                "en": "South-West"
+              }
+            },
+            {
+              "id": "South",
+              "label": {
+                "en": "South"
+              }
+            },
+            {
+              "id": "South-West",
+              "label": {
+                "en": "South-West"
+              }
+            },
+            {
+              "id": "East",
+              "label": {
+                "en": "East"
+              }
+            },
+            {
+              "id": "North-East",
+              "label": {
+                "en": "North-East"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "measure_relative_humidity_cp",
+        "title": {
+          "en": "Relative humidity !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Relative humidity in %."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "percent",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "measure_air_pressure_cp",
+        "title": {
+          "en": "Air pressure !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Air pressure in hPa."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "hpa",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "measure_thunder_probability_cp",
+        "title": {
+          "en": "Thunder probability !{{is|isn't}} above"
+        },
+        "hint": {
+  			"en": "Thunder probability in %."
+				},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "percent",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_total_cloud_cover_cp",
+        "title": {
+          "en": "Total cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Total cloud cover in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "wind_gust_speed_cp",
+        "title": {
+          "en": "Wind gust speed !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Wind gust speed in m/s."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "mps",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "horizontal_visibility_cp",
+        "title": {
+          "en": "Horizontal visibility !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Horizontal visibility in km."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "km",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "measure_precipitation_situation_cp",
+        "title": {
+          "en": "There !{{will|will not }} be "
+        },
+        "hint": {
+					"en": "Will there be rain or snow."
+				},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "precipitation",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "RainSnow",
+              "label": {
+                "en": "Rain or Snow"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "mean_precipitation_intensity_cp",
+        "title": {
+          "en": "Mean precipitation intensity !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Precipitation in mm/h."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "mmh",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "al_pollen_0",
+        "title": {
+          "en": "Alpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Alpollen idag."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "al_pollen_1",
+        "title": {
+          "en": "Alpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Alpollen imorgon ."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "al_pollen_2",
+        "title": {
+          "en": "Alpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Alpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "alm_pollen_0",
+        "title": {
+          "en": "Almpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Almpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "alm_pollen_1",
+        "title": {
+          "en": "Almpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Almpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "alm_pollen_2",
+        "title": {
+          "en": "Almpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Almpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ambrosia_pollen_0",
+        "title": {
+          "en": "Ambrosiapollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ambrosiapollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ambrosia_pollen_1",
+        "title": {
+          "en": "Ambrosiapollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ambrosiapollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ambrosia_pollen_2",
+        "title": {
+          "en": "Ambrosiapollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ambrosiapollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bjork_pollen_0",
+        "title": {
+          "en": "Björkpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Björkpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bjork_pollen_1",
+        "title": {
+          "en": "Björkpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Björkpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bjork_pollen_2",
+        "title": {
+          "en": "Björkpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Björkpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bok_pollen_0",
+        "title": {
+          "en": "Bokpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Bokpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bok_pollen_1",
+        "title": {
+          "en": "Bokpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Bokpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "bok_pollen_2",
+        "title": {
+          "en": "Bokpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Bokpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ek_pollen_0",
+        "title": {
+          "en": "Ekpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ekpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ek_pollen_1",
+        "title": {
+          "en": "Ekpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ekpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "ek_pollen_2",
+        "title": {
+          "en": "Ekpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Ekpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "gras_pollen_0",
+        "title": {
+          "en": "Gräspollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på gräspollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "gras_pollen_1",
+        "title": {
+          "en": "Gräspollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på gräspollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "gras_pollen_2",
+        "title": {
+          "en": "Gräspollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på gräspollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "grabo_pollen_0",
+        "title": {
+          "en": "Gråbopollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Gråbopollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "grabo_pollen_1",
+        "title": {
+          "en": "Gråbopollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Gråbopollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "grabo_pollen_2",
+        "title": {
+          "en": "Gråbopollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Gråbopollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "hassel_pollen_0",
+        "title": {
+          "en": "Hasselpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Hasselpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "hassel_pollen_1",
+        "title": {
+          "en": "Hasselpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Hasselpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "hassel_pollen_2",
+        "title": {
+          "en": "Hasselpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Hasselpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "salg_vide_pollen_0",
+        "title": {
+          "en": "Sälg/Videpollen är idag!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Sälg/Videpollen idag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "salg_vide_pollen_1",
+        "title": {
+          "en": "Sälg/Videpollen är imorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Sälg/Videpollen imorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      },
+      {
+        "id": "salg_vide_pollen_2",
+        "title": {
+          "en": "Sälg/Videpollen är i övermorgon!{{| inte}} högre än"
+        },
+        "hint": {
+	 			"en": "Nivån på Sälg/Videpollen i övermorgon."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollen"
+        },
+        {
+          "name": "halt",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Inga halter"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Låga halter"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Låga-måttliga halter"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Måttliga halter"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Måttliga-höga halter"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Höga halter"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Mycket höga halter"
+              }
+            }
+          ] 
+        }
+        ]
+      }
+    ],
+    "actions": []
+    },
+  "capabilities": {
+    "al_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Al idag",
+        "sv": "Al idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/al.svg"
+    },
+    "alm_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Alm idag",
+        "sv": "Alm idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/alm.svg"
+    },
+    "ambrosia_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Ambrosia idag",
+        "sv": "Ambrosia idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ambrosia.svg"
+    },
+    "bjork_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Björk idag",
+        "sv": "Björk idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bjork.svg"
+    },
+    "bok_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Bok idag",
+        "sv": "Bok idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bok.svg"
+    },
+    "ek_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Ek idag",
+        "sv": "Ek idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ek.svg"
+    },
+    "gras_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Gräs idag",
+        "sv": "Gräs idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gras.svg"
+    },
+    "grabo_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Gråbo idag",
+        "sv": "Gråbo idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "hassel_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Hassel idag",
+        "sv": "Hassel idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hassel.svg"
+    },
+    "salg_vide_pollen_0":{
+      "type": "string",
+      "title": {
+        "en": "Sälg/Vide idag",
+        "sv": "Sälg/Vide idag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/salg_vide.svg"
+    },
+
+    "al_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Al imorgon",
+        "sv": "Al imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/al.svg"
+    },
+    "alm_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Alm imorgon",
+        "sv": "Alm imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/alm.svg"
+    },
+    "ambrosia_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Ambrosia imorgon",
+        "sv": "Ambrosia imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ambrosia.svg"
+    },
+    "bjork_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Björk imorgon",
+        "sv": "Björk imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bjork.svg"
+    },
+    "bok_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Bok imorgon",
+        "sv": "Bok imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bok.svg"
+    },
+    "ek_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Ek imorgon",
+        "sv": "Ek imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ek.svg"
+    },
+    "gras_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Gräs imorgon",
+        "sv": "Gräs imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gras.svg"
+    },
+    "grabo_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Gråbo imorgon",
+        "sv": "Gråbo imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "hassel_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Hassel imorgon",
+        "sv": "Hassel imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hassel.svg"
+    },
+    "salg_vide_pollen_1":{
+      "type": "string",
+      "title": {
+        "en": "Sälg/Vide imorgon",
+        "sv": "Sälg/Vide imorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/salg_vide.svg"
+    },
+    "al_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Al i övermorgon",
+        "sv": "Al i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/al.svg"
+    },
+    "alm_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Alm i övermorgon",
+        "sv": "Alm i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/alm.svg"
+    },
+    "ambrosia_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Ambrosia i övermorgon",
+        "sv": "Ambrosia i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ambrosia.svg"
+    },
+    "bjork_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Björk i övermorgon",
+        "sv": "Björk i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bjork.svg"
+    },
+    "bok_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Bok i övermorgon",
+        "sv": "Bok i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bok.svg"
+    },
+    "ek_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Ek i övermorgon",
+        "sv": "Ek i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ek.svg"
+    },
+    "gras_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Gräs i övermorgon",
+        "sv": "Gräs i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gras.svg"
+    },
+    "grabo_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Gråbo i övermorgon",
+        "sv": "Gråbo i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "hassel_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Hassel i övermorgon",
+        "sv": "Hassel i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hassel.svg"
+    },
+    "salg_vide_pollen_2":{
+      "type": "string",
+      "title": {
+        "en": "Sälg/Vide i övermorgon",
+        "sv": "Sälg/Vide i övermorgon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/salg_vide.svg"
+    },
+    "forecast_for_cp":{
+      "type": "string",
+      "title": {
+        "en": "Forecast for"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "measure_weather_situation_cp":{
+      "type": "string",
+      "title": {
+        "en": "Weather situation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "measure_air_pressure_cp":{
+      "type": "number",
+      "title": {
+        "en": "Air pressure"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "hPa",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/barometer.svg"
+    },
+    "air_temperature_feels_like_cp":{
+      "type": "number",
+      "title": {
+        "en": "Feels like (AT)"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "°C",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/thermometer.svg"
+    },
+    "measure_air_temperature_cp":{
+      "type": "number",
+      "title": {
+        "en": "Air temperature"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "°C",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/thermometer.svg"
+    },
+    "horizontal_visibility_cp":{
+      "type": "number",
+      "title": {
+        "en": "Horizontal visibility"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "km",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/visibility.svg"
+    },
+    "wind_direction_cp":{
+      "type": "number",
+      "title": {
+        "en": "Wind direction"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "degree",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/wind_direction.svg"
+    },
+    "measure_wind_speed_cp":{
+      "type": "number",
+      "title": {
+        "en": "Wind speed"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "m/s",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/anemometer.svg"
+    },
+    "measure_relative_humidity_cp":{
+      "type": "number",
+      "title": {
+        "en": "Relative humidity"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hydrometer.svg"
+    },
+    "measure_thunder_probability_cp":{
+      "type": "number",
+      "title": {
+        "en": "Thunder probability"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/thunder.svg"
+    },
+    "mean_value_of_total_cloud_cover_cp":{
+      "type": "number",
+      "title": {
+        "en": "Total cloud cover"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "(0-8)",
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "mean_value_of_low_level_cloud_cover_cp":{
+      "type": "number",
+      "title": {
+        "en": "Cloud cover 0-2500 meters"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "(0-8)",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/low_cloud.svg"
+    },
+    "mean_value_of_medium_level_cloud_cover_cp":{
+      "type": "number",
+      "title": {
+        "en": "Cloud cover 2500-6000 meters"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "(0-8)",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/medium_cloud.svg"
+    },
+    "mean_value_of_high_level_cloud_cover_cp":{
+      "type": "number",
+      "title": {
+        "en": "Cloud cover above 6000 meters"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "(0-8)",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/high_cloud.svg"
+    },
+    "wind_gust_speed_cp":{
+      "type": "number",
+      "title": {
+        "en": "Wind gust speed"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "m/s",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gust.svg"
+    },
+    "minimum_precipitation_intensity_cp":{
+      "type": "number",
+      "title": {
+        "en": "Minimum precipitation intensity"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "mm/h",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "maximum_precipitation_intensity_cp":{
+      "type": "number",
+      "title": {
+        "en": "Maximum precipitation intensity"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "mm/h",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "percent_of_precipitation_in_frozen_form_cp":{
+      "type": "number",
+      "title": {
+        "en": "Percent of precipitation in frozen form"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "precipitation_category_cp":{
+      "type": "number",
+      "title": {
+        "en": "Precipitation category"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "mean_precipitation_intensity_cp":{
+      "type": "number",
+      "title": {
+        "en": "Mean precipitation intensity"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "mm/h",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "median_precipitation_intensity_cp":{
+      "type": "number",
+      "title": {
+        "en": "Median precipitation intensity"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "mm/h",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "weather_symbol_cp":{
+      "type": "number",
+      "title": {
+        "en": "Weather symbol"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "measure_precipitation_situation_cp":{
+      "type": "string",
+      "title": {
+        "en": "Precipitation situation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
+    },
+    "measure_wind_direction_heading_cp":{
+      "type": "string",
+      "title": {
+        "en": "Wind direction"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/wind_direction.svg"
+    }
+  }
+}

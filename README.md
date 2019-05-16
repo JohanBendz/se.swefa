@@ -16,3 +16,4 @@ Known issues:
 - if you add more than one of each device it will look great and enable to have several devices with separate data/hours/cities... problem is that once you restart the app they all fall back to one and source of data. (so don't.. or uppdate settings on them manually after reboot/restart of app).
 
 
+

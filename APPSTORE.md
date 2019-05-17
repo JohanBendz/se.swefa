@@ -10,11 +10,13 @@
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/WeatherForecastScreen.PNG">
 </a>
+Settings: Select a point in time for forecasts  (hours/days ahead).
 
 ### Pollen Level Data - in Swedish only
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/PollenLevelScreen.PNG">
 </a>
+Settings: Select a city from the list to have 3 day Pollen Level forecast for that area. 
 
 ## Feedback:
 * Please post requests in the [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/) topic on the Athom Community forum.

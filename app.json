@@ -10,6 +10,10 @@
     "en": "Weather information and prognoses for Sweden",
     "sv": "Väderinformation och prognoser för Sverige"
   },
+  "tags": {
+    "en": ["Climate", "Weather", "Pollen", "Forecast", "Temperature", "Sweden"],
+    "sv": ["Klimat", "Väder", "Pollen", "Prognos", "Temperatur", "Sverige"]
+  },
   "author": {
     "name": "Johan Bendz",
     "email": "johan_bendz@hotmail.com"

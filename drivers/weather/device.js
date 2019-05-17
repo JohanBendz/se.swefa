@@ -32,9 +32,6 @@ let forecastFor = "";
 let forecastTime = "";
 let settings = "";
 
-/* // define FlowCard variables
-let weatherCondition = new Homey.FlowCardCondition('weather_condition'); */
-
 class WeatherDevice extends Homey.Device {
 
 	onInit() {

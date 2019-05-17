@@ -6,12 +6,12 @@
 * 0-8 days of Weather Forecast based on Homey geolocation.
 * 0-3 days of Pollen Level Forecast based on choosen Swedish city.
 
-### Weather Forecast Data
+### Weather Forecast Data - in English
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/WeatherForecastScreen.PNG">
 </a>
 
-### Pollen Level Data
+### Pollen Level Data - in Swedish only
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/PollenLevelScreen.PNG">
 </a>

@@ -8,12 +8,12 @@
 
 ### Weather Forecast Data
 <a href="https://github.com/JohanBendz/se.swefa">
-  <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/WeatherForecastScreen.png">
+  <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/WeatherForecastScreen.PNG">
 </a>
 
 ### Pollen Level Data
 <a href="https://github.com/JohanBendz/se.swefa">
-  <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/PollenLevelScreen.png">
+  <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/PollenLevelScreen.PNG">
 </a>
 
 ## Feedback:

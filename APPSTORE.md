@@ -9,10 +9,12 @@
 ### Weather Forecast Data
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/master/assets/images/WeatherForecastScreen.png">
+</a>
 
 ### Pollen Level Data
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/master/assets/images/PollenLevelScreen.png">
+</a>
 
 ## Feedback:
 * Please post requests in the [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/) topic on the Athom Community forum.

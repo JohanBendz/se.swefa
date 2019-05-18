@@ -227,7 +227,22 @@ class WeatherDevice extends Homey.Device {
 		};
 
 		// setting forecastFor variable based on forecastTime value
-		forecastFor = (data.timeSeries[forecastTime]["validTime"]).replace("T", " ").replace("Z", "");
+		let fcTimeO = new Date(data.timeSeries[forecastTime]["validTime"]);
+		var month = [];
+		month[0] = "January";
+		month[1] = "February";
+		month[2] = "March";
+		month[3] = "April";
+		month[4] = "May";
+		month[5] = "June";
+		month[6] = "July";
+		month[7] = "August";
+		month[8] = "September";
+		month[9] = "October";
+		month[10] = "November";
+		month[11] = "December";
+		var fcTimeM = month[fcTimeO.getMonth()];
+		forecastFor = (fcTimeM+" "+fcTimeO.getDay()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
 		console.log(forecastFor);
 
 		// switch from number to string

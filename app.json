@@ -4,7 +4,7 @@
     "en": "Swedish Weather Forecast"
   },
   "version": "0.2.0",
-  "compatibility": ">=1.5.0",
+  "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
     "en": "Weather information and prognoses for Sweden",

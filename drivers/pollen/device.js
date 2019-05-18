@@ -30,7 +30,7 @@ class PollenDevice extends Homey.Device {
 
 		// get current settings
 		settings = this.getSettings();
-		pollenCity = parseInt(settings.radio1);
+		pollenCity = parseInt(settings.pCity);
 
 		// if settings are blank default to this (97=Stockholm)
 		if(!pollenCity) {
@@ -270,10 +270,10 @@ class PollenDevice extends Homey.Device {
 
 	// on changed city settings
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
-		if (changedKeysArr == 'radio1') {
-			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.radio1 + ' to ' + newSettingsObj.radio1) + '. Fetching pollen levels for new city.';
-//			await this.setSettings('pollenCity', newSettingsObj.radio1);
-			pollenCity = parseInt(newSettingsObj.radio1);
+		if (changedKeysArr == 'pCity') {
+			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.pCity + ' to ' + newSettingsObj.pCity) + '. Fetching pollen levels for new city.';
+//			await this.setSettings('pollenCity', newSettingsObj.pCity);
+			pollenCity = parseInt(newSettingsObj.pCity);
 			this.fetchPollenData();
 		}
   }; // end onSettings

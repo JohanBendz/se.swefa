@@ -265,7 +265,7 @@
           },
           "children": [
           {
-          "id": "radio1",
+          "id": "pCity",
           "type": "radio",
           "label": {
             "en": "Select pollen city"

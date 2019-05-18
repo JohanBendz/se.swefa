@@ -14,7 +14,7 @@ class PollenDriver extends Homey.Driver {
 			{ "name": "Pollen",
 			  "data": {"id": guid()},
 			  "settings": {
-				  "pollenCity": 'pollenCity'
+				  "pollenCity": '97'
 			  }
 			}
 		];

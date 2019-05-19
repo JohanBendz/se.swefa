@@ -3,7 +3,7 @@
 ### This app adds support for Swedish Weather Data.
 
 ## Included devices/features:
-* 0-8 days of Weather Forecast based on Homey geolocation.
+* 0-36 hours of Weather Forecast based on Homey geolocation.
 * 0-3 days of Pollen Level Forecast based on choosen Swedish city.
 
 ### Weather Forecast Data - in English
@@ -24,8 +24,10 @@
 
 ## Change Log:
 
+### v 0.2.2
+* Weather Forecast timeframe limited to 36 hours (working on fixing 8 days).
 ### v 0.2.1
-* Minor fixes.
+* Minor fixes 
 ### v 0.2.0
 * Beta release
 

@@ -24,6 +24,8 @@
 
 ## Change Log:
 
+### v 0.2.1
+* Minor fixes.
 ### v 0.2.0
 * Beta release
 

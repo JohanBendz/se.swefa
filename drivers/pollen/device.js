@@ -272,7 +272,6 @@ class PollenDevice extends Homey.Device {
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		if (changedKeysArr == 'pCity') {
 			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.pCity + ' to ' + newSettingsObj.pCity) + '. Fetching pollen levels for new city.';
-//			await this.setSettings('pollenCity', newSettingsObj.pCity);
 			pollenCity = parseInt(newSettingsObj.pCity);
 			this.fetchPollenData();
 		}

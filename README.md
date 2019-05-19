@@ -12,6 +12,8 @@
 
 ## Change Log:
 
+### v 0.2.1
+* Minor fixes and shortened date/time info in Weather forecast GUI. 
 ### v 0.2.0
 * Beta release
 ### v 0.1.9

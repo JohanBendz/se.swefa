@@ -147,7 +147,6 @@ class WeatherDevice extends Homey.Device {
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		if (changedKeysArr == 'fcTime') {
 			this.log('Settings changed from ' + oldSettingsObj.fcTime + ' to ' + newSettingsObj.fcTime) + '. Fetching new forecast.';
-// 			await this.setSettings('forecastTime', newSettingsObj.fcTime);
 			forecastTime = parseInt(newSettingsObj.fcTime);
 			this.fetchSMHIData();
 		}
@@ -227,7 +226,6 @@ class WeatherDevice extends Homey.Device {
 		};
 
 		// setting forecastFor variable based on forecastTime value
-		console.log(data.timeSeries[forecastTime]["validTime"]);
 		let fcTimeO = new Date(data.timeSeries[forecastTime]["validTime"]);
 		var month = [];
 		month[0] = "January";
@@ -244,7 +242,6 @@ class WeatherDevice extends Homey.Device {
 		month[11] = "December";
 		var fcTimeM = month[fcTimeO.getMonth()];
 		forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
-		console.log(forecastFor);
 
 		// switch from number to string
 		weather_situation = "";

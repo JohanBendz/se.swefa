@@ -94,108 +94,78 @@
           "label": {
             "en": "Select forecast"
           },
-          "value": "1",
+          "value": "0",
           "values": [
             {
-              "id": "1",
+              "id": "0",
               "label": {
                 "en": "Now"
               }
             },
             {
-              "id": "2",
+              "id": "1",
               "label": {
                 "en": "1 hour"
               }
             },
             {
-              "id": "3",
+              "id": "2",
               "label": {
                 "en": "2 hours"
               }
             },
             {
-              "id": "4",
+              "id": "3",
               "label": {
                 "en": "3 hours"
               }
             },
             {
-              "id": "5",
+              "id": "4",
               "label": {
                 "en": "4 hours"
               }
             },
             {
-              "id": "6",
+              "id": "5",
               "label": {
                 "en": "5 hours"
               }
             },
             {
-              "id": "9",
+              "id": "8",
               "label": {
                 "en": "8 hours"
               }
             },
             {
-              "id": "13",
+              "id": "12",
               "label": {
                 "en": "12 hours"
               }
             },
             {
-              "id": "25",
+              "id": "18",
+              "label": {
+                "en": "18 hours"
+              }
+            },
+            {
+              "id": "24",
               "label": {
                 "en": "24 hours"
               }
             },
             {
-              "id": "37",
+              "id": "30",
+              "label": {
+                "en": "30 hours"
+              }
+            },
+            {
+              "id": "36",
               "label": {
                 "en": "36 hours"
-              }
-            },
-            {
-              "id": "44",
-              "label": {
-                "en": "2 days"
-              }
-            },
-            {
-              "id": "47",
-              "label": {
-                "en": "3 days"
-              }
-            },
-            {
-              "id": "51",
-              "label": {
-                "en": "4 days"
-              }
-            },
-            {
-              "id": "55",
-              "label": {
-                "en": "5 days"
-              }
-            },
-            {
-              "id": "59",
-              "label": {
-                "en": "6 days"
-              }
-            },
-            {
-              "id": "63",
-              "label": {
-                "en": "7 days"
-              }
-            },
-            {
-              "id": "65",
-              "label": {
-                "en": "8 days"
               }
             }
           ]

@@ -53,15 +53,9 @@ class PollenDevice extends Homey.Device {
 					.catch(err => {
 						this.log(`problem with registering crontask: ${err.message}`);
 					});
-					} else {
-						this.log(`other cron error: ${err.message}`);
-					}
-				});
-		
-		//Unregister crontask on unload
-		Homey
-			.on('unload', () => {
-				Homey.ManagerCron.unregisterTask(cronName);
+				} else {
+					this.log(`other cron error: ${err.message}`);
+				}
 			});
 
 		// register Flow triggers
@@ -264,7 +258,10 @@ class PollenDevice extends Homey.Device {
 		this.log('device added: ', id);
 
 		// working with pollen data
-    this.fetchPollenData();
+		this.fetchPollenData()
+		.catch( err => {
+			this.error( err );
+		});
 
 	}; // end onAdded
 
@@ -280,7 +277,10 @@ class PollenDevice extends Homey.Device {
 	// working with Pollen json data here
   async fetchPollenData(){
 		console.log("Fetching Pollen data");
-		const res = await fetch(PollenUrl);
+		const res = await fetch(PollenUrl)
+		.catch( err => {
+			this.error( err );
+		});
 		const pollenData = await res.json();
 			
 		// populating pollen variables
@@ -467,7 +467,13 @@ class PollenDevice extends Homey.Device {
 
   onDeleted() {
     let id = this.getData().id;
-    this.log('device deleted:', id);
+		this.log('device deleted:', id);
+	
+		//Unregister crontask on unload
+		Homey
+		.on('unload', () => {
+			Homey.ManagerCron.unregisterTask(cronName);
+		});
 
 	}; // end onDeleted
 	

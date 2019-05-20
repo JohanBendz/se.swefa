@@ -12,6 +12,8 @@
 
 ## Change Log:
 
+### v 0.2.3
+* Cosmetic update
 ### v 0.2.2
 * Issue with setting forecast timeframe past 36 hours. Limiting to 36 hours until fixed.
 ### v 0.2.1

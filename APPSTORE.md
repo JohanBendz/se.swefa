@@ -24,6 +24,8 @@
 
 ## Change Log:
 
+### v 0.2.3
+* Cosmetic update
 ### v 0.2.2
 * Weather Forecast timeframe limited to 36 hours (working on fixing 8 days).
 ### v 0.2.1

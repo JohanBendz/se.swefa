@@ -313,7 +313,7 @@ class WeatherDevice extends Homey.Device {
 		this.setCapabilityValue('measure_air_pressure_cp', air_pressure);
 		this.setCapabilityValue('measure_air_temperature_cp', air_temperature);
 		this.setCapabilityValue('horizontal_visibility_cp', horizontal_visibility);
-//		this.setCapabilityValue('wind_direction_cp', wind_direction);
+		this.setCapabilityValue('wind_direction_cp', wind_direction);
 		this.setCapabilityValue('measure_wind_speed_cp', wind_speed);
 		this.setCapabilityValue('measure_relative_humidity_cp', relative_humidity);
 		this.setCapabilityValue('measure_thunder_probability_cp', thunder_probability);

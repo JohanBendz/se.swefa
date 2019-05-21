@@ -24,6 +24,8 @@
 
 ## Change Log:
 
+### v 0.2.4
+* Added Precipitation Trigger and Wind Direction Degrees as Token
 ### v 0.2.3
 * Cosmetic update
 ### v 0.2.2

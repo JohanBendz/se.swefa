@@ -3,7 +3,7 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.2.3",
+  "version": "0.2.4",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {

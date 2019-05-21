@@ -50,6 +50,7 @@
         "measure_precipitation_situation_cp",
         "air_temperature_feels_like_cp",
         "measure_wind_direction_heading_cp",
+        "measure_wind_direction_cp",
         "measure_relative_humidity_cp",
         "measure_wind_speed_cp",
         "measure_air_pressure_cp",
@@ -409,6 +410,25 @@
 				}]
       },
       {
+        "id": "PrecipitationSituationChange",
+        "title": {
+            "en": "Precipitation situation change"
+        },
+        "tokens": [
+        {
+          "name": "measure_precipitation_situation_cp",
+          "title": {
+            "en": "Precipitation situation"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedPrecipitationSituation",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
         "id": "WindSpeedChange",
         "title": {
             "en": "Wind speed change"
@@ -440,7 +460,7 @@
           }
         },
         {
-          "name": "wind_direction_cp",
+          "name": "measure_wind_direction_cp",
           "title": {
             "en": "Wind direction °"
           }
@@ -1320,6 +1340,26 @@
             "name": "mps",
             "type": "number"
           }
+        ]
+      },
+      {
+        "id": "measure_wind_direction_cp",
+        "title": {
+          "en": "Wind direction degree !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Compass wind direction in degrees."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "degree",
+          "type": "number"
+        }
         ]
       },
       {
@@ -3883,7 +3923,7 @@
       "uiComponent": "sensor",
       "icon": "/assets/icons/visibility.svg"
     },
-    "wind_direction_cp":{
+    "measure_wind_direction_cp":{
       "type": "number",
       "title": {
         "en": "Wind direction"

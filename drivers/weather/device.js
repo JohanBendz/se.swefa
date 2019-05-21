@@ -54,6 +54,7 @@ class WeatherDevice extends Homey.Device {
 		// register Flow triggers
 		this._flowTriggerWeatherSituationChange = new Homey.FlowCardTriggerDevice('WeatherSituationChange').register();
 		this._flowTriggerAirTemperatureChange = new Homey.FlowCardTriggerDevice('AirTemperatureChange').register();
+		this._flowTriggerPrecipitationSituationChange = new Homey.FlowCardTriggerDevice('PrecipitationSituationChange').register();
 		this._flowTriggerWindSpeedChange = new Homey.FlowCardTriggerDevice('WindSpeedChange').register();
 		this._flowTriggerWindDirectionHeadingChange = new Homey.FlowCardTriggerDevice('WindDirectionHeadingChange').register();
 		this._flowTriggerRelativeHumidityChange = new Homey.FlowCardTriggerDevice('RelativeHumidityChange').register();
@@ -79,6 +80,11 @@ class WeatherDevice extends Homey.Device {
 
 		this.windDirectionHeadingStatus = new Homey.FlowCardCondition('measure_wind_direction_heading_cp').register().registerRunListener((args, state) => {
 			var result = (wind_direction_heading == args.direction)
+			return Promise.resolve(result);
+		});
+
+		this.windDirectionStatus = new Homey.FlowCardCondition('measure_wind_direction_cp').register().registerRunListener((args, state) => {
+			var result = (wind_direction == args.degree)
 			return Promise.resolve(result);
 		});
 
@@ -148,7 +154,10 @@ class WeatherDevice extends Homey.Device {
 		if (changedKeysArr == 'fcTime') {
 			this.log('Settings changed from ' + oldSettingsObj.fcTime + ' to ' + newSettingsObj.fcTime) + '. Fetching new forecast.';
 			forecastTime = parseInt(newSettingsObj.fcTime);
-			this.fetchSMHIData();
+			this.fetchSMHIData()
+			.catch( err => {
+				this.error( err );
+			});
 		}
 	}; // end onSettings
 
@@ -313,7 +322,7 @@ class WeatherDevice extends Homey.Device {
 		this.setCapabilityValue('measure_air_pressure_cp', air_pressure);
 		this.setCapabilityValue('measure_air_temperature_cp', air_temperature);
 		this.setCapabilityValue('horizontal_visibility_cp', horizontal_visibility);
-		this.setCapabilityValue('wind_direction_cp', wind_direction);
+		this.setCapabilityValue('measure_wind_direction_cp', wind_direction);
 		this.setCapabilityValue('measure_wind_speed_cp', wind_speed);
 		this.setCapabilityValue('measure_relative_humidity_cp', relative_humidity);
 		this.setCapabilityValue('measure_thunder_probability_cp', thunder_probability);

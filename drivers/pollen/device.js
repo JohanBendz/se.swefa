@@ -41,7 +41,7 @@ class PollenDevice extends Homey.Device {
 		Homey.ManagerCron.getTask(cronName)
 			.then(task => {
 				this.log("This crontask is already registred: " + cronName);
-				task.on('run', () => this.GetData());
+				task.on('run', () => this.fetchPollenData());
 			})
 			.catch(err => {
 				if (err.code == 404) {

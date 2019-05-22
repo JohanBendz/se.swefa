@@ -24,6 +24,8 @@
 
 ## Change Log:
 
+### v 0.2.5
+* Typo in Cron code threw an error if task existed
 ### v 0.2.4
 * Added Precipitation Trigger and Wind Direction Degrees as Token
 ### v 0.2.3

@@ -12,6 +12,8 @@
 
 ## Change Log:
 
+### v 0.2.6
+* Enabling multiple devices with different settings
 ### v 0.2.5
 * Typo in Cron code threw an error if task existed
 ### v 0.2.4

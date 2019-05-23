@@ -28,18 +28,10 @@ let weather_situation = "";
 let precipitation_situation = "";
 let rainsnow = "";
 
-let forecastFor = "";
-let forecastTime = "";
-let settings = "";
-
 class WeatherDevice extends Homey.Device {
 
 	onInit() {
 		this.log('SMHI weather device initiated');
-		
-		// get current settings
-		settings = this.getSettings();
-		forecastTime = parseInt(settings.fcTime);
 	
 		// fetch SMHI data when app starts
 		this.fetchSMHIData()
@@ -153,7 +145,6 @@ class WeatherDevice extends Homey.Device {
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		if (changedKeysArr == 'fcTime') {
 			this.log('Settings changed from ' + oldSettingsObj.fcTime + ' to ' + newSettingsObj.fcTime) + '. Fetching new forecast.';
-			forecastTime = parseInt(newSettingsObj.fcTime);
 			this.fetchSMHIData()
 			.catch( err => {
 				this.error( err );
@@ -169,6 +160,10 @@ class WeatherDevice extends Homey.Device {
 			this.error( err );
 		});
 		const data = await response.json();
+
+		// get current settings
+		let settings = this.getSettings();
+		let forecastTime = parseInt(settings.fcTime);
 							
 		// working with SMHI json data here
 		for (var i=0; i < data.timeSeries[forecastTime].parameters.length; i++){
@@ -250,7 +245,7 @@ class WeatherDevice extends Homey.Device {
 		month[10] = "November";
 		month[11] = "December";
 		var fcTimeM = month[fcTimeO.getMonth()];
-		forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
+		let forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
 
 		// switch from number to string
 		weather_situation = "";

@@ -15,10 +15,6 @@ let grabopollen = [];
 let hasselpollen = [];
 let salgvidepollen = [];
 
-
-let pollenCity = "";
-let settings = "";
-
 //Set Cron parameters
 const cronName = "pollenCronTask"
 const cronInterval = "30 0,5,11,19 * * *"; // 30 0,5,11,19 * * * = every day, 0:30, 5:30, 11:30 and 19:30.
@@ -27,15 +23,6 @@ class PollenDevice extends Homey.Device {
 
   async onInit() {
 		this.log('SWEFA pollen device initiated');
-
-		// get current settings
-		settings = this.getSettings();
-		pollenCity = parseInt(settings.pCity);
-
-		// if settings are blank default to this (97=Stockholm)
-		if(!pollenCity) {
-			 pollenCity = 97;
-		}
 
 		//Register crontask
 		Homey.ManagerCron.getTask(cronName)
@@ -269,7 +256,6 @@ class PollenDevice extends Homey.Device {
 	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
 		if (changedKeysArr == 'pCity') {
 			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.pCity + ' to ' + newSettingsObj.pCity) + '. Fetching pollen levels for new city.';
-			pollenCity = parseInt(newSettingsObj.pCity);
 			this.fetchPollenData();
 		}
   }; // end onSettings
@@ -282,6 +268,10 @@ class PollenDevice extends Homey.Device {
 			this.error( err );
 		});
 		const pollenData = await res.json();
+
+		// get current settings
+		let settings = this.getSettings();
+		let pollenCity = parseInt(settings.pCity);
 			
 		// populating pollen variables
 		for (var i=0; i < pollenData[0].CitiesData.length; i++){

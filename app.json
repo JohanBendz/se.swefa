@@ -390,8 +390,8 @@
         "salix_pollen_1_no"
       ],
       "images": {
-        "large": "/drivers/pollen/assets/images/large.png",
-        "small": "/drivers/pollen/assets/images/small.png"
+        "large": "/drivers/pollenno/assets/images/large.png",
+        "small": "/drivers/pollenno/assets/images/small.png"
       },
       "pair": [{
         "id": "list_devices",
@@ -1262,7 +1262,7 @@
         "args": [{
 					"name": "Changed_burot_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1281,7 +1281,7 @@
         "args": [{
 					"name": "Changed_burot_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1300,7 +1300,7 @@
         "args": [{
 					"name": "Changed_bjork_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1319,7 +1319,7 @@
         "args": [{
 					"name": "Changed_bjork_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1338,7 +1338,7 @@
         "args": [{
 					"name": "Changed_gress_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1357,7 +1357,7 @@
         "args": [{
 					"name": "Changed_burot_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1376,7 +1376,7 @@
         "args": [{
 					"name": "Changed_hassel_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1395,7 +1395,7 @@
         "args": [{
 					"name": "Changed_hassel_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1414,7 +1414,7 @@
         "args": [{
 					"name": "Changed_or_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1433,7 +1433,7 @@
         "args": [{
 					"name": "Changed_or_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1452,7 +1452,7 @@
         "args": [{
 					"name": "Changed_salix_pollen_0_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       },
       {
@@ -1471,7 +1471,7 @@
         "args": [{
 					"name": "Changed_salix_pollen_1_no",
 					"type": "device",
-					"filter": "driver_id=pollen"
+					"filter": "driver_id=pollenno"
 				}]
       }
     ],
@@ -3887,7 +3887,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -3939,7 +3939,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -3991,7 +3991,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4043,7 +4043,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4095,7 +4095,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4147,7 +4147,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4199,7 +4199,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4251,7 +4251,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4303,7 +4303,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4355,7 +4355,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4407,7 +4407,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",
@@ -4459,7 +4459,7 @@
         {
           "name": "device",
           "type": "device",
-          "filter": "driver_id=pollen"
+          "filter": "driver_id=pollenno"
         },
         {
           "name": "spredning",

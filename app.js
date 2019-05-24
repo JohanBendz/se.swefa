@@ -15,6 +15,7 @@ class SWEFA extends Homey.App {
 		const DataUrl1 = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
 		global.SMHIdataUrl = DataUrl1+"/lon/"+lng+"/lat/"+lat+"/data.json";
 		global.PollenUrl = "https://pollenkoll.se/wp-content/themes/pollenkoll/api/get_all.json";
+		global.PollenNoUrl = "https://pollenkontroll.no/api/pollen-count?country=no";
 
 		this.log('Swedish weather forecasting app successfully started.');
 
@@ -23,4 +24,4 @@ class SWEFA extends Homey.App {
 }
 module.exports = SWEFA;
 
-// Weather icons made by Freepik from https://www.flaticon.com/
+// Weather and some pollen icons made by Freepik from https://www.flaticon.com/

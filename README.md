@@ -5,6 +5,7 @@
 ## Included devices/features:
 * 0-36 hours of Weather Forecast based on Homey geolocation.
 * 0-3 days of Pollen Level Forecast based on choosen Swedish city.
+* 0-2 days of Pollen Level Forecast based on choosen Norwegian city.
 
 ## Feedback:
 * Please post requests in the [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/) topic on the Athom Community forum.
@@ -12,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.2.7
+* Added Pollen Forecast for Norway
 ### v 0.2.6
 * Enabling multiple devices with different settings
 ### v 0.2.5
@@ -64,9 +67,3 @@
 * Added Weather Situation
 ### v 0.0.1
 * Added Weather Forecast data
-
-
-## Known issues:
-* When adding more than one Pollen device a restart of the app or Homey itself renders all Pollen devices to use the same source of data until settings are manually updated.
-
-* When adding more than one Weather device a restart of the app or Homey itself renders all Weather devices to use the same source of data until settings are manually updated.

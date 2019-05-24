@@ -3,7 +3,7 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.2.7",
+  "version": "0.2.8",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -1854,6 +1854,66 @@
         },
         "hint": {
 	 			"en": "Total cloud cover in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_low_level_cloud_cover_cp",
+        "title": {
+          "en": "Low cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_medium_level_cloud_cover_cp",
+        "title": {
+          "en": "Medium cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_high_level_cloud_cover_cp",
+        "title": {
+          "en": "High cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover above 6000 meters, in octas (0-8)."
 	  	},
         "args": [
         {

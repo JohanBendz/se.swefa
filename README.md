@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.2.8
+* Typo in Norwegian Pollen FlowCard code. Added Conditions for Low, Medium and High Level Cloud Cover.
 ### v 0.2.7
 * Added Pollen Forecast for Norway
 ### v 0.2.6

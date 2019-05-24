@@ -100,6 +100,21 @@ class WeatherDevice extends Homey.Device {
 			return Promise.resolve(result);
 		});
 
+		this.meanValueOfLowLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_low_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (mean_value_of_low_level_cloud_cover > args.octas)
+			return Promise.resolve(result);
+		});
+
+		this.meanValueOfMediumLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_medium_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (mean_value_of_medium_level_cloud_cover > args.octas)
+			return Promise.resolve(result);
+		});
+
+		this.meanValueOfHighLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_high_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (mean_value_of_high_level_cloud_cover > args.octas)
+			return Promise.resolve(result);
+		});
+
 		this.windGustSpeedStatus = new Homey.FlowCardCondition('wind_gust_speed_cp').register().registerRunListener((args, state) => {
 			var result = (wind_gust_speed > args.mps)
 			return Promise.resolve(result);
@@ -125,7 +140,6 @@ class WeatherDevice extends Homey.Device {
 			var result = (mean_precipitation_intensity > args.mmh)
 			return Promise.resolve(result);
 		});
-
 
 	}; // end onInit
 

@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.2.9
+* Added insights to some sensors
 ### v 0.2.8
 * Typo in Norwegian Pollen FlowCard code. Added Conditions for Low, Medium and High Level Cloud Cover.
 ### v 0.2.7

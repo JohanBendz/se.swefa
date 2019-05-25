@@ -3,7 +3,7 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.2.8",
+  "version": "0.2.9",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -4921,6 +4921,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "hPa",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4945,6 +4946,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "°C",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4957,6 +4959,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "km",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4980,6 +4983,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "m/s",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4992,6 +4996,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "%",
       "uiComponent": "sensor",
       "icon": "/assets/icons/hydrometer.svg"
@@ -5003,6 +5008,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "%",
       "uiComponent": "sensor",
       "icon": "/assets/icons/thunder.svg"
@@ -5014,6 +5020,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icon.svg"
@@ -5025,6 +5032,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/low_cloud.svg"
@@ -5036,6 +5044,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/medium_cloud.svg"
@@ -5047,6 +5056,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/high_cloud.svg"
@@ -5058,6 +5068,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "m/s",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -5115,6 +5126,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "mm/h",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -5127,6 +5139,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "mm/h",
       "decimals": 1,
       "uiComponent": "sensor",

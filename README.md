@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.3.0
+* Remake of and fixed broken triggers 
 ### v 0.2.9
 * Added insights to some sensors
 ### v 0.2.8

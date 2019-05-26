@@ -76,7 +76,7 @@ class WeatherDevice extends Homey.Device {
 		});
 
 		this.windDirectionStatus = new Homey.FlowCardCondition('measure_wind_direction_cp').register().registerRunListener((args, state) => {
-			var result = (wind_direction == args.degree)
+			var result = (wind_direction > args.degree)
 			return Promise.resolve(result);
 		});
 
@@ -178,6 +178,7 @@ class WeatherDevice extends Homey.Device {
 		// get current settings
 		let settings = this.getSettings();
 		let forecastTime = parseInt(settings.fcTime);
+		let device = this;
 							
 		// working with SMHI json data here
 		for (var i=0; i < data.timeSeries[forecastTime].parameters.length; i++){
@@ -352,6 +353,49 @@ class WeatherDevice extends Homey.Device {
 		this.setCapabilityValue('air_temperature_feels_like_cp', feelsLike);
 		this.setCapabilityValue('forecast_for_cp', forecastFor);
 
+		// updatingFlowTriggers
+		if (this.getCapabilityValue('measure_weather_situation_cp') != weather_situation) {
+			let state = {"measure_weather_situation_cp": weather_situation};
+			let tokens = {"measure_weather_situation_cp": weather_situation};
+			this._flowTriggerWeatherSituationChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_air_temperature_cp') != air_temperature) {
+			let state = {"measure_air_temperature_cp": air_temperature};
+			let tokens = {"measure_air_temperature_cp": air_temperature};
+			this._flowTriggerAirTemperatureChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_wind_speed_cp') != wind_speed) {
+			let state = {"measure_wind_speed_cp": wind_speed};
+			let tokens = {"measure_wind_speed_cp": wind_speed};
+			this._flowTriggerWindSpeedChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_wind_direction_heading_cp') != wind_direction_heading) {
+			let state = {"measure_wind_direction_heading_cp": wind_direction_heading};
+			let tokens = {"measure_wind_direction_heading_cp": wind_direction_heading};
+			this._flowTriggerWindDirectionHeadingChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_relative_humidity_cp') != relative_humidity) {
+			let state = {"measure_relative_humidity_cp": relative_humidity};
+			let tokens = {"measure_relative_humidity_cp": relative_humidity};
+			this._flowTriggerRelativeHumidityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_air_pressure_cp') != air_pressure) {
+			let state = {"measure_air_pressure_cp": air_pressure};
+			let tokens = {"measure_air_pressure_cp": air_pressure};
+			this._flowTriggerAirPressureChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_thunder_probability_cp') != thunder_probability) {
+			let state = {"measure_thunder_probability_cp": thunder_probability};
+			let tokens = {"measure_thunder_probability_cp": thunder_probability};
+			this._flowTriggerThunderProbabilityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
 	}; // end fetchSMHIData
   
 	onDeleted() {
@@ -359,50 +403,6 @@ class WeatherDevice extends Homey.Device {
 		this.log('device deleted:', id);
 
 	}; // end onDeleted
-	
-	// flow triggers
-	triggerWeatherSituationChangeFlow(device, tokens, state) {
-	this._flowTriggerWeatherSituationChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerAirTemperatureChangeFlow(device, tokens, state) {
-	this._flowTriggerAirTemperatureChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerWindSpeedChangeFlow(device, tokens, state) {
-	this._flowTriggerWindSpeedChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerWindDirectionHeadingChangeFlow(device, tokens, state) {
-	this._flowTriggerWindDirectionHeadingChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerRelativeHumidityChangeFlow(device, tokens, state) {
-	this._flowTriggerRelativeHumidityChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerAirPressureChangeFlow(device, tokens, state) {
-	this._flowTriggerAirPressureChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerThunderProbabilityChangeFlow(device, tokens, state) {
-	this._flowTriggerThunderProbabilityChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
 
 };
 

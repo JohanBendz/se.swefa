@@ -156,6 +156,7 @@ class PollenNoDevice extends Homey.Device {
 		// get current settings
 		let settings = this.getSettings();
 		let pollenCity = parseInt(settings.pCity);
+		let device = this;
 
 		// populating pollen variables
 		for (var i=0; i < pollenData.cities.length; i++){
@@ -218,6 +219,73 @@ class PollenNoDevice extends Homey.Device {
 		this.setCapabilityValue('or_pollen_1_no', orpollen[1]);
 		this.setCapabilityValue('salix_pollen_1_no', salixpollen[1]);
 
+		// updatingFlowTriggers
+		if (this.getCapabilityValue('bjork_pollen_0_no') != bjorkpollen[0]) {
+			let state = {"bjork_pollen_0_no": bjorkpollen[0]};
+			let tokens = {"bjork_pollen_0_no": bjorkpollen[0]};
+			this._flowTriggerbjork_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('bjork_pollen_1_no') != bjorkpollen[1]) {
+			let state = {"bjork_pollen_1_no": bjorkpollen[1]};
+			let tokens = {"bjork_pollen_1_no": bjorkpollen[1]};
+			this._flowTriggerbjork_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('burot_pollen_0_no') != burotpollen[0]) {
+			let state = {"burot_pollen_0_no": burotpollen[0]};
+			let tokens = {"burot_pollen_0_no": burotpollen[0]};
+			this._flowTriggerburot_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('burot_pollen_1_no') != burotpollen[1]) {
+			let state = {"burot_pollen_1_no": burotpollen[1]};
+			let tokens = {"burot_pollen_1_no": burotpollen[1]};
+			this._flowTriggerburot_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('gress_pollen_0_no') != gresspollen[0]) {
+			let state = {"gress_pollen_0_no": gresspollen[0]};
+			let tokens = {"gress_pollen_0_no": gresspollen[0]};
+			this._flowTriggergress_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('gress_pollen_1_no') != gresspollen[1]) {
+			let state = {"gress_pollen_1_no": gresspollen[1]};
+			let tokens = {"gress_pollen_1_no": gresspollen[1]};
+			this._flowTriggergress_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('hassel_pollen_0_no') != hasselpollen[0]) {
+			let state = {"hassel_pollen_0_no": hasselpollen[0]};
+			let tokens = {"hassel_pollen_0_no": hasselpollen[0]};
+			this._flowTriggerhassel_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('hassel_pollen_1_no') != hasselpollen[1]) {
+			let state = {"hassel_pollen_1_no": hasselpollen[1]};
+			let tokens = {"hassel_pollen_1_no": hasselpollen[1]};
+			this._flowTriggerhassel_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('or_pollen_0_no') != orpollen[0]) {
+			let state = {"or_pollen_0_no": orpollen[0]};
+			let tokens = {"or_pollen_0_no": orpollen[0]};
+			this._flowTriggeror_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('or_pollen_1_no') != orpollen[1]) {
+			let state = {"or_pollen_1_no": orpollen[1]};
+			let tokens = {"or_pollen_1_no": orpollen[1]};
+			this._flowTriggeror_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('salix_pollen_0_no') != salixpollen[0]) {
+			let state = {"salix_pollen_0_no": salixpollen[0]};
+			let tokens = {"salix_pollen_0_no": salixpollen[0]};
+			this._flowTriggersalix_pollen_0_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('salix_pollen_1_no') != salixpollen[1]) {
+			let state = {"salix_pollen_1_no": salixpollen[1]};
+			let tokens = {"salix_pollen_1_no": salixpollen[1]};
+			this._flowTriggersalix_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
 	}; // end fetchPollenData
 
   onDeleted() {
@@ -231,86 +299,6 @@ class PollenNoDevice extends Homey.Device {
 		});
 
 	}; // end onDeleted
-	
-	// flow triggers
-
-	triggerburot_pollen_0_no_ChangeFlow(device, tokens, state) {
-	this._flowTriggerburot_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggerburot_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggerburot_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-
-	triggerbjork_pollen_0_no_ChangeFlow(device, tokens, state) {
-	this._flowTriggerbjork_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggerbjork_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggerbjork_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-
-	triggergress_pollen_0_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggergress_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggergress_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggergress_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-
-	triggerhassel_pollen_0_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggerhassel_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggerhassel_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggerhassel_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-
-	triggersalix_pollen_0_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggersalix_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggersalix_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggersalix_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-
-	triggeror_pollen_0_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggeror_pollen_0_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
-	triggeror_pollen_1_no_ChangeFlow(device, tokens, state) {
-		this._flowTriggeror_pollen_1_no_Change
-		.trigger(device, tokens, state)
-		.then(this.log)
-		.catch(this.error)
-	};
 
 };
 

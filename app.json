@@ -3,7 +3,7 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.2.9",
+  "version": "0.3.0",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -507,6 +507,7 @@
         "tokens": [
         {
           "name": "measure_weather_situation_cp",
+          "type": "string",
           "title": {
             "en": "Weather situation"
           }
@@ -526,6 +527,7 @@
         "tokens": [
         {
           "name": "measure_air_temperature_cp",
+          "type": "number",
           "title": {
             "en": "Air temperature"
           }
@@ -545,6 +547,7 @@
         "tokens": [
         {
           "name": "measure_precipitation_situation_cp",
+          "type": "string",
           "title": {
             "en": "Precipitation situation"
           }
@@ -564,6 +567,7 @@
         "tokens": [
         {
           "name": "measure_wind_speed_cp",
+          "type": "number",
           "title": {
             "en": "Wind speed"
           }
@@ -583,6 +587,7 @@
         "tokens": [
         {
           "name": "measure_wind_direction_heading_cp",
+          "type": "string",
           "title": {
             "en": "Wind direction"
           }
@@ -608,6 +613,7 @@
         "tokens": [
         {
           "name": "measure_relative_humidity_cp",
+          "type": "number",
           "title": {
             "en": "Relative humidity"
           }
@@ -627,6 +633,7 @@
         "tokens": [
         {
           "name": "measure_air_pressure_cp",
+          "type": "number",
           "title": {
             "en": "Air pressure"
           }
@@ -646,6 +653,7 @@
         "tokens": [
         {
           "name": "measure_thunder_probability_cp",
+          "type": "number",
           "title": {
             "en": "Thunderstorm warning"
           }
@@ -665,6 +673,7 @@
         "tokens": [
         {
           "name": "mean_value_of_total_cloud_cover_cp",
+          "type": "number",
           "title": {
             "en": "Cloud cover"
           }
@@ -684,6 +693,7 @@
         "tokens": [
         {
           "name": "al_pollen_0",
+          "type": "string",
           "title": {
             "en": "Al idag"
           }
@@ -703,6 +713,7 @@
         "tokens": [
         {
           "name": "al_pollen_1",
+          "type": "string",
           "title": {
             "en": "Al imorgon"
           }
@@ -722,6 +733,7 @@
         "tokens": [
         {
           "name": "al_pollen_2",
+          "type": "string",
           "title": {
             "en": "Al i övermorgon"
           }
@@ -741,6 +753,7 @@
         "tokens": [
         {
           "name": "alm_pollen_0",
+          "type": "string",
           "title": {
             "en": "Alm idag"
           }
@@ -760,6 +773,7 @@
         "tokens": [
         {
           "name": "alm_pollen_1",
+          "type": "string",
           "title": {
             "en": "Alm imorgon"
           }
@@ -779,6 +793,7 @@
         "tokens": [
         {
           "name": "alm_pollen_2",
+          "type": "string",
           "title": {
             "en": "Alm i övermorgon"
           }
@@ -798,6 +813,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_0",
+          "type": "string",
           "title": {
             "en": "Ambrosia idag"
           }
@@ -817,6 +833,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_1",
+          "type": "string",
           "title": {
             "en": "Ambrosia imorgon"
           }
@@ -836,6 +853,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_2",
+          "type": "string",
           "title": {
             "en": "Ambrosia i övermorgon"
           }
@@ -855,6 +873,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_0",
+          "type": "string",
           "title": {
             "en": "Björk idag"
           }
@@ -874,6 +893,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_1",
+          "type": "string",
           "title": {
             "en": "Björk imorgon"
           }
@@ -893,6 +913,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_2",
+          "type": "string",
           "title": {
             "en": "Björk i övermorgon"
           }
@@ -912,6 +933,7 @@
         "tokens": [
         {
           "name": "bok_pollen_0",
+          "type": "string",
           "title": {
             "en": "Bok idag"
           }
@@ -931,6 +953,7 @@
         "tokens": [
         {
           "name": "bok_pollen_1",
+          "type": "string",
           "title": {
             "en": "Bok imorgon"
           }
@@ -950,6 +973,7 @@
         "tokens": [
         {
           "name": "bok_pollen_2",
+          "type": "string",
           "title": {
             "en": "Bok i övermorgon"
           }
@@ -969,6 +993,7 @@
         "tokens": [
         {
           "name": "ek_pollen_0",
+          "type": "string",
           "title": {
             "en": "Ek idag"
           }
@@ -988,6 +1013,7 @@
         "tokens": [
         {
           "name": "ek_pollen_1",
+          "type": "string",
           "title": {
             "en": "Ek imorgon"
           }
@@ -1007,6 +1033,7 @@
         "tokens": [
         {
           "name": "ek_pollen_2",
+          "type": "string",
           "title": {
             "en": "Ek i övermorgon"
           }
@@ -1026,6 +1053,7 @@
         "tokens": [
         {
           "name": "gras_pollen_0",
+          "type": "string",
           "title": {
             "en": "Gräs idag"
           }
@@ -1045,6 +1073,7 @@
         "tokens": [
         {
           "name": "gras_pollen_1",
+          "type": "string",
           "title": {
             "en": "Gräs imorgon"
           }
@@ -1064,6 +1093,7 @@
         "tokens": [
         {
           "name": "gras_pollen_2",
+          "type": "string",
           "title": {
             "en": "Gräs i övermorgon"
           }
@@ -1083,6 +1113,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_0",
+          "type": "string",
           "title": {
             "en": "Gråbo idag"
           }
@@ -1102,6 +1133,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_1",
+          "type": "string",
           "title": {
             "en": "Gråbo imorgon"
           }
@@ -1121,6 +1153,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_2",
+          "type": "string",
           "title": {
             "en": "Gråbo i övermorgon"
           }
@@ -1140,6 +1173,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_0",
+          "type": "string",
           "title": {
             "en": "Hassel idag"
           }
@@ -1159,6 +1193,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_1",
+          "type": "string",
           "title": {
             "en": "Hassel imorgon"
           }
@@ -1178,6 +1213,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_2",
+          "type": "string",
           "title": {
             "en": "Hassel i övermorgon"
           }
@@ -1197,6 +1233,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_0",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide idag"
           }
@@ -1216,6 +1253,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_1",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide imorgon"
           }
@@ -1235,6 +1273,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_2",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide i övermorgon"
           }
@@ -1254,6 +1293,7 @@
         "tokens": [
         {
           "name": "burot_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Burot i dag"
           }
@@ -1273,6 +1313,7 @@
         "tokens": [
         {
           "name": "burot_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Burot i morgen"
           }
@@ -1292,6 +1333,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Bjørk i dag"
           }
@@ -1311,6 +1353,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Bjørk i morgen"
           }
@@ -1330,6 +1373,7 @@
         "tokens": [
         {
           "name": "gress_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Gress i dag"
           }
@@ -1349,6 +1393,7 @@
         "tokens": [
         {
           "name": "gress_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Gress i morgen"
           }
@@ -1368,6 +1413,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Hassel i dag"
           }
@@ -1387,6 +1433,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Hassel i morgen"
           }
@@ -1406,6 +1453,7 @@
         "tokens": [
         {
           "name": "or_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Or i dag"
           }
@@ -1425,6 +1473,7 @@
         "tokens": [
         {
           "name": "or_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Or i morgen"
           }
@@ -1444,6 +1493,7 @@
         "tokens": [
         {
           "name": "salix_pollen_0_no",
+          "type": "string",
           "title": {
             "en": "Salix i dag"
           }
@@ -1463,6 +1513,7 @@
         "tokens": [
         {
           "name": "salix_pollen_1_no",
+          "type": "string",
           "title": {
             "en": "Salix i morgen"
           }

@@ -54,74 +54,74 @@ class WeatherDevice extends Homey.Device {
 		this._flowTriggerThunderProbabilityChange = new Homey.FlowCardTriggerDevice('ThunderProbabilityChange').register();
 		this._flowTriggerMeanValueOfTotalCloudCoverChange = new Homey.FlowCardTriggerDevice('MeanValueOfTotalCloudCoverChange').register();
 		
-		// Register Flow conditions
+		// register Flow conditions
 		this.weatherSituationStatus = new Homey.FlowCardCondition('measure_weather_situation_cp').register().registerRunListener((args, state) => {
-			var result = (weather_situation.replace(/\s+/g, '') == args.weather_situation_condition)
+			var result = (this.getCapabilityValue('measure_weather_situation_cp'.replace(/\s+/g, '')) == args.weather_situation_condition)
 			return Promise.resolve(result);
 		});
 
 		this.airTemperatureStatus = new Homey.FlowCardCondition('measure_air_temperature_cp').register().registerRunListener((args, state) => {
-			var result = (air_temperature > args.degree)
+			var result = (this.getCapabilityValue('measure_air_temperature_cp') > args.degree)
 			return Promise.resolve(result);
 		});
 
 		this.windSpeedStatus = new Homey.FlowCardCondition('measure_wind_speed_cp').register().registerRunListener((args, state) => {
-			var result = (wind_speed > args.mps)
+			var result = (this.getCapabilityValue('measure_wind_speed_cp') > args.mps)
 			return Promise.resolve(result);
 		});
 
 		this.windDirectionHeadingStatus = new Homey.FlowCardCondition('measure_wind_direction_heading_cp').register().registerRunListener((args, state) => {
-			var result = (wind_direction_heading == args.direction)
+			var result = (this.getCapabilityValue('measure_wind_direction_heading_cp') == args.direction)
 			return Promise.resolve(result);
 		});
 
 		this.windDirectionStatus = new Homey.FlowCardCondition('measure_wind_direction_cp').register().registerRunListener((args, state) => {
-			var result = (wind_direction > args.degree)
+			var result = (this.getCapabilityValue('measure_wind_direction_cp') > args.degree)
 			return Promise.resolve(result);
 		});
 
 		this.relativeHumidityStatus = new Homey.FlowCardCondition('measure_relative_humidity_cp').register().registerRunListener((args, state) => {
-			var result = (relative_humidity > args.percent)
+			var result = (this.getCapabilityValue('measure_relative_humidity_cp') > args.percent)
 			return Promise.resolve(result);
 		});
 
 		this.airPressureStatus = new Homey.FlowCardCondition('measure_air_pressure_cp').register().registerRunListener((args, state) => {
-			var result = (air_pressure > args.hpa)
+			var result = (this.getCapabilityValue('measure_air_pressure_cp') > args.hpa)
 			return Promise.resolve(result);
 		});
 
 		this.thunderProbabilityStatus = new Homey.FlowCardCondition('measure_thunder_probability_cp').register().registerRunListener((args, state) => {
-			var result = (thunder_probability > args.percent)
+			var result = (this.getCapabilityValue('measure_thunder_probability_cp') > args.percent)
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfTotalCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_total_cloud_cover_cp').register().registerRunListener((args, state) => {
-			var result = (mean_value_of_total_cloud_cover > args.octas)
+			var result = (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > args.octas)
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfLowLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_low_level_cloud_cover_cp').register().registerRunListener((args, state) => {
-			var result = (mean_value_of_low_level_cloud_cover > args.octas)
+			var result = (this.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > args.octas)
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfMediumLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_medium_level_cloud_cover_cp').register().registerRunListener((args, state) => {
-			var result = (mean_value_of_medium_level_cloud_cover > args.octas)
+			var result = (this.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > args.octas)
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfHighLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_high_level_cloud_cover_cp').register().registerRunListener((args, state) => {
-			var result = (mean_value_of_high_level_cloud_cover > args.octas)
+			var result = (this.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > args.octas)
 			return Promise.resolve(result);
 		});
 
 		this.windGustSpeedStatus = new Homey.FlowCardCondition('wind_gust_speed_cp').register().registerRunListener((args, state) => {
-			var result = (wind_gust_speed > args.mps)
+			var result = (this.getCapabilityValue('wind_gust_speed_cp') > args.mps)
 			return Promise.resolve(result);
 		});
 
 		this.horizontalVisibilityStatus = new Homey.FlowCardCondition('horizontal_visibility_cp').register().registerRunListener((args, state) => {
-			var result = (horizontal_visibility > args.km)
+			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
 			return Promise.resolve(result);
 		});
 
@@ -137,7 +137,7 @@ class WeatherDevice extends Homey.Device {
 		});
 
 		this.meanPrecipitationIntensityStatus = new Homey.FlowCardCondition('mean_precipitation_intensity_cp').register().registerRunListener((args, state) => {
-			var result = (mean_precipitation_intensity > args.mmh)
+			var result = (this.getCapabilityValue('mean_precipitation_intensity_cp') > args.mmh)
 			return Promise.resolve(result);
 		});
 

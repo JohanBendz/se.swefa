@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.3.2
+* Fixed broken Condition cards
 ### v 0.3.1
 * Typo in Wind Direction Heading selections
 ### v 0.3.0

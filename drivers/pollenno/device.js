@@ -60,7 +60,7 @@ class PollenNoDevice extends Homey.Device {
 		this._flowTriggeror_pollen_0_no_Change = new Homey.FlowCardTriggerDevice('or_pollen_0_no_Change').register();
 		this._flowTriggeror_pollen_1_no_Change = new Homey.FlowCardTriggerDevice('or_pollen_1_no_Change').register();
 		
-		// Register Flow conditions
+		// register Flow conditions
 
 		this.burotPollen0Status = new Homey.FlowCardCondition('burot_pollen_0_no').register().registerRunListener((args, state) => {
 			var result = (burotpollen[3] > args.spredning);

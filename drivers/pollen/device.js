@@ -87,7 +87,7 @@ class PollenDevice extends Homey.Device {
 		this._flowTriggersalg_vide_pollen_2_Change = new Homey.FlowCardTriggerDevice('salg_vide_pollen_2_Change').register();	
 		
 		
-		// Register Flow conditions
+		// register Flow conditions
 		this.alPollen0Status = new Homey.FlowCardCondition('al_pollen_0').register().registerRunListener((args, state) => {
 			var result = (alpollen[3] > args.halt);
 			return Promise.resolve(result);

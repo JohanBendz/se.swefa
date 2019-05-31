@@ -11,7 +11,7 @@ class SWEFA extends Homey.App {
 		console.log("latitude:",lat,", longitude:",lng,"\n");
 
 		console.log("Defining SMHI API Url based on Homey goelocation");
-		const DataUrl1 = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
+		global.DataUrl1 = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
 		global.SMHIdataUrl = DataUrl1+"/lon/"+lng+"/lat/"+lat+"/data.json";
 		global.PollenUrl = "https://pollenkoll.se/wp-content/themes/pollenkoll/api/get_all.json";
 		global.PollenNoUrl = "https://pollenkontroll.no/api/pollen-count?country=no";

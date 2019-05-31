@@ -160,9 +160,18 @@ class WeatherDevice extends Homey.Device {
 		if (changedKeys && changedKeys.length) {
 			for (var i=0; i<changedKeys.length;i++){
 				
-				if (changedKeys == 'fcTime') {
-					this.log('Settings changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime) + '. Fetching new forecast.';
+				if (changedKeys[i] == 'fcTime') {
+					this.log('Offset changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime) + '. Fetching new forecast.';
 				}
+
+				if (changedKeys[i] == 'latitude') {
+					this.log('Latitude changed from ' + oldSettings.latitude + ' to ' + newSettings.latitude) + '. Fetching new forecast.';
+				}
+
+				if (changedKeys[i] == 'longitude') {
+					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude) + '. Fetching new forecast.';
+				}
+
 			}
 			this.fetchSMHIData()
 			.catch( err => {
@@ -173,17 +182,21 @@ class WeatherDevice extends Homey.Device {
 
 	// working with SMHI weather data here
 	async fetchSMHIData(){
+
+		// get current settings
+		let settings = this.getSettings();
+		let forecastTime = parseInt(settings.fcTime);
+		if (settings.latitude && settings.longitude) {
+			SMHIdataUrl = DataUrl1+"/lon/"+settings.longitude+"/lat/"+settings.latitude+"/data.json";
+		}
+		let device = this;
+
 		console.log("Fetching SMHI weather data");
 		const response = await fetch(SMHIdataUrl)
 		.catch( err => {
 			this.error( err );
 		});
 		const data = await response.json();
-
-		// get current settings
-		let settings = this.getSettings();
-		let forecastTime = parseInt(settings.fcTime);
-		let device = this;
 							
 		// working with SMHI json data here
 		for (var i=0; i < data.timeSeries[forecastTime].parameters.length; i++){

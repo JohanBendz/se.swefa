@@ -89,14 +89,14 @@
             "en": "Weather settings"
           },
           "children": [
-          {
-          "id": "fcTime",
-          "type": "radio",
-          "label": {
-            "en": "Select forecast"
-          },
-          "value": "0",
-          "values": [
+            {
+            "id": "fcTime",
+            "type": "radio",
+            "label": {
+              "en": "Select forecast"
+            },
+            "value": "0",
+            "values": [
             {
               "id": "0",
               "label": {
@@ -169,8 +169,25 @@
                 "en": "36 hours"
               }
             }
+            ]
+          },
+          {
+            "id": "latitude",
+            "type": "text",
+            "value": "",
+            "label": {
+              "en": "GEOlocation latitude"
+            }
+          },
+          {
+            "id": "longitude",
+            "type": "text",
+            "value": "",
+            "label": {
+              "en": "GEOlocation longitude"
+            }
+          }
           ]
-          }]
         }
       ]
     },

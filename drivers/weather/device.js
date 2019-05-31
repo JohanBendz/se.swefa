@@ -156,9 +156,14 @@ class WeatherDevice extends Homey.Device {
 	}; // end onAdded
 
 	// on changed settings
-	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
-		if (changedKeysArr == 'fcTime') {
-			this.log('Settings changed from ' + oldSettingsObj.fcTime + ' to ' + newSettingsObj.fcTime) + '. Fetching new forecast.';
+	async onSettings(oldSettings, newSettings, changedKeys) {
+		if (changedKeys && changedKeys.length) {
+			for (var i=0; i<changedKeys.length;i++){
+				
+				if (changedKeys == 'fcTime') {
+					this.log('Settings changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime) + '. Fetching new forecast.';
+				}
+			}
 			this.fetchSMHIData()
 			.catch( err => {
 				this.error( err );

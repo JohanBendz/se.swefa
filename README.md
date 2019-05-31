@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.3.3
+* Minor rewrite of code in onSettings
 ### v 0.3.2
 * Fixed broken Condition cards
 ### v 0.3.1

@@ -136,12 +136,20 @@ class PollenNoDevice extends Homey.Device {
 
 	}; // end onAdded
 
-	// on changed city settings
-	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
-		if (changedKeysArr == 'pCity') {
-			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.pCity + ' to ' + newSettingsObj.pCity) + '. Fetching pollen levels for new city.';
-			this.fetchPollenData();
+  // on changed city settings
+  async onSettings(oldSettings, newSettings, changedKeys) {
+	if (changedKeys && changedKeys.length) {
+		for (var i=0; i<changedKeys.length;i++){
+
+			if (changedKeys == 'pCity') {
+				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity) + '. Fetching pollen levels for new city.';
+			}
 		}
+		this.fetchPollenData()
+		.catch( err => {
+			this.error( err );
+		});
+	}
   }; // end onSettings
 	
 	// working with Pollen json data here

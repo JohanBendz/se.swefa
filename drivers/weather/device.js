@@ -124,14 +124,13 @@ class WeatherDevice extends Homey.Device {
 			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
 			return Promise.resolve(result);
 		});
-
-		if (precipitation_category == 0){
-			rainsnow = "RainSnow";
-		} else {
-			rainsnow = "";
-		}
-
+		
 		this.precipitationSituationStatus = new Homey.FlowCardCondition('measure_precipitation_situation_cp').register().registerRunListener((args, state) => {
+			if (precipitation_category !== 0){
+				rainsnow = "RainSnow";
+			} else {
+				rainsnow = "";
+			}
 			var result = (rainsnow == args.rainsnow)
 			return Promise.resolve(result);
 		});
@@ -412,6 +411,18 @@ class WeatherDevice extends Homey.Device {
 			let state = {"measure_thunder_probability_cp": thunder_probability};
 			let tokens = {"measure_thunder_probability_cp": thunder_probability};
 			this._flowTriggerThunderProbabilityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_precipitation_situation_cp') != precipitation_situation) {
+			let state = {"measure_precipitation_situation_cp": precipitation_situation};
+			let tokens = {"measure_precipitation_situation_cp": precipitation_situation};
+			this._flowTriggerPrecipitationSituationChange.trigger(device, tokens, state).catch(this.error)
+		};
+		
+		if (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') != mean_value_of_total_cloud_cover) {
+			let state = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			let tokens = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			this._flowTriggerMeanValueOfTotalCloudCoverChange.trigger(device, tokens, state).catch(this.error)
 		};
 
 	}; // end fetchSMHIData

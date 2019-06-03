@@ -11,7 +11,7 @@
 <a href="https://github.com/JohanBendz/se.swefa">
   <img src="https://raw.githubusercontent.com/JohanBendz/se.swefa/Beta/assets/images/WeatherForecastScreen.PNG">
 </a>
-<br>Settings: Select a point in time for forecasts  (hours/days ahead).
+<br>Settings: Select a point in time for forecasts  (hours ahead).
 
 ### Pollen Level Data - Two devices, one for Sweden and one for Norway (local languages)
 <a href="https://github.com/JohanBendz/se.swefa">

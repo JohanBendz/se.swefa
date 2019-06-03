@@ -186,6 +186,14 @@
             "label": {
               "en": "GEOlocation longitude"
             }
+          },
+          {
+            "id": "usehomeylocation",
+            "type": "checkbox",
+            "value": true,
+            "label": {
+              "en": "Use Homey GEOlocation"
+            }
           }
           ]
         }

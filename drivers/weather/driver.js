@@ -16,7 +16,8 @@ class WeatherDriver extends Homey.Driver {
 		"settings": {
 			"fcTime": "0",
 			"latitude": "",
-			"longitude": ""
+			"longitude": "",
+			"usehomeylocation": true
 		}
 	}
 	];

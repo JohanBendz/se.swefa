@@ -27,6 +27,7 @@ let weather_symbol = "";
 let weather_situation = "";
 let precipitation_situation = "";
 let rainsnow = "";
+let SMHIdataUrl = "";
 
 class WeatherDevice extends Homey.Device {
 
@@ -124,14 +125,13 @@ class WeatherDevice extends Homey.Device {
 			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
 			return Promise.resolve(result);
 		});
-
-		if (precipitation_category == 0){
-			rainsnow = "RainSnow";
-		} else {
-			rainsnow = "";
-		}
-
+		
 		this.precipitationSituationStatus = new Homey.FlowCardCondition('measure_precipitation_situation_cp').register().registerRunListener((args, state) => {
+			if (precipitation_category !== 0){
+				rainsnow = "RainSnow";
+			} else {
+				rainsnow = "";
+			}
 			var result = (rainsnow == args.rainsnow)
 			return Promise.resolve(result);
 		});
@@ -172,6 +172,10 @@ class WeatherDevice extends Homey.Device {
 					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude) + '. Fetching new forecast.';
 				}
 
+				if (changedKeys[i] == 'usehomeylocation') {
+					this.log('Setting for use of Homey geolocation changed from ' + oldSettings.usehomeylocation + ' to ' + newSettings.usehomeylocation) + '. Fetching new forecast.';
+				}
+
 			}
 			this.fetchSMHIData()
 			.catch( err => {
@@ -186,10 +190,24 @@ class WeatherDevice extends Homey.Device {
 		// get current settings
 		let settings = this.getSettings();
 		let forecastTime = parseInt(settings.fcTime);
-		if (settings.latitude && settings.longitude) {
-			SMHIdataUrl = DataUrl1+"/lon/"+settings.longitude+"/lat/"+settings.latitude+"/data.json";
-		}
 		let device = this;
+		// define SMHI api endpoint
+		let APIUrl = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
+
+		if (settings.usehomeylocation == false) {
+			// define full url if lat/long provided
+			console.log("Defining SMHI API Url based on entered goelocation");
+			SMHIdataUrl = APIUrl+"/lon/"+settings.longitude+"/lat/"+settings.latitude+"/data.json";
+			console.log(SMHIdataUrl);
+		} else {
+			// define full url if lat/long is not provided
+			console.log("Collecting geolocation coordinates for this Homey");
+			const lat = (Homey.ManagerGeolocation.getLatitude()).toString().slice(0,9);
+			const lng = (Homey.ManagerGeolocation.getLongitude()).toString().slice(0,9);
+			console.log("Defining SMHI API Url based on Homey goelocation");
+			SMHIdataUrl = APIUrl+"/lon/"+lng+"/lat/"+lat+"/data.json";
+			console.log(SMHIdataUrl);
+		};
 
 		console.log("Fetching SMHI weather data");
 		const response = await fetch(SMHIdataUrl)
@@ -412,6 +430,18 @@ class WeatherDevice extends Homey.Device {
 			let state = {"measure_thunder_probability_cp": thunder_probability};
 			let tokens = {"measure_thunder_probability_cp": thunder_probability};
 			this._flowTriggerThunderProbabilityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_precipitation_situation_cp') != precipitation_situation) {
+			let state = {"measure_precipitation_situation_cp": precipitation_situation};
+			let tokens = {"measure_precipitation_situation_cp": precipitation_situation};
+			this._flowTriggerPrecipitationSituationChange.trigger(device, tokens, state).catch(this.error)
+		};
+		
+		if (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') != mean_value_of_total_cloud_cover) {
+			let state = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			let tokens = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			this._flowTriggerMeanValueOfTotalCloudCoverChange.trigger(device, tokens, state).catch(this.error)
 		};
 
 	}; // end fetchSMHIData

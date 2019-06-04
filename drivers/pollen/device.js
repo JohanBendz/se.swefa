@@ -24,18 +24,20 @@ class PollenDevice extends Homey.Device {
   async onInit() {
 		this.log('SWEFA pollen device initiated');
 
+		var settings = this.getSettings();
+
 		//Register crontask
 		Homey.ManagerCron.getTask(cronName)
 			.then(task => {
 				this.log("This crontask is already registred: " + cronName);
-				task.on('run', () => this.fetchPollenData());
+				task.on('run', () => this.fetchPollenData(settings));
 			})
 			.catch(err => {
 				if (err.code == 404) {
 					this.log("This crontask has not been registered yet, registering task: " + cronName);
 					Homey.ManagerCron.registerTask(cronName, cronInterval, null)
 					.then(task => {
-						task.on('run', () => this.fetchPollenData());
+						task.on('run', () => this.fetchPollenData(settings));
 					})
 					.catch(err => {
 						this.log(`problem with registering crontask: ${err.message}`);
@@ -244,8 +246,10 @@ class PollenDevice extends Homey.Device {
     let id = this.getData().id;
 		this.log('device added: ', id);
 
+		var settings = this.getSettings();
+
 		// working with pollen data
-		this.fetchPollenData()
+		this.fetchPollenData(settings)
 		.catch( err => {
 			this.error( err );
 		});
@@ -258,10 +262,10 @@ class PollenDevice extends Homey.Device {
 		for (var i=0; i<changedKeys.length;i++){
 			
 			if (changedKeys == 'pCity') {
-				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity) + '. Fetching pollen levels for new city.';
+				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity + '. Fetching pollen levels for new city.');
 			}
 		}
-		this.fetchPollenData()
+		this.fetchPollenData(newSettings)
 		.catch( err => {
 			this.error( err );
 		});
@@ -269,7 +273,7 @@ class PollenDevice extends Homey.Device {
   }; // end onSettings
 	
 	// working with Pollen json data here
-  async fetchPollenData(){
+  async fetchPollenData(settings){
 		console.log("Fetching Pollen data");
 		const res = await fetch(PollenUrl)
 		.catch( err => {
@@ -277,8 +281,6 @@ class PollenDevice extends Homey.Device {
 		});
 		const pollenData = await res.json();
 
-		// get current settings
-		let settings = this.getSettings();
 		let pollenCity = parseInt(settings.pCity);
 		let device = this;
 			

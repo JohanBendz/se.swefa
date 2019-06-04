@@ -33,9 +33,11 @@ class WeatherDevice extends Homey.Device {
 
 	onInit() {
 		this.log('SMHI weather device initiated');
+
+		var settings = this.getSettings();
 	
 		// fetch SMHI data when app starts
-		this.fetchSMHIData()
+		this.fetchSMHIData(settings)
 		.catch( err => {
 			this.error( err );
 		});
@@ -146,9 +148,11 @@ class WeatherDevice extends Homey.Device {
 	onAdded() {
 		let id = this.getData().id;
 		this.log('device added: ', id);
+
+		var settings = this.getSettings();
 			
 		// working with weather data
-		this.fetchSMHIData()
+		this.fetchSMHIData(settings)
 		.catch( err => {
 			this.error( err );
 		});
@@ -157,43 +161,46 @@ class WeatherDevice extends Homey.Device {
 
 	// on changed settings
 	async onSettings(oldSettings, newSettings, changedKeys) {
+
+		// check and update settings
 		if (changedKeys && changedKeys.length) {
+	
 			for (var i=0; i<changedKeys.length;i++){
-				
+					
 				if (changedKeys[i] == 'fcTime') {
-					this.log('Offset changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime) + '. Fetching new forecast.';
+					this.log('Offset changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime + '. Fetching new forecast.');
 				}
-
+						
 				if (changedKeys[i] == 'latitude') {
-					this.log('Latitude changed from ' + oldSettings.latitude + ' to ' + newSettings.latitude) + '. Fetching new forecast.';
+					this.log('Latitude changed from ' + oldSettings.latitude + ' to ' + newSettings.latitude + '. Fetching new forecast.');
 				}
-
+						
 				if (changedKeys[i] == 'longitude') {
-					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude) + '. Fetching new forecast.';
+					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude + '. Fetching new forecast.');
 				}
-
+						
 				if (changedKeys[i] == 'usehomeylocation') {
-					this.log('Setting for use of Homey geolocation changed from ' + oldSettings.usehomeylocation + ' to ' + newSettings.usehomeylocation) + '. Fetching new forecast.';
+					this.log('Setting for use of Homey geolocation changed from ' + oldSettings.usehomeylocation + ' to ' + newSettings.usehomeylocation + '. Fetching new forecast.');
 				}
-
 			}
-			this.fetchSMHIData()
-			.catch( err => {
-				this.error( err );
-			});
 		}
+
+	this.fetchSMHIData(newSettings)
+	.catch( err => {
+		this.error( err );
+	});
+
 	}; // end onSettings
 
 	// working with SMHI weather data here
-	async fetchSMHIData(){
+	async fetchSMHIData(settings){
 
-		// get current settings
-		let settings = this.getSettings();
-		let forecastTime = parseInt(settings.fcTime);
-		let device = this;
+		console.log(settings);
+		var forecastTime = parseInt(settings.fcTime);
+
 		// define SMHI api endpoint
 		let APIUrl = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
-
+		
 		if (settings.usehomeylocation == false) {
 			// define full url if lat/long provided
 			console.log("Defining SMHI API Url based on entered goelocation");
@@ -208,14 +215,16 @@ class WeatherDevice extends Homey.Device {
 			SMHIdataUrl = APIUrl+"/lon/"+lng+"/lat/"+lat+"/data.json";
 			console.log(SMHIdataUrl);
 		};
-
+		
 		console.log("Fetching SMHI weather data");
 		const response = await fetch(SMHIdataUrl)
 		.catch( err => {
 			this.error( err );
 		});
 		const data = await response.json();
-							
+		
+		let device = this;
+
 		// working with SMHI json data here
 		for (var i=0; i < data.timeSeries[forecastTime].parameters.length; i++){
 			if (data.timeSeries[forecastTime].parameters[i]["name"] == "msl"){

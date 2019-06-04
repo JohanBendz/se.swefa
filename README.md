@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.3.6
+* Rewrite of settings
 ### v 0.3.5
 * Settings fix
 ### v 0.3.4

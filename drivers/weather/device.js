@@ -44,7 +44,7 @@ class WeatherDevice extends Homey.Device {
 		
 		// fetch new SMHI data according to pollInterval settings (milliseconds)
 		const pollInterval = 3600000;
-		this._fetchSMHIData = setInterval(this.fetchSMHIData.bind(this), pollInterval);
+		this._fetchSMHIData = setInterval(()=> {this.fetchSMHIData(settings);}, pollInterval);
 
 		// register Flow triggers
 		this._flowTriggerWeatherSituationChange = new Homey.FlowCardTriggerDevice('WeatherSituationChange').register();

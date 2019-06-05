@@ -13,6 +13,8 @@
 
 ## Change Log:
 
+### v 0.3.5
+* Code cleaned
 ### v 0.3.4
 * Added ability to set latitude and longitude. Fixed broken Trigger cards
 ### v 0.3.3

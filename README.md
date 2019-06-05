@@ -13,9 +13,9 @@
 
 ## Change Log:
 
-### v 0.3.5
+### v 0.3.7
 * Code cleaned
-### v 0.3.4
+### v 0.3.4..6
 * Added ability to set latitude and longitude. Fixed broken Trigger cards
 ### v 0.3.3
 * Minor rewrite of code in onSettings

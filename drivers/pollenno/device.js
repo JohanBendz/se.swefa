@@ -20,18 +20,20 @@ class PollenNoDevice extends Homey.Device {
   async onInit() {
 		this.log('SWEFA Pollen Norway device initiated');
 
+		var settings = this.getSettings();
+
 		//Register crontask
 		Homey.ManagerCron.getTask(cronName)
 			.then(task => {
 				this.log("This crontask is already registred: " + cronName);
-				task.on('run', () => this.fetchPollenData());
+				task.on('run', () => this.fetchPollenData(settings));
 			})
 			.catch(err => {
 				if (err.code == 404) {
 					this.log("This crontask has not been registered yet, registering task: " + cronName);
 					Homey.ManagerCron.registerTask(cronName, cronInterval, null)
 					.then(task => {
-						task.on('run', () => this.fetchPollenData());
+						task.on('run', () => this.fetchPollenData(settings));
 					})
 					.catch(err => {
 						this.log(`problem with registering crontask: ${err.message}`);
@@ -126,34 +128,41 @@ class PollenNoDevice extends Homey.Device {
 
   onAdded() {
     let id = this.getData().id;
-		this.log('device added: ', id);
+	this.log('device added: ', id);
 
-		// working with pollen data
-		this.fetchPollenData()
-		.catch( err => {
-			this.error( err );
-		});
+	var settings = this.getSettings();
+
+	// working with pollen data
+	this.fetchPollenData(settings)
+	.catch( err => {
+		this.error( err );
+	});
 
 	}; // end onAdded
 
   // on changed city settings
   async onSettings(oldSettings, newSettings, changedKeys) {
 	if (changedKeys && changedKeys.length) {
+
 		for (var i=0; i<changedKeys.length;i++){
 
 			if (changedKeys == 'pCity') {
-				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity) + '. Fetching pollen levels for new city.';
+				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity + '. Fetching pollen levels for new city.');
 			}
+
 		}
-		this.fetchPollenData()
+
+		this.fetchPollenData(newSettings)
 		.catch( err => {
 			this.error( err );
 		});
+
 	}
+
   }; // end onSettings
 	
-	// working with Pollen json data here
-  	async fetchPollenData(){
+  // working with Pollen json data here
+  async fetchPollenData(settings){
 		console.log("Fetching Pollen data");
 		const res = await fetch(PollenNoUrl)
 		.catch( err => {
@@ -161,8 +170,6 @@ class PollenNoDevice extends Homey.Device {
 		});
 		const pollenData = await res.json();
 
-		// get current settings
-		let settings = this.getSettings();
 		let pollenCity = parseInt(settings.pCity);
 		let device = this;
 
@@ -294,7 +301,7 @@ class PollenNoDevice extends Homey.Device {
 			this._flowTriggersalix_pollen_1_no_Change.trigger(device, tokens, state).catch(this.error)
 		};
 
-	}; // end fetchPollenData
+  }; // end fetchPollenData
 
   onDeleted() {
     let id = this.getData().id;

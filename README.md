@@ -22,7 +22,7 @@
 ### v 0.3.5
 * Settings fix
 ### v 0.3.4
-* Added ability to define latitude and longitude
+* Added ability to set latitude and longitude. Fixed broken Trigger cards
 ### v 0.3.3
 * Minor rewrite of code in onSettings
 ### v 0.3.2

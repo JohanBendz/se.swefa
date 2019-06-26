@@ -3,7 +3,7 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.3.4",
+  "version": "0.3.8",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -185,6 +185,14 @@
             "value": "",
             "label": {
               "en": "GEOlocation longitude"
+            }
+          },
+          {
+            "id": "usehomeylocation",
+            "type": "checkbox",
+            "value": true,
+            "label": {
+              "en": "Use Homey GEOlocation"
             }
           }
           ]

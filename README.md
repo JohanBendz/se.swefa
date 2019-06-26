@@ -13,6 +13,14 @@
 
 ## Change Log:
 
+### v 0.3.8
+* Fix for bug in Precipitation Condition card
+### v 0.3.7
+* Fix for SetInterval
+### v 0.3.6
+* Rewrite of settings
+### v 0.3.5
+* Settings fix
 ### v 0.3.4
 * Added ability to define latitude and longitude
 ### v 0.3.3

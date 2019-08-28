@@ -13,6 +13,10 @@
 
 ## Change Log:
 
+### v 0.3.9
+* Alpha update to Homey App store
+### v 0.3.8
+* Fix for bug in Precipitation Condition card
 ### v 0.3.7
 * Fix for SetInterval
 ### v 0.3.6

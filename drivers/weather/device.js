@@ -26,7 +26,6 @@ let median_precipitation_intensity = "";
 let weather_symbol = "";
 let weather_situation = "";
 let precipitation_situation = "";
-let rainsnow = "";
 let SMHIdataUrl = "";
 
 class WeatherDevice extends Homey.Device {
@@ -127,14 +126,13 @@ class WeatherDevice extends Homey.Device {
 			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
 			return Promise.resolve(result);
 		});
-		
+
 		this.precipitationSituationStatus = new Homey.FlowCardCondition('measure_precipitation_situation_cp').register().registerRunListener((args, state) => {
 			if (precipitation_category !== 0){
-				rainsnow = "RainSnow";
+				var result = true;
 			} else {
-				rainsnow = "";
+				var result = false;
 			}
-			var result = (rainsnow == args.rainsnow)
 			return Promise.resolve(result);
 		});
 

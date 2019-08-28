@@ -13,6 +13,10 @@
 
 ## Change Log:
 
+### v 0.4.1
+* Updated Alpha Channel version
+### v 0.4.0
+* Alpha merged to Beta channel
 ### v 0.3.9
 * Alpha update to Homey App store
 ### v 0.3.8

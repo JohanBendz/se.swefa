@@ -13,8 +13,10 @@
 
 ## Change Log:
 
+### v 0.4.0
+* Uppdated Beta channel with Condition card fix
 ### v 0.3.9
-* Alpha update to Homey App store
+* Submission of Condition card fix
 ### v 0.3.8
 * Fix for bug in Precipitation Condition card
 ### v 0.3.7

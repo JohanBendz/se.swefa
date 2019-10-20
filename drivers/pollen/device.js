@@ -15,10 +15,6 @@ let grabopollen = [];
 let hasselpollen = [];
 let salgvidepollen = [];
 
-
-let pollenCity = "";
-let settings = "";
-
 //Set Cron parameters
 const cronName = "pollenCronTask"
 const cronInterval = "30 0,5,11,19 * * *"; // 30 0,5,11,19 * * * = every day, 0:30, 5:30, 11:30 and 19:30.
@@ -28,40 +24,27 @@ class PollenDevice extends Homey.Device {
   async onInit() {
 		this.log('SWEFA pollen device initiated');
 
-		// get current settings
-		settings = this.getSettings();
-		pollenCity = parseInt(settings.radio1);
-
-		// if settings are blank default to this (97=Stockholm)
-		if(!pollenCity) {
-			 pollenCity = 97;
-		}
+		var settings = this.getSettings();
 
 		//Register crontask
 		Homey.ManagerCron.getTask(cronName)
 			.then(task => {
 				this.log("This crontask is already registred: " + cronName);
-				task.on('run', () => this.GetData());
+				task.on('run', () => this.fetchPollenData(settings));
 			})
 			.catch(err => {
 				if (err.code == 404) {
 					this.log("This crontask has not been registered yet, registering task: " + cronName);
 					Homey.ManagerCron.registerTask(cronName, cronInterval, null)
 					.then(task => {
-						task.on('run', () => this.fetchPollenData());
+						task.on('run', () => this.fetchPollenData(settings));
 					})
 					.catch(err => {
 						this.log(`problem with registering crontask: ${err.message}`);
 					});
-					} else {
-						this.log(`other cron error: ${err.message}`);
-					}
-				});
-		
-		//Unregister crontask on unload
-		Homey
-			.on('unload', () => {
-				Homey.ManagerCron.unregisterTask(cronName);
+				} else {
+					this.log(`other cron error: ${err.message}`);
+				}
 			});
 
 		// register Flow triggers
@@ -106,7 +89,7 @@ class PollenDevice extends Homey.Device {
 		this._flowTriggersalg_vide_pollen_2_Change = new Homey.FlowCardTriggerDevice('salg_vide_pollen_2_Change').register();	
 		
 		
-		// Register Flow conditions
+		// register Flow conditions
 		this.alPollen0Status = new Homey.FlowCardCondition('al_pollen_0').register().registerRunListener((args, state) => {
 			var result = (alpollen[3] > args.halt);
 			return Promise.resolve(result);
@@ -263,26 +246,43 @@ class PollenDevice extends Homey.Device {
     let id = this.getData().id;
 		this.log('device added: ', id);
 
+		var settings = this.getSettings();
+
 		// working with pollen data
-    this.fetchPollenData();
+		this.fetchPollenData(settings)
+		.catch( err => {
+			this.error( err );
+		});
 
 	}; // end onAdded
 
-	// on changed city settings
-	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
-		if (changedKeysArr == 'radio1') {
-			this.log('Settings changed for selected pollen city from ' + oldSettingsObj.radio1 + ' to ' + newSettingsObj.radio1) + '. Fetching pollen levels for new city.';
-//			await this.setSettings('pollenCity', newSettingsObj.radio1);
-			pollenCity = parseInt(newSettingsObj.radio1);
-			this.fetchPollenData();
+  // on changed city settings
+  async onSettings(oldSettings, newSettings, changedKeys) {
+	if (changedKeys && changedKeys.length) {
+		for (var i=0; i<changedKeys.length;i++){
+			
+			if (changedKeys == 'pCity') {
+				this.log('Settings changed for selected pollen city from ' + oldSettings.pCity + ' to ' + newSettings.pCity + '. Fetching pollen levels for new city.');
+			}
 		}
+		this.fetchPollenData(newSettings)
+		.catch( err => {
+			this.error( err );
+		});
+	}
   }; // end onSettings
 	
 	// working with Pollen json data here
-  async fetchPollenData(){
+  async fetchPollenData(settings){
 		console.log("Fetching Pollen data");
-		const res = await fetch(PollenUrl);
+		const res = await fetch(PollenUrl)
+		.catch( err => {
+			this.error( err );
+		});
 		const pollenData = await res.json();
+
+		let pollenCity = parseInt(settings.pCity);
+		let device = this;
 			
 		// populating pollen variables
 		for (var i=0; i < pollenData[0].CitiesData.length; i++){
@@ -357,6 +357,169 @@ class PollenDevice extends Homey.Device {
 		this.setCapabilityValue('grabo_pollen_2', grabopollen[2]);
 		this.setCapabilityValue('hassel_pollen_2', hasselpollen[2]);
 		this.setCapabilityValue('salg_vide_pollen_2', salgvidepollen[2]);
+
+		// updatingFlowTriggers
+		if (this.getCapabilityValue('al_pollen_0') != alpollen[0]) {
+			let state = {"al_pollen_0": alpollen[0]};
+			let tokens = {"al_pollen_0": alpollen[0]};
+			this._flowTriggeral_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('al_pollen_1') != alpollen[1]) {
+			let state = {"al_pollen_1": alpollen[1]};
+			let tokens = {"al_pollen_1": alpollen[1]};
+			this._flowTriggeral_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('al_pollen_2') != alpollen[2]) {
+			let state = {"al_pollen_2": alpollen[2]};
+			let tokens = {"al_pollen_2": alpollen[2]};
+			this._flowTriggeral_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('alm_pollen_0') != almpollen[0]) {
+			let state = {"alm_pollen_0": almpollen[0]};
+			let tokens = {"alm_pollen_0": almpollen[0]};
+			this._flowTriggeralm_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('alm_pollen_1') != almpollen[1]) {
+			let state = {"alm_pollen_1": almpollen[1]};
+			let tokens = {"alm_pollen_1": almpollen[1]};
+			this._flowTriggeralm_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('alm_pollen_2') != almpollen[2]) {
+			let state = {"alm_pollen_2": almpollen[2]};
+			let tokens = {"alm_pollen_2": almpollen[2]};
+			this._flowTriggeralm_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('ambrosia_pollen_0') != ambrosiapollen[0]) {
+			let state = {"ambrosia_pollen_0": ambrosiapollen[0]};
+			let tokens = {"ambrosia_pollen_0": ambrosiapollen[0]};
+			this._flowTriggerambrosia_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('ambrosia_pollen_1') != ambrosiapollen[1]) {
+			let state = {"ambrosia_pollen_1": ambrosiapollen[1]};
+			let tokens = {"ambrosia_pollen_1": ambrosiapollen[1]};
+			this._flowTriggerambrosia_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('ambrosia_pollen_2') != ambrosiapollen[2]) {
+			let state = {"ambrosia_pollen_2": ambrosiapollen[2]};
+			let tokens = {"ambrosia_pollen_2": ambrosiapollen[2]};
+			this._flowTriggerambrosia_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('bjork_pollen_0') != bjorkpollen[0]) {
+			let state = {"bjork_pollen_0": bjorkpollen[0]};
+			let tokens = {"bjork_pollen_0": bjorkpollen[0]};
+			this._flowTriggerbjork_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('bjork_pollen_1') != bjorkpollen[1]) {
+			let state = {"bjork_pollen_1": bjorkpollen[1]};
+			let tokens = {"bjork_pollen_1": bjorkpollen[1]};
+			this._flowTriggerbjork_pollen_1_Change.trigger(device, tokens, state)
+				.then(this.log)
+				.catch(this.error)
+		};
+		if (this.getCapabilityValue('bjork_pollen_2') != bjorkpollen[2]) {
+			let state = {"bjork_pollen_2": bjorkpollen[2]};
+			let tokens = {"bjork_pollen_2": bjorkpollen[2]};
+			this._flowTriggerbjork_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('bok_pollen_0') != bokpollen[0]) {
+			let state = {"bok_pollen_0": bokpollen[0]};
+			let tokens = {"bok_pollen_0": bokpollen[0]};
+			this._flowTriggerbok_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('bok_pollen_1') != bokpollen[1]) {
+			let state = {"bok_pollen_1": bokpollen[1]};
+			let tokens = {"bok_pollen_1": bokpollen[1]};
+			this._flowTriggerbok_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('bok_pollen_2') != bokpollen[2]) {
+			let state = {"bok_pollen_2": bokpollen[2]};
+			let tokens = {"bok_pollen_2": bokpollen[2]};
+			this._flowTriggerbok_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('ek_pollen_0') != ekpollen[0]) {
+			let state = {"ek_pollen_0": ekpollen[0]};
+			let tokens = {"ek_pollen_0": ekpollen[0]};
+			this._flowTriggerek_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('ek_pollen_1') != ekpollen[1]) {
+			let state = {"ek_pollen_1": ekpollen[1]};
+			let tokens = {"ek_pollen_1": ekpollen[1]};
+			this._flowTriggerek_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('ek_pollen_2') != ekpollen[2]) {
+			let state = {"ek_pollen_2": ekpollen[2]};
+			let tokens = {"ek_pollen_2": ekpollen[2]};
+			this._flowTriggerek_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('gras_pollen_0') != graspollen[0]) {
+			let state = {"gras_pollen_0": graspollen[0]};
+			let tokens = {"gras_pollen_0": graspollen[0]};
+			this._flowTriggergras_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('gras_pollen_1') != graspollen[1]) {
+			let state = {"gras_pollen_1": graspollen[1]};
+			let tokens = {"gras_pollen_1": graspollen[1]};
+			this._flowTriggergras_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('gras_pollen_2') != graspollen[2]) {
+			let state = {"gras_pollen_2": graspollen[2]};
+			let tokens = {"gras_pollen_2": graspollen[2]};
+			this._flowTriggergras_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('grabo_pollen_0') != grabopollen[0]) {
+			let state = {"grabo_pollen_0": grabopollen[0]};
+			let tokens = {"grabo_pollen_0": grabopollen[0]};
+			this._flowTriggergrabo_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('grabo_pollen_1') != grabopollen[1]) {
+			let state = {"grabo_pollen_1": grabopollen[1]};
+			let tokens = {"grabo_pollen_1": grabopollen[1]};
+			this._flowTriggergrabo_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('grabo_pollen_2') != grabopollen[2]) {
+			let state = {"grabo_pollen_2": grabopollen[2]};
+			let tokens = {"grabo_pollen_2": grabopollen[2]};
+			this._flowTriggergrabo_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('hassel_pollen_0') != hasselpollen[0]) {
+			let state = {"hassel_pollen_0": hasselpollen[0]};
+			let tokens = {"hassel_pollen_0": hasselpollen[0]};
+			this._flowTriggerhassel_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('hassel_pollen_1') != hasselpollen[1]) {
+			let state = {"hassel_pollen_1": hasselpollen[1]};
+			let tokens = {"hassel_pollen_1": hasselpollen[1]};
+			this._flowTriggerhassel_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('hassel_pollen_2') != hasselpollen[2]) {
+			let state = {"hassel_pollen_2": hasselpollen[2]};
+			let tokens = {"hassel_pollen_2": hasselpollen[2]};
+			this._flowTriggerhassel_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('salg_vide_pollen_0') != salgvidepollen[0]) {
+			let state = {"salg_vide_pollen_0": salgvidepollen[0]};
+			let tokens = {"salg_vide_pollen_0": salgvidepollen[0]};
+			this._flowTriggersalg_vide_pollen_0_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('salg_vide_pollen_1') != salgvidepollen[1]) {
+			let state = {"salg_vide_pollen_1": salgvidepollen[1]};
+			let tokens = {"salg_vide_pollen_1": salgvidepollen[1]};
+			this._flowTriggersalg_vide_pollen_1_Change.trigger(device, tokens, state).catch(this.error)
+		};
+		if (this.getCapabilityValue('salg_vide_pollen_2') != salgvidepollen[2]) {
+			let state = {"salg_vide_pollen_2": salgvidepollen[2]};
+			let tokens = {"salg_vide_pollen_2": salgvidepollen[2]};
+			this._flowTriggersalg_vide_pollen_2_Change.trigger(device, tokens, state).catch(this.error)
+		};
 			
 		// switch from strings to numbers
 		for (var i=0; i<2; i++) {
@@ -468,220 +631,15 @@ class PollenDevice extends Homey.Device {
 
   onDeleted() {
     let id = this.getData().id;
-    this.log('device deleted:', id);
+		this.log('device deleted:', id);
+	
+		//Unregister crontask on unload
+		Homey
+		.on('unload', () => {
+			Homey.ManagerCron.unregisterTask(cronName);
+		});
 
 	}; // end onDeleted
-	
-// flow triggers
-triggeral_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeral_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggeralm_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeral_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerambrosia_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeral_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbjork_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeralm_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbok_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeralm_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerek_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggeralm_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergras_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggerambrosia_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergrabo_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggerambrosia_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerhassel_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggerambrosia_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggersalg_vide_pollen_0_ChangeFlow(device, tokens, state) {
-this._flowTriggerbjork_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggeral_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerbjork_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggeralm_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerbjork_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerambrosia_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerbok_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbjork_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerbok_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbok_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerbok_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerek_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerek_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergras_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerek_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergrabo_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggerek_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerhassel_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggergras_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggersalg_vide_pollen_1_ChangeFlow(device, tokens, state) {
-this._flowTriggergras_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggeral_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggergras_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggeralm_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggergrabo_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerambrosia_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggergrabo_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbjork_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggergrabo_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerbok_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggerhassel_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerek_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggerhassel_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergras_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggerhassel_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggergrabo_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggersalg_vide_pollen_0_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggerhassel_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggersalg_vide_pollen_1_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
-
-triggersalg_vide_pollen_2_ChangeFlow(device, tokens, state) {
-this._flowTriggersalg_vide_pollen_2_Change
-	.trigger(device, tokens, state)
-	.then(this.log)
-	.catch(this.error)
-};
 
 };
 

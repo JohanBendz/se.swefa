@@ -2,19 +2,19 @@
 
 const Homey = require('homey');
 
-class PollenDriver extends Homey.Driver {
+class PollenNoDriver extends Homey.Driver {
 
 	onInit() {
-		this.log('SWEFA pollen driver initiated');
+		this.log('SWEFA Pollen Norway driver initiated');
     
 	}; // end onInit
 	
 	onPairListDevices(data, callback) {
 		let devices = [
-			{ "name": "Pollen",
+			{ "name": "Pollen Norway",
 			  "data": {"id": guid()},
 			  "settings": {
-				  "pCity": '97'
+				  "pCity": '126'
 			  }
 			}
 		];
@@ -23,7 +23,7 @@ class PollenDriver extends Homey.Driver {
 
 };
 
-module.exports = PollenDriver;
+module.exports = PollenNoDriver;
 
 function guid() {
 	function s4() {

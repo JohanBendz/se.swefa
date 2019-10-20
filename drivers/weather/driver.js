@@ -14,7 +14,10 @@ class WeatherDriver extends Homey.Driver {
 	{ "name": "SMHI weather",
 		"data": {"id": guid()},
 		"settings": {
-			"fcTime": "1"
+			"fcTime": "0",
+			"latitude": "",
+			"longitude": "",
+			"usehomeylocation": true
 		}
 	}
 	];

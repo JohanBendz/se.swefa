@@ -26,37 +26,29 @@ let median_precipitation_intensity = "";
 let weather_symbol = "";
 let weather_situation = "";
 let precipitation_situation = "";
-let rainsnow = "";
-
-let forecastFor = "";
-let forecastTime = "";
-let settings = "";
-
-/* // define FlowCard variables
-let weatherCondition = new Homey.FlowCardCondition('weather_condition'); */
+let SMHIdataUrl = "";
 
 class WeatherDevice extends Homey.Device {
 
 	onInit() {
 		this.log('SMHI weather device initiated');
-		
-		// get current settings
-		settings = this.getSettings();
-		forecastTime = parseInt(settings.fcTime);
+
+		var settings = this.getSettings();
 	
 		// fetch SMHI data when app starts
-		this.fetchSMHIData()
+		this.fetchSMHIData(settings)
 		.catch( err => {
 			this.error( err );
 		});
 		
 		// fetch new SMHI data according to pollInterval settings (milliseconds)
 		const pollInterval = 3600000;
-		this._fetchSMHIData = setInterval(this.fetchSMHIData.bind(this), pollInterval);
+		this._fetchSMHIData = setInterval(()=> {this.fetchSMHIData(settings);}, pollInterval);
 
 		// register Flow triggers
 		this._flowTriggerWeatherSituationChange = new Homey.FlowCardTriggerDevice('WeatherSituationChange').register();
 		this._flowTriggerAirTemperatureChange = new Homey.FlowCardTriggerDevice('AirTemperatureChange').register();
+		this._flowTriggerPrecipitationSituationChange = new Homey.FlowCardTriggerDevice('PrecipitationSituationChange').register();
 		this._flowTriggerWindSpeedChange = new Homey.FlowCardTriggerDevice('WindSpeedChange').register();
 		this._flowTriggerWindDirectionHeadingChange = new Homey.FlowCardTriggerDevice('WindDirectionHeadingChange').register();
 		this._flowTriggerRelativeHumidityChange = new Homey.FlowCardTriggerDevice('RelativeHumidityChange').register();
@@ -64,82 +56,101 @@ class WeatherDevice extends Homey.Device {
 		this._flowTriggerThunderProbabilityChange = new Homey.FlowCardTriggerDevice('ThunderProbabilityChange').register();
 		this._flowTriggerMeanValueOfTotalCloudCoverChange = new Homey.FlowCardTriggerDevice('MeanValueOfTotalCloudCoverChange').register();
 		
-		// Register Flow conditions
+		// register Flow conditions
 		this.weatherSituationStatus = new Homey.FlowCardCondition('measure_weather_situation_cp').register().registerRunListener((args, state) => {
-			var result = (weather_situation.replace(/\s+/g, '') == args.weather_situation_condition)
+			var result = (this.getCapabilityValue('measure_weather_situation_cp'.replace(/\s+/g, '')) == args.weather_situation_condition)
 			return Promise.resolve(result);
 		});
 
 		this.airTemperatureStatus = new Homey.FlowCardCondition('measure_air_temperature_cp').register().registerRunListener((args, state) => {
-			var result = (air_temperature > args.degree)
+			var result = (this.getCapabilityValue('measure_air_temperature_cp') > args.degree)
 			return Promise.resolve(result);
 		});
 
 		this.windSpeedStatus = new Homey.FlowCardCondition('measure_wind_speed_cp').register().registerRunListener((args, state) => {
-			var result = (wind_speed > args.mps)
+			var result = (this.getCapabilityValue('measure_wind_speed_cp') > args.mps)
 			return Promise.resolve(result);
 		});
 
 		this.windDirectionHeadingStatus = new Homey.FlowCardCondition('measure_wind_direction_heading_cp').register().registerRunListener((args, state) => {
-			var result = (wind_direction_heading == args.direction)
+			var result = (this.getCapabilityValue('measure_wind_direction_heading_cp') == args.direction)
+			return Promise.resolve(result);
+		});
+
+		this.windDirectionStatus = new Homey.FlowCardCondition('measure_wind_direction_cp').register().registerRunListener((args, state) => {
+			var result = (this.getCapabilityValue('measure_wind_direction_cp') > args.degree)
 			return Promise.resolve(result);
 		});
 
 		this.relativeHumidityStatus = new Homey.FlowCardCondition('measure_relative_humidity_cp').register().registerRunListener((args, state) => {
-			var result = (relative_humidity > args.percent)
+			var result = (this.getCapabilityValue('measure_relative_humidity_cp') > args.percent)
 			return Promise.resolve(result);
 		});
 
 		this.airPressureStatus = new Homey.FlowCardCondition('measure_air_pressure_cp').register().registerRunListener((args, state) => {
-			var result = (air_pressure > args.hpa)
+			var result = (this.getCapabilityValue('measure_air_pressure_cp') > args.hpa)
 			return Promise.resolve(result);
 		});
 
 		this.thunderProbabilityStatus = new Homey.FlowCardCondition('measure_thunder_probability_cp').register().registerRunListener((args, state) => {
-			var result = (thunder_probability > args.percent)
+			var result = (this.getCapabilityValue('measure_thunder_probability_cp') > args.percent)
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfTotalCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_total_cloud_cover_cp').register().registerRunListener((args, state) => {
-			var result = (mean_value_of_total_cloud_cover > args.octas)
+			var result = (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > args.octas)
+			return Promise.resolve(result);
+		});
+
+		this.meanValueOfLowLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_low_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (this.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > args.octas)
+			return Promise.resolve(result);
+		});
+
+		this.meanValueOfMediumLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_medium_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (this.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > args.octas)
+			return Promise.resolve(result);
+		});
+
+		this.meanValueOfHighLevelCloudCoverStatus = new Homey.FlowCardCondition('mean_value_of_high_level_cloud_cover_cp').register().registerRunListener((args, state) => {
+			var result = (this.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > args.octas)
 			return Promise.resolve(result);
 		});
 
 		this.windGustSpeedStatus = new Homey.FlowCardCondition('wind_gust_speed_cp').register().registerRunListener((args, state) => {
-			var result = (wind_gust_speed > args.mps)
+			var result = (this.getCapabilityValue('wind_gust_speed_cp') > args.mps)
 			return Promise.resolve(result);
 		});
 
 		this.horizontalVisibilityStatus = new Homey.FlowCardCondition('horizontal_visibility_cp').register().registerRunListener((args, state) => {
-			var result = (horizontal_visibility > args.km)
+			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
 			return Promise.resolve(result);
 		});
 
-		if (precipitation_category == 0){
-			rainsnow = "RainSnow";
-		} else {
-			rainsnow = "";
-		}
-
 		this.precipitationSituationStatus = new Homey.FlowCardCondition('measure_precipitation_situation_cp').register().registerRunListener((args, state) => {
-			var result = (rainsnow == args.rainsnow)
+			if (precipitation_category !== 0){
+				var result = true;
+			} else {
+				var result = false;
+			}
 			return Promise.resolve(result);
 		});
 
 		this.meanPrecipitationIntensityStatus = new Homey.FlowCardCondition('mean_precipitation_intensity_cp').register().registerRunListener((args, state) => {
-			var result = (mean_precipitation_intensity > args.mmh)
+			var result = (this.getCapabilityValue('mean_precipitation_intensity_cp') > args.mmh)
 			return Promise.resolve(result);
 		});
-
 
 	}; // end onInit
 
 	onAdded() {
 		let id = this.getData().id;
 		this.log('device added: ', id);
+
+		var settings = this.getSettings();
 			
 		// working with weather data
-		this.fetchSMHIData()
+		this.fetchSMHIData(settings)
 		.catch( err => {
 			this.error( err );
 		});
@@ -147,24 +158,71 @@ class WeatherDevice extends Homey.Device {
 	}; // end onAdded
 
 	// on changed settings
-	async onSettings(oldSettingsObj, newSettingsObj, changedKeysArr) {
-		if (changedKeysArr == 'fcTime') {
-			this.log('Settings changed from ' + oldSettingsObj.fcTime + ' to ' + newSettingsObj.fcTime) + '. Fetching new forecast.';
-// 			await this.setSettings('forecastTime', newSettingsObj.fcTime);
-			forecastTime = parseInt(newSettingsObj.fcTime);
-			this.fetchSMHIData();
+	async onSettings(oldSettings, newSettings, changedKeys) {
+
+		// check and update settings
+		if (changedKeys && changedKeys.length) {
+	
+			for (var i=0; i<changedKeys.length;i++){
+					
+				if (changedKeys[i] == 'fcTime') {
+					this.log('Offset changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime + '. Fetching new forecast.');
+				}
+						
+				if (changedKeys[i] == 'latitude') {
+					this.log('Latitude changed from ' + oldSettings.latitude + ' to ' + newSettings.latitude + '. Fetching new forecast.');
+				}
+						
+				if (changedKeys[i] == 'longitude') {
+					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude + '. Fetching new forecast.');
+				}
+						
+				if (changedKeys[i] == 'usehomeylocation') {
+					this.log('Setting for use of Homey geolocation changed from ' + oldSettings.usehomeylocation + ' to ' + newSettings.usehomeylocation + '. Fetching new forecast.');
+				}
+			}
 		}
+
+	this.fetchSMHIData(newSettings)
+	.catch( err => {
+		this.error( err );
+	});
+
 	}; // end onSettings
 
 	// working with SMHI weather data here
-	async fetchSMHIData(){
+	async fetchSMHIData(settings){
+
+		console.log(settings);
+		var forecastTime = parseInt(settings.fcTime);
+
+		// define SMHI api endpoint
+		let APIUrl = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
+		
+		if (settings.usehomeylocation == false) {
+			// define full url if lat/long provided
+			console.log("Defining SMHI API Url based on entered goelocation");
+			SMHIdataUrl = APIUrl+"/lon/"+settings.longitude+"/lat/"+settings.latitude+"/data.json";
+			console.log(SMHIdataUrl);
+		} else {
+			// define full url if lat/long is not provided
+			console.log("Collecting geolocation coordinates for this Homey");
+			const lat = (Homey.ManagerGeolocation.getLatitude()).toString().slice(0,9);
+			const lng = (Homey.ManagerGeolocation.getLongitude()).toString().slice(0,9);
+			console.log("Defining SMHI API Url based on Homey goelocation");
+			SMHIdataUrl = APIUrl+"/lon/"+lng+"/lat/"+lat+"/data.json";
+			console.log(SMHIdataUrl);
+		};
+		
 		console.log("Fetching SMHI weather data");
 		const response = await fetch(SMHIdataUrl)
 		.catch( err => {
 			this.error( err );
 		});
 		const data = await response.json();
-							
+		
+		let device = this;
+
 		// working with SMHI json data here
 		for (var i=0; i < data.timeSeries[forecastTime].parameters.length; i++){
 			if (data.timeSeries[forecastTime].parameters[i]["name"] == "msl"){
@@ -230,8 +288,22 @@ class WeatherDevice extends Homey.Device {
 		};
 
 		// setting forecastFor variable based on forecastTime value
-		forecastFor = (data.timeSeries[forecastTime]["validTime"]).replace("T", " ").replace("Z", "");
-		console.log(forecastFor);
+		let fcTimeO = new Date(data.timeSeries[forecastTime]["validTime"]);
+		var month = [];
+		month[0] = "January";
+		month[1] = "February";
+		month[2] = "March";
+		month[3] = "April";
+		month[4] = "May";
+		month[5] = "June";
+		month[6] = "July";
+		month[7] = "August";
+		month[8] = "September";
+		month[9] = "October";
+		month[10] = "November";
+		month[11] = "December";
+		var fcTimeM = month[fcTimeO.getMonth()];
+		let forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
 
 		// switch from number to string
 		weather_situation = "";
@@ -303,7 +375,7 @@ class WeatherDevice extends Homey.Device {
 		this.setCapabilityValue('measure_air_pressure_cp', air_pressure);
 		this.setCapabilityValue('measure_air_temperature_cp', air_temperature);
 		this.setCapabilityValue('horizontal_visibility_cp', horizontal_visibility);
-//		this.setCapabilityValue('wind_direction_cp', wind_direction);
+		this.setCapabilityValue('measure_wind_direction_cp', wind_direction);
 		this.setCapabilityValue('measure_wind_speed_cp', wind_speed);
 		this.setCapabilityValue('measure_relative_humidity_cp', relative_humidity);
 		this.setCapabilityValue('measure_thunder_probability_cp', thunder_probability);
@@ -324,6 +396,61 @@ class WeatherDevice extends Homey.Device {
 		this.setCapabilityValue('air_temperature_feels_like_cp', feelsLike);
 		this.setCapabilityValue('forecast_for_cp', forecastFor);
 
+		// updatingFlowTriggers
+		if (this.getCapabilityValue('measure_weather_situation_cp') != weather_situation) {
+			let state = {"measure_weather_situation_cp": weather_situation};
+			let tokens = {"measure_weather_situation_cp": weather_situation};
+			this._flowTriggerWeatherSituationChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_air_temperature_cp') != air_temperature) {
+			let state = {"measure_air_temperature_cp": air_temperature};
+			let tokens = {"measure_air_temperature_cp": air_temperature};
+			this._flowTriggerAirTemperatureChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_wind_speed_cp') != wind_speed) {
+			let state = {"measure_wind_speed_cp": wind_speed};
+			let tokens = {"measure_wind_speed_cp": wind_speed};
+			this._flowTriggerWindSpeedChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_wind_direction_heading_cp') != wind_direction_heading) {
+			let state = {"measure_wind_direction_heading_cp": wind_direction_heading};
+			let tokens = {"measure_wind_direction_heading_cp": wind_direction_heading};
+			this._flowTriggerWindDirectionHeadingChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_relative_humidity_cp') != relative_humidity) {
+			let state = {"measure_relative_humidity_cp": relative_humidity};
+			let tokens = {"measure_relative_humidity_cp": relative_humidity};
+			this._flowTriggerRelativeHumidityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_air_pressure_cp') != air_pressure) {
+			let state = {"measure_air_pressure_cp": air_pressure};
+			let tokens = {"measure_air_pressure_cp": air_pressure};
+			this._flowTriggerAirPressureChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_thunder_probability_cp') != thunder_probability) {
+			let state = {"measure_thunder_probability_cp": thunder_probability};
+			let tokens = {"measure_thunder_probability_cp": thunder_probability};
+			this._flowTriggerThunderProbabilityChange.trigger(device, tokens, state).catch(this.error)
+		};
+
+		if (this.getCapabilityValue('measure_precipitation_situation_cp') != precipitation_situation) {
+			let state = {"measure_precipitation_situation_cp": precipitation_situation};
+			let tokens = {"measure_precipitation_situation_cp": precipitation_situation};
+			this._flowTriggerPrecipitationSituationChange.trigger(device, tokens, state).catch(this.error)
+		};
+		
+		if (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') != mean_value_of_total_cloud_cover) {
+			let state = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			let tokens = {"mean_value_of_total_cloud_cover_cp": mean_value_of_total_cloud_cover};
+			this._flowTriggerMeanValueOfTotalCloudCoverChange.trigger(device, tokens, state).catch(this.error)
+		};
+
 	}; // end fetchSMHIData
   
 	onDeleted() {
@@ -331,50 +458,6 @@ class WeatherDevice extends Homey.Device {
 		this.log('device deleted:', id);
 
 	}; // end onDeleted
-	
-	// flow triggers
-	triggerWeatherSituationChangeFlow(device, tokens, state) {
-	this._flowTriggerWeatherSituationChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerAirTemperatureChangeFlow(device, tokens, state) {
-	this._flowTriggerAirTemperatureChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerWindSpeedChangeFlow(device, tokens, state) {
-	this._flowTriggerWindSpeedChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerWindDirectionHeadingChangeFlow(device, tokens, state) {
-	this._flowTriggerWindDirectionHeadingChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerRelativeHumidityChangeFlow(device, tokens, state) {
-	this._flowTriggerRelativeHumidityChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerAirPressureChangeFlow(device, tokens, state) {
-	this._flowTriggerAirPressureChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
-	triggerThunderProbabilityChangeFlow(device, tokens, state) {
-	this._flowTriggerThunderProbabilityChange
-	  .trigger(device, tokens, state)
-	  .then(this.log)
-	  .catch(this.error)
-	};
 
 };
 

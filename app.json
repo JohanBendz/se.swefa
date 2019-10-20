@@ -3,12 +3,16 @@
   "name": {
     "en": "Swedish Weather Forecast"
   },
-  "version": "0.1.9",
-  "compatibility": ">=1.5.0",
+  "version": "0.4.0",
+  "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
     "en": "Weather information and prognoses for Sweden",
     "sv": "Väderinformation och prognoser för Sverige"
+  },
+  "tags": {
+    "en": ["Climate", "Weather", "Pollen", "Forecast", "Temperature", "Sweden"],
+    "sv": ["Klimat", "Väder", "Pollen", "Prognos", "Temperatur", "Sverige"]
   },
   "author": {
     "name": "Johan Bendz",
@@ -46,6 +50,7 @@
         "measure_precipitation_situation_cp",
         "air_temperature_feels_like_cp",
         "measure_wind_direction_heading_cp",
+        "measure_wind_direction_cp",
         "measure_relative_humidity_cp",
         "measure_wind_speed_cp",
         "measure_air_pressure_cp",
@@ -84,118 +89,113 @@
             "en": "Weather settings"
           },
           "children": [
-          {
-          "id": "fcTime",
-          "type": "radio",
-          "label": {
-            "en": "Select forecast"
-          },
-          "value": "1",
-          "values": [
             {
-              "id": "1",
+            "id": "fcTime",
+            "type": "radio",
+            "label": {
+              "en": "Select forecast"
+            },
+            "value": "0",
+            "values": [
+            {
+              "id": "0",
               "label": {
                 "en": "Now"
               }
             },
             {
-              "id": "2",
+              "id": "1",
               "label": {
                 "en": "1 hour"
               }
             },
             {
-              "id": "3",
+              "id": "2",
               "label": {
                 "en": "2 hours"
               }
             },
             {
-              "id": "4",
+              "id": "3",
               "label": {
                 "en": "3 hours"
               }
             },
             {
-              "id": "5",
+              "id": "4",
               "label": {
                 "en": "4 hours"
               }
             },
             {
-              "id": "6",
+              "id": "5",
               "label": {
                 "en": "5 hours"
               }
             },
             {
-              "id": "9",
+              "id": "8",
               "label": {
                 "en": "8 hours"
               }
             },
             {
-              "id": "13",
+              "id": "12",
               "label": {
                 "en": "12 hours"
               }
             },
             {
-              "id": "25",
+              "id": "18",
+              "label": {
+                "en": "18 hours"
+              }
+            },
+            {
+              "id": "24",
               "label": {
                 "en": "24 hours"
               }
             },
             {
-              "id": "37",
+              "id": "30",
+              "label": {
+                "en": "30 hours"
+              }
+            },
+            {
+              "id": "36",
               "label": {
                 "en": "36 hours"
               }
-            },
-            {
-              "id": "44",
-              "label": {
-                "en": "2 days"
-              }
-            },
-            {
-              "id": "47",
-              "label": {
-                "en": "3 days"
-              }
-            },
-            {
-              "id": "51",
-              "label": {
-                "en": "4 days"
-              }
-            },
-            {
-              "id": "55",
-              "label": {
-                "en": "5 days"
-              }
-            },
-            {
-              "id": "59",
-              "label": {
-                "en": "6 days"
-              }
-            },
-            {
-              "id": "63",
-              "label": {
-                "en": "7 days"
-              }
-            },
-            {
-              "id": "65",
-              "label": {
-                "en": "8 days"
-              }
             }
+            ]
+          },
+          {
+            "id": "latitude",
+            "type": "text",
+            "value": "",
+            "label": {
+              "en": "GEOlocation latitude"
+            }
+          },
+          {
+            "id": "longitude",
+            "type": "text",
+            "value": "",
+            "label": {
+              "en": "GEOlocation longitude"
+            }
+          },
+          {
+            "id": "usehomeylocation",
+            "type": "checkbox",
+            "value": true,
+            "label": {
+              "en": "Use Homey GEOlocation"
+            }
+          }
           ]
-          }]
         }
       ]
     },
@@ -261,7 +261,7 @@
           },
           "children": [
           {
-          "id": "radio1",
+          "id": "pCity",
           "type": "radio",
           "label": {
             "en": "Select pollen city"
@@ -392,6 +392,134 @@
           }]
         }
       ]
+    },
+    {
+      "id": "pollenno",
+      "name": {
+        "en": "Norwegian Pollen Forecast",
+        "sv": "Norsk Pollenprognos"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "burot_pollen_0_no",
+        "bjork_pollen_0_no",
+        "gress_pollen_0_no",
+        "hassel_pollen_0_no",
+        "or_pollen_0_no",
+        "salix_pollen_0_no",
+        "burot_pollen_1_no",
+        "bjork_pollen_1_no",
+        "gress_pollen_1_no",
+        "hassel_pollen_1_no",
+        "or_pollen_1_no",
+        "salix_pollen_1_no"
+      ],
+      "images": {
+        "large": "/drivers/pollenno/assets/images/large.png",
+        "small": "/drivers/pollenno/assets/images/small.png"
+      },
+      "pair": [{
+        "id": "list_devices",
+        "template": "list_devices",
+        "navigation": {
+          "next": "add_devices"
+        }
+      },
+      {
+        "id": "add_devices",
+        "template": "add_devices"
+      }],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Pollen settings"
+          },
+          "children": [
+          {
+          "id": "pCity",
+          "type": "radio",
+          "label": {
+            "en": "Select pollen city"
+          },
+          "value": "126",
+          "values": [
+            {
+              "id": "126",
+              "label": {
+                "en": "Østlandet med Oslo"
+              }
+            },
+            {
+              "id": "131",
+              "label": {
+                "en": "Sørlandet"
+              }
+            },
+            {
+              "id": "136",
+              "label": {
+                "en": "Rogaland"
+              }
+            },
+            {
+              "id": "141",
+              "label": {
+                "en": "Hordaland"
+              }
+            },
+            {
+              "id": "146",
+              "label": {
+                "en": "Sogn og Fjordane"
+              }
+            },
+            {
+              "id": "151",
+              "label": {
+                "en": "Møre og Romsdal"
+              }
+            },
+            {
+              "id": "156",
+              "label": {
+                "en": "Sentrale fjellstrøk i Sør-Norge"
+              }
+            },
+            {
+              "id": "161",
+              "label": {
+                "en": "Indre Østlandet"
+              }
+            },
+            {
+              "id": "166",
+              "label": {
+                "en": "Trøndelag"
+              }
+            },
+            {
+              "id": "171",
+              "label": {
+                "en": "Nordland"
+              }
+            },
+            {
+              "id": "176",
+              "label": {
+                "en": "Troms"
+              }
+            },
+            {
+              "id": "181",
+              "label": {
+                "en": "Finnmark"
+              }
+            }
+          ]
+          }]
+        }
+      ]
     }
   ],
   "flow": {
@@ -404,6 +532,7 @@
         "tokens": [
         {
           "name": "measure_weather_situation_cp",
+          "type": "string",
           "title": {
             "en": "Weather situation"
           }
@@ -423,6 +552,7 @@
         "tokens": [
         {
           "name": "measure_air_temperature_cp",
+          "type": "number",
           "title": {
             "en": "Air temperature"
           }
@@ -435,6 +565,26 @@
 				}]
       },
       {
+        "id": "PrecipitationSituationChange",
+        "title": {
+            "en": "Precipitation situation change"
+        },
+        "tokens": [
+        {
+          "name": "measure_precipitation_situation_cp",
+          "type": "string",
+          "title": {
+            "en": "Precipitation situation"
+          }
+        }
+        ],
+        "args": [{
+					"name": "ChangedPrecipitationSituation",
+					"type": "device",
+					"filter": "driver_id=weather"
+				}]
+      },
+      {
         "id": "WindSpeedChange",
         "title": {
             "en": "Wind speed change"
@@ -442,6 +592,7 @@
         "tokens": [
         {
           "name": "measure_wind_speed_cp",
+          "type": "number",
           "title": {
             "en": "Wind speed"
           }
@@ -461,8 +612,15 @@
         "tokens": [
         {
           "name": "measure_wind_direction_heading_cp",
+          "type": "string",
           "title": {
             "en": "Wind direction"
+          }
+        },
+        {
+          "name": "measure_wind_direction_cp",
+          "title": {
+            "en": "Wind direction °"
           }
         }
         ],
@@ -480,6 +638,7 @@
         "tokens": [
         {
           "name": "measure_relative_humidity_cp",
+          "type": "number",
           "title": {
             "en": "Relative humidity"
           }
@@ -499,6 +658,7 @@
         "tokens": [
         {
           "name": "measure_air_pressure_cp",
+          "type": "number",
           "title": {
             "en": "Air pressure"
           }
@@ -518,6 +678,7 @@
         "tokens": [
         {
           "name": "measure_thunder_probability_cp",
+          "type": "number",
           "title": {
             "en": "Thunderstorm warning"
           }
@@ -537,6 +698,7 @@
         "tokens": [
         {
           "name": "mean_value_of_total_cloud_cover_cp",
+          "type": "number",
           "title": {
             "en": "Cloud cover"
           }
@@ -556,6 +718,7 @@
         "tokens": [
         {
           "name": "al_pollen_0",
+          "type": "string",
           "title": {
             "en": "Al idag"
           }
@@ -575,6 +738,7 @@
         "tokens": [
         {
           "name": "al_pollen_1",
+          "type": "string",
           "title": {
             "en": "Al imorgon"
           }
@@ -594,6 +758,7 @@
         "tokens": [
         {
           "name": "al_pollen_2",
+          "type": "string",
           "title": {
             "en": "Al i övermorgon"
           }
@@ -613,6 +778,7 @@
         "tokens": [
         {
           "name": "alm_pollen_0",
+          "type": "string",
           "title": {
             "en": "Alm idag"
           }
@@ -632,6 +798,7 @@
         "tokens": [
         {
           "name": "alm_pollen_1",
+          "type": "string",
           "title": {
             "en": "Alm imorgon"
           }
@@ -651,6 +818,7 @@
         "tokens": [
         {
           "name": "alm_pollen_2",
+          "type": "string",
           "title": {
             "en": "Alm i övermorgon"
           }
@@ -670,6 +838,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_0",
+          "type": "string",
           "title": {
             "en": "Ambrosia idag"
           }
@@ -689,6 +858,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_1",
+          "type": "string",
           "title": {
             "en": "Ambrosia imorgon"
           }
@@ -708,6 +878,7 @@
         "tokens": [
         {
           "name": "ambrosia_pollen_2",
+          "type": "string",
           "title": {
             "en": "Ambrosia i övermorgon"
           }
@@ -727,6 +898,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_0",
+          "type": "string",
           "title": {
             "en": "Björk idag"
           }
@@ -746,6 +918,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_1",
+          "type": "string",
           "title": {
             "en": "Björk imorgon"
           }
@@ -765,6 +938,7 @@
         "tokens": [
         {
           "name": "bjork_pollen_2",
+          "type": "string",
           "title": {
             "en": "Björk i övermorgon"
           }
@@ -784,6 +958,7 @@
         "tokens": [
         {
           "name": "bok_pollen_0",
+          "type": "string",
           "title": {
             "en": "Bok idag"
           }
@@ -803,6 +978,7 @@
         "tokens": [
         {
           "name": "bok_pollen_1",
+          "type": "string",
           "title": {
             "en": "Bok imorgon"
           }
@@ -822,6 +998,7 @@
         "tokens": [
         {
           "name": "bok_pollen_2",
+          "type": "string",
           "title": {
             "en": "Bok i övermorgon"
           }
@@ -841,6 +1018,7 @@
         "tokens": [
         {
           "name": "ek_pollen_0",
+          "type": "string",
           "title": {
             "en": "Ek idag"
           }
@@ -860,6 +1038,7 @@
         "tokens": [
         {
           "name": "ek_pollen_1",
+          "type": "string",
           "title": {
             "en": "Ek imorgon"
           }
@@ -879,6 +1058,7 @@
         "tokens": [
         {
           "name": "ek_pollen_2",
+          "type": "string",
           "title": {
             "en": "Ek i övermorgon"
           }
@@ -898,6 +1078,7 @@
         "tokens": [
         {
           "name": "gras_pollen_0",
+          "type": "string",
           "title": {
             "en": "Gräs idag"
           }
@@ -917,6 +1098,7 @@
         "tokens": [
         {
           "name": "gras_pollen_1",
+          "type": "string",
           "title": {
             "en": "Gräs imorgon"
           }
@@ -936,6 +1118,7 @@
         "tokens": [
         {
           "name": "gras_pollen_2",
+          "type": "string",
           "title": {
             "en": "Gräs i övermorgon"
           }
@@ -955,6 +1138,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_0",
+          "type": "string",
           "title": {
             "en": "Gråbo idag"
           }
@@ -974,6 +1158,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_1",
+          "type": "string",
           "title": {
             "en": "Gråbo imorgon"
           }
@@ -993,6 +1178,7 @@
         "tokens": [
         {
           "name": "grabo_pollen_2",
+          "type": "string",
           "title": {
             "en": "Gråbo i övermorgon"
           }
@@ -1012,6 +1198,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_0",
+          "type": "string",
           "title": {
             "en": "Hassel idag"
           }
@@ -1031,6 +1218,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_1",
+          "type": "string",
           "title": {
             "en": "Hassel imorgon"
           }
@@ -1050,6 +1238,7 @@
         "tokens": [
         {
           "name": "hassel_pollen_2",
+          "type": "string",
           "title": {
             "en": "Hassel i övermorgon"
           }
@@ -1069,6 +1258,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_0",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide idag"
           }
@@ -1088,6 +1278,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_1",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide imorgon"
           }
@@ -1107,6 +1298,7 @@
         "tokens": [
         {
           "name": "salg_vide_pollen_2",
+          "type": "string",
           "title": {
             "en": "Sälg/Vide i övermorgon"
           }
@@ -1117,9 +1309,248 @@
 					"type": "device",
 					"filter": "driver_id=pollen"
 				}]
-      }
-
+      },
+      {
+        "id": "burot_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av burot pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "burot_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Burot i dag"
+          }
+        }
         ],
+        "args": [{
+					"name": "Changed_burot_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "burot_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av burot pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "burot_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Burot i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_burot_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "bjork_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av bjørk pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "bjork_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Bjørk i dag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bjork_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "bjork_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av bjørk pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "bjork_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Bjørk i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_bjork_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "gress_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av gress pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "gress_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Gress i dag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_gress_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "gress_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av gress pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "gress_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Gress i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_burot_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "hassel_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av hassel pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "hassel_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Hassel i dag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_hassel_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "hassel_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av hassel pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "hassel_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Hassel i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_hassel_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "or_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av or pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "or_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Or i dag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_or_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "or_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av or pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "or_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Or i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_or_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "salix_pollen_0_no_Change",
+        "title": {
+            "en": "Endret nivå av salix pollen i dag"
+        },
+        "tokens": [
+        {
+          "name": "salix_pollen_0_no",
+          "type": "string",
+          "title": {
+            "en": "Salix i dag"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_salix_pollen_0_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      },
+      {
+        "id": "salix_pollen_1_no_Change",
+        "title": {
+            "en": "Endret nivå av salix pollen i morgen"
+        },
+        "tokens": [
+        {
+          "name": "salix_pollen_1_no",
+          "type": "string",
+          "title": {
+            "en": "Salix i morgen"
+          }
+        }
+        ],
+        "args": [{
+					"name": "Changed_salix_pollen_1_no",
+					"type": "device",
+					"filter": "driver_id=pollenno"
+				}]
+      }
+    ],
     "conditions": [
       {
         "id": "measure_weather_situation_cp",
@@ -1343,6 +1774,26 @@
         ]
       },
       {
+        "id": "measure_wind_direction_cp",
+        "title": {
+          "en": "Wind direction degree !{{is|isn't}} above"
+        },
+        "hint": {
+	  		"en": "Compass wind direction in degrees."
+		  },
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "degree",
+          "type": "number"
+        }
+        ]
+      },
+      {
         "id": "measure_wind_direction_heading_cp",
         "title": {
           "en": "Wind direction heading !{{is|isn't}}"
@@ -1391,9 +1842,9 @@
               }
             },
             {
-              "id": "South-West",
+              "id": "South-East",
               "label": {
-                "en": "South-West"
+                "en": "South-East"
               }
             },
             {
@@ -1479,6 +1930,66 @@
         },
         "hint": {
 	 			"en": "Total cloud cover in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_low_level_cloud_cover_cp",
+        "title": {
+          "en": "Low cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_medium_level_cloud_cover_cp",
+        "title": {
+          "en": "Medium cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)."
+	  	},
+        "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=weather"
+        },
+        {
+          "name": "octas",
+          "type": "number"
+        }
+        ]
+      },
+      {
+        "id": "mean_value_of_high_level_cloud_cover_cp",
+        "title": {
+          "en": "High cloud cover !{{is|isn't}} above"
+        },
+        "hint": {
+	 			"en": "Cloud cover above 6000 meters, in octas (0-8)."
 	  	},
         "args": [
         {
@@ -3499,6 +4010,630 @@
           ] 
         }
         ]
+      },
+      {
+        "id": "burot_pollen_0_no",
+        "title": {
+          "en": "Burot pollen er i dag!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av burot pollen i dag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "burot_pollen_1_no",
+        "title": {
+          "en": "Burot pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av burot pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "bjork_pollen_0_no",
+        "title": {
+          "en": "Bjørk pollen er i dag!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av bjørk pollen i dag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "bjork_pollen_1_no",
+        "title": {
+          "en": "Bjørk pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av bjørk pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "gress_pollen_0_no",
+        "title": {
+          "en": "Gress pollen er i dag!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av gress pollen i dag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "gress_pollen_1_no",
+        "title": {
+          "en": "Gress pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av gress pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "hassel_pollen_0_no",
+        "title": {
+          "en": "Hassel pollen er i dag!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av hassel pollen i dag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "hassel_pollen_1_no",
+        "title": {
+          "en": "Hassel pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av hassel pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "or_pollen_0_no",
+        "title": {
+          "en": "Or pollen er i dag!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av or pollen i dag."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "or_pollen_1_no",
+        "title": {
+          "en": "Or pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av or pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "salix_pollen_0_no",
+        "title": {
+          "en": "Salix pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av salix pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
+      },
+      {
+        "id": "salix_pollen_1_no",
+        "title": {
+          "en": "Salix pollen er i morgen!{{| ikke}} høyere enn"
+        },
+        "hint": {
+	 			"en": "Spredning av salix pollen i morgen."
+	  	},
+      "args": [
+        {
+          "name": "device",
+          "type": "device",
+          "filter": "driver_id=pollenno"
+        },
+        {
+          "name": "spredning",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Ingen spredning"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Beskjeden spredning"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Moderat spredning"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Kraftig spredning"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Ekstrem spredning"
+              }
+            }
+          ]
+        }
+        ]
       }
     ],
     "actions": []
@@ -3862,6 +4997,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "hPa",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -3886,6 +5022,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "°C",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -3898,12 +5035,13 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "km",
       "decimals": 1,
       "uiComponent": "sensor",
       "icon": "/assets/icons/visibility.svg"
     },
-    "wind_direction_cp":{
+    "measure_wind_direction_cp":{
       "type": "number",
       "title": {
         "en": "Wind direction"
@@ -3921,6 +5059,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "m/s",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -3933,6 +5072,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "%",
       "uiComponent": "sensor",
       "icon": "/assets/icons/hydrometer.svg"
@@ -3944,6 +5084,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "%",
       "uiComponent": "sensor",
       "icon": "/assets/icons/thunder.svg"
@@ -3955,6 +5096,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icon.svg"
@@ -3966,6 +5108,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/low_cloud.svg"
@@ -3977,6 +5120,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/medium_cloud.svg"
@@ -3988,6 +5132,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icons/high_cloud.svg"
@@ -3999,6 +5144,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "m/s",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4056,6 +5202,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "mm/h",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4068,6 +5215,7 @@
       },
       "getable": true,
       "setable": false,
+      "insights": true,
       "units": "mm/h",
       "decimals": 1,
       "uiComponent": "sensor",
@@ -4102,6 +5250,126 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/wind_direction.svg"
+    },
+    "burot_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Burot i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "burot_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Burot i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "bjork_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Bjørk i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bjork.svg"
+    },
+    "bjork_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Bjørk i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/bjork.svg"
+    },
+    "gress_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Gress i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gras.svg"
+    },
+    "gress_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Gress i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/gras.svg"
+    },
+    "hassel_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Hassel i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hassel.svg"
+    },
+    "hassel_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Hassel i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/hassel.svg"
+    },
+    "or_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Or i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "or_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Or i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/grabo.svg"
+    },
+    "salix_pollen_0_no":{
+      "type": "string",
+      "title": {
+        "en": "Salix i dag"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/salg_vide.svg"
+    },
+    "salix_pollen_1_no":{
+      "type": "string",
+      "title": {
+        "en": "Salix i morgen"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/salg_vide.svg"
     }
   }
 }

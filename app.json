@@ -1849,7 +1849,8 @@
       {
         "id": "measure_wind_direction_cp",
         "title": {
-          "en": "Wind direction degree !{{is|isn't}} above"
+          "en": "Wind direction degree !{{is|isn't}} above",
+          "sv": "Vindens riktning !{{är|är inte}} över"
         },
         "hint": {
 	  		"en": "Compass wind direction in degrees",
@@ -5080,7 +5081,8 @@
     "forecast_for_cp":{
       "type": "string",
       "title": {
-        "en": "Forecast for"
+        "en": "Forecast for",
+        "sv": "Prognos för"
       },
       "getable": true,
       "setable": false,
@@ -5090,8 +5092,8 @@
     "measure_weather_situation_cp":{
       "type": "string",
       "title": {
-        "en": "Weather situation",
-        "sv": "Vädersituationen"
+        "en": "Weather",
+        "sv": "Väder"
       },
       "getable": true,
       "setable": false,
@@ -5143,7 +5145,7 @@
       "type": "number",
       "title": {
         "en": "Horizontal visibility",
-        "sv": "Horisontell visibilitet"
+        "sv": "Horisontell sikt"
       },
       "getable": true,
       "setable": false,
@@ -5161,7 +5163,7 @@
       },
       "getable": true,
       "setable": false,
-      "units": "degree",
+      "units": "°",
       "uiComponent": "sensor",
       "icon": "/assets/icons/wind_direction.svg"
     },
@@ -5261,7 +5263,7 @@
       "type": "number",
       "title": {
         "en": "Wind gust speed",
-        "sv": "Hastighet i vindbyarna"
+        "sv": "Vindbyarnas hastighet"
       },
       "getable": true,
       "setable": false,

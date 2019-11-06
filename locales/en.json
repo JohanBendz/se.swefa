@@ -42,6 +42,20 @@
     "direction5": "South",
     "direction6": "South-East",
     "direction7": "East",
-    "direction8": "North-East"
+    "direction8": "North-East",
+    "month1": "Jan",
+    "month2": "Feb",
+    "month3": "Mar",
+    "month4": "Apr",
+    "month5": "May",
+    "month6": "Jun",
+    "month7": "Jul",
+    "month8": "Aug",
+    "month9": "Sept",
+    "month10": "Oct",
+    "month11": "Nov",
+    "month12": "Dec"
+
+
 
 }

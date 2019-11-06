@@ -42,6 +42,18 @@
     "direction5": "Syd",
     "direction6": "Syd-Öst",
     "direction7": "Öst",
-    "direction8": "Nord-Öst"
+    "direction8": "Nord-Öst",
+    "month1": "Jan",
+    "month2": "Feb",
+    "month3": "Mar",
+    "month4": "Apr",
+    "month5": "Maj",
+    "month6": "Jun",
+    "month7": "Jul",
+    "month8": "Aug",
+    "month9": "Sep",
+    "month10": "Okt",
+    "month11": "Nov",
+    "month12": "Dec"
 
 }

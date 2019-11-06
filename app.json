@@ -5117,8 +5117,8 @@
     "air_temperature_feels_like_cp":{
       "type": "number",
       "title": {
-        "en": "Feels like (AT)",
-        "sv": "Känns som (AT)"
+        "en": "Feels like",
+        "sv": "Känns som"
       },
       "getable": true,
       "setable": false,
@@ -5302,8 +5302,8 @@
     "percent_of_precipitation_in_frozen_form_cp":{
       "type": "number",
       "title": {
-        "en": "Percent of precipitation in frozen form",
-        "sv": "Procent av nederbörd i frusen form"
+        "en": "Precipitation in frozen form",
+        "sv": "Nederbörd i frusen form"
       },
       "getable": true,
       "setable": false,

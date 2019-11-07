@@ -13,12 +13,14 @@
 
 ## Change Log:
 
+### v 0.4.2
+* Added Swedish language
 ### v 0.4.1
-* Updated Alpha Channel version
+* Uppdated Alpha and Beta channel with Condition card fix
 ### v 0.4.0
 * Alpha merged to Beta channel
 ### v 0.3.9
-* Alpha update to Homey App store
+* Submission of Condition card fix
 ### v 0.3.8
 * Fix for bug in Precipitation Condition card
 ### v 0.3.7

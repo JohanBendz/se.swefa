@@ -290,23 +290,23 @@ class WeatherDevice extends Homey.Device {
 		// setting forecastFor variable based on forecastTime value
 		let fcTimeO = new Date(data.timeSeries[forecastTime]["validTime"]);
 		var month = [];
-		month[0] = "January";
-		month[1] = "February";
-		month[2] = "March";
-		month[3] = "April";
-		month[4] = "May";
-		month[5] = "June";
-		month[6] = "July";
-		month[7] = "August";
-		month[8] = "September";
-		month[9] = "October";
-		month[10] = "November";
-		month[11] = "December";
+		month[0] = Homey.__("month1");
+		month[1] = Homey.__("month2");
+		month[2] = Homey.__("month3");
+		month[3] = Homey.__("month4");
+		month[4] = Homey.__("month5");
+		month[5] = Homey.__("month6");
+		month[6] = Homey.__("month7");
+		month[7] = Homey.__("month8");
+		month[8] = Homey.__("month9");
+		month[9] = Homey.__("month10");
+		month[10] = Homey.__("month11");
+		month[11] = Homey.__("month12");
 		var fcTimeM = month[fcTimeO.getMonth()];
 		let forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
 
 		// switch from number to string
-		weather_situation = "";
+/* 		weather_situation = "";
 		switch (weather_symbol) {
 			case 1: weather_situation = "Clear sky"; break;
 			case 2: weather_situation = "Nearly clear sky"; break;
@@ -336,9 +336,41 @@ class WeatherDevice extends Homey.Device {
 			case 26: weather_situation = "Moderate snowfall"; break;
 			case 27: weather_situation = "Heavy snowfall"; break;
 			default: weather_situation = "No value found";
-		};
+		}; */
 		
-		// switch from number to string
+		weather_situation = "";
+		switch (weather_symbol) {
+			case 1: weather_situation = Homey.__("weather_situation1"); break;
+			case 2: weather_situation = Homey.__("weather_situation2"); break;
+			case 3: weather_situation = Homey.__("weather_situation3"); break;
+			case 4: weather_situation = Homey.__("weather_situation4"); break;
+			case 5: weather_situation = Homey.__("weather_situation5"); break;
+			case 6: weather_situation = Homey.__("weather_situation6"); break;
+			case 7: weather_situation = Homey.__("weather_situation7"); break;
+			case 8: weather_situation = Homey.__("weather_situation8"); break;
+			case 9: weather_situation = Homey.__("weather_situation9"); break;
+			case 10: weather_situation = Homey.__("weather_situation10"); break;
+			case 11: weather_situation = Homey.__("weather_situation11"); break;
+			case 12: weather_situation = Homey.__("weather_situation12"); break;
+			case 13: weather_situation = Homey.__("weather_situation13"); break;
+			case 14: weather_situation = Homey.__("weather_situation14"); break;
+			case 15: weather_situation = Homey.__("weather_situation15"); break;
+			case 16: weather_situation = Homey.__("weather_situation16"); break;
+			case 17: weather_situation = Homey.__("weather_situation17"); break;
+			case 18: weather_situation = Homey.__("weather_situation18"); break;
+			case 19: weather_situation = Homey.__("weather_situation19"); break;
+			case 20: weather_situation = Homey.__("weather_situation20"); break;
+			case 21: weather_situation = Homey.__("weather_situation21"); break;
+			case 22: weather_situation = Homey.__("weather_situation22"); break;
+			case 23: weather_situation = Homey.__("weather_situation23"); break;
+			case 24: weather_situation = Homey.__("weather_situation24"); break;
+			case 25: weather_situation = Homey.__("weather_situation25"); break;
+			case 26: weather_situation = Homey.__("weather_situation26"); break;
+			case 27: weather_situation = Homey.__("weather_situation27"); break;
+			default: weather_situation = Homey.__("weather_situation");
+		};
+
+/* 		// switch from number to string
 		precipitation_situation = "";
 		switch (precipitation_category) {
 			case 0: precipitation_situation = "No precipitation"; break;
@@ -349,12 +381,26 @@ class WeatherDevice extends Homey.Device {
 			case 5: precipitation_situation = "Freezing rain"; break;
 			case 6: precipitation_situation = "Freezing drizzle"; break;
 			default: precipitation_situation = "No value found";
-		};
+		}; */
+
+				// switch from number to string
+				precipitation_situation = "";
+				switch (precipitation_category) {
+					case 0: precipitation_situation = Homey.__("precipitation_situation0"); break;
+					case 1: precipitation_situation = Homey.__("precipitation_situation1"); break;
+					case 2: precipitation_situation = Homey.__("precipitation_situation2"); break;
+					case 3: precipitation_situation = Homey.__("precipitation_situation3"); break;
+					case 4: precipitation_situation = Homey.__("precipitation_situation4"); break;
+					case 5: precipitation_situation = Homey.__("precipitation_situation5"); break;
+					case 6: precipitation_situation = Homey.__("precipitation_situation6"); break;
+					default: precipitation_situation = Homey.__("precipitation_situation");
+				};
 		
 		// convert wind direction from degrees to heading
 		var wind_direction_heading = getDirection(wind_direction);
 		function getDirection(angle) {
-			let directions = ['North', 'North-West', 'West', 'South-West', 'South', 'South-East', 'East', 'North-East'];
+	//		let directions = ['North', 'North-West', 'West', 'South-West', 'South', 'South-East', 'East', 'North-East'];
+		let directions = [Homey.__("direction1"), Homey.__("direction2"), Homey.__("direction3"), Homey.__("direction4"), Homey.__("direction5"), Homey.__("direction6"), Homey.__("direction7"), Homey.__("direction8")];
 			return directions[Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8];
 		};
 

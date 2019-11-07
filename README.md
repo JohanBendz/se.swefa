@@ -13,8 +13,12 @@
 
 ## Change Log:
 
+### v 0.4.2
+* Added Swedish language
+### v 0.4.1
+* Uppdated Alpha and Beta channel with Condition card fix
 ### v 0.4.0
-* Uppdated Beta channel with Condition card fix
+* Alpha merged to Beta channel
 ### v 0.3.9
 * Submission of Condition card fix
 ### v 0.3.8

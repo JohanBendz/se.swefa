@@ -1,9 +1,10 @@
 {
   "id": "se.swefa",
   "name": {
-    "en": "Swedish Weather Forecast"
+    "en": "Swedish Weather Forecast",
+    "sv": "Svensk väderprognos"
   },
-  "version": "0.4.0",
+  "version": "0.4.2",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -86,87 +87,101 @@
         {
           "type": "group",
           "label": {
-            "en": "Weather settings"
+            "en": "Weather settings",
+            "sv": "Väderinställningar"
           },
           "children": [
             {
             "id": "fcTime",
             "type": "radio",
             "label": {
-              "en": "Select forecast"
+              "en": "Select forecast",
+              "sv": "Tid till prognos"
             },
             "value": "0",
             "values": [
             {
               "id": "0",
               "label": {
-                "en": "Now"
+                "en": "Now",
+                "sv": "Nu"
               }
             },
             {
               "id": "1",
               "label": {
-                "en": "1 hour"
+                "en": "1 hour",
+                "sv": "1 timme"
               }
             },
             {
               "id": "2",
               "label": {
-                "en": "2 hours"
+                "en": "2 hours",
+                "sv": "2 timmar"
               }
             },
             {
               "id": "3",
               "label": {
-                "en": "3 hours"
+                "en": "3 hours",
+                "sv": "3 timmar"
               }
             },
             {
               "id": "4",
               "label": {
-                "en": "4 hours"
+                "en": "4 hours",
+                "sv": "4 timmar"
               }
             },
             {
               "id": "5",
               "label": {
-                "en": "5 hours"
+                "en": "5 hours",
+                "sv": "5 timmar"
               }
             },
             {
               "id": "8",
               "label": {
-                "en": "8 hours"
+                "en": "8 hours",
+                "sv": "8 timmar"
               }
             },
             {
               "id": "12",
               "label": {
-                "en": "12 hours"
+                "en": "12 hours",
+                "sv": "12 timmar"
               }
             },
             {
               "id": "18",
               "label": {
-                "en": "18 hours"
+                "en": "18 hours",
+                "sv": "18 timmar"
               }
             },
             {
               "id": "24",
               "label": {
-                "en": "24 hours"
+                "en": "24 hours",
+                "sv": "24 timmar"
               }
             },
             {
               "id": "30",
               "label": {
-                "en": "30 hours"
+                "en": "30 hours",
+                "sv": "30 timmar"
               }
             },
             {
               "id": "36",
               "label": {
-                "en": "36 hours"
+                "en": "36 hours",
+                "sv": "36 timmar"
               }
             }
             ]
@@ -176,7 +191,8 @@
             "type": "text",
             "value": "",
             "label": {
-              "en": "GEOlocation latitude"
+              "en": "GEOlocation latitude",
+              "sv": "Geografisk plats, latitud"
             }
           },
           {
@@ -184,7 +200,8 @@
             "type": "text",
             "value": "",
             "label": {
-              "en": "GEOlocation longitude"
+              "en": "GEOlocation longitude",
+              "sv": "Geografisk plats, longitud"
             }
           },
           {
@@ -192,7 +209,8 @@
             "type": "checkbox",
             "value": true,
             "label": {
-              "en": "Use Homey GEOlocation"
+              "en": "Use Homey GEOlocation",
+              "sv": "Använd Homeys GEOlocation"
             }
           }
           ]
@@ -257,14 +275,16 @@
         {
           "type": "group",
           "label": {
-            "en": "Pollen settings"
+            "en": "Pollen settings",
+            "sv": "Polleninställningar"
           },
           "children": [
           {
           "id": "pCity",
           "type": "radio",
           "label": {
-            "en": "Select pollen city"
+            "en": "Select city for pollen prognosis",
+            "sv": "Ange stad för pollenprognos"
           },
           "value": "97",
           "values": [
@@ -433,14 +453,16 @@
         {
           "type": "group",
           "label": {
-            "en": "Pollen settings"
+            "en": "Pollen settings",
+            "sv": "Pollenprognos"
           },
           "children": [
           {
           "id": "pCity",
           "type": "radio",
           "label": {
-            "en": "Select pollen city"
+            "en": "Select city for pollen prognosis",
+            "sv": "Ange stad för pollenprognos"
           },
           "value": "126",
           "values": [
@@ -527,14 +549,16 @@
       {
         "id": "WeatherSituationChange",
         "title": {
-            "en": "Weather change"
+            "en": "Weather change",
+            "sv": "Väderomslag"
         },
         "tokens": [
         {
           "name": "measure_weather_situation_cp",
           "type": "string",
           "title": {
-            "en": "Weather situation"
+            "en": "Weather situation",
+            "sv": "Vädersituation"
           }
         }
         ],
@@ -547,14 +571,16 @@
       {
         "id": "AirTemperatureChange",
         "title": {
-            "en": "Air temperature change"
+            "en": "Air temperature change",
+            "sv": "Förändrad lufttemperatur"
         },
         "tokens": [
         {
           "name": "measure_air_temperature_cp",
           "type": "number",
           "title": {
-            "en": "Air temperature"
+            "en": "Air temperature",
+            "sv": "Lufttemperatur"
           }
         }
         ],
@@ -567,14 +593,16 @@
       {
         "id": "PrecipitationSituationChange",
         "title": {
-            "en": "Precipitation situation change"
+            "en": "Precipitation situation change",
+            "sv": "Förändrad nederbörssituation"
         },
         "tokens": [
         {
           "name": "measure_precipitation_situation_cp",
           "type": "string",
           "title": {
-            "en": "Precipitation situation"
+            "en": "Precipitation situation",
+            "sv": "Nederbördssituation"
           }
         }
         ],
@@ -587,14 +615,16 @@
       {
         "id": "WindSpeedChange",
         "title": {
-            "en": "Wind speed change"
+            "en": "Wind speed change",
+            "sv": "Förändrad vindhastighet"
         },
         "tokens": [
         {
           "name": "measure_wind_speed_cp",
           "type": "number",
           "title": {
-            "en": "Wind speed"
+            "en": "Wind speed",
+            "sv": "Vindhastighet"
           }
         }
         ],
@@ -607,20 +637,23 @@
       {
         "id": "WindDirectionHeadingChange",
         "title": {
-            "en": "Wind direction change"
+            "en": "Wind direction change",
+            "sv": "Förändrad vindriktning"
         },
         "tokens": [
         {
           "name": "measure_wind_direction_heading_cp",
           "type": "string",
           "title": {
-            "en": "Wind direction"
+            "en": "Wind direction",
+            "sv": "Vindriktning"
           }
         },
         {
           "name": "measure_wind_direction_cp",
           "title": {
-            "en": "Wind direction °"
+            "en": "Wind direction °",
+            "sv": "Vindriktning °"
           }
         }
         ],
@@ -633,14 +666,16 @@
       {
         "id": "RelativeHumidityChange",
         "title": {
-            "en": "Relative humidity change"
+            "en": "Relative humidity change",
+            "sv": "Förändrad relativ luftfuktighet"
         },
         "tokens": [
         {
           "name": "measure_relative_humidity_cp",
           "type": "number",
           "title": {
-            "en": "Relative humidity"
+            "en": "Relative humidity",
+            "sv": "Relativ luftfuktighet"
           }
         }
         ],
@@ -653,14 +688,16 @@
       {
         "id": "AirPressureChange",
         "title": {
-            "en": "Air pressure change"
+            "en": "Air pressure change",
+            "sv": "Förändrat lufttryck"
         },
         "tokens": [
         {
           "name": "measure_air_pressure_cp",
           "type": "number",
           "title": {
-            "en": "Air pressure"
+            "en": "Air pressure",
+            "sv": "Lufttryck"
           }
         }
         ],
@@ -673,14 +710,16 @@
       {
         "id": "ThunderProbabilityChange",
         "title": {
-            "en": "Thunderstorm warning change"
+            "en": "Thunderstorm probability change",
+            "sv": "Förändrad risk för åska"
         },
         "tokens": [
         {
           "name": "measure_thunder_probability_cp",
           "type": "number",
           "title": {
-            "en": "Thunderstorm warning"
+            "en": "Thunderstorm probability",
+            "sv": "Risk för åska"
           }
         }
         ],
@@ -693,14 +732,16 @@
       {
         "id": "MeanValueOfTotalCloudCoverChange",
         "title": {
-            "en": "Cloud cover change"
+            "en": "Cloud cover change",
+            "sv": "Förändrad molntäthet"
         },
         "tokens": [
         {
           "name": "mean_value_of_total_cloud_cover_cp",
           "type": "number",
           "title": {
-            "en": "Cloud cover"
+            "en": "Cloud cover",
+            "sv": "Molntäthet"
           }
         }
         ],
@@ -1555,7 +1596,8 @@
       {
         "id": "measure_weather_situation_cp",
         "title": {
-          "en": "Weather situation !{{is|isn't}}"
+          "en": "Weather situation !{{is|isn't}}",
+          "sv": "Vädersituationen !{{är|är inte}}"
         },
         "args": [
           {
@@ -1570,163 +1612,190 @@
               {
 								"id": "Clearsky",
 								"label": {
-									"en": "Clear sky"
+									"en": "Clear sky",
+                  "sv": "Klart"
 								}
 							},
 							{
 								"id": "Nearlyclearsky",
 								"label": {
-									"en": "Nearly clear sky"
+									"en": "Nearly clear sky",
+                  "sv": "Nästan klart"
 								}
 							},
 							{
 								"id": "Variablecloudiness",
 								"label": {
-									"en": "Variable cloudiness"
+									"en": "Variable cloudiness",
+                  "sv": "Växlande molnighet"
 								}
 							},
 							{
 								"id": "Halfclearsky",
 								"label": {
-									"en": "Halfclear sky"
+									"en": "Halfclear sky",
+                  "sv": "Halvklart"
 								}
 							},
 							{
 								"id": "Cloudysky",
 								"label": {
-									"en": "Cloudy sky"
+									"en": "Cloudy sky",
+                  "sv": "Lätt molnighet"
 								}
 							},
 							{
 								"id": "Overcast",
 								"label": {
-									"en": "Overcast"
+									"en": "Overcast",
+                  "sv": "Molnigt"
 								}
 							},
 							{
 								"id": "Fog",
 								"label": {
-									"en": "Fog"
+									"en": "Fog",
+                  "sv": "Dimma"
 								}
 							},
 							{
 								"id": "Lightrainshowers",
 								"label": {
-									"en": "Light rain showers"
+									"en": "Light rain showers",
+                  "sv": "Lätta regnskurar"
 								}
               },
               {
 								"id": "Moderaterainshowers",
 								"label": {
-									"en": "Moderate rain showers"
+									"en": "Moderate rain showers",
+                  "sv": "Måttliga regnskurar"
 								}
               },
               {
 								"id": "Heavyrainshowers",
 								"label": {
-									"en": "Heavy rain showers"
+									"en": "Heavy rain showers",
+                  "sv": "Kraftiga regnskurar"
 								}
               },
               {
 								"id": "Thunderstorm",
 								"label": {
-									"en": "Thunderstorm"
+									"en": "Thunderstorm",
+                  "sv": "Åskväder"
 								}
               },
               {
 								"id": "Lightsleetshowers",
 								"label": {
-									"en": "Light sleet showers"
+									"en": "Light sleet showers",
+                  "sv": "Underkylda duggregn"
 								}
               },
               {
 								"id": "Moderatesleetshowers",
 								"label": {
-									"en": "Moderate sleet showers"
+									"en": "Moderate sleet showers",
+                  "sv": "Underkylda regnskurar"
 								}
               },
               {
 								"id": "Heavysleetshowers",
 								"label": {
-									"en": "Heavy sleet showers"
+									"en": "Heavy sleet showers",
+                  "sv": "Underkylda skyfall"
 								}
               },
               {
 								"id": "Lightsnowshowers",
 								"label": {
-									"en": "Light snow showers"
+									"en": "Light snow showers",
+                  "sv": "Lätta snöbyar"
 								}
               },
               {
 								"id": "Moderatesnowshowers",
 								"label": {
-									"en": "Moderate snow showers"
+									"en": "Moderate snow showers",
+                  "sv": "Snöbyar"
 								}
               },
               {
 								"id": "Heavysnowshowers",
 								"label": {
-									"en": "Heavy snow showers"
+									"en": "Heavy snow showers",
+                  "sv": "Kraftiga snöbyar"
 								}
               },
               {
 								"id": "Lightrain",
 								"label": {
-									"en": "Light rain"
+									"en": "Light rain",
+                  "sv": "Duggregn"
 								}
               },
               {
 								"id": "Moderaterain",
 								"label": {
-									"en": "Moderate rain"
+									"en": "Moderate rain",
+                  "sv": "Regn"
 								}
               },
               {
 								"id": "Heavyrain",
 								"label": {
-									"en": "Heavy rain"
+									"en": "Heavy rain",
+                  "sv": "Skyfall"
 								}
               },
               {
 								"id": "Thunder",
 								"label": {
-									"en": "Thunder"
+									"en": "Thunder",
+                  "sv": "Åska"
 								}
               },
               {
 								"id": "Lightsleet",
 								"label": {
-									"en": "Light sleet"
+									"en": "Light sleet",
+                  "sv": "Snöblandat duggregn"
 								}
               },
               {
 								"id": "Moderatesleet",
 								"label": {
-									"en": "Moderate sleet"
+									"en": "Moderate sleet",
+                  "sv": "Snöblandat regn"
 								}
               },
               {
 								"id": "Heavysleet",
 								"label": {
-									"en": "Heavy sleet"
+									"en": "Heavy sleet",
+                  "sv": "Snöblandat skyfall"
 								}
               },
               {
 								"id": "Lightsnowfall",
 								"label": {
-									"en": "Light snowfall"
+									"en": "Light snowfall",
+                  "sv": "Lätt snöfall"
 								}
               },
               {
 								"id": "Moderatesnowfall",
 								"label": {
-									"en": "Moderate snowfall"
+									"en": "Moderate snowfall",
+                  "sv": "Måttligt snöfall"
 								}
               },
               {
 								"id": "Heavysnowfall",
 								"label": {
-									"en": "Heavy snowfall"
+									"en": "Heavy snowfall",
+                  "sv": "Kraftigt snöfall"
 								}
               }
             ]
@@ -1736,10 +1805,12 @@
       {
         "id": "measure_air_temperature_cp",
         "title": {
-          "en": "Air temperature !{{is|isn't}} above"
+          "en": "Air temperature !{{is|isn't}} above",
+          "sv": "Lufttemperaturen !{{är|är inte}} över"
         },
         "hint": {
-					"en": "Air temperature in °C."
+					"en": "Air temperature in °C",
+          "sv": "Lufttemperaturen i °C"
 				},
         "args": [
           {
@@ -1756,10 +1827,12 @@
       {
         "id": "measure_wind_speed_cp",
         "title": {
-          "en": "Wind speed !{{is|isn't}} above"
+          "en": "Wind speed !{{is|isn't}} above",
+          "sv": "Vindhastigheten !{{är|är inte}} över"
         },
         "hint": {
-					"en": "Wind speed in m/s."
+					"en": "Wind speed in m/s.",
+          "sv": "Vindhastigheten i m/s"
 				},
         "args": [
           {
@@ -1776,10 +1849,12 @@
       {
         "id": "measure_wind_direction_cp",
         "title": {
-          "en": "Wind direction degree !{{is|isn't}} above"
+          "en": "Wind direction degree !{{is|isn't}} above",
+          "sv": "Vindens riktning !{{är|är inte}} över"
         },
         "hint": {
-	  		"en": "Compass wind direction in degrees."
+	  		"en": "Compass wind direction in degrees",
+        "sv": "Vindens kompassriktning i grader"
 		  },
         "args": [
         {
@@ -1796,10 +1871,12 @@
       {
         "id": "measure_wind_direction_heading_cp",
         "title": {
-          "en": "Wind direction heading !{{is|isn't}}"
+          "en": "Wind direction heading !{{is|isn't}}",
+          "sv": "Vindens riktning !{{är|är inte}}"
         },
         "hint": {
-					"en": "Compass wind direction."
+					"en": "Compass wind direction",
+          "sv": "Vindens kompassriktning"
 				},
         "args": [
         {
@@ -1814,49 +1891,57 @@
             {
               "id": "North",
               "label": {
-                "en": "North"
+                "en": "North",
+                "sv": "Nord"
               }
             },
             {
               "id": "North-West",
               "label": {
-                "en": "North-West"
+                "en": "North-West",
+                "sv": "Nord-Väst"
               }
             },
             {
               "id": "West",
               "label": {
-                "en": "West"
+                "en": "West",
+                "sv": "Väst"
               }
             },
             {
               "id": "South-West",
               "label": {
-                "en": "South-West"
+                "en": "South-West",
+                "sv": "Syd-Väst"
               }
             },
             {
               "id": "South",
               "label": {
-                "en": "South"
+                "en": "South",
+                "sv": "Syd"
               }
             },
             {
               "id": "South-East",
               "label": {
-                "en": "South-East"
+                "en": "South-East",
+                "sv": "Syd-Öst"
               }
             },
             {
               "id": "East",
               "label": {
-                "en": "East"
+                "en": "East",
+                "sv": "Öst"
               }
             },
             {
               "id": "North-East",
               "label": {
-                "en": "North-East"
+                "en": "North-East",
+                "sv": "Nord-Öst"
               }
             }
           ]
@@ -1866,10 +1951,12 @@
       {
         "id": "measure_relative_humidity_cp",
         "title": {
-          "en": "Relative humidity !{{is|isn't}} above"
+          "en": "Relative humidity !{{is|isn't}} above",
+          "sv": "Relativ luftfuktighet !{{är|är inte}} över"
         },
         "hint": {
-	  		"en": "Relative humidity in %."
+	  		"en": "Relative humidity in %",
+        "sv": "Relativ luftfuktighet i %"
 		  },
         "args": [
         {
@@ -1886,10 +1973,12 @@
       {
         "id": "measure_air_pressure_cp",
         "title": {
-          "en": "Air pressure !{{is|isn't}} above"
+          "en": "Air pressure !{{is|isn't}} above",
+          "sv": "Lufttrycket !{{är|är inte}} över"
         },
         "hint": {
-	  		"en": "Air pressure in hPa."
+	  		"en": "Air pressure in hPa",
+        "sv": "Lufttrycket i hPa"
 		  },
         "args": [
         {
@@ -1906,10 +1995,12 @@
       {
         "id": "measure_thunder_probability_cp",
         "title": {
-          "en": "Thunder probability !{{is|isn't}} above"
+          "en": "Thunder probability !{{is|isn't}} above",
+          "sv": "Åskrisken !{{är|är inte}} över"
         },
         "hint": {
-  			"en": "Thunder probability in %."
+  			"en": "Thunder probability in %",
+        "sv": "Åskrisk i %"
 				},
         "args": [
         {
@@ -1926,10 +2017,12 @@
       {
         "id": "mean_value_of_total_cloud_cover_cp",
         "title": {
-          "en": "Total cloud cover !{{is|isn't}} above"
+          "en": "Total cloud cover !{{is|isn't}} above",
+          "sv": "Total molnighet !{{är|är inte}} över"
         },
         "hint": {
-	 			"en": "Total cloud cover in octas (0-8)."
+	 			"en": "Total cloud cover in octas (0-8)",
+         "sv": "Total molnighet i octas (0-8)"
 	  	},
         "args": [
         {
@@ -1946,10 +2039,12 @@
       {
         "id": "mean_value_of_low_level_cloud_cover_cp",
         "title": {
-          "en": "Low cloud cover !{{is|isn't}} above"
+          "en": "Low cloud cover !{{is|isn't}} above",
+          "sv": "Låg molnighet !{{är|är inte}} över"
         },
         "hint": {
-	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)."
+	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)",
+         "sv": "Molnighet på 0-2500 meter, i octas (0-8)"
 	  	},
         "args": [
         {
@@ -1966,10 +2061,12 @@
       {
         "id": "mean_value_of_medium_level_cloud_cover_cp",
         "title": {
-          "en": "Medium cloud cover !{{is|isn't}} above"
+          "en": "Medium cloud cover !{{is|isn't}} above",
+          "sv": "Medelhög molnighet !{{är|är inte}} över"
         },
         "hint": {
-	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)."
+	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)",
+         "sv": "Molnighet på 2500-6000 meter, i octas (0-8)"
 	  	},
         "args": [
         {
@@ -1986,10 +2083,12 @@
       {
         "id": "mean_value_of_high_level_cloud_cover_cp",
         "title": {
-          "en": "High cloud cover !{{is|isn't}} above"
+          "en": "High cloud cover !{{is|isn't}} above",
+          "sv": "Hög molighet !{{är|är inte}} över"
         },
         "hint": {
-	 			"en": "Cloud cover above 6000 meters, in octas (0-8)."
+	 			"en": "Cloud cover above 6000 meters, in octas (0-8)",
+         "sv": "Molnighet över 6000 meter, i octas (0-8)"
 	  	},
         "args": [
         {
@@ -2006,10 +2105,12 @@
       {
         "id": "wind_gust_speed_cp",
         "title": {
-          "en": "Wind gust speed !{{is|isn't}} above"
+          "en": "Wind gust speed !{{is|isn't}} above",
+          "sv": "Hastigheten i vindbyarna !{{är|är inte}} över"
         },
         "hint": {
-	  		"en": "Wind gust speed in m/s."
+	  		"en": "Wind gust speed in m/s",
+        "sv": "Hastighet i vindbyarna i m/s"
 		  },
         "args": [
         {
@@ -2026,10 +2127,12 @@
       {
         "id": "horizontal_visibility_cp",
         "title": {
-          "en": "Horizontal visibility !{{is|isn't}} above"
+          "en": "Horizontal visibility !{{is|isn't}} above",
+          "sv": "Horisontell visibilitet !{{är|är inte}} över"
         },
         "hint": {
-	  		"en": "Horizontal visibility in km."
+	  		"en": "Horizontal visibility in km",
+        "sv": "Horisontell visibilitet i km"
 		  },
         "args": [
         {
@@ -2046,10 +2149,12 @@
       {
         "id": "measure_precipitation_situation_cp",
         "title": {
-          "en": "There !{{will|will not }} be "
+          "en": "There !{{will|will not }} be",
+          "sv": "Det kommer !{{att|inte att}}"
         },
         "hint": {
-					"en": "Will there be rain or snow."
+					"en": "Will there be rain or snow",
+          "sv": "Kommer det nederbörd"
 				},
         "args": [
         {
@@ -2064,7 +2169,8 @@
             {
               "id": "RainSnow",
               "label": {
-                "en": "Rain or Snow"
+                "en": "Rain or Snow",
+                "sv": "Regn eller snö"
               }
             }
           ] 
@@ -2074,10 +2180,12 @@
       {
         "id": "mean_precipitation_intensity_cp",
         "title": {
-          "en": "Mean precipitation intensity !{{is|isn't}} above"
+          "en": "Mean precipitation intensity !{{is|isn't}} above",
+          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} över"
         },
         "hint": {
-	 			"en": "Precipitation in mm/h."
+	 			"en": "Precipitation in mm/h",
+         "sv": "Nederbörd i mm/tim"
 	  	},
         "args": [
         {
@@ -4973,7 +5081,8 @@
     "forecast_for_cp":{
       "type": "string",
       "title": {
-        "en": "Forecast for"
+        "en": "Forecast for",
+        "sv": "Prognos för"
       },
       "getable": true,
       "setable": false,
@@ -4983,7 +5092,8 @@
     "measure_weather_situation_cp":{
       "type": "string",
       "title": {
-        "en": "Weather situation"
+        "en": "Weather",
+        "sv": "Väder"
       },
       "getable": true,
       "setable": false,
@@ -4993,7 +5103,8 @@
     "measure_air_pressure_cp":{
       "type": "number",
       "title": {
-        "en": "Air pressure"
+        "en": "Air pressure",
+        "sv": "Lufttryck"
       },
       "getable": true,
       "setable": false,
@@ -5006,7 +5117,8 @@
     "air_temperature_feels_like_cp":{
       "type": "number",
       "title": {
-        "en": "Feels like (AT)"
+        "en": "Feels like",
+        "sv": "Känns som"
       },
       "getable": true,
       "setable": false,
@@ -5018,7 +5130,8 @@
     "measure_air_temperature_cp":{
       "type": "number",
       "title": {
-        "en": "Air temperature"
+        "en": "Air temperature",
+        "sv": "Lufttemperatur"
       },
       "getable": true,
       "setable": false,
@@ -5031,7 +5144,8 @@
     "horizontal_visibility_cp":{
       "type": "number",
       "title": {
-        "en": "Horizontal visibility"
+        "en": "Horizontal visibility",
+        "sv": "Horisontell sikt"
       },
       "getable": true,
       "setable": false,
@@ -5044,18 +5158,20 @@
     "measure_wind_direction_cp":{
       "type": "number",
       "title": {
-        "en": "Wind direction"
+        "en": "Wind direction",
+        "sv": "Vindriktning"
       },
       "getable": true,
       "setable": false,
-      "units": "degree",
+      "units": "°",
       "uiComponent": "sensor",
       "icon": "/assets/icons/wind_direction.svg"
     },
     "measure_wind_speed_cp":{
       "type": "number",
       "title": {
-        "en": "Wind speed"
+        "en": "Wind speed",
+        "sv": "Vindhastighet"
       },
       "getable": true,
       "setable": false,
@@ -5068,7 +5184,8 @@
     "measure_relative_humidity_cp":{
       "type": "number",
       "title": {
-        "en": "Relative humidity"
+        "en": "Relative humidity",
+        "sv": "Relativ luftfuktighet"
       },
       "getable": true,
       "setable": false,
@@ -5080,7 +5197,8 @@
     "measure_thunder_probability_cp":{
       "type": "number",
       "title": {
-        "en": "Thunder probability"
+        "en": "Thunder probability",
+        "sv": "Risk för åska"
       },
       "getable": true,
       "setable": false,
@@ -5092,7 +5210,8 @@
     "mean_value_of_total_cloud_cover_cp":{
       "type": "number",
       "title": {
-        "en": "Total cloud cover"
+        "en": "Total cloud cover",
+        "sv": "Total molnighet"
       },
       "getable": true,
       "setable": false,
@@ -5104,7 +5223,8 @@
     "mean_value_of_low_level_cloud_cover_cp":{
       "type": "number",
       "title": {
-        "en": "Cloud cover 0-2500 meters"
+        "en": "Cloud cover 0-2500 meters",
+        "sv": "Molnighet på 0-2500 meter"
       },
       "getable": true,
       "setable": false,
@@ -5116,7 +5236,8 @@
     "mean_value_of_medium_level_cloud_cover_cp":{
       "type": "number",
       "title": {
-        "en": "Cloud cover 2500-6000 meters"
+        "en": "Cloud cover 2500-6000 meters",
+        "sv": "Molnighet på 2500-6000 meter"
       },
       "getable": true,
       "setable": false,
@@ -5128,7 +5249,8 @@
     "mean_value_of_high_level_cloud_cover_cp":{
       "type": "number",
       "title": {
-        "en": "Cloud cover above 6000 meters"
+        "en": "Cloud cover above 6000 meters",
+        "sv": "Molnighet över 6000 meter"
       },
       "getable": true,
       "setable": false,
@@ -5140,7 +5262,8 @@
     "wind_gust_speed_cp":{
       "type": "number",
       "title": {
-        "en": "Wind gust speed"
+        "en": "Wind gust speed",
+        "sv": "Vindbyarnas hastighet"
       },
       "getable": true,
       "setable": false,
@@ -5153,7 +5276,8 @@
     "minimum_precipitation_intensity_cp":{
       "type": "number",
       "title": {
-        "en": "Minimum precipitation intensity"
+        "en": "Minimum precipitation intensity",
+        "sv": "Lägsta nederbördsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -5165,7 +5289,8 @@
     "maximum_precipitation_intensity_cp":{
       "type": "number",
       "title": {
-        "en": "Maximum precipitation intensity"
+        "en": "Maximum precipitation intensity",
+        "sv": "Högsta nederbördsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -5177,7 +5302,8 @@
     "percent_of_precipitation_in_frozen_form_cp":{
       "type": "number",
       "title": {
-        "en": "Percent of precipitation in frozen form"
+        "en": "Precipitation in frozen form",
+        "sv": "Nederbörd i frusen form"
       },
       "getable": true,
       "setable": false,
@@ -5188,7 +5314,8 @@
     "precipitation_category_cp":{
       "type": "number",
       "title": {
-        "en": "Precipitation category"
+        "en": "Precipitation category",
+        "sv": "Nederbördskategori"
       },
       "getable": true,
       "setable": false,
@@ -5198,7 +5325,8 @@
     "mean_precipitation_intensity_cp":{
       "type": "number",
       "title": {
-        "en": "Mean precipitation intensity"
+        "en": "Mean precipitation intensity",
+        "sv": "Genomsnittlig nederbördsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -5211,7 +5339,8 @@
     "median_precipitation_intensity_cp":{
       "type": "number",
       "title": {
-        "en": "Median precipitation intensity"
+        "en": "Median precipitation intensity",
+        "sv": "Medelvärdet av nederbördsintensiteten"
       },
       "getable": true,
       "setable": false,
@@ -5224,7 +5353,8 @@
     "weather_symbol_cp":{
       "type": "number",
       "title": {
-        "en": "Weather symbol"
+        "en": "Weather symbol",
+        "sv": "Vädersymbol"
       },
       "getable": true,
       "setable": false,
@@ -5234,7 +5364,8 @@
     "measure_precipitation_situation_cp":{
       "type": "string",
       "title": {
-        "en": "Precipitation situation"
+        "en": "Precipitation situation",
+        "sv": "Nederbördssituation"
       },
       "getable": true,
       "setable": false,
@@ -5244,7 +5375,8 @@
     "measure_wind_direction_heading_cp":{
       "type": "string",
       "title": {
-        "en": "Wind direction"
+        "en": "Wind direction",
+        "sv": "Vindriktning"
       },
       "getable": true,
       "setable": false,

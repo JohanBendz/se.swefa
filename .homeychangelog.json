@@ -1,5 +1,5 @@
 {
-    "0.4.3": {
+    "0.4.4": {
       "en": "Fix for Node.js Local Time change. Removed Swedish Pollen data since API has been closed/private."
     }
 }

@@ -303,7 +303,7 @@ class WeatherDevice extends Homey.Device {
 		month[10] = Homey.__("month11");
 		month[11] = Homey.__("month12");
 		var fcTimeM = month[fcTimeO.getMonth()];
-		let forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toLocaleTimeString().slice(0,-3)));
+		let forecastFor = (fcTimeM+" "+fcTimeO.getDate()+" "+(fcTimeO.toTimeString().slice(0,5)));
 
 		// switch from number to string
 /* 		weather_situation = "";

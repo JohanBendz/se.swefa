@@ -4,7 +4,6 @@
 
 ## Included devices/features:
 * 0-36 hours of Weather Forecast based on Homey geolocation.
-* 0-3 days of Pollen Level Forecast based on choosen Swedish city.
 * 0-2 days of Pollen Level Forecast based on choosen Norwegian city.
 
 ## Feedback:
@@ -12,7 +11,9 @@
 * Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
 
 ## Change Log:
-
+### v 0.4.3
+* Fix for Node.js update that broke time format
+* Removed pollen for Sweden as API has gone private 
 ### v 0.4.2
 * Added Swedish language
 ### v 0.4.1

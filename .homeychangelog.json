@@ -1,5 +1,8 @@
 {
     "0.4.4": {
-      "en": "Fix for Node.js Local Time change. Removed Swedish Pollen data since API has been closed/private."
+      "en": "Fix for Node.js Local Time change. Removed Swedish Pollen data since API has been closed/private. Added Norwegian translation"
+    },
+    "0.4.5": {
+      "en": "Changed from Cron to setInterval to be compliant with firmware 5."
     }
 }

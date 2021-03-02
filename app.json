@@ -4,7 +4,7 @@
     "en": "Swedish Weather Forecast from SMHI",
     "sv": "Svensk väderprognos från SMHI"
   },
-  "version": "0.4.5",
+  "version": "0.4.6",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {

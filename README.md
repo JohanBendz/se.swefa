@@ -11,6 +11,8 @@
 * Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
 
 ## Change Log:
+### v 0.4.6
+* Fix for lat/long decimal issue
 ### v 0.4.5
 * Replaced Cron with setInterval to be compliant with firmware 5
 ### v 0.4.4

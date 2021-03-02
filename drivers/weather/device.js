@@ -183,10 +183,10 @@ class WeatherDevice extends Homey.Device {
 			}
 		}
 
-	this.fetchSMHIData(newSettings)
-	.catch( err => {
-		this.error( err );
-	});
+		this.fetchSMHIData(newSettings)
+		.catch( err => {
+			this.error( err );
+		});
 
 	}; // end onSettings
 
@@ -196,21 +196,30 @@ class WeatherDevice extends Homey.Device {
 		console.log(settings);
 		var forecastTime = parseInt(settings.fcTime);
 
+		function round(value, precision) {
+			var multiplier = Math.pow(10, precision || 0);
+			return Math.round(value * multiplier) / multiplier;
+		}
+
 		// define SMHI api endpoint
 		let APIUrl = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
 		
 		if (settings.usehomeylocation == false) {
 			// define full url if lat/long provided
 			console.log("Defining SMHI API Url based on entered goelocation");
-			SMHIdataUrl = APIUrl+"/lon/"+settings.longitude+"/lat/"+settings.latitude+"/data.json";
+			let long = round(settings.longitude, 6).toFixed(6);
+			let lat = round(settings.latitude, 6).toFixed(6);
+			SMHIdataUrl = APIUrl+"/lon/"+long+"/lat/"+lat+"/data.json";
 			console.log(SMHIdataUrl);
 		} else {
 			// define full url if lat/long is not provided
 			console.log("Collecting geolocation coordinates for this Homey");
-			const lat = (Homey.ManagerGeolocation.getLatitude()).toString().slice(0,9);
-			const lng = (Homey.ManagerGeolocation.getLongitude()).toString().slice(0,9);
+			// const lat = (Homey.ManagerGeolocation.getLatitude()).toString().slice(0,9);
+			// const lng = (Homey.ManagerGeolocation.getLongitude()).toString().slice(0,9);
+			let long = round(Homey.ManagerGeolocation.getLongitude(), 6).toFixed(6);
+			let lat = round(Homey.ManagerGeolocation.getLatitude(), 6).toFixed(6);
 			console.log("Defining SMHI API Url based on Homey goelocation");
-			SMHIdataUrl = APIUrl+"/lon/"+lng+"/lat/"+lat+"/data.json";
+			SMHIdataUrl = APIUrl+"/lon/"+long+"/lat/"+lat+"/data.json";
 			console.log(SMHIdataUrl);
 		};
 		

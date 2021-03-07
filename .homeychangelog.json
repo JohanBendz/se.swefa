@@ -4,5 +4,8 @@
     },
     "0.4.5": {
       "en": "Changed from Cron to setInterval to be compliant with firmware 5."
+    },
+    "0.4.6": {
+      "en": "Fix for lat/long decimal issue."
     }
 }

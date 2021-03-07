@@ -11,10 +11,6 @@ let hasselpollen = [];
 let salixpollen = [];
 let orpollen = [];
 
-//Set Cron parameters
-const cronName = "pollenNoCronTask"
-// const cronInterval = "30 0,5,11,19 * * *"; // 30 0,5,11,19 * * * = every day, 0:30, 5:30, 11:30 and 19:30.
-
 class PollenNoDevice extends Homey.Device {
 
   async onInit() {
@@ -25,27 +21,6 @@ class PollenNoDevice extends Homey.Device {
 		// fetch new pollen data according to pollInterval settings (milliseconds)
 		const pollInterval = 14400000;
 		this._fetchPollenData = setInterval(()=> {this.fetchPollenData(settings);}, pollInterval);
-
-/* 		//Register crontask
-		Homey.ManagerCron.getTask(cronName)
-			.then(task => {
-				this.log("This crontask is already registred: " + cronName);
-				task.on('run', () => this.fetchPollenData(settings));
-			})
-			.catch(err => {
-				if (err.code == 404) {
-					this.log("This crontask has not been registered yet, registering task: " + cronName);
-					Homey.ManagerCron.registerTask(cronName, cronInterval, null)
-					.then(task => {
-						task.on('run', () => this.fetchPollenData(settings));
-					})
-					.catch(err => {
-						this.log(`problem with registering crontask: ${err.message}`);
-					});
-				} else {
-					this.log(`other cron error: ${err.message}`);
-				}
-			}); */
 
 		// register Flow triggers
 		this._flowTriggerburot_pollen_0_no_Change = new Homey.FlowCardTriggerDevice('burot_pollen_0_no_Change').register();

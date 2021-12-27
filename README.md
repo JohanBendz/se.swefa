@@ -1,16 +1,19 @@
-# Swedish Weather Forecast
+# SMHI Weather Forecast
 
-### This app adds support for Swedish Weather Data.
+### This app adds support for SMHI Weather Data.
 
 ## Included devices/features:
 * 0-36 hours of Weather Forecast based on Homey geolocation.
-* 0-2 days of Pollen Level Forecast based on choosen Norwegian city.
 
 ## Feedback:
 * Please post requests in the [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/) topic on the Athom Community forum.
 * Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
 
 ## Change Log:
+### v 0.5.0
+* Translation correction/completion
+### v 0.4.7
+* Swedish pollen data removed due to Homey have been blocked from using the API's
 ### v 0.4.6
 * Fix for lat/long decimal issue
 ### v 0.4.5

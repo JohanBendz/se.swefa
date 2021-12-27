@@ -1,19 +1,22 @@
 {
   "id": "se.swefa",
   "name": {
-    "en": "Swedish Weather Forecast from SMHI",
-    "sv": "Svensk väderprognos från SMHI"
+    "en": "Weather Forecast from SMHI",
+    "sv": "väderprognos från SMHI",
+    "no": "Værvarsel fra SMHI"
   },
-  "version": "0.4.6",
+  "version": "0.5.0",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
     "en": "Weather information and prognoses for Sweden, Norway, Denmark and Finland",
-    "sv": "Väderinformation och prognoser för Sverige, Norge, Danmark och Finland"
+    "sv": "Väderinformation och prognoser för Sverige, Norge, Danmark och Finland",
+    "no": "Værinformasjon og prognoser for Sverige, Norge, Danmark og Finland"
   },
   "tags": {
-    "en": ["Climate", "Weather", "Pollen", "Forecast", "Temperature", "Sweden", "Norway", "Denmark", "Finland"],
-    "sv": ["Klimat", "Väder", "Pollen", "Prognos", "Temperatur", "Sverige", "Norge", "Danmark", "Finland"]
+    "en": ["Climate", "Weather", "Forecast", "Temperature", "Sweden", "Norway", "Denmark", "Finland"],
+    "sv": ["Klimat", "Väder", "Prognos", "Temperatur", "Sverige", "Norge", "Danmark", "Finland"],
+    "no": ["Klima", "Vær", "Prognose", "Temperatur", "Sverige", "Norge", "Danmark", "Finland"]
   },
   "author": {
     "name": "Johan Bendz",
@@ -40,8 +43,9 @@
     {
       "id": "weather",
       "name": {
-        "en": "Swedish Weather Forecast from SMHI",
-        "sv": "Svensk Väderprognos från SMHI"
+        "en": "Weather Forecast from SMHI",
+        "sv": "Väderprognos från SMHI",
+        "no": "Værvarsel fra SMHI"
       },
       "class": "sensor",
       "capabilities": [
@@ -88,7 +92,8 @@
           "type": "group",
           "label": {
             "en": "Weather settings",
-            "sv": "Väderinställningar"
+            "sv": "Väderinställningar",
+            "no": "Værinnstillinger"
           },
           "children": [
             {
@@ -96,7 +101,8 @@
             "type": "radio",
             "label": {
               "en": "Select forecast",
-              "sv": "Tid till prognos"
+              "sv": "Välj prognos",
+              "no": "Velg prognose"
             },
             "value": "0",
             "values": [
@@ -104,84 +110,96 @@
               "id": "0",
               "label": {
                 "en": "Now",
-                "sv": "Nu"
+                "sv": "Nu",
+                "no": "Nå"
               }
             },
             {
               "id": "1",
               "label": {
                 "en": "1 hour",
-                "sv": "1 timme"
+                "sv": "1 timme",
+                "no": "1 time"
               }
             },
             {
               "id": "2",
               "label": {
                 "en": "2 hours",
-                "sv": "2 timmar"
+                "sv": "2 timmar",
+                "no": "2 timer"
               }
             },
             {
               "id": "3",
               "label": {
                 "en": "3 hours",
-                "sv": "3 timmar"
+                "sv": "3 timmar",
+                "no": "3 timer"
               }
             },
             {
               "id": "4",
               "label": {
                 "en": "4 hours",
-                "sv": "4 timmar"
+                "sv": "4 timmar",
+                "no": "4 timer"
               }
             },
             {
               "id": "5",
               "label": {
                 "en": "5 hours",
-                "sv": "5 timmar"
+                "sv": "5 timmar",
+                "no": "5 timer"
               }
             },
             {
               "id": "8",
               "label": {
                 "en": "8 hours",
-                "sv": "8 timmar"
+                "sv": "8 timmar",
+                "no": "8 timer"
               }
             },
             {
               "id": "12",
               "label": {
                 "en": "12 hours",
-                "sv": "12 timmar"
+                "sv": "12 timmar",
+                "no": "12 timer"
               }
             },
             {
               "id": "18",
               "label": {
                 "en": "18 hours",
-                "sv": "18 timmar"
+                "sv": "18 timmar",
+                "no": "18 timer"
               }
             },
             {
               "id": "24",
               "label": {
                 "en": "24 hours",
-                "sv": "24 timmar"
+                "sv": "24 timmar",
+                "no": "24 timer"
               }
             },
             {
               "id": "30",
               "label": {
                 "en": "30 hours",
-                "sv": "30 timmar"
+                "sv": "30 timmar",
+                "no": "30 timer"
               }
             },
             {
               "id": "36",
               "label": {
                 "en": "36 hours",
-                "sv": "36 timmar"
+                "sv": "36 timmar",
+                "no": "36 timer"
               }
             }
             ]
@@ -192,7 +210,8 @@
             "value": "",
             "label": {
               "en": "GEOlocation latitude",
-              "sv": "Geografisk plats, latitud"
+              "sv": "Geografisk plats, latitud",
+              "no": "Geografisk beliggenhet, breddegrad"
             }
           },
           {
@@ -201,7 +220,8 @@
             "value": "",
             "label": {
               "en": "GEOlocation longitude",
-              "sv": "Geografisk plats, longitud"
+              "sv": "Geografisk plats, longitud",
+              "no": "Geografisk beliggenhet, lengdegrad"
             }
           },
           {
@@ -210,140 +230,11 @@
             "value": true,
             "label": {
               "en": "Use Homey GEOlocation",
-              "sv": "Använd Homeys GEOlocation"
+              "sv": "Använd Homeys GEOlocation",
+              "no": "Bruk Homeys GEOlocation"
             }
           }
           ]
-        }
-      ]
-    },
-    {
-      "id": "pollenno",
-      "name": {
-        "en": "Norwegian Pollen Forecast",
-        "sv": "Norsk Pollenprognos"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "burot_pollen_0_no",
-        "bjork_pollen_0_no",
-        "gress_pollen_0_no",
-        "hassel_pollen_0_no",
-        "or_pollen_0_no",
-        "salix_pollen_0_no",
-        "burot_pollen_1_no",
-        "bjork_pollen_1_no",
-        "gress_pollen_1_no",
-        "hassel_pollen_1_no",
-        "or_pollen_1_no",
-        "salix_pollen_1_no"
-      ],
-      "images": {
-        "large": "/drivers/pollenno/assets/images/large.png",
-        "small": "/drivers/pollenno/assets/images/small.png"
-      },
-      "pair": [{
-        "id": "list_devices",
-        "template": "list_devices",
-        "navigation": {
-          "next": "add_devices"
-        }
-      },
-      {
-        "id": "add_devices",
-        "template": "add_devices"
-      }],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Pollen settings",
-            "sv": "Pollenprognos"
-          },
-          "children": [
-          {
-          "id": "pCity",
-          "type": "radio",
-          "label": {
-            "en": "Select city for pollen prognosis",
-            "sv": "Ange stad för pollenprognos"
-          },
-          "value": "126",
-          "values": [
-            {
-              "id": "126",
-              "label": {
-                "en": "Østlandet med Oslo"
-              }
-            },
-            {
-              "id": "131",
-              "label": {
-                "en": "Sørlandet"
-              }
-            },
-            {
-              "id": "136",
-              "label": {
-                "en": "Rogaland"
-              }
-            },
-            {
-              "id": "141",
-              "label": {
-                "en": "Hordaland"
-              }
-            },
-            {
-              "id": "146",
-              "label": {
-                "en": "Sogn og Fjordane"
-              }
-            },
-            {
-              "id": "151",
-              "label": {
-                "en": "Møre og Romsdal"
-              }
-            },
-            {
-              "id": "156",
-              "label": {
-                "en": "Sentrale fjellstrøk i Sør-Norge"
-              }
-            },
-            {
-              "id": "161",
-              "label": {
-                "en": "Indre Østlandet"
-              }
-            },
-            {
-              "id": "166",
-              "label": {
-                "en": "Trøndelag"
-              }
-            },
-            {
-              "id": "171",
-              "label": {
-                "en": "Nordland"
-              }
-            },
-            {
-              "id": "176",
-              "label": {
-                "en": "Troms"
-              }
-            },
-            {
-              "id": "181",
-              "label": {
-                "en": "Finnmark"
-              }
-            }
-          ]
-          }]
         }
       ]
     }
@@ -354,7 +245,8 @@
         "id": "WeatherSituationChange",
         "title": {
             "en": "Weather change",
-            "sv": "Väderomslag"
+            "sv": "Väderomslag",
+            "no": "Værendring"
         },
         "tokens": [
         {
@@ -362,7 +254,8 @@
           "type": "string",
           "title": {
             "en": "Weather situation",
-            "sv": "Vädersituation"
+            "sv": "Vädersituation",
+            "no": "Værsituasjon"
           }
         }
         ],
@@ -376,7 +269,8 @@
         "id": "AirTemperatureChange",
         "title": {
             "en": "Air temperature change",
-            "sv": "Förändrad lufttemperatur"
+            "sv": "Förändrad lufttemperatur",
+            "no": "Endring av lufttemperatur"
         },
         "tokens": [
         {
@@ -384,7 +278,8 @@
           "type": "number",
           "title": {
             "en": "Air temperature",
-            "sv": "Lufttemperatur"
+            "sv": "Lufttemperatur",
+            "no": "Lufttemperatur"
           }
         }
         ],
@@ -398,7 +293,8 @@
         "id": "PrecipitationSituationChange",
         "title": {
             "en": "Precipitation situation change",
-            "sv": "Förändrad nederbörssituation"
+            "sv": "Förändrad nederbörssituation",
+            "no": "Nedbørssituasjon endres"
         },
         "tokens": [
         {
@@ -406,7 +302,8 @@
           "type": "string",
           "title": {
             "en": "Precipitation situation",
-            "sv": "Nederbördssituation"
+            "sv": "Nederbördssituation",
+            "no": "Nedbørssituasjon"
           }
         }
         ],
@@ -420,7 +317,8 @@
         "id": "WindSpeedChange",
         "title": {
             "en": "Wind speed change",
-            "sv": "Förändrad vindhastighet"
+            "sv": "Förändrad vindhastighet",
+            "no": "Endring av vindhastighet"
         },
         "tokens": [
         {
@@ -428,7 +326,8 @@
           "type": "number",
           "title": {
             "en": "Wind speed",
-            "sv": "Vindhastighet"
+            "sv": "Vindhastighet",
+            "no": "Vindfart"
           }
         }
         ],
@@ -442,7 +341,8 @@
         "id": "WindDirectionHeadingChange",
         "title": {
             "en": "Wind direction change",
-            "sv": "Förändrad vindriktning"
+            "sv": "Förändrad vindriktning",
+            "no": "Endret vindretning"
         },
         "tokens": [
         {
@@ -450,14 +350,16 @@
           "type": "string",
           "title": {
             "en": "Wind direction",
-            "sv": "Vindriktning"
+            "sv": "Vindriktning",
+            "no": "Vindretning"
           }
         },
         {
           "name": "measure_wind_direction_cp",
           "title": {
             "en": "Wind direction °",
-            "sv": "Vindriktning °"
+            "sv": "Vindriktning °",
+            "no": "Vindretning °"
           }
         }
         ],
@@ -471,7 +373,8 @@
         "id": "RelativeHumidityChange",
         "title": {
             "en": "Relative humidity change",
-            "sv": "Förändrad relativ luftfuktighet"
+            "sv": "Förändrad relativ luftfuktighet",
+            "no": "Endret relativ luftfuktighet"
         },
         "tokens": [
         {
@@ -479,7 +382,8 @@
           "type": "number",
           "title": {
             "en": "Relative humidity",
-            "sv": "Relativ luftfuktighet"
+            "sv": "Relativ luftfuktighet",
+            "no": "Relativ luftfuktighet"
           }
         }
         ],
@@ -493,7 +397,8 @@
         "id": "AirPressureChange",
         "title": {
             "en": "Air pressure change",
-            "sv": "Förändrat lufttryck"
+            "sv": "Förändrat lufttryck",
+            "no": "Endret lufttrykk"
         },
         "tokens": [
         {
@@ -501,7 +406,8 @@
           "type": "number",
           "title": {
             "en": "Air pressure",
-            "sv": "Lufttryck"
+            "sv": "Lufttryck",
+            "no": "lufttrykk"
           }
         }
         ],
@@ -515,7 +421,8 @@
         "id": "ThunderProbabilityChange",
         "title": {
             "en": "Thunderstorm probability change",
-            "sv": "Förändrad risk för åska"
+            "sv": "Förändrad risk för åska",
+            "no": "Endret fare for torden"
         },
         "tokens": [
         {
@@ -523,7 +430,8 @@
           "type": "number",
           "title": {
             "en": "Thunderstorm probability",
-            "sv": "Risk för åska"
+            "sv": "Risk för åska",
+            "no": "Fare for torden"
           }
         }
         ],
@@ -537,7 +445,8 @@
         "id": "MeanValueOfTotalCloudCoverChange",
         "title": {
             "en": "Cloud cover change",
-            "sv": "Förändrad molntäthet"
+            "sv": "Förändrad molntäthet",
+            "no": "Endret skytetthet"
         },
         "tokens": [
         {
@@ -545,7 +454,8 @@
           "type": "number",
           "title": {
             "en": "Cloud cover",
-            "sv": "Molntäthet"
+            "sv": "Molntäthet",
+            "no": "Skytetthet"
           }
         }
         ],
@@ -554,246 +464,6 @@
 					"type": "device",
 					"filter": "driver_id=weather"
 				}]
-      },
-      {
-        "id": "burot_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av burot pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "burot_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Burot i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_burot_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "burot_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av burot pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "burot_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Burot i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_burot_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "bjork_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av bjørk pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "bjork_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Bjørk i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_bjork_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "bjork_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av bjørk pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "bjork_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Bjørk i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_bjork_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "gress_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av gress pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "gress_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Gress i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_gress_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "gress_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av gress pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "gress_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Gress i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_burot_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "hassel_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av hassel pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "hassel_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Hassel i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_hassel_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "hassel_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av hassel pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "hassel_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Hassel i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_hassel_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "or_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av or pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "or_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Or i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_or_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "or_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av or pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "or_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Or i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_or_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "salix_pollen_0_no_Change",
-        "title": {
-            "en": "Endret nivå av salix pollen i dag"
-        },
-        "tokens": [
-        {
-          "name": "salix_pollen_0_no",
-          "type": "string",
-          "title": {
-            "en": "Salix i dag"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_salix_pollen_0_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
-      },
-      {
-        "id": "salix_pollen_1_no_Change",
-        "title": {
-            "en": "Endret nivå av salix pollen i morgen"
-        },
-        "tokens": [
-        {
-          "name": "salix_pollen_1_no",
-          "type": "string",
-          "title": {
-            "en": "Salix i morgen"
-          }
-        }
-        ],
-        "args": [{
-					"name": "Changed_salix_pollen_1_no",
-					"type": "device",
-					"filter": "driver_id=pollenno"
-				}]
       }
     ],
     "conditions": [
@@ -801,7 +471,13 @@
         "id": "measure_weather_situation_cp",
         "title": {
           "en": "Weather situation !{{is|isn't}}",
-          "sv": "Vädersituationen !{{är|är inte}}"
+          "sv": "Vädersituationen !{{är|är inte}}",
+          "no": "Været !{{er | er ikke}}"
+        },
+        "titleFormatted": {
+          "en": "Weather situation !{{is|isn't}} [[weather_situation_condition]]",
+          "sv": "Vädersituationen !{{är|är inte}} [[weather_situation_condition]]",
+          "no": "Værsituasjonen !{{er | er ikke}} [[weather_situation_condition]]"
         },
         "args": [
           {
@@ -817,189 +493,216 @@
 								"id": "Clearsky",
 								"label": {
 									"en": "Clear sky",
-                  "sv": "Klart"
+                  "sv": "Klart",
+                  "no": "Klar himmel"
 								}
 							},
 							{
 								"id": "Nearlyclearsky",
 								"label": {
 									"en": "Nearly clear sky",
-                  "sv": "Nästan klart"
+                  "sv": "Nästan klart",
+                  "no": "Nesten klar himmel"
 								}
 							},
 							{
 								"id": "Variablecloudiness",
 								"label": {
 									"en": "Variable cloudiness",
-                  "sv": "Växlande molnighet"
+                  "sv": "Växlande molnighet",
+                  "no": "Variabel overskyethet"
 								}
 							},
 							{
 								"id": "Halfclearsky",
 								"label": {
 									"en": "Halfclear sky",
-                  "sv": "Halvklart"
+                  "sv": "Halvklart",
+                  "no": "Halvklar himmel"
 								}
 							},
 							{
 								"id": "Cloudysky",
 								"label": {
 									"en": "Cloudy sky",
-                  "sv": "Lätt molnighet"
+                  "sv": "Lätt molnighet",
+                  "no": "Skyet himmel"
 								}
 							},
 							{
 								"id": "Overcast",
 								"label": {
 									"en": "Overcast",
-                  "sv": "Molnigt"
+                  "sv": "Molnigt",
+                  "no": "Overskyet"
 								}
 							},
 							{
 								"id": "Fog",
 								"label": {
 									"en": "Fog",
-                  "sv": "Dimma"
+                  "sv": "Dimma",
+                  "no": "Tåke"
 								}
 							},
 							{
 								"id": "Lightrainshowers",
 								"label": {
 									"en": "Light rain showers",
-                  "sv": "Lätta regnskurar"
+                  "sv": "Lätta regnskurar",
+                  "no": "Lette regnbyger"
 								}
               },
               {
 								"id": "Moderaterainshowers",
 								"label": {
 									"en": "Moderate rain showers",
-                  "sv": "Måttliga regnskurar"
+                  "sv": "Måttliga regnskurar",
+                  "no": "Moderate regnbyger"
 								}
               },
               {
 								"id": "Heavyrainshowers",
 								"label": {
 									"en": "Heavy rain showers",
-                  "sv": "Kraftiga regnskurar"
+                  "sv": "Kraftiga regnskurar",
+                  "no": "Kraftige regnbyger"
 								}
               },
               {
 								"id": "Thunderstorm",
 								"label": {
 									"en": "Thunderstorm",
-                  "sv": "Åskväder"
+                  "sv": "Åskväder",
+                  "no": "Tordenvær"
 								}
               },
               {
 								"id": "Lightsleetshowers",
 								"label": {
 									"en": "Light sleet showers",
-                  "sv": "Underkylda duggregn"
+                  "sv": "Underkylt duggregn",
+                  "no": "Lette sluddbyger"
 								}
               },
               {
 								"id": "Moderatesleetshowers",
 								"label": {
 									"en": "Moderate sleet showers",
-                  "sv": "Underkylda regnskurar"
+                  "sv": "Underkylda regnskurar",
+                  "no": "Moderate sluddbyger"
 								}
               },
               {
 								"id": "Heavysleetshowers",
 								"label": {
 									"en": "Heavy sleet showers",
-                  "sv": "Underkylda skyfall"
+                  "sv": "Underkylda skyfall",
+                  "no": "Kraftige sluddbyger"
 								}
               },
               {
 								"id": "Lightsnowshowers",
 								"label": {
 									"en": "Light snow showers",
-                  "sv": "Lätta snöbyar"
+                  "sv": "Lätta snöbyar",
+                  "no": "Lette snøbyger"
 								}
               },
               {
 								"id": "Moderatesnowshowers",
 								"label": {
 									"en": "Moderate snow showers",
-                  "sv": "Snöbyar"
+                  "sv": "Snöbyar",
+                  "no": "Moderate snøbyger"
 								}
               },
               {
 								"id": "Heavysnowshowers",
 								"label": {
 									"en": "Heavy snow showers",
-                  "sv": "Kraftiga snöbyar"
+                  "sv": "Kraftiga snöbyar",
+                  "no": "Kraftige snøbyger"
 								}
               },
               {
 								"id": "Lightrain",
 								"label": {
 									"en": "Light rain",
-                  "sv": "Duggregn"
+                  "sv": "Duggregn",
+                  "no": "Lett regn"
 								}
               },
               {
 								"id": "Moderaterain",
 								"label": {
 									"en": "Moderate rain",
-                  "sv": "Regn"
+                  "sv": "Regn",
+                  "no": "Moderate regn"
 								}
               },
               {
 								"id": "Heavyrain",
 								"label": {
 									"en": "Heavy rain",
-                  "sv": "Skyfall"
+                  "sv": "Skyfall",
+                  "no": "Kraftig regn"
 								}
               },
               {
 								"id": "Thunder",
 								"label": {
 									"en": "Thunder",
-                  "sv": "Åska"
+                  "sv": "Åska",
+                  "no": "Torden"
 								}
               },
               {
 								"id": "Lightsleet",
 								"label": {
 									"en": "Light sleet",
-                  "sv": "Snöblandat duggregn"
+                  "sv": "Snöblandat duggregn",
+                  "no": "Lett sludd"
 								}
               },
               {
 								"id": "Moderatesleet",
 								"label": {
 									"en": "Moderate sleet",
-                  "sv": "Snöblandat regn"
+                  "sv": "Snöblandat regn",
+                  "no": "Moderat sludd"
 								}
               },
               {
 								"id": "Heavysleet",
 								"label": {
 									"en": "Heavy sleet",
-                  "sv": "Snöblandat skyfall"
+                  "sv": "Snöblandat skyfall",
+                  "no": "Kraftig sludd"
 								}
               },
               {
 								"id": "Lightsnowfall",
 								"label": {
 									"en": "Light snowfall",
-                  "sv": "Lätt snöfall"
+                  "sv": "Lätt snöfall",
+                  "no": "Lett snøfall"
 								}
               },
               {
 								"id": "Moderatesnowfall",
 								"label": {
 									"en": "Moderate snowfall",
-                  "sv": "Måttligt snöfall"
+                  "sv": "Måttligt snöfall",
+                  "no": "Moderat snøfall"
 								}
               },
               {
 								"id": "Heavysnowfall",
 								"label": {
 									"en": "Heavy snowfall",
-                  "sv": "Kraftigt snöfall"
+                  "sv": "Kraftigt snöfall",
+                  "no": "Kraftig snøfall"
 								}
               }
             ]
@@ -1010,11 +713,18 @@
         "id": "measure_air_temperature_cp",
         "title": {
           "en": "Air temperature !{{is|isn't}} above",
-          "sv": "Lufttemperaturen !{{är|är inte}} över"
+          "sv": "Lufttemperaturen !{{är|är inte}} över",
+          "no": "Lufttemperatur !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Air temperature !{{is|isn't}} [[degree]] degree(s)",
+          "sv": "Lufttemperaturen !{{är|är inte}} [[degree]] grad(er)",
+          "no": "Lufttemperatur !{{er|er ikke}} [[degree]] grad(er)"
         },
         "hint": {
 					"en": "Air temperature in °C",
-          "sv": "Lufttemperaturen i °C"
+          "sv": "Lufttemperaturen i °C",
+          "no": "Lufttemperatur i °C"
 				},
         "args": [
           {
@@ -1032,11 +742,18 @@
         "id": "measure_wind_speed_cp",
         "title": {
           "en": "Wind speed !{{is|isn't}} above",
-          "sv": "Vindhastigheten !{{är|är inte}} över"
+          "sv": "Vindhastigheten !{{är|är inte}} över",
+          "no": "Vindfart !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Wind speed !{{is|isn't}} [[mps]] m/s",
+          "sv": "Vindhastigheten !{{är|är inte}} [[mps]] m/s",
+          "no": "Vindfart !{{er|er ikke}} [[mps]] m/s"
         },
         "hint": {
 					"en": "Wind speed in m/s.",
-          "sv": "Vindhastigheten i m/s"
+          "sv": "Vindhastigheten i m/s",
+          "no": "Vindfart i m/s"
 				},
         "args": [
           {
@@ -1054,11 +771,18 @@
         "id": "measure_wind_direction_cp",
         "title": {
           "en": "Wind direction degree !{{is|isn't}} above",
-          "sv": "Vindens riktning !{{är|är inte}} över"
+          "sv": "Vindens riktning !{{är|är inte}} över",
+          "no": "Vindretning !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Wind direction degree !{{is|isn't}} [[degree]] degree(s)",
+          "sv": "Vindens riktning !{{är|är inte}} [[degree]] grad(er)",
+          "no": "Vindretning !{{er|er ikke}} [[degree]] grad(er)"
         },
         "hint": {
 	  		"en": "Compass wind direction in degrees",
-        "sv": "Vindens kompassriktning i grader"
+        "sv": "Vindens kompassriktning i grader",
+        "no": "Kompassretningen til vinden i grader"
 		  },
         "args": [
         {
@@ -1076,11 +800,18 @@
         "id": "measure_wind_direction_heading_cp",
         "title": {
           "en": "Wind direction heading !{{is|isn't}}",
-          "sv": "Vindens riktning !{{är|är inte}}"
+          "sv": "Vindens riktning !{{är|är inte}}",
+          "no": "Vindretning !{{er|er ikke}}"
+        },
+        "titleFormatted": {
+          "en": "Wind direction heading !{{is|isn't}} [[direction]]",
+          "sv": "Vindens riktning !{{är|är inte}} [[direction]]",
+          "no": "Vindretning !{{er|er ikke}} [[direction]]"
         },
         "hint": {
 					"en": "Compass wind direction",
-          "sv": "Vindens kompassriktning"
+          "sv": "Vindens kompassriktning",
+          "no": "Kompassretningen fra vinden"
 				},
         "args": [
         {
@@ -1096,56 +827,64 @@
               "id": "North",
               "label": {
                 "en": "North",
-                "sv": "Nord"
+                "sv": "Nord",
+                "no": "Nord"
               }
             },
             {
               "id": "North-West",
               "label": {
                 "en": "North-West",
-                "sv": "Nord-Väst"
+                "sv": "Nord-Väst",
+                "no": "Nordvest"
               }
             },
             {
               "id": "West",
               "label": {
                 "en": "West",
-                "sv": "Väst"
+                "sv": "Väst",
+                "no": "Vest"
               }
             },
             {
               "id": "South-West",
               "label": {
                 "en": "South-West",
-                "sv": "Syd-Väst"
+                "sv": "Syd-Väst",
+                "no": "Sørvest"
               }
             },
             {
               "id": "South",
               "label": {
                 "en": "South",
-                "sv": "Syd"
+                "sv": "Syd",
+                "no": "Sør"
               }
             },
             {
               "id": "South-East",
               "label": {
                 "en": "South-East",
-                "sv": "Syd-Öst"
+                "sv": "Syd-Öst",
+                "no": "Sørøst"
               }
             },
             {
               "id": "East",
               "label": {
                 "en": "East",
-                "sv": "Öst"
+                "sv": "Öst",
+                "no": "Øst"
               }
             },
             {
               "id": "North-East",
               "label": {
                 "en": "North-East",
-                "sv": "Nord-Öst"
+                "sv": "Nord-Öst",
+                "no": "Nord-Øst"
               }
             }
           ]
@@ -1156,11 +895,18 @@
         "id": "measure_relative_humidity_cp",
         "title": {
           "en": "Relative humidity !{{is|isn't}} above",
-          "sv": "Relativ luftfuktighet !{{är|är inte}} över"
+          "sv": "Relativ luftfuktighet !{{är|är inte}} över",
+          "no": "Relativ fuktighet !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Relative humidity !{{is|isn't}} [[percent]]%",
+          "sv": "Relativ luftfuktighet !{{är|är inte}} [[percent]]%",
+          "no": "Relativ fuktighet !{{er|er ikke}} [[percent]]%"
         },
         "hint": {
 	  		"en": "Relative humidity in %",
-        "sv": "Relativ luftfuktighet i %"
+        "sv": "Relativ luftfuktighet i %",
+        "no": "Relativ fuktighet i %"
 		  },
         "args": [
         {
@@ -1178,11 +924,18 @@
         "id": "measure_air_pressure_cp",
         "title": {
           "en": "Air pressure !{{is|isn't}} above",
-          "sv": "Lufttrycket !{{är|är inte}} över"
+          "sv": "Lufttrycket !{{är|är inte}} över",
+          "no": "Lufttrykket !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Air pressure !{{is|isn't}} [[hpa]] hPa",
+          "sv": "Lufttrycket !{{är|är inte}} [[hpa]] hPa",
+          "no": "Lufttrykket !{{er|er ikke}} [[hpa]] hPa"
         },
         "hint": {
 	  		"en": "Air pressure in hPa",
-        "sv": "Lufttrycket i hPa"
+        "sv": "Lufttrycket i hPa",
+        "no": "Lufttrykket i hPa"
 		  },
         "args": [
         {
@@ -1200,11 +953,18 @@
         "id": "measure_thunder_probability_cp",
         "title": {
           "en": "Thunder probability !{{is|isn't}} above",
-          "sv": "Åskrisken !{{är|är inte}} över"
+          "sv": "Åskrisken !{{är|är inte}} över",
+          "no": "Risiko for tordenvær !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Thunder probability !{{is|isn't}} [[percent]]%",
+          "sv": "Åskrisken !{{är|är inte}} [[percent]]%",
+          "no": "Risiko for tordenvær !{{er|er ikke}} [[percent]]%"
         },
         "hint": {
   			"en": "Thunder probability in %",
-        "sv": "Åskrisk i %"
+        "sv": "Åskrisk i %",
+        "no": "Risiko for torden i %"
 				},
         "args": [
         {
@@ -1222,11 +982,18 @@
         "id": "mean_value_of_total_cloud_cover_cp",
         "title": {
           "en": "Total cloud cover !{{is|isn't}} above",
-          "sv": "Total molnighet !{{är|är inte}} över"
+          "sv": "Total molnighet !{{är|är inte}} över",
+          "no": "Total overskyet !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Total cloud cover !{{is|isn't}} [[octas]] octas",
+          "sv": "Total molnighet !{{är|är inte}} [[octas]] octas",
+          "no": "Total overskyet !{{er|er ikke}} [[octas]] octas"
         },
         "hint": {
 	 			"en": "Total cloud cover in octas (0-8)",
-         "sv": "Total molnighet i octas (0-8)"
+         "sv": "Total molnighet i octas (0-8)",
+         "no": "Total overskyethet i oktaer (0–8)"
 	  	},
         "args": [
         {
@@ -1244,11 +1011,18 @@
         "id": "mean_value_of_low_level_cloud_cover_cp",
         "title": {
           "en": "Low cloud cover !{{is|isn't}} above",
-          "sv": "Låg molnighet !{{är|är inte}} över"
+          "sv": "Låg molnighet !{{är|är inte}} över",
+          "no": "Lite overskyet !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Low cloud cover !{{is|isn't}} [[octas]] octas",
+          "sv": "Låg molnighet !{{är|är inte}} [[octas]] octas",
+          "no": "Lite overskyet !{{er|er ikke}} [[octas]] octas"
         },
         "hint": {
 	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)",
-         "sv": "Molnighet på 0-2500 meter, i octas (0-8)"
+        "sv": "Molnighet på 0-2500 meter, i octas (0-8)",
+        "no": "Skyet himmel på 0–2500 meter, i oktaer (0–8)"
 	  	},
         "args": [
         {
@@ -1266,11 +1040,18 @@
         "id": "mean_value_of_medium_level_cloud_cover_cp",
         "title": {
           "en": "Medium cloud cover !{{is|isn't}} above",
-          "sv": "Medelhög molnighet !{{är|är inte}} över"
+          "sv": "Medelhög molnighet !{{är|är inte}} över",
+          "no": "Middels overskyet !{{er|ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Medium cloud cover !{{is|isn't}} [[octas]] octas",
+          "sv": "Medelhög molnighet !{{är|är inte}} [[octas]] octas",
+          "no": "Middels overskyet !{{er|ikke}} [[octas]] octas"
         },
         "hint": {
 	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)",
-         "sv": "Molnighet på 2500-6000 meter, i octas (0-8)"
+         "sv": "Molnighet på 2500-6000 meter, i octas (0-8)",
+         "no": "Skyet på 2500–6000 meter, i oktaer (0–8)"
 	  	},
         "args": [
         {
@@ -1288,11 +1069,18 @@
         "id": "mean_value_of_high_level_cloud_cover_cp",
         "title": {
           "en": "High cloud cover !{{is|isn't}} above",
-          "sv": "Hög molighet !{{är|är inte}} över"
+          "sv": "Hög molighet !{{är|är inte}} över",
+          "no": "Høy sky !{{er|er ikke}} over" 
+        },
+        "titleFormatted": {
+          "en": "High cloud cover !{{is|isn't}} [[octas]] octas",
+          "sv": "Hög molnighet !{{är|är inte}} [[octas]] octas",
+          "no": "Høy sky !{{er|er ikke}} [[octas]] octas"
         },
         "hint": {
 	 			"en": "Cloud cover above 6000 meters, in octas (0-8)",
-         "sv": "Molnighet över 6000 meter, i octas (0-8)"
+         "sv": "Molnighet över 6000 meter, i octas (0-8)",
+         "no": "Skyet himmel over 6000 meter, i oktaer (0-8)"
 	  	},
         "args": [
         {
@@ -1310,11 +1098,18 @@
         "id": "wind_gust_speed_cp",
         "title": {
           "en": "Wind gust speed !{{is|isn't}} above",
-          "sv": "Hastigheten i vindbyarna !{{är|är inte}} över"
+          "sv": "Hastigheten i vindbyarna !{{är|är inte}} över",
+          "no": "Hastigheten til vindkastene !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Wind gust speed !{{is|isn't}} [[mps]] m/s",
+          "sv": "Hastigheten i vindbyarna !{{är|är inte}} [[mps]] m/s",
+          "no": "Hastigheten til vindkastene !{{er|er ikke}} [[mps]] m/s"
         },
         "hint": {
 	  		"en": "Wind gust speed in m/s",
-        "sv": "Hastighet i vindbyarna i m/s"
+        "sv": "Hastighet i vindbyarna i m/s",
+        "no": "Hastighet i vindkast i m/s"
 		  },
         "args": [
         {
@@ -1332,11 +1127,18 @@
         "id": "horizontal_visibility_cp",
         "title": {
           "en": "Horizontal visibility !{{is|isn't}} above",
-          "sv": "Horisontell visibilitet !{{är|är inte}} över"
+          "sv": "Horisontell visibilitet !{{är|är inte}} över",
+          "no": "Horisontal synlighet !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Horizontal visibility !{{is|isn't}} [[km]] km",
+          "sv": "Horisontell visibilitet !{{är|är inte}} [[km]] km",
+          "no": "Horisontal synlighet !{{er|er ikke}} [[km]] km"
         },
         "hint": {
 	  		"en": "Horizontal visibility in km",
-        "sv": "Horisontell visibilitet i km"
+        "sv": "Horisontell visibilitet i km",
+        "no": "Horisontal sikt i km"
 		  },
         "args": [
         {
@@ -1354,11 +1156,18 @@
         "id": "measure_precipitation_situation_cp",
         "title": {
           "en": "There !{{will|will not }} be",
-          "sv": "Det kommer !{{att|inte att}}"
+          "sv": "Det kommer !{{att|inte att}}",
+          "no": "Det !{{vil|vil ikke}}"
+        },
+        "titleFormatted": {
+          "en": "Precipitation situation !{{will|will not }} [[precipitation]]",
+          "sv": "Nederbördssituation !{{att|inte att}} [[precipitation]]",
+          "no": "Nedbørssituasjon !{{vil|vil ikke}} [[precipitation]]"
         },
         "hint": {
-					"en": "Will there be rain or snow",
-          "sv": "Kommer det nederbörd"
+					"en": "Will there be rain or snow?",
+          "sv": "Kommer det nederbörd?",
+          "no": "Blir det nedbør?"
 				},
         "args": [
         {
@@ -1374,7 +1183,8 @@
               "id": "RainSnow",
               "label": {
                 "en": "Rain or Snow",
-                "sv": "Regn eller snö"
+                "sv": "Regn eller snö",
+                "no": "Regn eller snø"
               }
             }
           ] 
@@ -1385,11 +1195,18 @@
         "id": "mean_precipitation_intensity_cp",
         "title": {
           "en": "Mean precipitation intensity !{{is|isn't}} above",
-          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} över"
+          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} över",
+          "no": "Gjennomsnittlig nedbørsintensitet !{{er|er ikke}} over"
+        },
+        "titleFormatted": {
+          "en": "Mean precipitation intensity !{{is|isn't}} [[mmh]] mm/h",
+          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} [[mmh]] mm/tim",
+          "no": "Gjennomsnittlig nedbørsintensitet !{{er|er ikke}} [[mmh]] mm/time"
         },
         "hint": {
 	 			"en": "Precipitation in mm/h",
-         "sv": "Nederbörd i mm/tim"
+         "sv": "Nederbörd i mm/tim",
+         "no": "Nedbør i mm/time"
 	  	},
         "args": [
         {
@@ -1402,630 +1219,6 @@
           "type": "number"
         }
         ]
-      },
-      {
-        "id": "burot_pollen_0_no",
-        "title": {
-          "en": "Burot pollen er i dag!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av burot pollen i dag."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "burot_pollen_1_no",
-        "title": {
-          "en": "Burot pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av burot pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "bjork_pollen_0_no",
-        "title": {
-          "en": "Bjørk pollen er i dag!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av bjørk pollen i dag."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "bjork_pollen_1_no",
-        "title": {
-          "en": "Bjørk pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av bjørk pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "gress_pollen_0_no",
-        "title": {
-          "en": "Gress pollen er i dag!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av gress pollen i dag."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "gress_pollen_1_no",
-        "title": {
-          "en": "Gress pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av gress pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "hassel_pollen_0_no",
-        "title": {
-          "en": "Hassel pollen er i dag!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av hassel pollen i dag."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "hassel_pollen_1_no",
-        "title": {
-          "en": "Hassel pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av hassel pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "or_pollen_0_no",
-        "title": {
-          "en": "Or pollen er i dag!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av or pollen i dag."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "or_pollen_1_no",
-        "title": {
-          "en": "Or pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av or pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "salix_pollen_0_no",
-        "title": {
-          "en": "Salix pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av salix pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
-      },
-      {
-        "id": "salix_pollen_1_no",
-        "title": {
-          "en": "Salix pollen er i morgen!{{| ikke}} høyere enn"
-        },
-        "hint": {
-	 			"en": "Spredning av salix pollen i morgen."
-	  	},
-      "args": [
-        {
-          "name": "device",
-          "type": "device",
-          "filter": "driver_id=pollenno"
-        },
-        {
-          "name": "spredning",
-          "type": "dropdown",
-          "values": [
-            {
-              "id": "0",
-              "label": {
-                "en": "Ingen spredning"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "Beskjeden spredning"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "Moderat spredning"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "Kraftig spredning"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "Ekstrem spredning"
-              }
-            }
-          ]
-        }
-        ]
       }
     ],
     "actions": []
@@ -2035,7 +1228,8 @@
       "type": "string",
       "title": {
         "en": "Forecast for",
-        "sv": "Prognos för"
+        "sv": "Prognos för",
+        "no": "Værvarsel for"
       },
       "getable": true,
       "setable": false,
@@ -2046,7 +1240,8 @@
       "type": "string",
       "title": {
         "en": "Weather",
-        "sv": "Väder"
+        "sv": "Väder",
+        "no": "Vær"
       },
       "getable": true,
       "setable": false,
@@ -2057,7 +1252,8 @@
       "type": "number",
       "title": {
         "en": "Air pressure",
-        "sv": "Lufttryck"
+        "sv": "Lufttryck",
+        "no": "lufttrykk"
       },
       "getable": true,
       "setable": false,
@@ -2071,7 +1267,8 @@
       "type": "number",
       "title": {
         "en": "Feels like",
-        "sv": "Känns som"
+        "sv": "Känns som",
+        "no": "Føles som"
       },
       "getable": true,
       "setable": false,
@@ -2084,7 +1281,8 @@
       "type": "number",
       "title": {
         "en": "Air temperature",
-        "sv": "Lufttemperatur"
+        "sv": "Lufttemperatur",
+        "no": "Lufttemperatur"
       },
       "getable": true,
       "setable": false,
@@ -2098,7 +1296,8 @@
       "type": "number",
       "title": {
         "en": "Horizontal visibility",
-        "sv": "Horisontell sikt"
+        "sv": "Horisontell sikt",
+        "no": "Horisontal visning"
       },
       "getable": true,
       "setable": false,
@@ -2112,7 +1311,8 @@
       "type": "number",
       "title": {
         "en": "Wind direction",
-        "sv": "Vindriktning"
+        "sv": "Vindriktning",
+        "no": "Vindretning"
       },
       "getable": true,
       "setable": false,
@@ -2124,7 +1324,8 @@
       "type": "number",
       "title": {
         "en": "Wind speed",
-        "sv": "Vindhastighet"
+        "sv": "Vindhastighet",
+        "no": "Vindfart"
       },
       "getable": true,
       "setable": false,
@@ -2138,7 +1339,8 @@
       "type": "number",
       "title": {
         "en": "Relative humidity",
-        "sv": "Relativ luftfuktighet"
+        "sv": "Relativ luftfuktighet",
+        "no": "Relativ fuktighet"
       },
       "getable": true,
       "setable": false,
@@ -2151,7 +1353,8 @@
       "type": "number",
       "title": {
         "en": "Thunder probability",
-        "sv": "Risk för åska"
+        "sv": "Risk för åska",
+        "no": "Fare for torden"
       },
       "getable": true,
       "setable": false,
@@ -2164,7 +1367,8 @@
       "type": "number",
       "title": {
         "en": "Total cloud cover",
-        "sv": "Total molnighet"
+        "sv": "Total molnighet",
+        "no": "Total overskyethet"
       },
       "getable": true,
       "setable": false,
@@ -2177,7 +1381,8 @@
       "type": "number",
       "title": {
         "en": "Cloud cover 0-2500 meters",
-        "sv": "Molnighet på 0-2500 meter"
+        "sv": "Molnighet på 0-2500 meter",
+        "no": "Skyet på 0-2500 meter"
       },
       "getable": true,
       "setable": false,
@@ -2190,7 +1395,8 @@
       "type": "number",
       "title": {
         "en": "Cloud cover 2500-6000 meters",
-        "sv": "Molnighet på 2500-6000 meter"
+        "sv": "Molnighet på 2500-6000 meter",
+        "no": "Overskyet på 2500-6000 meter"
       },
       "getable": true,
       "setable": false,
@@ -2203,7 +1409,8 @@
       "type": "number",
       "title": {
         "en": "Cloud cover above 6000 meters",
-        "sv": "Molnighet över 6000 meter"
+        "sv": "Molnighet över 6000 meter",
+        "no": "Skyet himmel over 6000 meter"
       },
       "getable": true,
       "setable": false,
@@ -2216,7 +1423,8 @@
       "type": "number",
       "title": {
         "en": "Wind gust speed",
-        "sv": "Vindbyarnas hastighet"
+        "sv": "Vindbyarnas hastighet",
+        "no": "Hastigheten på vindkastene"
       },
       "getable": true,
       "setable": false,
@@ -2230,7 +1438,8 @@
       "type": "number",
       "title": {
         "en": "Minimum precipitation intensity",
-        "sv": "Lägsta nederbördsintensitet"
+        "sv": "Lägsta nederbördsintensitet",
+        "no": "Laveste nedbørsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -2243,7 +1452,8 @@
       "type": "number",
       "title": {
         "en": "Maximum precipitation intensity",
-        "sv": "Högsta nederbördsintensitet"
+        "sv": "Högsta nederbördsintensitet",
+        "no": "Høyeste nedbørsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -2256,7 +1466,8 @@
       "type": "number",
       "title": {
         "en": "Precipitation in frozen form",
-        "sv": "Nederbörd i frusen form"
+        "sv": "Nederbörd i frusen form",
+        "no": "Nedbør i frossen form"
       },
       "getable": true,
       "setable": false,
@@ -2268,7 +1479,8 @@
       "type": "number",
       "title": {
         "en": "Precipitation category",
-        "sv": "Nederbördskategori"
+        "sv": "Nederbördskategori",
+        "no": "Nedbørskategori"
       },
       "getable": true,
       "setable": false,
@@ -2279,7 +1491,8 @@
       "type": "number",
       "title": {
         "en": "Mean precipitation intensity",
-        "sv": "Genomsnittlig nederbördsintensitet"
+        "sv": "Genomsnittlig nederbördsintensitet",
+        "no": "Gjennomsnittlig nedbørsintensitet"
       },
       "getable": true,
       "setable": false,
@@ -2293,7 +1506,8 @@
       "type": "number",
       "title": {
         "en": "Median precipitation intensity",
-        "sv": "Medelvärdet av nederbördsintensiteten"
+        "sv": "Medelvärdet av nederbördsintensiteten",
+        "no": "Gjennomsnittsverdien av nedbørintensiteten"
       },
       "getable": true,
       "setable": false,
@@ -2307,7 +1521,8 @@
       "type": "number",
       "title": {
         "en": "Weather symbol",
-        "sv": "Vädersymbol"
+        "sv": "Vädersymbol",
+        "no": "Værsymbol"
       },
       "getable": true,
       "setable": false,
@@ -2318,7 +1533,8 @@
       "type": "string",
       "title": {
         "en": "Precipitation situation",
-        "sv": "Nederbördssituation"
+        "sv": "Nederbördssituation",
+        "no": "Nedbørssituasjon"
       },
       "getable": true,
       "setable": false,
@@ -2329,132 +1545,13 @@
       "type": "string",
       "title": {
         "en": "Wind direction",
-        "sv": "Vindriktning"
+        "sv": "Vindriktning",
+        "no": "Vindretning"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/wind_direction.svg"
-    },
-    "burot_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Burot i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/grabo.svg"
-    },
-    "burot_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Burot i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/grabo.svg"
-    },
-    "bjork_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Bjørk i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/bjork.svg"
-    },
-    "bjork_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Bjørk i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/bjork.svg"
-    },
-    "gress_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Gress i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/gras.svg"
-    },
-    "gress_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Gress i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/gras.svg"
-    },
-    "hassel_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Hassel i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/hassel.svg"
-    },
-    "hassel_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Hassel i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/hassel.svg"
-    },
-    "or_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Or i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/grabo.svg"
-    },
-    "or_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Or i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/grabo.svg"
-    },
-    "salix_pollen_0_no":{
-      "type": "string",
-      "title": {
-        "en": "Salix i dag"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/salg_vide.svg"
-    },
-    "salix_pollen_1_no":{
-      "type": "string",
-      "title": {
-        "en": "Salix i morgen"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/salg_vide.svg"
     }
   }
 }

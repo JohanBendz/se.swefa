@@ -717,9 +717,9 @@
           "no": "Lufttemperatur !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Air temperature !{{is|isn't}} [[degree]] degree(s)",
-          "sv": "Lufttemperaturen !{{är|är inte}} [[degree]] grad(er)",
-          "no": "Lufttemperatur !{{er|er ikke}} [[degree]] grad(er)"
+          "en": "Air temperature !{{is|isn't}} above [[degree]] degree(s)",
+          "sv": "Lufttemperaturen !{{är|är inte}} över [[degree]] grad(er)",
+          "no": "Lufttemperatur !{{er|er ikke}} over [[degree]] grad(er)"
         },
         "hint": {
 					"en": "Air temperature in °C",
@@ -746,9 +746,9 @@
           "no": "Vindfart !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Wind speed !{{is|isn't}} [[mps]] m/s",
-          "sv": "Vindhastigheten !{{är|är inte}} [[mps]] m/s",
-          "no": "Vindfart !{{er|er ikke}} [[mps]] m/s"
+          "en": "Wind speed !{{is|isn't}} above [[mps]] m/s",
+          "sv": "Vindhastigheten !{{är|är inte}} över [[mps]] m/s",
+          "no": "Vindfart !{{er|er ikke}} over [[mps]] m/s"
         },
         "hint": {
 					"en": "Wind speed in m/s.",
@@ -770,14 +770,14 @@
       {
         "id": "measure_wind_direction_cp",
         "title": {
-          "en": "Wind direction degree !{{is|isn't}} above",
+          "en": "Wind direction !{{is|isn't}} above",
           "sv": "Vindens riktning !{{är|är inte}} över",
           "no": "Vindretning !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Wind direction degree !{{is|isn't}} [[degree]] degree(s)",
-          "sv": "Vindens riktning !{{är|är inte}} [[degree]] grad(er)",
-          "no": "Vindretning !{{er|er ikke}} [[degree]] grad(er)"
+          "en": "Wind direction !{{is|isn't}} above [[degree]] degree(s)",
+          "sv": "Vindens riktning !{{är|är inte}} över [[degree]] grad(er)",
+          "no": "Vindretning !{{er|er ikke}} over [[degree]] grad(er)"
         },
         "hint": {
 	  		"en": "Compass wind direction in degrees",
@@ -899,9 +899,9 @@
           "no": "Relativ fuktighet !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Relative humidity !{{is|isn't}} [[percent]]%",
-          "sv": "Relativ luftfuktighet !{{är|är inte}} [[percent]]%",
-          "no": "Relativ fuktighet !{{er|er ikke}} [[percent]]%"
+          "en": "Relative humidity !{{is|isn't}} above [[percent]]%",
+          "sv": "Relativ luftfuktighet !{{är|är inte}} över [[percent]]%",
+          "no": "Relativ fuktighet !{{er|er ikke}} over [[percent]]%"
         },
         "hint": {
 	  		"en": "Relative humidity in %",
@@ -928,9 +928,9 @@
           "no": "Lufttrykket !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Air pressure !{{is|isn't}} [[hpa]] hPa",
-          "sv": "Lufttrycket !{{är|är inte}} [[hpa]] hPa",
-          "no": "Lufttrykket !{{er|er ikke}} [[hpa]] hPa"
+          "en": "Air pressure !{{is|isn't}} above [[hpa]] hPa",
+          "sv": "Lufttrycket !{{är|är inte}} över [[hpa]] hPa",
+          "no": "Lufttrykket !{{er|er ikke}} over [[hpa]] hPa"
         },
         "hint": {
 	  		"en": "Air pressure in hPa",
@@ -957,9 +957,9 @@
           "no": "Risiko for tordenvær !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Thunder probability !{{is|isn't}} [[percent]]%",
-          "sv": "Åskrisken !{{är|är inte}} [[percent]]%",
-          "no": "Risiko for tordenvær !{{er|er ikke}} [[percent]]%"
+          "en": "Thunder probability !{{is|isn't}} above [[percent]]%",
+          "sv": "Åskrisken !{{är|är inte}} över [[percent]]%",
+          "no": "Risiko for tordenvær !{{er|er ikke}} over [[percent]]%"
         },
         "hint": {
   			"en": "Thunder probability in %",
@@ -986,9 +986,9 @@
           "no": "Total overskyet !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Total cloud cover !{{is|isn't}} [[octas]] octas",
-          "sv": "Total molnighet !{{är|är inte}} [[octas]] octas",
-          "no": "Total overskyet !{{er|er ikke}} [[octas]] octas"
+          "en": "Total cloud cover !{{is|isn't}} above [[octas]] octas",
+          "sv": "Total molnighet !{{är|är inte}} över [[octas]] octas",
+          "no": "Total overskyet !{{er|er ikke}} over [[octas]] octas"
         },
         "hint": {
 	 			"en": "Total cloud cover in octas (0-8)",
@@ -1199,9 +1199,9 @@
           "no": "Gjennomsnittlig nedbørsintensitet !{{er|er ikke}} over"
         },
         "titleFormatted": {
-          "en": "Mean precipitation intensity !{{is|isn't}} [[mmh]] mm/h",
-          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} [[mmh]] mm/tim",
-          "no": "Gjennomsnittlig nedbørsintensitet !{{er|er ikke}} [[mmh]] mm/time"
+          "en": "Mean precipitation intensity !{{is|isn't}} above [[mmh]] mm/h",
+          "sv": "Genomsnittlig nederbördsintensitet !{{är|är inte}} över [[mmh]] mm/tim",
+          "no": "Gjennomsnittlig nedbørsintensitet !{{er|er ikke}} over [[mmh]] mm/time"
         },
         "hint": {
 	 			"en": "Precipitation in mm/h",

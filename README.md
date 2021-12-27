@@ -13,7 +13,7 @@
 ### v 0.5.0
 * Translation correction/completion
 ### v 0.4.7
-* Swedish pollen data removed due to Homey have been blocked from using the API's
+* Pollen data removed due to Homey have been blocked from using the API's
 ### v 0.4.6
 * Fix for lat/long decimal issue
 ### v 0.4.5

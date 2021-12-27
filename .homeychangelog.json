@@ -9,7 +9,7 @@
       "en": "Fix for lat/long decimal issue."
     },
     "0.4.7": {
-      "en": "Swedish pollen data removed due to Homey have been blocked from using the API's."
+      "en": "Pollen data removed due to Homey have been blocked from using the API's."
     },
     "0.5.0": {
       "en": "Translation correction/completion."

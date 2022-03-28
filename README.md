@@ -10,6 +10,8 @@
 * Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
 
 ## Change Log:
+### v 0.5.1
+* New Live version
 ### v 0.5.0
 * Translation correction/completion
 ### v 0.4.7

@@ -5,13 +5,11 @@ class SWEFA extends Homey.App {
 
 	async onInit() {
 
-		global.PollenNoUrl = "https://pollenkontroll.no/api/pollen-count?country=no";
-
-		this.log('Swedish weather forecasting app successfully started.');
+		this.log('SMHI weather forecasting app successfully started.');
 
 	};
 
 }
 module.exports = SWEFA;
 
-// Weather and some pollen icons made by Freepik from https://www.flaticon.com/
+// Some weather icons made by Freepik @ https://www.flaticon.com/

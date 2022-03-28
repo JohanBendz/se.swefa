@@ -5,7 +5,7 @@
     "sv": "väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.5.0",
+  "version": "0.5.1",
   "compatibility": ">=2.0.0",
   "sdk": 2,
   "description": {
@@ -327,7 +327,7 @@
           "title": {
             "en": "Wind speed",
             "sv": "Vindhastighet",
-            "no": "Vindfart"
+            "no": "Vindstyrke"
           }
         }
         ],
@@ -407,7 +407,7 @@
           "title": {
             "en": "Air pressure",
             "sv": "Lufttryck",
-            "no": "lufttrykk"
+            "no": "Lufttrykk"
           }
         }
         ],
@@ -743,17 +743,17 @@
         "title": {
           "en": "Wind speed !{{is|isn't}} above",
           "sv": "Vindhastigheten !{{är|är inte}} över",
-          "no": "Vindfart !{{er|er ikke}} over"
+          "no": "Vindstyrke !{{er|er ikke}} over"
         },
         "titleFormatted": {
           "en": "Wind speed !{{is|isn't}} above [[mps]] m/s",
           "sv": "Vindhastigheten !{{är|är inte}} över [[mps]] m/s",
-          "no": "Vindfart !{{er|er ikke}} over [[mps]] m/s"
+          "no": "Vindstyrke !{{er|er ikke}} over [[mps]] m/s"
         },
         "hint": {
 					"en": "Wind speed in m/s.",
           "sv": "Vindhastigheten i m/s",
-          "no": "Vindfart i m/s"
+          "no": "Vindstyrke i m/s"
 				},
         "args": [
           {
@@ -993,7 +993,7 @@
         "hint": {
 	 			"en": "Total cloud cover in octas (0-8)",
          "sv": "Total molnighet i octas (0-8)",
-         "no": "Total overskyethet i oktaer (0–8)"
+         "no": "Total overskyethet i oktaer (0-8)"
 	  	},
         "args": [
         {
@@ -1022,7 +1022,7 @@
         "hint": {
 	 			"en": "Cloud cover 0-2500 meters, in octas (0-8)",
         "sv": "Molnighet på 0-2500 meter, i octas (0-8)",
-        "no": "Skyet himmel på 0–2500 meter, i oktaer (0–8)"
+        "no": "Skyet himmel på 0-2500 meter, i oktaer (0-8)"
 	  	},
         "args": [
         {
@@ -1051,7 +1051,7 @@
         "hint": {
 	 			"en": "Cloud cover 2500-6000 meters, in octas (0-8)",
          "sv": "Molnighet på 2500-6000 meter, i octas (0-8)",
-         "no": "Skyet på 2500–6000 meter, i oktaer (0–8)"
+         "no": "Skyet på 2500-6000 meter, i oktaer (0-8)"
 	  	},
         "args": [
         {
@@ -1253,7 +1253,7 @@
       "title": {
         "en": "Air pressure",
         "sv": "Lufttryck",
-        "no": "lufttrykk"
+        "no": "Lufttrykk"
       },
       "getable": true,
       "setable": false,
@@ -1325,7 +1325,7 @@
       "title": {
         "en": "Wind speed",
         "sv": "Vindhastighet",
-        "no": "Vindfart"
+        "no": "Vindstyrke"
       },
       "getable": true,
       "setable": false,

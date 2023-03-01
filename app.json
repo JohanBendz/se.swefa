@@ -356,6 +356,7 @@
         },
         {
           "name": "measure_wind_direction_cp",
+          "type": "number",
           "title": {
             "en": "Wind direction °",
             "sv": "Vindriktning °",

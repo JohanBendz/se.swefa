@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Wind gust speed",
+    "sv": "Vindbyarnas hastighet",
+    "no": "Hastigheten på vindkastene"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "m/s",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/gust.svg"
+}

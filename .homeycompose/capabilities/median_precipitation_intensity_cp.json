@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Median precipitation intensity",
+    "sv": "Medelvärdet av nederbördsintensiteten",
+    "no": "Gjennomsnittsverdien av nedbørintensiteten"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "mm/h",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

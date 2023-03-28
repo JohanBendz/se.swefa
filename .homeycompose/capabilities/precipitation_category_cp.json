@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Precipitation category",
+    "sv": "Nederbördskategori",
+    "no": "Nedbørskategori"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

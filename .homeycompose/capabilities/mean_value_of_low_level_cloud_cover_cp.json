@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cloud cover 0-2500 meters",
+    "sv": "Molnighet på 0-2500 meter",
+    "no": "Skyet på 0-2500 meter"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "(0-8)",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/low_cloud.svg"
+}

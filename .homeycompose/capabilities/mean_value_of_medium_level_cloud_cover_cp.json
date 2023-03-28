@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cloud cover 2500-6000 meters",
+    "sv": "Molnighet på 2500-6000 meter",
+    "no": "Overskyet på 2500-6000 meter"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "(0-8)",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/medium_cloud.svg"
+}

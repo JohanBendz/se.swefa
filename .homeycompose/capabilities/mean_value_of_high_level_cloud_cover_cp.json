@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Cloud cover above 6000 meters",
+    "sv": "Molnighet över 6000 meter",
+    "no": "Skyet himmel over 6000 meter"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "(0-8)",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/high_cloud.svg"
+}

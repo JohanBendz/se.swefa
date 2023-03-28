@@ -1,0 +1,49 @@
+{
+  "name": {
+    "en": "Weather Forecast from SMHI",
+    "sv": "Väderprognos från SMHI",
+    "no": "Værvarsel fra SMHI"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "forecast_for_cp",
+    "measure_weather_situation_cp",
+    "measure_air_temperature_cp",
+    "measure_precipitation_situation_cp",
+    "air_temperature_feels_like_cp",
+    "measure_wind_direction_heading_cp",
+    "measure_wind_direction_cp",
+    "measure_relative_humidity_cp",
+    "measure_wind_speed_cp",
+    "measure_air_pressure_cp",
+    "wind_gust_speed_cp",
+    "measure_thunder_probability_cp",
+    "horizontal_visibility_cp",
+    "mean_value_of_total_cloud_cover_cp",
+    "mean_value_of_low_level_cloud_cover_cp",
+    "mean_value_of_medium_level_cloud_cover_cp",
+    "mean_value_of_high_level_cloud_cover_cp",
+    "minimum_precipitation_intensity_cp",
+    "maximum_precipitation_intensity_cp",
+    "percent_of_precipitation_in_frozen_form_cp",
+    "mean_precipitation_intensity_cp",
+    "median_precipitation_intensity_cp"
+  ],
+  "images": {
+    "large": "/drivers/weather/assets/images/large.png",
+    "small": "/drivers/weather/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

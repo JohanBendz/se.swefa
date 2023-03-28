@@ -11,7 +11,7 @@
 
 ## Change Log:
 ### v 0.6.0
-* SDK 3
+* SDK 3 version, compatible with Homey Pro Early 2023
 ### v 0.5.1
 * New Live version
 ### v 0.5.0

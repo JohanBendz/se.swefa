@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Maximum precipitation intensity",
+    "sv": "Högsta nederbördsintensitet",
+    "no": "Høyeste nedbørsintensitet"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm/h",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

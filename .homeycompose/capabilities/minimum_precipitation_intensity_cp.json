@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Minimum precipitation intensity",
+    "sv": "Lägsta nederbördsintensitet",
+    "no": "Laveste nedbørsintensitet"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "mm/h",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

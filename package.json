@@ -1,0 +1,16 @@
+{
+  "name": "se.swefa",
+  "version": "0.6.0",
+  "description": "Weather Forecast from SMHI",
+  "main": "app.js",
+  "keywords": [
+    "SMHI",
+    "Weather"
+  ],
+  "author": "Johan Bendz",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "feels": "^3.0.0",
+    "node-fetch": "^2.6.1"
+  }
+}

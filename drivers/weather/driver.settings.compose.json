@@ -1,0 +1,150 @@
+[
+    {
+      "type": "group",
+      "label": {
+        "en": "Weather settings",
+        "sv": "Väderinställningar",
+        "no": "Værinnstillinger"
+      },
+      "children": [
+        {
+          "id": "fcTime",
+          "type": "radio",
+          "label": {
+            "en": "Select forecast",
+            "sv": "Välj prognos",
+            "no": "Velg prognose"
+          },
+          "value": "0",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Now",
+                "sv": "Nu",
+                "no": "Nå"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "1 hour",
+                "sv": "1 timme",
+                "no": "1 time"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "2 hours",
+                "sv": "2 timmar",
+                "no": "2 timer"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "3 hours",
+                "sv": "3 timmar",
+                "no": "3 timer"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "4 hours",
+                "sv": "4 timmar",
+                "no": "4 timer"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "5 hours",
+                "sv": "5 timmar",
+                "no": "5 timer"
+              }
+            },
+            {
+              "id": "8",
+              "label": {
+                "en": "8 hours",
+                "sv": "8 timmar",
+                "no": "8 timer"
+              }
+            },
+            {
+              "id": "12",
+              "label": {
+                "en": "12 hours",
+                "sv": "12 timmar",
+                "no": "12 timer"
+              }
+            },
+            {
+              "id": "18",
+              "label": {
+                "en": "18 hours",
+                "sv": "18 timmar",
+                "no": "18 timer"
+              }
+            },
+            {
+              "id": "24",
+              "label": {
+                "en": "24 hours",
+                "sv": "24 timmar",
+                "no": "24 timer"
+              }
+            },
+            {
+              "id": "30",
+              "label": {
+                "en": "30 hours",
+                "sv": "30 timmar",
+                "no": "30 timer"
+              }
+            },
+            {
+              "id": "36",
+              "label": {
+                "en": "36 hours",
+                "sv": "36 timmar",
+                "no": "36 timer"
+              }
+            }
+          ]
+        },
+        {
+          "id": "latitude",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "GEOlocation latitude",
+            "sv": "Geografisk plats, latitud",
+            "no": "Geografisk beliggenhet, breddegrad"
+          }
+        },
+        {
+          "id": "longitude",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "GEOlocation longitude",
+            "sv": "Geografisk plats, longitud",
+            "no": "Geografisk beliggenhet, lengdegrad"
+          }
+        },
+        {
+          "id": "usehomeylocation",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Use Homey GEOlocation",
+            "sv": "Använd Homeys GEOlocation",
+            "no": "Bruk Homeys GEOlocation"
+          }
+        }
+      ]
+    }
+  ]

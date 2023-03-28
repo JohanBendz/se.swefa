@@ -1,23 +1,37 @@
 {
-    "0.4.4": {
-      "en": "Fix for Node.js Local Time change. Removed Swedish Pollen data since API has been closed/private. Added Norwegian translation"
-    },
-    "0.4.5": {
-      "en": "Changed from Cron to setInterval to be compliant with firmware 5."
-    },
-    "0.4.6": {
-      "en": "Fix for lat/long decimal issue."
-    },
-    "0.4.7": {
-      "en": "Pollen data removed due to Homey have been blocked from using the API's."
-    },
-    "0.5.0": {
-      "en": "Translation correction/completion."
-    },
-    "0.5.1": {
-      "en": "Live version update."
-    },
-    "0.6.0": {
-      "en": "SDK 3."
-    }
+  "0.4.4": {
+    "en": "Fix for Node.js Local Time change. Removed Swedish Pollen data since API has been closed/private. Added Norwegian translation",
+    "sv": "Fix för Node.js lokal tidsförändring. Svenska Pollendatan har tagits bort eftersom API:et har stängts/privatiserats. Norsk översättning har lagts till.",
+    "no": "Fikset for Node.js lokaltidsendring. Svensk Pollen-data er fjernet siden APIet har blitt stengt/privat. La til norsk oversettelse."
+  },
+  "0.4.5": {
+    "en": "Changed from Cron to setInterval to be compliant with firmware 5.",
+    "sv": "Ändrad från Cron till setInterval för att vara förenlig med firmware 5.",
+    "no": "Endret fra Cron til setInterval for å være i samsvar med firmware 5."
+  },
+  "0.4.6": {
+    "en": "Fix for lat/long decimal issue.",
+    "sv": "Fix för decimalproblem med latitud/longitud.",
+    "no": "Fikset for desimalproblemer med breddegrad/lengdegrad."
+  },
+  "0.4.7": {
+    "en": "Pollen data removed due to Homey have been blocked from using the API's.",
+    "sv": "Pollendata har tagits bort eftersom Homey har blockerats från att använda API:erna.",
+    "no": "Pollen-data fjernet fordi Homey har blitt blokkert fra å bruke API-ene."
+  },
+  "0.5.0": {
+    "en": "Translation correction/completion.",
+    "sv": "Översättningskorrigering/fullständighet.",
+    "no": "Oversettelseskorreksjon/fullføring."
+  },
+  "0.5.1": {
+    "en": "Live version update.",
+    "sv": "Uppdatering av liveversionen.",
+    "no": "Oppdatering av liveversjonen."
+  },
+  "0.6.0": {
+    "en": "SDK 3 / Homey Pro Early 2023 Compatible. (also some bugs killed and languages added)",
+    "sv": "SDK 3 / Homey Pro Early 2023-kompatibel. (även vissa buggar fixade och språk tillagda)",
+    "no": "SDK 3 / Homey Pro Early 2023-kompatibel. (også noen feilrettinger og tillegg av språk)"
+  }
 }

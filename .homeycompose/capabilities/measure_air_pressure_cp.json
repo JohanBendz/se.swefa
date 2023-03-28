@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Air pressure",
+    "sv": "Lufttryck",
+    "no": "Lufttrykk"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "hPa",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/barometer.svg"
+}

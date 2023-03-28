@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Feels like",
+    "sv": "Känns som",
+    "no": "Føles som"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "°C",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/thermometer.svg"
+}

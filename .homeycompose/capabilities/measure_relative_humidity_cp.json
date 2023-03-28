@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Relative humidity",
+    "sv": "Relativ luftfuktighet",
+    "no": "Relativ fuktighet"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "%",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/hydrometer.svg"
+}

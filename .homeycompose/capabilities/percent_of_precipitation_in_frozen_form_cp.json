@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Precipitation in frozen form",
+    "sv": "Nederbörd i frusen form",
+    "no": "Nedbør i frossen form"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "%",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

@@ -9,7 +9,7 @@ class WeatherDriver extends Homey.Driver {
 
   };
 
-  async onPairListDevices() {
+  onPairListDevices(data, callback) {
 	let devices = [
 	{ "name": "SMHI weather",
 		"data": {"id": guid()},
@@ -21,7 +21,7 @@ class WeatherDriver extends Homey.Driver {
 		}
 	}
 	];
-	return devices;
+	callback(null, devices);
   };
 
 };

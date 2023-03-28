@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Weather",
+    "sv": "Väder",
+    "no": "Vær"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

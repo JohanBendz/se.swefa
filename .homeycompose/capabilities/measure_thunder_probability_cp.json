@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Thunder probability",
+    "sv": "Risk för åska",
+    "no": "Fare for torden"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "%",
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/thunder.svg"
+}

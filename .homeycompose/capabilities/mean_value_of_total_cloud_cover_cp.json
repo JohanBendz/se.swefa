@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Total cloud cover",
+    "sv": "Total molnighet",
+    "no": "Total overskyethet"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "(0-8)",
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

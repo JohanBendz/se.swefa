@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Air temperature",
+    "sv": "Lufttemperatur",
+    "no": "Lufttemperatur"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "°C",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/thermometer.svg"
+}

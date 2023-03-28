@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Precipitation situation",
+    "sv": "Nederbördssituation",
+    "no": "Nedbørssituasjon"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/pct.svg"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Wind speed",
+    "sv": "Vindhastighet",
+    "no": "Vindstyrke"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "m/s",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/anemometer.svg"
+}

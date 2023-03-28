@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Horizontal visibility",
+    "sv": "Horisontell sikt",
+    "no": "Horisontal visning"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "km",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/visibility.svg"
+}

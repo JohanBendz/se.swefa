@@ -1,0 +1,12 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Weather symbol",
+    "sv": "Vädersymbol",
+    "no": "Værsymbol"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

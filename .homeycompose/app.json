@@ -1,0 +1,71 @@
+{
+  "id": "se.swefa",
+  "name": {
+    "en": "Weather Forecast from SMHI",
+    "sv": "väderprognos från SMHI",
+    "no": "Værvarsel fra SMHI"
+  },
+  "version": "0.6.0",
+  "compatibility": ">=2.0.0",
+  "sdk": 2,
+  "description": {
+    "en": "Weather information and prognoses for Sweden, Norway, Denmark and Finland",
+    "sv": "Väderinformation och prognoser för Sverige, Norge, Danmark och Finland",
+    "no": "Værinformasjon og prognoser for Sverige, Norge, Danmark og Finland"
+  },
+  "tags": {
+    "en": [
+      "Climate",
+      "Weather",
+      "Forecast",
+      "Temperature",
+      "Sweden",
+      "Norway",
+      "Denmark",
+      "Finland"
+    ],
+    "sv": [
+      "Klimat",
+      "Väder",
+      "Prognos",
+      "Temperatur",
+      "Sverige",
+      "Norge",
+      "Danmark",
+      "Finland"
+    ],
+    "no": [
+      "Klima",
+      "Vær",
+      "Prognose",
+      "Temperatur",
+      "Sverige",
+      "Norge",
+      "Danmark",
+      "Finland"
+    ]
+  },
+  "author": {
+    "name": "Johan Bendz",
+    "email": "johan_bendz@hotmail.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Johan Bendz",
+        "email": "johan_bendz@hotmail.com"
+      }
+    ]
+  },
+  "category": [
+    "climate"
+  ],
+  "brandColor": "#689eb8",
+  "permissions": [
+    "homey:manager:geolocation"
+  ],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  }
+}

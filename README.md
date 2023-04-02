@@ -10,7 +10,8 @@
 * Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
 
 ## Change Log:
-### v 0.6.0
+
+### v 0.6.1
 * SDK 3 version, compatible with Homey Pro Early 2023
 ### v 0.5.1
 * New Live version

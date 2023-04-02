@@ -5,9 +5,9 @@
     "sv": "väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.6.0",
-  "compatibility": ">=2.0.0",
-  "sdk": 2,
+  "version": "0.6.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
   "description": {
     "en": "Weather information and prognoses for Sweden, Norway, Denmark and Finland",
     "sv": "Väderinformation och prognoser för Sverige, Norge, Danmark och Finland",

@@ -1,6 +1,132 @@
 {
   "triggers": [
     {
+      "id": "temperature_above_threshold",
+      "title": {
+        "en": "Temperature above threshold",
+        "sv": "Temperatur över tröskelvärde",
+        "no": "Temperatur over terskelverdi"
+      },
+      "titleFormatted": {
+        "en": "Temperature will exceed [[temperature]]°C within [[hours]] hours",
+        "sv": "Temperaturen kommer överstiga [[temperature]]°C inom [[hours]] timmar",
+        "no": "Temperaturen vil overstige [[temperature]]°C innenfor [[hours]] timer"
+      },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "placeholder": {
+            "en": "Temperature",
+            "sv": "Temperatur",
+            "no": "Temperatur"
+          }
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "placeholder": {
+            "en": "Hours",
+            "sv": "Timmar",
+            "no": "Timer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "temperature_below_threshold",
+      "title": {
+        "en": "Temperature below threshold",
+        "sv": "Temperatur under tröskelvärde",
+        "no": "Temperatur under terskelverdi"
+      },
+      "titleFormatted": {
+        "en": "Temperature will fall below [[temperature]]°C within [[hours]] hours",
+        "sv": "Temperaturen kommer sjunka under [[temperature]]°C inom [[hours]] timmar",
+        "no": "Temperaturen vil synke under [[temperature]]°C innenfor [[hours]] timer"
+      },
+      "args": [
+        {
+          "name": "temperature",
+          "type": "number",
+          "placeholder": {
+            "en": "Temperature",
+            "sv": "Temperatur",
+            "no": "Temperatur"
+          }
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "placeholder": {
+            "en": "Hours",
+            "sv": "Timmar",
+            "no": "Timer"
+          }
+        }
+      ]
+    },    
+    {
+      "id": "wind_speed_above_threshold",
+      "title": {
+        "en": "Wind speed above threshold",
+        "sv": "Vindhastighet över tröskelvärde",
+        "no": "Vindhastighet over terskelverdi"
+      },
+      "titleFormatted": {
+        "en": "Wind speed will exceed [[windspeed]] m/s within [[hours]] hours",
+        "sv": "Vindhastigheten kommer överstiga [[windspeed]] m/s inom [[hours]] timmar",
+        "no": "Vindhastigheten vil overstige [[windspeed]] m/s innenfor [[hours]] timer"
+      },
+      "args": [
+        {
+          "name": "windspeed",
+          "type": "number",
+          "placeholder": {
+            "en": "Wind speed",
+            "sv": "Vindhastighet",
+            "no": "Vindhastighet"
+          }
+        },
+        {
+          "name": "hours",
+          "type": "number",
+          "placeholder": {
+            "en": "Hours",
+            "sv": "Timmar",
+            "no": "Timer"
+          }
+        }
+      ]
+    },
+    {
+      "id": "trigger_will_rain_within_hours",
+      "title": {
+        "en": "Precipitation within given time",
+        "sv": "Nederbörd inom angiven tid",
+        "no": "Nedbør innen angitt tid"
+      },
+      "titleFormatted": {
+        "en": "There will be precipitation within [[hours]] hours",
+        "sv": "Det kommer att bli nederbörd inom [[hours]] timmar",
+        "no": "Det vil være nedbør innenfor [[hours]] timer"
+      },
+      "args": [
+        {
+          "name": "hours",
+          "type": "number",
+          "placeholder": {
+            "en": "Hours",
+            "sv": "Timmar",
+            "no": "Timer"
+          },
+          "min": 1,
+          "max": 36,
+          "step": 1
+        }
+      ]
+    },
+    {
       "id": "WeatherSituationChange",
       "title": {
         "en": "Weather change",
@@ -8,9 +134,9 @@
         "no": "Værendring"
       },
       "titleFormatted": {
-        "en": "Weather change: {{measure_weather_situation_cp}}",
-        "sv": "Väderomslag: {{measure_weather_situation_cp}}",
-        "no": "Værendring: {{measure_weather_situation_cp}}"
+        "en": "Weather change",
+        "sv": "Väderomslag",
+        "no": "Værendring"
       },
       "tokens": [
         {
@@ -22,8 +148,7 @@
             "no": "Værsituasjon"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "AirTemperatureChange",
@@ -33,9 +158,9 @@
         "no": "Endring av lufttemperatur"
       },
       "titleFormatted": {
-        "en": "Air temperature change: {{measure_air_temperature_cp}}°C",
-        "sv": "Förändring av lufttemperatur: {{measure_air_temperature_cp}}°C",
-        "no": "Endring av lufttemperatur: {{measure_air_temperature_cp}}°C"
+        "en": "Air temperature change",
+        "sv": "Förändring av lufttemperatur",
+        "no": "Endring av lufttemperatur"
       },
       "tokens": [
         {
@@ -47,8 +172,7 @@
             "no": "Lufttemperatur"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "PrecipitationSituationChange",
@@ -58,9 +182,9 @@
         "no": "Nedbørssituasjon endres"
       },
       "titleFormatted": {
-        "en": "Precipitation situation change: {{measure_precipitation_situation_cp}}",
-        "sv": "Förändring av nederbörssituation: {{measure_precipitation_situation_cp}}",
-        "no": "Endring av nedbørssituasjon: {{measure_precipitation_situation_cp}}"
+        "en": "Precipitation situation change",
+        "sv": "Förändring av nederbörssituation",
+        "no": "Endring av nedbørssituasjon"
       },
       "tokens": [
         {
@@ -72,8 +196,7 @@
             "no": "Nedbørssituasjon"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "WindSpeedChange",
@@ -83,9 +206,9 @@
         "no": "Endring av vindhastighet"
       },
       "titleFormatted": {
-        "en": "Wind speed change: {{measure_wind_speed_cp}} m/s",
-        "sv": "Förändring av vindhastighet: {{measure_wind_speed_cp}} m/s",
-        "no": "Endring av vindhastighet: {{measure_wind_speed_cp}} m/s"
+        "en": "Wind speed change",
+        "sv": "Förändring av vindhastighet",
+        "no": "Endring av vindhastighet"
       },
       "tokens": [
         {
@@ -97,8 +220,7 @@
             "no": "Vindstyrke"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "WindDirectionHeadingChange",
@@ -108,9 +230,9 @@
         "no": "Endret vindretning"
       },
       "titleFormatted": {
-        "en": "Wind direction change: {{measure_wind_direction_heading_cp}} {{measure_wind_direction_cp}}°",
-        "sv": "Förändring av vindriktning: {{measure_wind_direction_heading_cp}} {{measure_wind_direction_cp}}°",
-        "no": "Endring av vindretning: {{measure_wind_direction_heading_cp}} {{measure_wind_direction_cp}}°"
+        "en": "Wind direction change",
+        "sv": "Förändring av vindriktning",
+        "no": "Endring av vindretning"
       },
       "tokens": [
         {
@@ -124,15 +246,14 @@
         },
         {
           "name": "measure_wind_direction_cp",
-          "type": "string",
+          "type": "number",
           "title": {
             "en": "Wind direction °",
             "sv": "Vindriktning °",
             "no": "Vindretning °"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "RelativeHumidityChange",
@@ -142,9 +263,9 @@
         "no": "Endret relativ luftfuktighet"
       },
       "titleFormatted": {
-        "en": "Relative humidity change: {{measure_relative_humidity_cp}}%",
-        "sv": "Förändring av relativ luftfuktighet: {{measure_relative_humidity_cp}}%",
-        "no": "Endring av relativ luftfuktighet: {{measure_relative_humidity_cp}}%"
+        "en": "Relative humidity change",
+        "sv": "Förändring av relativ luftfuktighet",
+        "no": "Endring av relativ luftfuktighet"
       },
       "tokens": [
         {
@@ -156,8 +277,7 @@
             "no": "Relativ luftfuktighet"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "AirPressureChange",
@@ -167,9 +287,9 @@
         "no": "Endret lufttrykk"
       },
       "titleFormatted": {
-        "en": "Air pressure change: {{measure_air_pressure_cp}} hPa",
-        "sv": "Förändring av lufttryck: {{measure_air_pressure_cp}} hPa",
-        "no": "Endring av lufttrykk: {{measure_air_pressure_cp}} hPa"
+        "en": "Air pressure change",
+        "sv": "Förändring av lufttryck",
+        "no": "Endring av lufttrykk"
       },
       "tokens": [
         {
@@ -181,8 +301,7 @@
             "no": "Lufttrykk"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "ThunderProbabilityChange",
@@ -192,9 +311,9 @@
         "no": "Endret fare for torden"
       },
       "titleFormatted": {
-        "en": "Thunderstorm probability change: {{measure_thunder_probability_cp}}%",
-        "sv": "Förändring av risk för åska: {{measure_thunder_probability_cp}}%",
-        "no": "Endring av fare for torden: {{measure_thunder_probability_cp}}%"
+        "en": "Thunderstorm probability change",
+        "sv": "Förändring av risk för åska",
+        "no": "Endring av fare for torden"
       },
       "tokens": [
         {
@@ -206,8 +325,7 @@
             "no": "Fare for torden"
           }
         }
-      ],
-      "args": []
+      ]
     },
     {
       "id": "MeanValueOfTotalCloudCoverChange",
@@ -217,9 +335,9 @@
         "no": "Endret skytetthet"
       },
       "titleFormatted": {
-        "en": "Cloud cover change: {{mean_value_of_total_cloud_cover_cp}}%",
-        "sv": "Förändring av molntäthet: {{mean_value_of_total_cloud_cover_cp}}%",
-        "no": "Endring av skytetthet: {{mean_value_of_total_cloud_cover_cp}}%"
+        "en": "Cloud cover change",
+        "sv": "Förändring av molntäthet",
+        "no": "Endring av skytetthet"
       },
       "tokens": [
         {
@@ -231,28 +349,34 @@
             "no": "Skytetthet"
           }
         }
-      ],
-      "args": []
+      ]
     }
   ],
   "conditions": [
     {
       "id": "will_rain_within_hours",
       "title": {
-        "en": "Will ther be precipitation within the given hours?",
+        "en": "Will there be precipitation within the given hours?",
         "sv": "Kommer det nederbörd inom angiven tid?",
         "no": "Vil det bli nedbør innenfor de angitte timene?"
       },
       "titleFormatted": {
-        "en": "Will there be precipitation within the next [[hours]] hours?",
-        "sv": "Kommer det nederbörd inom de närmaste [[hours]] timmarna?",
-        "no": "Vil det bli nedbør innenfor de neste [[hours]] timene?"
+        "en": "There !{{will|will not}} be precipitation within the next [[hours]] hours?",
+        "sv": "Det !{{kommer|kommer inte}} nederbörd inom de närmaste [[hours]] timmarna?",
+        "no": "Det !{{bli|bli ikke}} nedbør innenfor de neste [[hours]] timene?"
       },
       "args": [
         {
           "name": "hours",
           "type": "number",
-          "placeholder": "Enter hours"
+          "placeholder": {
+            "en": "Hours",
+            "sv": "Timmar",
+            "no": "Timer"
+          },
+          "min": 1,
+          "max": 36,
+          "step": 1
         }
       ]
     },

@@ -26,9 +26,9 @@ precipitation_category = 0;
 mean_precipitation_intensity = 0;
 median_precipitation_intensity = 0;
 weather_symbol = 0;
-weatherData = "";
-// weather_situation = "";
-// precipitation_situation = "";
+weatherData = {
+    timeSeries: [],
+};
 
 	async onInit() {
 
@@ -49,45 +49,23 @@ weatherData = "";
 
 	}; // end onInit
 
-	// register Flow trigger cards
-	registerFlowTriggers() {
-		this._flowTriggerWeatherSituationChange = this.homey.flow.getDeviceTriggerCard('WeatherSituationChange');
-		this._flowTriggerAirTemperatureChange = this.homey.flow.getDeviceTriggerCard('AirTemperatureChange');
-		this._flowTriggerWindSpeedChange = this.homey.flow.getDeviceTriggerCard('WindSpeedChange');
-		this._flowTriggerWindDirectionHeadingChange = this.homey.flow.getDeviceTriggerCard('WindDirectionHeadingChange');
-		this._flowTriggerRelativeHumidityChange = this.homey.flow.getDeviceTriggerCard('RelativeHumidityChange');
-		this._flowTriggerAirPressureChange = this.homey.flow.getDeviceTriggerCard('AirPressureChange');
-		this._flowTriggerThunderProbabilityChange = this.homey.flow.getDeviceTriggerCard('ThunderProbabilityChange');
-		this._flowTriggerPrecipitationSituationChange = this.homey.flow.getDeviceTriggerCard('PrecipitationSituationChange');
-		this._flowTriggerMeanValueOfTotalCloudCoverChange = this.homey.flow.getDeviceTriggerCard('MeanValueOfTotalCloudCoverChange');
-		this._flowTriggerWindSpeedAboveThreshold = this.homey.flow.getDeviceTriggerCard('wind_speed_above_threshold')
-		.registerRunListener(async (args, state) => {
-			const result = this.willItBeWindyWithin(args.hours, args.windspeed);
-			return Promise.resolve(result);
-		});
+	async registerFlowTriggers() {
+		// register Capability Flow Triggers
+		this.flowTriggerWeatherSituationChange = this.homey.flow.getDeviceTriggerCard('WeatherSituationChange');
+		this.flowTriggerAirTemperatureChange = this.homey.flow.getDeviceTriggerCard('AirTemperatureChange');
+		this.flowTriggerWindSpeedChange = this.homey.flow.getDeviceTriggerCard('WindSpeedChange');
+		this.flowTriggerWindDirectionHeadingChange = this.homey.flow.getDeviceTriggerCard('WindDirectionHeadingChange');
+		this.flowTriggerRelativeHumidityChange = this.homey.flow.getDeviceTriggerCard('RelativeHumidityChange');
+		this.flowTriggerAirPressureChange = this.homey.flow.getDeviceTriggerCard('AirPressureChange');
+		this.flowTriggerThunderProbabilityChange = this.homey.flow.getDeviceTriggerCard('ThunderProbabilityChange');
+		this.flowTriggerPrecipitationSituationChange = this.homey.flow.getDeviceTriggerCard('PrecipitationSituationChange');
+		this.flowTriggerMeanValueOfTotalCloudCoverChange = this.homey.flow.getDeviceTriggerCard('MeanValueOfTotalCloudCoverChange');
+		// register Function Flow Triggers
 
-		this._flowTriggerWillRainWithinHours = this.homey.flow.getDeviceTriggerCard('trigger_will_rain_within_hours')
-		.registerRunListener(async (args, state) => {
-			const result = this.willItRainWithin(args.hours);
-			return Promise.resolve(result);
-		});
-
-		this._flowTriggerTemperatureAboveThreshold = this.homey.flow.getDeviceTriggerCard('temperature_above_threshold')
-		.registerRunListener(async (args, state) => {
-			const result = this.willTemperatureBeAboveWithin(args.hours, args.temperature);
-			return Promise.resolve(result);
-		});
-
-		this._flowTriggerTemperatureBelowThreshold = this.homey.flow.getDeviceTriggerCard('temperature_below_threshold')
-		.registerRunListener(async (args, state) => {
-			const result = this.willTemperatureBeBelowWithin(args.hours, args.temperature);
-			return Promise.resolve(result);
-		});
 
 	}; // end registerFlowTriggers
 
-	// register Flow condition cards
-	registerFlowConditions() {
+	registerFlowConditions() { // register Flow condition cards
 
 		this.conditionWillRainWithinHours = this.homey.flow.getConditionCard('will_rain_within_hours')
 		.registerRunListener(async (args, state) => {
@@ -196,85 +174,6 @@ weatherData = "";
 		});
 
 	}; // end registerFlowConditions
-
-	// New Flow cards
-	// checking if there will be precipitation within given number of hours
-	willItRainWithin = (hours) =>{
-		const timeSeries = this.weatherData.timeSeries;
-		const currentTime = new Date(this.weatherData.referenceTime);
-		const targetTime = new Date(currentTime.getTime() + hours * 60 * 60 * 1000);
-		
-		for (const timePoint of timeSeries) {
-			const validTime = new Date(timePoint.validTime);
-			if (validTime > targetTime) break;
-		
-			for (const param of timePoint.parameters) {
-			if (param.name === 'pcat' && param.values[0] > 0) {
-				return true;
-			}
-			}
-		}
-		return false;
-	};
-
-	// checking if there will be wind above a user-defined value within given number of hours
-	willItBeWindyWithin = (hours, windThreshold) => {
-		const timeSeries = this.weatherData.timeSeries;
-		const currentTime = new Date(this.weatherData.referenceTime);
-		const targetTime = new Date(currentTime.getTime() + hours * 60 * 60 * 1000);
-		
-		for (const timePoint of timeSeries) {
-		const validTime = new Date(timePoint.validTime);
-		if (validTime > targetTime) break;
-		
-		for (const param of timePoint.parameters) {
-			if (param.name === 'ws' && param.values[0] > windThreshold) {
-			return true;
-			}
-		}
-		}
-		return false;
-	};
-  
-	// checking if there will be temperature above a user-defined value within given number of hours
-	willTemperatureBeAboveWithin = (hours, tempThreshold) => {
-		const timeSeries = this.weatherData.timeSeries;
-		const currentTime = new Date(this.weatherData.referenceTime);
-		const targetTime = new Date(currentTime.getTime() + hours * 60 * 60 * 1000);
-	
-		for (const timePoint of timeSeries) {
-		const validTime = new Date(timePoint.validTime);
-		if (validTime > targetTime) break;
-	
-		for (const param of timePoint.parameters) {
-			if (param.name === 't' && param.values[0] > tempThreshold) {
-			return true;
-			}
-		}
-		}
-		return false;
-	};
-	
-	// checking if there will be temperature below a user-defined value within given number of hours
-	willTemperatureBeBelowWithin = (hours, tempThreshold) => {
-		const timeSeries = this.weatherData.timeSeries;
-		const currentTime = new Date(this.weatherData.referenceTime);
-		const targetTime = new Date(currentTime.getTime() + hours * 60 * 60 * 1000);
-	
-		for (const timePoint of timeSeries) {
-		const validTime = new Date(timePoint.validTime);
-		if (validTime > targetTime) break;
-	
-		for (const param of timePoint.parameters) {
-			if (param.name === 't' && param.values[0] < tempThreshold) {
-			return true;
-			}
-		}
-		}
-		return false;
-	};
-
-	// End New Flow cards
   
 	// convert wind direction from degrees to heading
 	getDirection(angle) {
@@ -289,8 +188,6 @@ weatherData = "";
 			this.homey.__("direction8")
 		];
 		let correctedAngle = 360 - angle;
-		console.log("Angle of direction calculated to be: ", angle);
-		console.log("Inverted angle: ", correctedAngle);
 		console.log("Reported direction: ", directions[Math.round(((correctedAngle %= 360) < 0 ? correctedAngle + 360 : correctedAngle) / 45) % 8]);
 		return directions[Math.round(((correctedAngle %= 360) < 0 ? correctedAngle + 360 : correctedAngle) / 45) % 8];
 	};
@@ -312,29 +209,6 @@ weatherData = "";
 
 	// when settings change
 	async onSettings({oldSettings, newSettings, changedKeys}) {
-
-		// check and update settings
-		if (changedKeys && changedKeys.length) {
-	
-			for (var i=0; i<changedKeys.length;i++){
-					
-				if (changedKeys[i] == 'fcTime') {
-					this.log('Offset changed from ' + oldSettings.fcTime + ' to ' + newSettings.fcTime + '. Fetching new forecast.');
-				}
-						
-				if (changedKeys[i] == 'latitude') {
-					this.log('Latitude changed from ' + oldSettings.latitude + ' to ' + newSettings.latitude + '. Fetching new forecast.');
-				}
-						
-				if (changedKeys[i] == 'longitude') {
-					this.log('Longitude changed from ' + oldSettings.longitude + ' to ' + newSettings.longitude + '. Fetching new forecast.');
-				}
-						
-				if (changedKeys[i] == 'usehomeylocation') {
-					this.log('Setting for use of Homey geolocation changed from ' + oldSettings.usehomeylocation + ' to ' + newSettings.usehomeylocation + '. Fetching new forecast.');
-				}
-			}
-		}
 
 		this.fetchSMHIData(newSettings)
 		.catch( err => {
@@ -423,8 +297,6 @@ weatherData = "";
 				
 		// defining wind direction
 		var wind_direction_heading = this.getDirection(this.wind_direction);
-		console.log('wind_direction:', this.wind_direction);
-		console.log('wind_direction_heading:', wind_direction_heading);
 
 		// calculating "feels like"
 		const config = {
@@ -466,20 +338,18 @@ weatherData = "";
 
 		// creating flow triggers
 		const flowTriggers = {
-			measure_weather_situation_cp: this._flowTriggerWeatherSituationChange,
-			measure_air_temperature_cp: this._flowTriggerAirTemperatureChange,
-			measure_wind_speed_cp: this._flowTriggerWindSpeedChange,
-			measure_wind_direction_heading_cp: this._flowTriggerWindDirectionHeadingChange,
-			measure_relative_humidity_cp: this._flowTriggerRelativeHumidityChange,
-			measure_air_pressure_cp: this._flowTriggerAirPressureChange,
-			measure_thunder_probability_cp: this._flowTriggerThunderProbabilityChange,
-			measure_precipitation_situation_cp: this._flowTriggerPrecipitationSituationChange,
-			mean_value_of_total_cloud_cover_cp: this._flowTriggerMeanValueOfTotalCloudCoverChange,
-			trigger_will_rain_within_hours: this._flowTriggerWillRainWithinHours,
-			wind_speed_above_threshold: this._flowTriggerWindSpeedAboveThreshold,
-			temperature_above_threshold: this._flowTriggerTemperatureAboveThreshold,
-			temperature_below_threshold: this._flowTriggerTemperatureBelowThreshold
+			measure_weather_situation_cp: this.flowTriggerWeatherSituationChange,
+			measure_air_temperature_cp: this.flowTriggerAirTemperatureChange,
+			measure_wind_speed_cp: this.flowTriggerWindSpeedChange,
+			measure_wind_direction_heading_cp: this.flowTriggerWindDirectionHeadingChange,
+			measure_relative_humidity_cp: this.flowTriggerRelativeHumidityChange,
+			measure_air_pressure_cp: this.flowTriggerAirPressureChange,
+			measure_thunder_probability_cp: this.flowTriggerThunderProbabilityChange,
+			measure_precipitation_situation_cp: this.flowTriggerPrecipitationSituationChange,
+			mean_value_of_total_cloud_cover_cp: this.flowTriggerMeanValueOfTotalCloudCoverChange,
 		};
+		
+		// triggers the appropriate Homey Flow for the provided capability and value. If the capability is measure_wind_direction_heading_cp, it also includes the wind direction value in the tokens and state.
 		const triggerFlow = async (capability, value) => {
 			if (flowTriggers[capability]) {
 				let state = { [capability]: value };
@@ -496,12 +366,12 @@ weatherData = "";
 					tokens = { [capability]: value };
 				}
 		
-				console.log(tokens);
 				await flowTriggers[capability].trigger(this.device, tokens, state).catch(this.error);
 			}
 		};
+		
+		// iterates through the entries of the capabilityMapping object. On changed values the capability value are updated and trigger the corresponding Homey Flow.
 		for (const [capability, value] of Object.entries(capabilityMapping)) {
-			// Update measure_wind_direction_cp if wind direction has changed
 			if (this.getCapabilityValue(capability) !== value) {
 			  this.setCapabilityValue(capability, value)
 				.then(() => {
@@ -512,6 +382,27 @@ weatherData = "";
 		};
 
 	}; // end fetchSMHIData
+
+	// check if it will rain or snow within given number of hours
+	async willItRainWithin(hours) {
+		const settings = this.getSettings();
+		const forecastTime = parseInt(settings.fcTime);
+		const currentTime = new Date(this.weatherData.timeSeries[forecastTime].validTime);
+		const endTime = new Date(currentTime.getTime() + (hours * 60 * 60 * 1000));
+		const timeSeries = this.weatherData.timeSeries.filter((data) => {
+		  const validTime = new Date(data.validTime);
+		  return validTime >= currentTime && validTime <= endTime;
+		});
+		let willRain = false;
+		for (const data of timeSeries) {
+		  const precipitationCategory = data.parameters.find((param) => param.name === "pcat");
+		  if (precipitationCategory && precipitationCategory.values[0] > 0) {
+			willRain = true;
+			break;
+		  }
+		}
+		return willRain;
+	};
   
 	// Stuff that happens when the device is removed
 	onDeleted() {

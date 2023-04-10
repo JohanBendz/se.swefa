@@ -6,6 +6,7 @@ class WeatherDriver extends Driver {
 
   async onInit() {
     this.log('SMHI weather driver initiated');
+
   }
 
   async onPairListDevices() {

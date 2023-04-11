@@ -69,107 +69,118 @@ weatherData = {
 
 		this.conditionWillRainWithinHours = this.homey.flow.getConditionCard('will_rain_within_hours')
 		.registerRunListener(async (args, state) => {
-			var result = await this.willItRainWithin(args.hours);
+			const result = await this.willItRainWithin(args.hours);
 			return Promise.resolve(result);
 		});
 
 		this.weatherSituationStatus = this.homey.flow.getConditionCard('measure_weather_situation_cp')
-		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_weather_situation_cp'.replace(/\s+/g, '')) == args.weather_situation_condition)
-			return Promise.resolve(result);
+		.registerRunListener(async (args, state) => {
+		  const currentWeatherSituation = this.getCapabilityValue('measure_weather_situation_cp').replace(/\s+/g, '');
+		  const argWeatherSituation = args.weather_situation_condition.replace(/\s+/g, '');
+		  const result = (currentWeatherSituation === argWeatherSituation);
+		  return Promise.resolve(result);
 		});
 
 		this.airTemperatureStatus = this.homey.flow.getConditionCard('measure_air_temperature_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_air_temperature_cp') > args.degree)
+			const result = (this.getCapabilityValue('measure_air_temperature_cp') > args.degree);
 			return Promise.resolve(result);
 		});
 
 		this.windSpeedStatus = this.homey.flow.getConditionCard('measure_wind_speed_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_wind_speed_cp') > args.mps)
+			const result = (this.getCapabilityValue('measure_wind_speed_cp') > args.mps);
 			return Promise.resolve(result);
 		});
 
 		this.windDirectionHeadingStatus = this.homey.flow.getConditionCard('measure_wind_direction_heading_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_wind_direction_heading_cp') == args.direction)
+			const result = (this.getCapabilityValue('measure_wind_direction_heading_cp') == args.direction);
 			return Promise.resolve(result);
 		});
 
 		this.windDirectionStatus = this.homey.flow.getConditionCard('measure_wind_direction_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_wind_direction_cp') > args.degree)
+			const result = (this.getCapabilityValue('measure_wind_direction_cp') > args.degree);
 			return Promise.resolve(result);
 		});
 
 		this.relativeHumidityStatus = this.homey.flow.getConditionCard('measure_relative_humidity_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_relative_humidity_cp') > args.percent)
+			const result = (this.getCapabilityValue('measure_relative_humidity_cp') > args.percent);
 			return Promise.resolve(result);
 		});
 
 		this.airPressureStatus = this.homey.flow.getConditionCard('measure_air_pressure_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_air_pressure_cp') > args.hpa)
+			const result = (this.getCapabilityValue('measure_air_pressure_cp') > args.hpa);
 			return Promise.resolve(result);
 		});
 
 		this.thunderProbabilityStatus = this.homey.flow.getConditionCard('measure_thunder_probability_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('measure_thunder_probability_cp') > args.percent)
+			const result = (this.getCapabilityValue('measure_thunder_probability_cp') > args.percent);
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfTotalCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_total_cloud_cover_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > args.octas)
+			const result = (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > args.octas);
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfLowLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_low_level_cloud_cover_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > args.octas)
+			const result = (this.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > args.octas);
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfMediumLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_medium_level_cloud_cover_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > args.octas)
+			const result = (this.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > args.octas);
 			return Promise.resolve(result);
 		});
 
 		this.meanValueOfHighLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_high_level_cloud_cover_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > args.octas)
+			const result = (this.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > args.octas);
 			return Promise.resolve(result);
 		});
 
 		this.windGustSpeedStatus = this.homey.flow.getConditionCard('wind_gust_speed_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('wind_gust_speed_cp') > args.mps)
+			const result = (this.getCapabilityValue('wind_gust_speed_cp') > args.mps);
 			return Promise.resolve(result);
 		});
 
 		this.horizontalVisibilityStatus = this.homey.flow.getConditionCard('horizontal_visibility_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km)
+			const result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km);
 			return Promise.resolve(result);
 		});
 
 		this.precipitationSituationStatus = this.homey.flow.getConditionCard('measure_precipitation_situation_cp')
 		.registerRunListener((args, state) => {
-			if (precipitation_category !== 0){
-				var result = true;
-			} else {
-				var result = false;
-			}
-			return Promise.resolve(result);
+		  let result;
+		  switch (args.precipitation) {
+			case 'RainSnow':
+			  result = (this.precipitation_category === 1 || this.precipitation_category === 2 || this.precipitation_category === 3);
+			  break;
+			case 'Rain':
+			  result = (this.precipitation_category === 2 || this.precipitation_category === 3);
+			  break;
+			case 'Snow':
+			  result = (this.precipitation_category === 1);
+			  break;
+			default:
+			  result = false;
+		  }
+		  return Promise.resolve(result);
 		});
 
 		this.meanPrecipitationIntensityStatus = this.homey.flow.getConditionCard('mean_precipitation_intensity_cp')
 		.registerRunListener((args, state) => {
-			var result = (this.getCapabilityValue('mean_precipitation_intensity_cp') > args.mmh)
+			const result = (this.getCapabilityValue('mean_precipitation_intensity_cp') > args.mmh);
 			return Promise.resolve(result);
 		});
 

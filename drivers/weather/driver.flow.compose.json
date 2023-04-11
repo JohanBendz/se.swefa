@@ -873,16 +873,16 @@
       "id": "measure_precipitation_situation_cp",
       "title": {
         "en": "There !{{will|will not }} be",
-        "sv": "Det kommer !{{att|inte att}}",
+        "sv": "Det !{{kommer|kommer inte}}",
         "no": "Det !{{vil|vil ikke}}"
       },
       "titleFormatted": {
-        "en": "Precipitation situation !{{will|will not }} [[precipitation]]",
-        "sv": "Nederbördssituation !{{att|inte att}} [[precipitation]]",
-        "no": "Nedbørssituasjon !{{vil|vil ikke}} [[precipitation]]"
+        "en": "There !{{will|will not }} be [[precipitation]]",
+        "sv": "Det !{{kommer|kommer inte}} [[precipitation]]",
+        "no": "Det !{{vil|vil ikke}} bli [[precipitation]]"
       },
       "hint": {
-        "en": "Will there be rain or snow?",
+        "en": "Will there be precipitation?",
         "sv": "Kommer det nederbörd?",
         "no": "Blir det nedbør?"
       },
@@ -894,9 +894,25 @@
             {
               "id": "RainSnow",
               "label": {
-                "en": "Rain or Snow",
-                "sv": "Regn eller snö",
-                "no": "Regn eller snø"
+                "en": "rain or Snow",
+                "sv": "regn eller snö",
+                "no": "regn eller snø"
+              }
+            },
+            {
+              "id": "Rain",
+              "label": {
+                "en": "rain",
+                "sv": "regn",
+                "no": "regn"
+              }
+            },
+            {
+              "id": "Snow",
+              "label": {
+                "en": "snow",
+                "sv": "snö",
+                "no": "snø"
               }
             }
           ]

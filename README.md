@@ -11,6 +11,8 @@
 
 ## Change Log:
 
+### v 0.6.3
+* Fix for precipitation category and weather situation conditional cards. BREAKING CHANGE: Wind direction corrected! Check your flows!
 ### v 0.6.2
 * SDK 3 version, compatible with Homey Pro Early 2023
 ### v 0.5.1

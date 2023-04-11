@@ -6,7 +6,7 @@
     "sv": "väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.6.2",
+  "version": "0.6.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {

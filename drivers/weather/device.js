@@ -245,11 +245,26 @@ weatherData = {
 
 		// collecting data
 		console.log("Fetching SMHI weather data");
-		const response = await fetch(SMHIdataUrl)
-		.catch( err => {
-			this.error( err );
-		});
-		this.weatherData = await response.json();
+		let retries = 3;
+		while (retries > 0) {
+			try {
+				const response = await fetch(SMHIdataUrl);
+				
+				if (response.headers.get('content-type') !== 'application/json') {
+					throw new Error('Unexpected content type, expected JSON');
+				}
+				
+				this.weatherData = await response.json();
+				break; // Successfully fetched and parsed JSON, exit the loop
+			} catch (err) {
+				retries--;
+				if (retries === 0) {
+					this.error(err);
+				} else {
+					console.warn(`Error fetching SMHI weather data. Retries left: ${retries}`);
+				}
+			}
+		}
 
 		// defining parameters
 		const parameterHandlers = {

@@ -38,5 +38,10 @@
     "en": "Fix for precipitation category and weather situation conditional cards. BREAKING CHANGE: Wind direction corrected! Check your flows!",
     "sv": "Fix för nederbördskategori och vädersituationens villkorskort. VIKTIG FÖRÄNDRING: Vindriktningen har korrigerats! Kontrollera dina flöden!",
     "no": "Fiks for nedbørskategori og værsituasjonens betingelseskort. VIKTIG ENDRING: Vindretningen er rettet! Sjekk flytene dine!"
+  },
+  "0.6.4": {
+    "en": "Added retry to the SMHI Data fetch functionality to mitigate events where incorrect data is shown due to SMHI API not responding. BREAKING CHANGE: Wind direction corrected! Check your flows!",
+    "sv": "Lade till en retry vid hämtning av SMHI-data för att minska händelser där felaktig data visas på grund av att SMHI API inte svarar. VIKTIG ÄNDRING: Vindriktningen har korrigerats! Kontrollera dina flöden!",
+    "no": "La til en retry for henting av SMHI-data for å redusere tilfeller der feil data vises på grunn av at SMHI API ikke svarer. VIKTIG ENDRING: Vindretningen er korrigert! Sjekk strømmene dine!"
   }
 }

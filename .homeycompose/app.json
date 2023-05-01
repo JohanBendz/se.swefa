@@ -2,10 +2,10 @@
   "id": "se.swefa",
   "name": {
     "en": "Weather Forecast from SMHI",
-    "sv": "väderprognos från SMHI",
+    "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.6.3",
+  "version": "0.6.4",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {

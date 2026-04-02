@@ -5,438 +5,321 @@ const fetch = require('node-fetch');
 const Feels = require('feels');
 
 class WeatherDevice extends Device {
-	
-// defining variables
-air_pressure = 0;
-air_temperature = 0;
-horizontal_visibility = 0;
-wind_direction = 0;
-wind_speed = 0;
-relative_humidity = 0;
-thunder_probability = 0;
-mean_value_of_total_cloud_cover = 0;
-mean_value_of_low_level_cloud_cover = 0;
-mean_value_of_medium_level_cloud_cover = 0;
-mean_value_of_high_level_cloud_cover = 0;
-wind_gust_speed = 0;
-minimum_precipitation_intensity = 0;
-maximum_precipitation_intensity = 0;
-percent_of_precipitation_in_frozen_form = 0;
-precipitation_category = 0;
-mean_precipitation_intensity = 0;
-median_precipitation_intensity = 0;
-weather_symbol = 0;
-weatherData = {
-    timeSeries: [],
-};
+  constructor(...args) {
+    super(...args);
+    this.weatherData = null;
+    this.approvedTime = null;
+    this.pollInterval = 3600000; // 1 hour in milliseconds
+    this.cacheDuration = 600000; // 10 minutes in milliseconds
+    this.lastFetchTime = 0;
+  }
 
-	async onInit() {
+  async onInit() {
+    this.log('SMHI Weather Device initialized');
 
-		this.log('SMHI weather device initiated');
-		this.device = this;
+    // Register Flow cards
+    this.registerFlowTriggers();
+    this.registerFlowConditions();
 
-		// registering Flow cards
-		this.registerFlowTriggers();
-		this.registerFlowConditions();
+    // Fetch initial data
+    await this.fetchSMHIData();
 
-		// fetch initial data on device initialization
-		const settings = this.getSettings();
-		this.fetchSMHIData(settings);
-		
-		// fetch new SMHI data according to pollInterval settings (milliseconds)
-		const pollInterval = 3600000;
-		this._fetchSMHIData = setInterval(()=> {this.fetchSMHIData(settings);}, pollInterval);
+    // Set interval to fetch new data
+    this._fetchInterval = setInterval(() => {
+      this.fetchSMHIData();
+    }, this.pollInterval);
 
-	}; // end onInit
+    // Schedule regular updates of aggregated data
+    this.updateAggregatedCapabilities();
+    this._aggregatedDataInterval = setInterval(() => {
+      this.updateAggregatedCapabilities();
+    }, 1800000); // Every 30 minutes
+  }
 
-	async registerFlowTriggers() {
-		// register Capability Flow Triggers
-		this.flowTriggerWeatherSituationChange = this.homey.flow.getDeviceTriggerCard('WeatherSituationChange');
-		this.flowTriggerAirTemperatureChange = this.homey.flow.getDeviceTriggerCard('AirTemperatureChange');
-		this.flowTriggerWindSpeedChange = this.homey.flow.getDeviceTriggerCard('WindSpeedChange');
-		this.flowTriggerWindDirectionHeadingChange = this.homey.flow.getDeviceTriggerCard('WindDirectionHeadingChange');
-		this.flowTriggerRelativeHumidityChange = this.homey.flow.getDeviceTriggerCard('RelativeHumidityChange');
-		this.flowTriggerAirPressureChange = this.homey.flow.getDeviceTriggerCard('AirPressureChange');
-		this.flowTriggerThunderProbabilityChange = this.homey.flow.getDeviceTriggerCard('ThunderProbabilityChange');
-		this.flowTriggerPrecipitationSituationChange = this.homey.flow.getDeviceTriggerCard('PrecipitationSituationChange');
-		this.flowTriggerMeanValueOfTotalCloudCoverChange = this.homey.flow.getDeviceTriggerCard('MeanValueOfTotalCloudCoverChange');
-		// register Function Flow Triggers
+  // Register Flow Triggers
+  registerFlowTriggers() {
+    this.flowTriggerExtremeWeather = this.homey.flow.getDeviceTriggerCard('extreme_weather');
+    // Add more triggers as needed
+  }
 
+  // Register Flow Conditions
+  registerFlowConditions() {
+    // Condition: Will it rain within the next X hours
+    this.flowConditionWillRain = this.homey.flow.getConditionCard('will_rain_in_next_hours')
+      .registerRunListener(async (args) => {
+        const hours = args.hours;
+        const willRain = await this.willItRainInNextHours(hours);
+        return willRain;
+      });
 
-	}; // end registerFlowTriggers
+    // Condition: Max wind speed exceeds X m/s in next X hours
+    this.flowConditionMaxWindSpeed = this.homey.flow.getConditionCard('max_wind_speed_exceeds')
+      .registerRunListener(async (args) => {
+        const hours = args.hours;
+        const threshold = args.windSpeed;
+        const maxWindSpeed = await this.getMaxWindSpeedInNextHours(hours);
+        return maxWindSpeed > threshold;
+      });
 
-	registerFlowConditions() { // register Flow condition cards
+    // Add more conditions as needed
+  }
 
-		this.conditionWillRainWithinHours = this.homey.flow.getConditionCard('will_rain_within_hours')
-		.registerRunListener(async (args, state) => {
-			const result = await this.willItRainWithin(args.hours);
-			return Promise.resolve(result);
-		});
+  // Fetch SMHI data
+  async fetchSMHIData() {
+    const currentTime = Date.now();
+    if (currentTime - this.lastFetchTime < this.cacheDuration && this.weatherData) {
+      return; // Use cached data
+    }
 
-		this.weatherSituationStatus = this.homey.flow.getConditionCard('measure_weather_situation_cp')
-		.registerRunListener(async (args, state) => {
-		  const currentWeatherSituation = this.getCapabilityValue('measure_weather_situation_cp').replace(/\s+/g, '');
-		  const argWeatherSituation = args.weather_situation_condition.replace(/\s+/g, '');
-		  const result = (currentWeatherSituation === argWeatherSituation);
-		  return Promise.resolve(result);
-		});
+    try {
+      const approvedTime = await this.getApprovedTime();
+      if (approvedTime !== this.approvedTime) {
+        this.approvedTime = approvedTime;
+        this.weatherData = await this.getWeatherData();
+        this.lastFetchTime = currentTime;
+        await this.updateCapabilities();
+      }
+    } catch (error) {
+      this.error('Failed to fetch SMHI data:', error);
+    }
+  }
 
-		this.airTemperatureStatus = this.homey.flow.getConditionCard('measure_air_temperature_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_air_temperature_cp') > args.degree);
-			return Promise.resolve(result);
-		});
+  // Get the latest approved time
+  async getApprovedTime() {
+    const url = 'https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/approvedtime.json';
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.approvedTime[0];
+  }
 
-		this.windSpeedStatus = this.homey.flow.getConditionCard('measure_wind_speed_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_wind_speed_cp') > args.mps);
-			return Promise.resolve(result);
-		});
+  // Get weather data
+  async getWeatherData() {
+    const settings = this.getSettings();
+    const longitude = settings.usehomeylocation ? this.homey.geolocation.getLongitude() : parseFloat(settings.longitude);
+    const latitude = settings.usehomeylocation ? this.homey.geolocation.getLatitude() : parseFloat(settings.latitude);
+    const url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude.toFixed(6)}/lat/${latitude.toFixed(6)}/data.json`;
 
-		this.windDirectionHeadingStatus = this.homey.flow.getConditionCard('measure_wind_direction_heading_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_wind_direction_heading_cp') == args.direction);
-			return Promise.resolve(result);
-		});
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  }
 
-		this.windDirectionStatus = this.homey.flow.getConditionCard('measure_wind_direction_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_wind_direction_cp') > args.degree);
-			return Promise.resolve(result);
-		});
+  // Update device capabilities for point-in-time forecast
+  async updateCapabilities() {
+    const settings = this.getSettings();
+    const forecastHoursAhead = parseInt(settings.fcTime, 10) || 0; // Default to 0 if not set
+    const targetTime = new Date(Date.now() + forecastHoursAhead * 3600 * 1000);
 
-		this.relativeHumidityStatus = this.homey.flow.getConditionCard('measure_relative_humidity_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_relative_humidity_cp') > args.percent);
-			return Promise.resolve(result);
-		});
+    // Find the closest forecast time
+    const closestDataPoint = this.findClosestForecastDataPoint(targetTime);
+    if (!closestDataPoint) {
+      this.error('No forecast data available for the specified time.');
+      return;
+    }
 
-		this.airPressureStatus = this.homey.flow.getConditionCard('measure_air_pressure_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_air_pressure_cp') > args.hpa);
-			return Promise.resolve(result);
-		});
+    await this.processForecastData(closestDataPoint);
+  }
 
-		this.thunderProbabilityStatus = this.homey.flow.getConditionCard('measure_thunder_probability_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('measure_thunder_probability_cp') > args.percent);
-			return Promise.resolve(result);
-		});
+  // Find the closest forecast data point to the target time
+  findClosestForecastDataPoint(targetTime) {
+    let closestDataPoint = null;
+    let smallestTimeDiff = Infinity;
 
-		this.meanValueOfTotalCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_total_cloud_cover_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > args.octas);
-			return Promise.resolve(result);
-		});
+    for (const dataPoint of this.weatherData.timeSeries) {
+      const validTime = new Date(dataPoint.validTime);
+      const timeDiff = Math.abs(validTime - targetTime);
 
-		this.meanValueOfLowLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_low_level_cloud_cover_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > args.octas);
-			return Promise.resolve(result);
-		});
+      if (timeDiff < smallestTimeDiff) {
+        smallestTimeDiff = timeDiff;
+        closestDataPoint = dataPoint;
+      }
+    }
 
-		this.meanValueOfMediumLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_medium_level_cloud_cover_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > args.octas);
-			return Promise.resolve(result);
-		});
+    return closestDataPoint;
+  }
 
-		this.meanValueOfHighLevelCloudCoverStatus = this.homey.flow.getConditionCard('mean_value_of_high_level_cloud_cover_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > args.octas);
-			return Promise.resolve(result);
-		});
+  // Process and update capabilities based on forecast data
+  async processForecastData(forecastData) {
+    const parameters = {};
+    forecastData.parameters.forEach((param) => {
+      parameters[param.name] = param.values[0];
+    });
 
-		this.windGustSpeedStatus = this.homey.flow.getConditionCard('wind_gust_speed_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('wind_gust_speed_cp') > args.mps);
-			return Promise.resolve(result);
-		});
+    // Calculate "feels like" temperature
+    const feelsLikeConfig = {
+      temp: parameters.t,
+      humidity: parameters.r,
+      speed: parameters.ws,
+      units: { temp: 'c', speed: 'mps' },
+    };
+    const feelsLike = Math.round(new Feels(feelsLikeConfig).like() * 100) / 100;
 
-		this.horizontalVisibilityStatus = this.homey.flow.getConditionCard('horizontal_visibility_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('horizontal_visibility_cp') > args.km);
-			return Promise.resolve(result);
-		});
+    // Map SMHI parameters to device capabilities
+    const capabilityMapping = {
+      measure_temperature: parameters.t,
+      measure_pressure: parameters.msl,
+      measure_humidity: parameters.r,
+      measure_wind_speed: parameters.ws,
+      measure_wind_angle: parameters.wd,
+      measure_rain: parameters.pmean,
+      measure_snow: parameters.spp >= 0 ? parameters.spp : 0,
+      measure_cloudiness: parameters.tcc_mean,
+      measure_feels_like: feelsLike,
+      // Add more mappings as needed
+    };
 
-		this.precipitationSituationStatus = this.homey.flow.getConditionCard('measure_precipitation_situation_cp')
-		.registerRunListener((args, state) => {
-		  let result;
-		  switch (args.precipitation) {
-			case 'RainSnow':
-			  result = (this.precipitation_category === 1 || this.precipitation_category === 2 || this.precipitation_category === 3);
-			  break;
-			case 'Rain':
-			  result = (this.precipitation_category === 2 || this.precipitation_category === 3);
-			  break;
-			case 'Snow':
-			  result = (this.precipitation_category === 1);
-			  break;
-			default:
-			  result = false;
-		  }
-		  return Promise.resolve(result);
-		});
+    // Update capabilities
+    for (const [capability, value] of Object.entries(capabilityMapping)) {
+      await this.setCapabilityValue(capability, value).catch(this.error);
+    }
+  }
 
-		this.meanPrecipitationIntensityStatus = this.homey.flow.getConditionCard('mean_precipitation_intensity_cp')
-		.registerRunListener((args, state) => {
-			const result = (this.getCapabilityValue('mean_precipitation_intensity_cp') > args.mmh);
-			return Promise.resolve(result);
-		});
+  // Update aggregated capabilities for the next X hours
+  async updateAggregatedCapabilities() {
+    const settings = this.getSettings();
+    const hoursAhead = parseInt(settings.forecastHoursAhead, 10) || 6; // Default to 6 hours
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
 
-	}; // end registerFlowConditions
-  
-	// convert wind direction from degrees to heading
-	getDirection(angle) {
-		let directions = [
-			this.homey.__("direction1"),
-			this.homey.__("direction2"),
-			this.homey.__("direction3"),
-			this.homey.__("direction4"),
-			this.homey.__("direction5"),
-			this.homey.__("direction6"),
-			this.homey.__("direction7"),
-			this.homey.__("direction8")
-		];
-		let correctedAngle = 360 - angle;
-		console.log("Reported direction: ", directions[Math.round(((correctedAngle %= 360) < 0 ? correctedAngle + 360 : correctedAngle) / 45) % 8]);
-		return directions[Math.round(((correctedAngle %= 360) < 0 ? correctedAngle + 360 : correctedAngle) / 45) % 8];
-	};
+    if (forecastData.length === 0) {
+      this.error('No forecast data available for the specified time range.');
+      return;
+    }
 
-	// stuff that happen when a device is added
-	onAdded() {
+    // Analyze the data
+    const willRain = forecastData.some(dataPoint => {
+      const pcatParam = dataPoint.parameters.find(param => param.name === 'pcat');
+      return pcatParam && pcatParam.values[0] > 0;
+    });
 
-		let id = this.getData().id;
-		this.log('device added: ', id);
-		var settings = this.getSettings();
+    let maxWindSpeed = 0;
+    let minTemperature = Infinity;
 
-		// working with weather data
-		this.fetchSMHIData(settings)
-		.catch( err => {
-			this.error( err );
-		});
+    for (const dataPoint of forecastData) {
+      const wsParam = dataPoint.parameters.find(param => param.name === 'ws');
+      const tempParam = dataPoint.parameters.find(param => param.name === 't');
 
-	}; // end onAdded
+      if (wsParam) {
+        const windSpeed = wsParam.values[0];
+        if (windSpeed > maxWindSpeed) {
+          maxWindSpeed = windSpeed;
+        }
+      }
 
-	// when settings change
-	async onSettings({oldSettings, newSettings, changedKeys}) {
+      if (tempParam) {
+        const temperature = tempParam.values[0];
+        if (temperature < minTemperature) {
+          minTemperature = temperature;
+        }
+      }
+    }
 
-		this.fetchSMHIData(newSettings)
-		.catch( err => {
-			this.error( err );
-		});
+    // Update capabilities
+    await this.setCapabilityValue('will_rain_next_hours', willRain).catch(this.error);
+    await this.setCapabilityValue('measure_max_wind_speed_next_hours', maxWindSpeed).catch(this.error);
+    await this.setCapabilityValue('measure_min_temperature_next_hours', minTemperature).catch(this.error);
 
-	}; // end onSettings
+    this.log(`Aggregated weather data updated for the next ${hoursAhead} hours.`);
+  }
 
-	// working with SMHI weather data here
-	async fetchSMHIData(settings){
+  // Get forecast data for the next X hours
+  async getForecastDataForNextHours(hoursAhead) {
+    const endTime = new Date(Date.now() + hoursAhead * 3600 * 1000);
 
-		console.log("Settings:", settings);
-		var forecastTime = parseInt(settings.fcTime);
+    // Ensure weatherData is up to date
+    if (!this.weatherData) {
+      await this.fetchSMHIData();
+    }
 
-		// define SMHI api endpoint
-		let APIUrl = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
-		console.log(settings.usehomeylocation ? "Collecting geolocation coordinates for this Homey" : "Defining SMHI API Url based on entered geolocation");
-		const roundTo = (num, decimals) => Number(Math.round(num + 'e' + decimals) + 'e-' + decimals);
-		const long = settings.usehomeylocation ? roundTo(this.homey.geolocation.getLongitude(), 6) : roundTo(settings.longitude, 6);
-		const lat = settings.usehomeylocation ? roundTo(this.homey.geolocation.getLatitude(), 6) : roundTo(settings.latitude, 6);
-		var SMHIdataUrl = APIUrl + "/lon/" + long.toFixed(6) + "/lat/" + lat.toFixed(6) + "/data.json";
-		console.log("SMHI API Url:", SMHIdataUrl);
+    // Filter timeSeries for data points within the next X hours
+    const forecastData = this.weatherData.timeSeries.filter((dataPoint) => {
+      const validTime = new Date(dataPoint.validTime);
+      return validTime >= new Date() && validTime <= endTime;
+    });
 
-		// collecting data
-		console.log("Fetching SMHI weather data");
-		let retries = 3;
-		while (retries > 0) {
-			try {
-				const response = await fetch(SMHIdataUrl);
-				
-				if (response.headers.get('content-type') !== 'application/json') {
-					throw new Error('Unexpected content type, expected JSON');
-				}
-				
-				this.weatherData = await response.json();
-				break; // Successfully fetched and parsed JSON, exit the loop
-			} catch (err) {
-				retries--;
-				if (retries === 0) {
-					this.error(err);
-				} else {
-					console.warn(`Error fetching SMHI weather data. Retries left: ${retries}`);
-				}
-			}
-		}
+    return forecastData;
+  }
 
-		// defining parameters
-		const parameterHandlers = {
-			msl: value => this.air_pressure = parseFloat(value),
-			t: value => this.air_temperature = parseFloat(value),
-			vis: value => this.horizontal_visibility = parseFloat(value),
-			wd: value => this.wind_direction = parseInt(value),
-			ws: value => this.wind_speed = parseFloat(value),
-			r: value => this.relative_humidity = parseInt(value),
-			tstm: value => this.thunder_probability = parseInt(value),
-			tcc_mean: value => this.mean_value_of_total_cloud_cover = parseInt(value),
-			lcc_mean: value => this.mean_value_of_low_level_cloud_cover = parseInt(value),
-			mcc_mean: value => this.mean_value_of_medium_level_cloud_cover = parseInt(value),
-			hcc_mean: value => this.mean_value_of_high_level_cloud_cover = parseInt(value),
-			gust: value => this.wind_gust_speed = parseFloat(value),
-			pmin: value => this.minimum_precipitation_intensity = parseFloat(value),
-			pmax: value => this.maximum_precipitation_intensity = parseFloat(value),
-			spp: value => {
-				this.percent_of_precipitation_in_frozen_form = parseInt(value);
-			  if (this.percent_of_precipitation_in_frozen_form < 0) {
-				this.percent_of_precipitation_in_frozen_form = 0;
-			  }
-			},
-			pcat: value => this.precipitation_category = parseInt(value),
-			pmean: value => this.mean_precipitation_intensity = parseFloat(value),
-			pmedian: value => this.median_precipitation_intensity = parseFloat(value),
-			Wsymb2: value => this.weather_symbol = parseInt(value),
-		};
+  // Check if it will rain within the next X hours
+  async willItRainInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
 
-		const parameters = this.weatherData.timeSeries[forecastTime].parameters;
-		for (const { name, values } of parameters) {
-			if (parameterHandlers.hasOwnProperty(name)) {
-				parameterHandlers[name](values);
-			}
-		};
+    if (forecastData.length === 0) {
+      this.error('No forecast data available for the specified time range.');
+      return false;
+    }
 
-		// setting forecastFor variable based on forecastTime value
-		const fcTimeO = new Date(this.weatherData.timeSeries[forecastTime].validTime);
-		const options = { month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false, timeZone: this.homey.clock.getTimezone() };
-		const forecastFor = fcTimeO.toLocaleString(this.homey.locale, options);
+    return forecastData.some(dataPoint => {
+      const pcatParam = dataPoint.parameters.find(param => param.name === 'pcat');
+      return pcatParam && pcatParam.values[0] > 0;
+    });
+  }
 
-		const weatherSituations = Array.from({ length: 27 }, (_, i) => this.homey.__(`weather_situation${i + 1}`));
-		const weather_situation = weatherSituations[this.weather_symbol - 1] || this.homey.__("weather_situation");
+  // Get maximum wind speed in the next X hours
+  async getMaxWindSpeedInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
 
-		// defining precipitation situation based on reported number
-		const precipitationSituations = {
-			0: this.homey.__("precipitation_situation0"),
-			1: this.homey.__("precipitation_situation1"),
-			2: this.homey.__("precipitation_situation2"),
-			3: this.homey.__("precipitation_situation3"),
-			4: this.homey.__("precipitation_situation4"),
-			5: this.homey.__("precipitation_situation5"),
-			6: this.homey.__("precipitation_situation6"),
-		};
-		const precipitation_situation = precipitationSituations[this.precipitation_category] || this.homey.__("precipitation_situation");
-				
-		// defining wind direction
-		var wind_direction_heading = this.getDirection(this.wind_direction);
+    if (forecastData.length === 0) {
+      this.error('No forecast data available for the specified time range.');
+      return 0;
+    }
 
-		// calculating "feels like"
-		const config = {
-		 temp: this.air_temperature,
-		 humidity: this.relative_humidity,
-		 speed: this.wind_speed,
-		 units: {
-		  temp: 'c',
-		  speed: 'mps'
-  		 }
-		};
-		const feelsLike = Math.round(new Feels(config).like()*100)/100; 
+    let maxWindSpeed = 0;
 
-		// setting device capabilities
-		const capabilityMapping = {
-			measure_weather_situation_cp: weather_situation,
-			measure_air_pressure_cp: this.air_pressure,
-			measure_air_temperature_cp: this.air_temperature,
-			horizontal_visibility_cp: this.horizontal_visibility,
-			measure_wind_direction_cp: this.wind_direction,
-			measure_wind_speed_cp: this.wind_speed,
-			measure_relative_humidity_cp: this.relative_humidity,
-			measure_thunder_probability_cp: this.thunder_probability,
-			mean_value_of_total_cloud_cover_cp: this.mean_value_of_total_cloud_cover,
-			mean_value_of_low_level_cloud_cover_cp: this.mean_value_of_low_level_cloud_cover,
-			mean_value_of_medium_level_cloud_cover_cp: this.mean_value_of_medium_level_cloud_cover,
-			mean_value_of_high_level_cloud_cover_cp: this.mean_value_of_high_level_cloud_cover,
-			wind_gust_speed_cp: this.wind_gust_speed,
-			minimum_precipitation_intensity_cp: this.minimum_precipitation_intensity,
-			maximum_precipitation_intensity_cp: this.maximum_precipitation_intensity,
-			percent_of_precipitation_in_frozen_form_cp: this.percent_of_precipitation_in_frozen_form,
-			mean_precipitation_intensity_cp: this.mean_precipitation_intensity,
-			median_precipitation_intensity_cp: this.median_precipitation_intensity,
-			measure_precipitation_situation_cp: precipitation_situation,
-			measure_wind_direction_heading_cp: wind_direction_heading,
-			air_temperature_feels_like_cp: feelsLike,
-			forecast_for_cp: forecastFor
-		};
+    for (const dataPoint of forecastData) {
+      const wsParam = dataPoint.parameters.find(param => param.name === 'ws');
+      if (wsParam) {
+        const windSpeed = wsParam.values[0];
+        if (windSpeed > maxWindSpeed) {
+          maxWindSpeed = windSpeed;
+        }
+      }
+    }
 
-		// creating flow triggers
-		const flowTriggers = {
-			measure_weather_situation_cp: this.flowTriggerWeatherSituationChange,
-			measure_air_temperature_cp: this.flowTriggerAirTemperatureChange,
-			measure_wind_speed_cp: this.flowTriggerWindSpeedChange,
-			measure_wind_direction_heading_cp: this.flowTriggerWindDirectionHeadingChange,
-			measure_relative_humidity_cp: this.flowTriggerRelativeHumidityChange,
-			measure_air_pressure_cp: this.flowTriggerAirPressureChange,
-			measure_thunder_probability_cp: this.flowTriggerThunderProbabilityChange,
-			measure_precipitation_situation_cp: this.flowTriggerPrecipitationSituationChange,
-			mean_value_of_total_cloud_cover_cp: this.flowTriggerMeanValueOfTotalCloudCoverChange,
-		};
-		
-		// triggers the appropriate Homey Flow for the provided capability and value. If the capability is measure_wind_direction_heading_cp, it also includes the wind direction value in the tokens and state.
-		const triggerFlow = async (capability, value) => {
-			if (flowTriggers[capability]) {
-				let state = { [capability]: value };
-				let tokens = {};
-		
-				if (capability === 'measure_wind_direction_heading_cp') {
-					tokens = {
-						measure_wind_direction_heading_cp: value,
-						measure_wind_direction_cp: this.getCapabilityValue('measure_wind_direction_cp'),
-					};
-		
-					state.measure_wind_direction_cp = this.getCapabilityValue('measure_wind_direction_cp');
-				} else {
-					tokens = { [capability]: value };
-				}
-		
-				await flowTriggers[capability].trigger(this.device, tokens, state).catch(this.error);
-			}
-		};
-		
-		// iterates through the entries of the capabilityMapping object. On changed values the capability value are updated and trigger the corresponding Homey Flow.
-		for (const [capability, value] of Object.entries(capabilityMapping)) {
-			if (this.getCapabilityValue(capability) !== value) {
-			  this.setCapabilityValue(capability, value)
-				.then(() => {
-				  triggerFlow(capability, value);
-				})
-				.catch(this.error);
-			}
-		};
+    return maxWindSpeed;
+  }
 
-	}; // end fetchSMHIData
+  // Get minimum temperature in the next X hours
+  async getMinTemperatureInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
 
-	// check if it will rain or snow within given number of hours
-	async willItRainWithin(hours) {
-		const settings = this.getSettings();
-		const forecastTime = parseInt(settings.fcTime);
-		const currentTime = new Date(this.weatherData.timeSeries[forecastTime].validTime);
-		const endTime = new Date(currentTime.getTime() + (hours * 60 * 60 * 1000));
-		const timeSeries = this.weatherData.timeSeries.filter((data) => {
-		  const validTime = new Date(data.validTime);
-		  return validTime >= currentTime && validTime <= endTime;
-		});
-		let willRain = false;
-		for (const data of timeSeries) {
-		  const precipitationCategory = data.parameters.find((param) => param.name === "pcat");
-		  if (precipitationCategory && precipitationCategory.values[0] > 0) {
-			willRain = true;
-			break;
-		  }
-		}
-		return willRain;
-	};
-  
-	// Stuff that happens when the device is removed
-	onDeleted() {
-		let id = this.getData().id;
-		this.log('device deleted:', id);
-		clearInterval(this._fetchSMHIData);
-	}; // end onDeleted
+    if (forecastData.length === 0) {
+      this.error('No forecast data available for the specified time range.');
+      return null;
+    }
 
-};
+    let minTemperature = Infinity;
+
+    for (const dataPoint of forecastData) {
+      const tempParam = dataPoint.parameters.find(param => param.name === 't');
+      if (tempParam) {
+        const temperature = tempParam.values[0];
+        if (temperature < minTemperature) {
+          minTemperature = temperature;
+        }
+      }
+    }
+
+    return minTemperature;
+  }
+
+  // Convert wind angle to direction
+  getWindDirection(angle) {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(((angle % 360) / 45)) % 8;
+    return directions[index];
+  }
+
+  onDeleted() {
+    this.log('Device deleted');
+    clearInterval(this._fetchInterval);
+    clearInterval(this._aggregatedDataInterval);
+  }
+}
 
 module.exports = WeatherDevice;

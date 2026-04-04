@@ -11,6 +11,10 @@
 
 ## Change Log:
 
+### v 0.7.0
+* Major change in backend due to SMHI deprecating and shutting down the old pmp3g API used by the app. Switching to new SNOW API.
+### v 0.6.4
+* Added retry to the SMHI Data fetch functionality to mitigate events where incorrect data is shown due to SMHI API not responding. BREAKING CHANGE: Wind direction corrected! Check your flows!
 ### v 0.6.3
 * Fix for precipitation category and weather situation conditional cards. BREAKING CHANGE: Wind direction corrected! Check your flows!
 ### v 0.6.2

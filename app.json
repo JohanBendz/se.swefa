@@ -6,7 +6,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.6.4",
+  "version": "0.7.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -358,9 +358,159 @@
             "filter": "driver_id=weather"
           }
         ]
+      },
+      {
+        "id": "extreme_weather",
+        "title": {
+          "en": "Extreme weather alert",
+          "sv": "Varning för extremt väder",
+          "no": "Varsel om ekstremt vær"
+        },
+        "titleFormatted": {
+          "en": "Extreme weather detected",
+          "sv": "Extremt väder upptäckt",
+          "no": "Ekstremt vær oppdaget"
+        },
+        "tokens": [
+          {
+            "name": "weather_condition",
+            "type": "string",
+            "title": {
+              "en": "Weather condition",
+              "sv": "Väderförhållande",
+              "no": "Værforhold"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
       }
     ],
     "conditions": [
+      {
+        "id": "will_rain_in_next_hours",
+        "title": {
+          "en": "Will it rain in the next X hours?",
+          "sv": "Kommer det att regna inom de närmaste X timmarna?",
+          "no": "Vil det regne i løpet av de neste X timene?"
+        },
+        "titleFormatted": {
+          "en": "It !{{will|will not}} rain in the next [[hours]] hours",
+          "sv": "Det !{{kommer|kommer inte}} att regna inom de närmaste [[hours]] timmarna",
+          "no": "Det !{{vil|vil ikke}} regne i løpet av de neste [[hours]] timene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "hours",
+            "type": "number",
+            "placeholder": {
+              "en": "Hours",
+              "sv": "Timmar",
+              "no": "Timer"
+            },
+            "min": 1,
+            "max": 72,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "max_wind_speed_exceeds",
+        "title": {
+          "en": "Maximum wind speed exceeds X m/s in next Y hours",
+          "sv": "Maximal vindhastighet överstiger X m/s inom de närmaste Y timmarna",
+          "no": "Maksimal vindhastighet overstiger X m/s i løpet av de neste Y timene"
+        },
+        "titleFormatted": {
+          "en": "Maximum wind speed exceeds [[windSpeed]] m/s in next [[hours]] hours",
+          "sv": "Maximal vindhastighet överstiger [[windSpeed]] m/s inom de närmaste [[hours]] timmarna",
+          "no": "Maksimal vindhastighet overstiger [[windSpeed]] m/s i løpet av de neste [[hours]] timene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "windSpeed",
+            "type": "number",
+            "placeholder": {
+              "en": "Wind speed in m/s",
+              "sv": "Vindhastighet i m/s",
+              "no": "Vindhastighet i m/s"
+            },
+            "min": 0,
+            "step": 0.1
+          },
+          {
+            "name": "hours",
+            "type": "number",
+            "placeholder": {
+              "en": "Hours",
+              "sv": "Timmar",
+              "no": "Timer"
+            },
+            "min": 1,
+            "max": 72,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "min_temperature_below",
+        "title": {
+          "en": "Minimum temperature falls below X°C in next Y hours",
+          "sv": "Minsta temperaturen faller under X°C inom de närmaste Y timmarna",
+          "no": "Minimumstemperaturen faller under X°C i løpet av de neste Y timene"
+        },
+        "titleFormatted": {
+          "en": "Minimum temperature falls below [[temperature]]°C in next [[hours]] hours",
+          "sv": "Minsta temperaturen faller under [[temperature]]°C inom de närmaste [[hours]] timmarna",
+          "no": "Minimumstemperaturen faller under [[temperature]]°C i løpet av de neste [[hours]] timene"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "placeholder": {
+              "en": "Temperature in °C",
+              "sv": "Temperatur i °C",
+              "no": "Temperatur i °C"
+            },
+            "min": -50,
+            "max": 50,
+            "step": 0.1
+          },
+          {
+            "name": "hours",
+            "type": "number",
+            "placeholder": {
+              "en": "Hours",
+              "sv": "Timmar",
+              "no": "Timer"
+            },
+            "min": 1,
+            "max": 72,
+            "step": 1
+          }
+        ]
+      },
       {
         "id": "will_rain_within_hours",
         "title": {

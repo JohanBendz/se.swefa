@@ -6,7 +6,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.7.0",
+  "version": "0.7.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -58,9 +58,7 @@
       }
     ]
   },
-  "category": [
-    "climate"
-  ],
+  "category": "climate",
   "brandColor": "#689eb8",
   "permissions": [
     "homey:manager:geolocation"
@@ -91,6 +89,33 @@
               "en": "Weather situation",
               "sv": "Vädersituation",
               "no": "Værsituasjon"
+            }
+          },
+          {
+            "name": "previous_weather_situation",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation",
+              "sv": "Föregående vädersituation",
+              "no": "Forrige værsituasjon"
+            }
+          },
+          {
+            "name": "weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Weather situation code",
+              "sv": "Vädersituationskod",
+              "no": "Værsituasjonskode"
+            }
+          },
+          {
+            "name": "previous_weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation code",
+              "sv": "Föregående vädersituationskod",
+              "no": "Forrige værsituasjonskode"
             }
           }
         ],
@@ -362,14 +387,14 @@
       {
         "id": "extreme_weather",
         "title": {
-          "en": "Extreme weather alert",
-          "sv": "Varning för extremt väder",
-          "no": "Varsel om ekstremt vær"
+          "en": "Severe weather condition",
+          "sv": "Kraftigt väderförhållande",
+          "no": "Kraftig værtilstand"
         },
         "titleFormatted": {
-          "en": "Extreme weather detected",
-          "sv": "Extremt väder upptäckt",
-          "no": "Ekstremt vær oppdaget"
+          "en": "A severe weather condition is detected",
+          "sv": "Ett kraftigt väderförhållande upptäcks",
+          "no": "En kraftig værtilstand oppdages"
         },
         "tokens": [
           {
@@ -380,6 +405,15 @@
               "sv": "Väderförhållande",
               "no": "Værforhold"
             }
+          },
+          {
+            "name": "weather_condition_code",
+            "type": "string",
+            "title": {
+              "en": "Weather condition code",
+              "sv": "Väderkod",
+              "no": "Værkode"
+            }
           }
         ],
         "args": [
@@ -387,6 +421,788 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "WeatherSituationChangedTo",
+        "title": {
+          "en": "Weather changes to",
+          "sv": "Vädret ändras till",
+          "no": "Været endres til"
+        },
+        "titleFormatted": {
+          "en": "Weather changes to [[weather_situation_condition]]",
+          "sv": "Vädret ändras till [[weather_situation_condition]]",
+          "no": "Været endres til [[weather_situation_condition]]"
+        },
+        "tokens": [
+          {
+            "name": "measure_weather_situation_cp",
+            "type": "string",
+            "title": {
+              "en": "Weather situation",
+              "sv": "Vädersituation",
+              "no": "Værsituasjon"
+            }
+          },
+          {
+            "name": "previous_weather_situation",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation",
+              "sv": "Föregående vädersituation",
+              "no": "Forrige værsituasjon"
+            }
+          },
+          {
+            "name": "weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Weather situation code",
+              "sv": "Vädersituationskod",
+              "no": "Værsituasjonskode"
+            }
+          },
+          {
+            "name": "previous_weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation code",
+              "sv": "Föregående vädersituationskod",
+              "no": "Forrige værsituasjonskode"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "weather_situation_condition",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Clearsky",
+                "label": {
+                  "en": "Clear sky",
+                  "sv": "Klart",
+                  "no": "Klar himmel"
+                }
+              },
+              {
+                "id": "Nearlyclearsky",
+                "label": {
+                  "en": "Nearly clear sky",
+                  "sv": "Nästan klart",
+                  "no": "Nesten klar himmel"
+                }
+              },
+              {
+                "id": "Variablecloudiness",
+                "label": {
+                  "en": "Variable cloudiness",
+                  "sv": "Växlande molnighet",
+                  "no": "Variabel overskyethet"
+                }
+              },
+              {
+                "id": "Halfclearsky",
+                "label": {
+                  "en": "Halfclear sky",
+                  "sv": "Halvklart",
+                  "no": "Halvklar himmel"
+                }
+              },
+              {
+                "id": "Cloudysky",
+                "label": {
+                  "en": "Cloudy sky",
+                  "sv": "Molnigt",
+                  "no": "Skyet himmel"
+                }
+              },
+              {
+                "id": "Overcast",
+                "label": {
+                  "en": "Overcast",
+                  "sv": "Mulet",
+                  "no": "Overskyet"
+                }
+              },
+              {
+                "id": "Fog",
+                "label": {
+                  "en": "Fog",
+                  "sv": "Dimma",
+                  "no": "Tåke"
+                }
+              },
+              {
+                "id": "Lightrainshowers",
+                "label": {
+                  "en": "Light rain showers",
+                  "sv": "Lätta regnskurar",
+                  "no": "Lette regnbyger"
+                }
+              },
+              {
+                "id": "Moderaterainshowers",
+                "label": {
+                  "en": "Moderate rain showers",
+                  "sv": "Måttliga regnskurar",
+                  "no": "Moderate regnbyger"
+                }
+              },
+              {
+                "id": "Heavyrainshowers",
+                "label": {
+                  "en": "Heavy rain showers",
+                  "sv": "Kraftiga regnskurar",
+                  "no": "Kraftige regnbyger"
+                }
+              },
+              {
+                "id": "Thunderstorm",
+                "label": {
+                  "en": "Thunderstorm",
+                  "sv": "Åskväder",
+                  "no": "Tordenvær"
+                }
+              },
+              {
+                "id": "Lightsleetshowers",
+                "label": {
+                  "en": "Light sleet showers",
+                  "sv": "Lätta skurar av snöblandat regn",
+                  "no": "Lette sluddbyger"
+                }
+              },
+              {
+                "id": "Moderatesleetshowers",
+                "label": {
+                  "en": "Moderate sleet showers",
+                  "sv": "Måttliga skurar av snöblandat regn",
+                  "no": "Moderate sluddbyger"
+                }
+              },
+              {
+                "id": "Heavysleetshowers",
+                "label": {
+                  "en": "Heavy sleet showers",
+                  "sv": "Kraftiga skurar av snöblandat regn",
+                  "no": "Kraftige sluddbyger"
+                }
+              },
+              {
+                "id": "Lightsnowshowers",
+                "label": {
+                  "en": "Light snow showers",
+                  "sv": "Lätta snöbyar",
+                  "no": "Lette snøbyger"
+                }
+              },
+              {
+                "id": "Moderatesnowshowers",
+                "label": {
+                  "en": "Moderate snow showers",
+                  "sv": "Snöbyar",
+                  "no": "Moderate snøbyger"
+                }
+              },
+              {
+                "id": "Heavysnowshowers",
+                "label": {
+                  "en": "Heavy snow showers",
+                  "sv": "Kraftiga snöbyar",
+                  "no": "Kraftige snøbyger"
+                }
+              },
+              {
+                "id": "Lightrain",
+                "label": {
+                  "en": "Light rain",
+                  "sv": "Lätt regn",
+                  "no": "Lett regn"
+                }
+              },
+              {
+                "id": "Moderaterain",
+                "label": {
+                  "en": "Moderate rain",
+                  "sv": "Regn",
+                  "no": "Moderate regn"
+                }
+              },
+              {
+                "id": "Heavyrain",
+                "label": {
+                  "en": "Heavy rain",
+                  "sv": "Kraftigt regn",
+                  "no": "Kraftig regn"
+                }
+              },
+              {
+                "id": "Thunder",
+                "label": {
+                  "en": "Thunder",
+                  "sv": "Åska",
+                  "no": "Torden"
+                }
+              },
+              {
+                "id": "Lightsleet",
+                "label": {
+                  "en": "Light sleet",
+                  "sv": "Lätt snöblandat regn",
+                  "no": "Lett sludd"
+                }
+              },
+              {
+                "id": "Moderatesleet",
+                "label": {
+                  "en": "Moderate sleet",
+                  "sv": "Snöblandat regn",
+                  "no": "Moderat sludd"
+                }
+              },
+              {
+                "id": "Heavysleet",
+                "label": {
+                  "en": "Heavy sleet",
+                  "sv": "Kraftigt snöblandat regn",
+                  "no": "Kraftig sludd"
+                }
+              },
+              {
+                "id": "Lightsnowfall",
+                "label": {
+                  "en": "Light snowfall",
+                  "sv": "Lätt snöfall",
+                  "no": "Lett snøfall"
+                }
+              },
+              {
+                "id": "Moderatesnowfall",
+                "label": {
+                  "en": "Moderate snowfall",
+                  "sv": "Måttligt snöfall",
+                  "no": "Moderat snøfall"
+                }
+              },
+              {
+                "id": "Heavysnowfall",
+                "label": {
+                  "en": "Heavy snowfall",
+                  "sv": "Kraftigt snöfall",
+                  "no": "Kraftig snøfall"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "WeatherSituationChangedFromTo",
+        "title": {
+          "en": "Weather changes from/to",
+          "sv": "Vädret ändras från/till",
+          "no": "Været endres fra/til"
+        },
+        "titleFormatted": {
+          "en": "Weather changes from [[from_weather_situation]] to [[to_weather_situation]]",
+          "sv": "Vädret ändras från [[from_weather_situation]] till [[to_weather_situation]]",
+          "no": "Været endres fra [[from_weather_situation]] til [[to_weather_situation]]"
+        },
+        "tokens": [
+          {
+            "name": "measure_weather_situation_cp",
+            "type": "string",
+            "title": {
+              "en": "Weather situation",
+              "sv": "Vädersituation",
+              "no": "Værsituasjon"
+            }
+          },
+          {
+            "name": "previous_weather_situation",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation",
+              "sv": "Föregående vädersituation",
+              "no": "Forrige værsituasjon"
+            }
+          },
+          {
+            "name": "weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Weather situation code",
+              "sv": "Vädersituationskod",
+              "no": "Værsituasjonskode"
+            }
+          },
+          {
+            "name": "previous_weather_situation_code",
+            "type": "string",
+            "title": {
+              "en": "Previous weather situation code",
+              "sv": "Föregående vädersituationskod",
+              "no": "Forrige værsituasjonskode"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          },
+          {
+            "name": "from_weather_situation",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Clearsky",
+                "label": {
+                  "en": "Clear sky",
+                  "sv": "Klart",
+                  "no": "Klar himmel"
+                }
+              },
+              {
+                "id": "Nearlyclearsky",
+                "label": {
+                  "en": "Nearly clear sky",
+                  "sv": "Nästan klart",
+                  "no": "Nesten klar himmel"
+                }
+              },
+              {
+                "id": "Variablecloudiness",
+                "label": {
+                  "en": "Variable cloudiness",
+                  "sv": "Växlande molnighet",
+                  "no": "Variabel overskyethet"
+                }
+              },
+              {
+                "id": "Halfclearsky",
+                "label": {
+                  "en": "Halfclear sky",
+                  "sv": "Halvklart",
+                  "no": "Halvklar himmel"
+                }
+              },
+              {
+                "id": "Cloudysky",
+                "label": {
+                  "en": "Cloudy sky",
+                  "sv": "Molnigt",
+                  "no": "Skyet himmel"
+                }
+              },
+              {
+                "id": "Overcast",
+                "label": {
+                  "en": "Overcast",
+                  "sv": "Mulet",
+                  "no": "Overskyet"
+                }
+              },
+              {
+                "id": "Fog",
+                "label": {
+                  "en": "Fog",
+                  "sv": "Dimma",
+                  "no": "Tåke"
+                }
+              },
+              {
+                "id": "Lightrainshowers",
+                "label": {
+                  "en": "Light rain showers",
+                  "sv": "Lätta regnskurar",
+                  "no": "Lette regnbyger"
+                }
+              },
+              {
+                "id": "Moderaterainshowers",
+                "label": {
+                  "en": "Moderate rain showers",
+                  "sv": "Måttliga regnskurar",
+                  "no": "Moderate regnbyger"
+                }
+              },
+              {
+                "id": "Heavyrainshowers",
+                "label": {
+                  "en": "Heavy rain showers",
+                  "sv": "Kraftiga regnskurar",
+                  "no": "Kraftige regnbyger"
+                }
+              },
+              {
+                "id": "Thunderstorm",
+                "label": {
+                  "en": "Thunderstorm",
+                  "sv": "Åskväder",
+                  "no": "Tordenvær"
+                }
+              },
+              {
+                "id": "Lightsleetshowers",
+                "label": {
+                  "en": "Light sleet showers",
+                  "sv": "Lätta skurar av snöblandat regn",
+                  "no": "Lette sluddbyger"
+                }
+              },
+              {
+                "id": "Moderatesleetshowers",
+                "label": {
+                  "en": "Moderate sleet showers",
+                  "sv": "Måttliga skurar av snöblandat regn",
+                  "no": "Moderate sluddbyger"
+                }
+              },
+              {
+                "id": "Heavysleetshowers",
+                "label": {
+                  "en": "Heavy sleet showers",
+                  "sv": "Kraftiga skurar av snöblandat regn",
+                  "no": "Kraftige sluddbyger"
+                }
+              },
+              {
+                "id": "Lightsnowshowers",
+                "label": {
+                  "en": "Light snow showers",
+                  "sv": "Lätta snöbyar",
+                  "no": "Lette snøbyger"
+                }
+              },
+              {
+                "id": "Moderatesnowshowers",
+                "label": {
+                  "en": "Moderate snow showers",
+                  "sv": "Snöbyar",
+                  "no": "Moderate snøbyger"
+                }
+              },
+              {
+                "id": "Heavysnowshowers",
+                "label": {
+                  "en": "Heavy snow showers",
+                  "sv": "Kraftiga snöbyar",
+                  "no": "Kraftige snøbyger"
+                }
+              },
+              {
+                "id": "Lightrain",
+                "label": {
+                  "en": "Light rain",
+                  "sv": "Lätt regn",
+                  "no": "Lett regn"
+                }
+              },
+              {
+                "id": "Moderaterain",
+                "label": {
+                  "en": "Moderate rain",
+                  "sv": "Regn",
+                  "no": "Moderate regn"
+                }
+              },
+              {
+                "id": "Heavyrain",
+                "label": {
+                  "en": "Heavy rain",
+                  "sv": "Kraftigt regn",
+                  "no": "Kraftig regn"
+                }
+              },
+              {
+                "id": "Thunder",
+                "label": {
+                  "en": "Thunder",
+                  "sv": "Åska",
+                  "no": "Torden"
+                }
+              },
+              {
+                "id": "Lightsleet",
+                "label": {
+                  "en": "Light sleet",
+                  "sv": "Lätt snöblandat regn",
+                  "no": "Lett sludd"
+                }
+              },
+              {
+                "id": "Moderatesleet",
+                "label": {
+                  "en": "Moderate sleet",
+                  "sv": "Snöblandat regn",
+                  "no": "Moderat sludd"
+                }
+              },
+              {
+                "id": "Heavysleet",
+                "label": {
+                  "en": "Heavy sleet",
+                  "sv": "Kraftigt snöblandat regn",
+                  "no": "Kraftig sludd"
+                }
+              },
+              {
+                "id": "Lightsnowfall",
+                "label": {
+                  "en": "Light snowfall",
+                  "sv": "Lätt snöfall",
+                  "no": "Lett snøfall"
+                }
+              },
+              {
+                "id": "Moderatesnowfall",
+                "label": {
+                  "en": "Moderate snowfall",
+                  "sv": "Måttligt snöfall",
+                  "no": "Moderat snøfall"
+                }
+              },
+              {
+                "id": "Heavysnowfall",
+                "label": {
+                  "en": "Heavy snowfall",
+                  "sv": "Kraftigt snöfall",
+                  "no": "Kraftig snøfall"
+                }
+              }
+            ]
+          },
+          {
+            "name": "to_weather_situation",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "Clearsky",
+                "label": {
+                  "en": "Clear sky",
+                  "sv": "Klart",
+                  "no": "Klar himmel"
+                }
+              },
+              {
+                "id": "Nearlyclearsky",
+                "label": {
+                  "en": "Nearly clear sky",
+                  "sv": "Nästan klart",
+                  "no": "Nesten klar himmel"
+                }
+              },
+              {
+                "id": "Variablecloudiness",
+                "label": {
+                  "en": "Variable cloudiness",
+                  "sv": "Växlande molnighet",
+                  "no": "Variabel overskyethet"
+                }
+              },
+              {
+                "id": "Halfclearsky",
+                "label": {
+                  "en": "Halfclear sky",
+                  "sv": "Halvklart",
+                  "no": "Halvklar himmel"
+                }
+              },
+              {
+                "id": "Cloudysky",
+                "label": {
+                  "en": "Cloudy sky",
+                  "sv": "Molnigt",
+                  "no": "Skyet himmel"
+                }
+              },
+              {
+                "id": "Overcast",
+                "label": {
+                  "en": "Overcast",
+                  "sv": "Mulet",
+                  "no": "Overskyet"
+                }
+              },
+              {
+                "id": "Fog",
+                "label": {
+                  "en": "Fog",
+                  "sv": "Dimma",
+                  "no": "Tåke"
+                }
+              },
+              {
+                "id": "Lightrainshowers",
+                "label": {
+                  "en": "Light rain showers",
+                  "sv": "Lätta regnskurar",
+                  "no": "Lette regnbyger"
+                }
+              },
+              {
+                "id": "Moderaterainshowers",
+                "label": {
+                  "en": "Moderate rain showers",
+                  "sv": "Måttliga regnskurar",
+                  "no": "Moderate regnbyger"
+                }
+              },
+              {
+                "id": "Heavyrainshowers",
+                "label": {
+                  "en": "Heavy rain showers",
+                  "sv": "Kraftiga regnskurar",
+                  "no": "Kraftige regnbyger"
+                }
+              },
+              {
+                "id": "Thunderstorm",
+                "label": {
+                  "en": "Thunderstorm",
+                  "sv": "Åskväder",
+                  "no": "Tordenvær"
+                }
+              },
+              {
+                "id": "Lightsleetshowers",
+                "label": {
+                  "en": "Light sleet showers",
+                  "sv": "Lätta skurar av snöblandat regn",
+                  "no": "Lette sluddbyger"
+                }
+              },
+              {
+                "id": "Moderatesleetshowers",
+                "label": {
+                  "en": "Moderate sleet showers",
+                  "sv": "Måttliga skurar av snöblandat regn",
+                  "no": "Moderate sluddbyger"
+                }
+              },
+              {
+                "id": "Heavysleetshowers",
+                "label": {
+                  "en": "Heavy sleet showers",
+                  "sv": "Kraftiga skurar av snöblandat regn",
+                  "no": "Kraftige sluddbyger"
+                }
+              },
+              {
+                "id": "Lightsnowshowers",
+                "label": {
+                  "en": "Light snow showers",
+                  "sv": "Lätta snöbyar",
+                  "no": "Lette snøbyger"
+                }
+              },
+              {
+                "id": "Moderatesnowshowers",
+                "label": {
+                  "en": "Moderate snow showers",
+                  "sv": "Snöbyar",
+                  "no": "Moderate snøbyger"
+                }
+              },
+              {
+                "id": "Heavysnowshowers",
+                "label": {
+                  "en": "Heavy snow showers",
+                  "sv": "Kraftiga snöbyar",
+                  "no": "Kraftige snøbyger"
+                }
+              },
+              {
+                "id": "Lightrain",
+                "label": {
+                  "en": "Light rain",
+                  "sv": "Lätt regn",
+                  "no": "Lett regn"
+                }
+              },
+              {
+                "id": "Moderaterain",
+                "label": {
+                  "en": "Moderate rain",
+                  "sv": "Regn",
+                  "no": "Moderate regn"
+                }
+              },
+              {
+                "id": "Heavyrain",
+                "label": {
+                  "en": "Heavy rain",
+                  "sv": "Kraftigt regn",
+                  "no": "Kraftig regn"
+                }
+              },
+              {
+                "id": "Thunder",
+                "label": {
+                  "en": "Thunder",
+                  "sv": "Åska",
+                  "no": "Torden"
+                }
+              },
+              {
+                "id": "Lightsleet",
+                "label": {
+                  "en": "Light sleet",
+                  "sv": "Lätt snöblandat regn",
+                  "no": "Lett sludd"
+                }
+              },
+              {
+                "id": "Moderatesleet",
+                "label": {
+                  "en": "Moderate sleet",
+                  "sv": "Snöblandat regn",
+                  "no": "Moderat sludd"
+                }
+              },
+              {
+                "id": "Heavysleet",
+                "label": {
+                  "en": "Heavy sleet",
+                  "sv": "Kraftigt snöblandat regn",
+                  "no": "Kraftig sludd"
+                }
+              },
+              {
+                "id": "Lightsnowfall",
+                "label": {
+                  "en": "Light snowfall",
+                  "sv": "Lätt snöfall",
+                  "no": "Lett snøfall"
+                }
+              },
+              {
+                "id": "Moderatesnowfall",
+                "label": {
+                  "en": "Moderate snowfall",
+                  "sv": "Måttligt snöfall",
+                  "no": "Moderat snøfall"
+                }
+              },
+              {
+                "id": "Heavysnowfall",
+                "label": {
+                  "en": "Heavy snowfall",
+                  "sv": "Kraftigt snöfall",
+                  "no": "Kraftig snøfall"
+                }
+              }
+            ]
           }
         ]
       }
@@ -601,7 +1417,7 @@
                 "id": "Cloudysky",
                 "label": {
                   "en": "Cloudy sky",
-                  "sv": "Lätt molnighet",
+                  "sv": "Molnigt",
                   "no": "Skyet himmel"
                 }
               },
@@ -609,7 +1425,7 @@
                 "id": "Overcast",
                 "label": {
                   "en": "Overcast",
-                  "sv": "Molnigt",
+                  "sv": "Mulet",
                   "no": "Overskyet"
                 }
               },
@@ -657,7 +1473,7 @@
                 "id": "Lightsleetshowers",
                 "label": {
                   "en": "Light sleet showers",
-                  "sv": "Underkylt duggregn",
+                  "sv": "Lätta skurar av snöblandat regn",
                   "no": "Lette sluddbyger"
                 }
               },
@@ -665,7 +1481,7 @@
                 "id": "Moderatesleetshowers",
                 "label": {
                   "en": "Moderate sleet showers",
-                  "sv": "Underkylda regnskurar",
+                  "sv": "Måttliga skurar av snöblandat regn",
                   "no": "Moderate sluddbyger"
                 }
               },
@@ -673,7 +1489,7 @@
                 "id": "Heavysleetshowers",
                 "label": {
                   "en": "Heavy sleet showers",
-                  "sv": "Underkylda skyfall",
+                  "sv": "Kraftiga skurar av snöblandat regn",
                   "no": "Kraftige sluddbyger"
                 }
               },
@@ -705,7 +1521,7 @@
                 "id": "Lightrain",
                 "label": {
                   "en": "Light rain",
-                  "sv": "Duggregn",
+                  "sv": "Lätt regn",
                   "no": "Lett regn"
                 }
               },
@@ -721,7 +1537,7 @@
                 "id": "Heavyrain",
                 "label": {
                   "en": "Heavy rain",
-                  "sv": "Skyfall",
+                  "sv": "Kraftigt regn",
                   "no": "Kraftig regn"
                 }
               },
@@ -737,7 +1553,7 @@
                 "id": "Lightsleet",
                 "label": {
                   "en": "Light sleet",
-                  "sv": "Snöblandat duggregn",
+                  "sv": "Lätt snöblandat regn",
                   "no": "Lett sludd"
                 }
               },
@@ -753,7 +1569,7 @@
                 "id": "Heavysleet",
                 "label": {
                   "en": "Heavy sleet",
-                  "sv": "Snöblandat skyfall",
+                  "sv": "Kraftigt snöblandat regn",
                   "no": "Kraftig sludd"
                 }
               },
@@ -908,43 +1724,11 @@
                 }
               },
               {
-                "id": "North-West",
+                "id": "North-East",
                 "label": {
-                  "en": "North-West",
-                  "sv": "Nord-Väst",
-                  "no": "Nordvest"
-                }
-              },
-              {
-                "id": "West",
-                "label": {
-                  "en": "West",
-                  "sv": "Väst",
-                  "no": "Vest"
-                }
-              },
-              {
-                "id": "South-West",
-                "label": {
-                  "en": "South-West",
-                  "sv": "Syd-Väst",
-                  "no": "Sørvest"
-                }
-              },
-              {
-                "id": "South",
-                "label": {
-                  "en": "South",
-                  "sv": "Syd",
-                  "no": "Sør"
-                }
-              },
-              {
-                "id": "South-East",
-                "label": {
-                  "en": "South-East",
-                  "sv": "Syd-Öst",
-                  "no": "Sørøst"
+                  "en": "North-East",
+                  "sv": "Nord-Öst",
+                  "no": "Nord-Øst"
                 }
               },
               {
@@ -956,11 +1740,43 @@
                 }
               },
               {
-                "id": "North-East",
+                "id": "South-East",
                 "label": {
-                  "en": "North-East",
-                  "sv": "Nord-Öst",
-                  "no": "Nord-Øst"
+                  "en": "South-East",
+                  "sv": "Syd-Öst",
+                  "no": "Sørøst"
+                }
+              },
+              {
+                "id": "South",
+                "label": {
+                  "en": "South",
+                  "sv": "Syd",
+                  "no": "Sør"
+                }
+              },
+              {
+                "id": "South-West",
+                "label": {
+                  "en": "South-West",
+                  "sv": "Syd-Väst",
+                  "no": "Sørvest"
+                }
+              },
+              {
+                "id": "West",
+                "label": {
+                  "en": "West",
+                  "sv": "Väst",
+                  "no": "Vest"
+                }
+              },
+              {
+                "id": "North-West",
+                "label": {
+                  "en": "North-West",
+                  "sv": "Nord-Väst",
+                  "no": "Nordvest"
                 }
               }
             ]
@@ -1847,4 +2663,4 @@
       "icon": "/assets/icons/gust.svg"
     }
   }
-}
+}\n

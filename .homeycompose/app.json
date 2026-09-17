@@ -5,7 +5,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.7.0",
+  "version": "0.7.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -57,9 +57,7 @@
       }
     ]
   },
-  "category": [
-    "climate"
-  ],
+  "category": "climate",
   "brandColor": "#689eb8",
   "permissions": [
     "homey:manager:geolocation"
@@ -68,4 +66,4 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   }
-}
+}\n

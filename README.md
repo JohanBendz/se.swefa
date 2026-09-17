@@ -11,7 +11,7 @@
 
 ## Change Log:
 
-### v 0.7.0
+### v 0.7.1\n* Stabilization of the SNOW1gv1 migration: corrected wind direction, cloud-cover units and precipitation categories; completed missing Flow cards; improved retries/timezone handling; added changed-to/from-to weather triggers and regression tests.\n### v 0.7.0
 * Major change in backend due to SMHI deprecating and shutting down the old pmp3g API used by the app. Switching to new SNOW API.
 ### v 0.6.4
 * Added retry to the SMHI Data fetch functionality to mitigate events where incorrect data is shown due to SMHI API not responding. BREAKING CHANGE: Wind direction corrected! Check your flows!

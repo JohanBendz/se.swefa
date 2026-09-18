@@ -59,19 +59,19 @@ class WeatherDevice extends Device {
     this._flowTriggerExtremeWeather = this.homey.flow.getDeviceTriggerCard('extreme_weather');
   }
 
-  async onSettings({ changedKeys }) {
+  async onSettings({ newSettings, changedKeys }) {
     this.log('Settings changed:', changedKeys);
 
     if (changedKeys?.length) {
       this.lastFetchTime = 0;
-      await this.fetchSMHIData(true);
+      await this.fetchSMHIData(true, newSettings);
     }
   }
 
-  async fetchSMHIData(force = false) {
+  async fetchSMHIData(force = false, settingsOverride = null) {
     if (this._fetchPromise) return this._fetchPromise;
 
-    this._fetchPromise = this._fetchSMHIData(force)
+    this._fetchPromise = this._fetchSMHIData(force, settingsOverride)
       .finally(() => {
         this._fetchPromise = null;
       });
@@ -79,7 +79,7 @@ class WeatherDevice extends Device {
     return this._fetchPromise;
   }
 
-  async _fetchSMHIData(force = false) {
+  async _fetchSMHIData(force = false, settingsOverride = null) {
     const currentTime = Date.now();
 
     if (!force && this.cacheDuration > 0 && currentTime - this.lastFetchTime < this.cacheDuration && this.weatherData) {
@@ -88,11 +88,11 @@ class WeatherDevice extends Device {
 
     try {
       this.log('Fetching SMHI SNOW forecast...');
-      const data = await this.getWeatherData();
+      const data = await this.getWeatherData(settingsOverride);
       this.weatherData = data;
       this.lastFetchTime = currentTime;
       this.log(`SMHI returned ${data.timeSeries.length} forecast entries`);
-      await this.updateCapabilities();
+      await this.updateCapabilities(settingsOverride);
       this.log('SMHI forecast updated successfully');
     } catch (error) {
       this.error('Failed to fetch SMHI data:', error);
@@ -143,8 +143,8 @@ class WeatherDevice extends Device {
     return formatCoordinate(value, label);
   }
 
-  getCoordinatesFromSettings() {
-    const settings = this.getSettings();
+  getCoordinatesFromSettings(settingsOverride = null) {
+    const settings = settingsOverride || this.getSettings();
 
     const longitude = settings.usehomeylocation
       ? this.homey.geolocation.getLongitude()
@@ -160,8 +160,8 @@ class WeatherDevice extends Device {
     };
   }
 
-  async getWeatherData() {
-    const { lon, lat } = this.getCoordinatesFromSettings();
+  async getWeatherData(settingsOverride = null) {
+    const { lon, lat } = this.getCoordinatesFromSettings(settingsOverride);
     const url = `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
     const data = await this.fetchJsonWithRetry(url);
@@ -177,8 +177,8 @@ class WeatherDevice extends Device {
     return data;
   }
 
-  async updateCapabilities() {
-    const settings = this.getSettings();
+  async updateCapabilities(settingsOverride = null) {
+    const settings = settingsOverride || this.getSettings();
     const forecastHoursAhead = Number.parseInt(settings.fcTime, 10) || 0;
     const targetTime = new Date(Date.now() + forecastHoursAhead * 3600000);
 

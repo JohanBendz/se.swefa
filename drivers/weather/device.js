@@ -195,6 +195,11 @@ class WeatherDevice extends Device {
     this.log(
       `Forecast selection: +${forecastHoursAhead}h -> ${closestDataPoint.time}`,
     );
+    this.log(`Selected SNOW datapoint: ${JSON.stringify({
+      time: closestDataPoint.time,
+      intervalParametersStartTime: closestDataPoint.intervalParametersStartTime,
+      data: closestDataPoint.data,
+    })}`);
 
     await this.processForecastData(closestDataPoint);
   }

@@ -87,10 +87,13 @@ class WeatherDevice extends Device {
     }
 
     try {
+      this.log('Fetching SMHI SNOW forecast...');
       const data = await this.getWeatherData();
       this.weatherData = data;
       this.lastFetchTime = currentTime;
+      this.log(`SMHI returned ${data.timeSeries.length} forecast entries`);
       await this.updateCapabilities();
+      this.log('SMHI forecast updated successfully');
     } catch (error) {
       this.error('Failed to fetch SMHI data:', error);
     }
@@ -184,6 +187,10 @@ class WeatherDevice extends Device {
       this.error('No forecast data available for the specified time.');
       return;
     }
+
+    this.log(
+      `Forecast selection: +${forecastHoursAhead}h -> ${closestDataPoint.time}`,
+    );
 
     await this.processForecastData(closestDataPoint);
   }

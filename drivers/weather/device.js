@@ -167,6 +167,7 @@ class WeatherDevice extends Device {
     const { lon, lat } = this.getCoordinatesFromSettings(settingsOverride);
     const url = `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
+    this.log(`SMHI SNOW URL: ${url}`);
     const data = await this.fetchJsonWithRetry(url);
 
     if (!data || !Array.isArray(data.timeSeries)) {

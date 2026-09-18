@@ -69,7 +69,10 @@ class WeatherDevice extends Device {
   }
 
   async fetchSMHIData(force = false, settingsOverride = null) {
-    if (this._fetchPromise) return this._fetchPromise;
+    if (this._fetchPromise) {
+      if (!force) return this._fetchPromise;
+      await this._fetchPromise;
+    }
 
     this._fetchPromise = this._fetchSMHIData(force, settingsOverride)
       .finally(() => {

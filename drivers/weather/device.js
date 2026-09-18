@@ -6,7 +6,7 @@ const Feels = require('feels');
 const {
   WIND_DIRECTION_CODES,
   formatCoordinate,
-  percentToOctas,
+  normalizeOctas,
   getWeatherConditionCode,
   getWindDirectionCode,
   getPrecipitationTranslationKey,
@@ -234,10 +234,10 @@ class WeatherDevice extends Device {
     const relativeHumidity = this.pick(parameters, ['relative_humidity'], null);
     const thunderProbability = this.pick(parameters, ['thunderstorm_probability'], 0);
 
-    const totalCloud = percentToOctas(this.pick(parameters, ['cloud_area_fraction'], null));
-    const lowCloud = percentToOctas(this.pick(parameters, ['low_type_cloud_area_fraction'], null));
-    const mediumCloud = percentToOctas(this.pick(parameters, ['medium_type_cloud_area_fraction'], null));
-    const highCloud = percentToOctas(this.pick(parameters, ['high_type_cloud_area_fraction'], null));
+    const totalCloud = normalizeOctas(this.pick(parameters, ['cloud_area_fraction'], null));
+    const lowCloud = normalizeOctas(this.pick(parameters, ['low_type_cloud_area_fraction'], null));
+    const mediumCloud = normalizeOctas(this.pick(parameters, ['medium_type_cloud_area_fraction'], null));
+    const highCloud = normalizeOctas(this.pick(parameters, ['high_type_cloud_area_fraction'], null));
 
     const windGust = this.pick(parameters, ['wind_speed_of_gust'], null);
 

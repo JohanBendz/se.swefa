@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 
 const {
   formatCoordinate,
-  percentToOctas,
+  normalizeOctas,
   getWeatherConditionCode,
   getWindDirectionCode,
   getPrecipitationTranslationKey,
@@ -27,11 +27,12 @@ test('coordinates are normalized to six decimals', () => {
   assert.throws(() => formatCoordinate('not-a-number', 'longitude'));
 });
 
-test('SNOW cloud percentages are converted to legacy oktas', () => {
-  assert.equal(percentToOctas(0), 0);
-  assert.equal(percentToOctas(12.5), 1);
-  assert.equal(percentToOctas(50), 4);
-  assert.equal(percentToOctas(100), 8);
+test('SNOW cloud cover values are already expressed as 0-8 octas', () => {
+  assert.equal(normalizeOctas(0), 0);
+  assert.equal(normalizeOctas(1), 1);
+  assert.equal(normalizeOctas(5), 5);
+  assert.equal(normalizeOctas(8), 8);
+  assert.equal(normalizeOctas(9), null);
 });
 
 test('wind direction follows meteorological degrees clockwise from north', () => {

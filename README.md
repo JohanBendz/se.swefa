@@ -1,6 +1,6 @@
-# SMHI Weather Forecast, Warnings & Fire Risk for Homey
+# SMHI Weather Forecast, Warnings, Fire Risk & Ocean Observations for Homey
 
-Weather forecasts, official weather warnings and fire-risk forecasts from SMHI for Homey. Weather forecasts use **SNOW1gv1**, warnings use SMHI's official impact-based warning feed, and fire risk uses the daily **FWIF1G** point forecast.
+Weather forecasts, official weather warnings, fire-risk forecasts and ocean observations from SMHI for Homey. Weather forecasts use **SNOW1gv1**, warnings use SMHI's official impact-based warning feed, fire risk uses the daily **FWIF1G** point forecast, and sea-level/wave devices use SMHI Oceanographic Observations.
 
 ## Features
 
@@ -20,6 +20,9 @@ Weather forecasts, official weather warnings and fire-risk forecasts from SMHI f
 - Warning Flow triggers for issued, updated and ended warnings, plus conditions for current warning state and severity.
 - A separate **SMHI Fire Risk** device with daily forest fire risk, grass fire risk and forest fuel dryness forecasts from today through five days ahead.
 - Fire-risk Flow triggers for class changes and conditions for minimum risk/dryness levels.
+- Separate **SMHI Sea Level** and **SMHI Waves** devices bound to named SMHI ocean observation stations.
+- Sea-level RH2000, observation age/quality, significant and maximum wave height, wave period and wave direction where available.
+- Ocean Flow cards for sea-level threshold crossings and wave-height thresholds.
 
 The app is intended for locations within SMHI's SNOW forecast area and is primarily presented for Sweden, Norway, Denmark and Finland.
 
@@ -38,6 +41,19 @@ The device supports today through five days ahead, Homey's geolocation or custom
 If a reliable forecast cannot be obtained for the selected location/day, the device becomes unavailable rather than presenting stale data as current.
 
 **Fire risk is a forecast, not an official fire ban.** Users must follow fire bans and restrictions issued by the responsible authorities.
+
+## Sea level and waves
+
+v0.11.0 adds two station-based ocean observation devices:
+
+- **SMHI Sea Level** — measured sea level in RH2000 from a selected SMHI/Sjöfartsverket station, including observation time, age, quality and source.
+- **SMHI Waves** — measured significant wave height from a selected wave buoy/station, with maximum wave height, mean period and wave direction when those measurements are available at the same station.
+
+Pairing lists actual stations rather than silently choosing a nearby station. The station ID is the Homey device identity, and the station name/owner are shown on the device.
+
+Sea Level reads the latest RH2000 minute observations and allows normal publication latency before declaring data stale. Waves requires a recent significant-wave-height measurement; optional wave fields may be absent without making the device unavailable.
+
+Wave direction prefers SMHI's mean direction when fresh and falls back to direction at Tp/peak wave energy when that is the current direction series for the buoy. The displayed compass direction follows SMHI's convention: the direction **from which** the waves come.
 
 ## Flow cards
 
@@ -93,6 +109,18 @@ homey app run
 - Bugs and feature requests: [GitHub Issues](https://github.com/JohanBendz/se.swefa/issues)
 
 ## Change log
+
+### v0.11.0
+
+- Added separate **SMHI Sea Level** and **SMHI Waves** devices.
+- Pairing uses named active ocean observation stations and wave buoys.
+- Sea Level exposes measured RH2000 level, station, observation time/age, quality and source.
+- Waves exposes significant and maximum wave height, mean wave period and wave direction where supported.
+- Wave direction falls back from mean direction to direction at Tp/peak energy when needed.
+- Added Flow triggers for sea-level threshold crossings and wave-height threshold crossings.
+- Added corresponding conditions for current sea level and wave height.
+- Added freshness handling so stale primary measurements make the relevant device unavailable.
+- Added dedicated ocean, sea-level and wave icons plus regression coverage for station selection, observation age and direction fallback.
 
 ### v0.10.0
 

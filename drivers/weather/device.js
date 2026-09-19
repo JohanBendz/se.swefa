@@ -60,8 +60,6 @@ class WeatherDevice extends Device {
   }
 
   async onSettings({ newSettings, changedKeys }) {
-    this.log('Settings changed:', changedKeys);
-
     if (changedKeys?.length) {
       this.lastFetchTime = 0;
       await this.fetchSMHIData(true, newSettings);
@@ -90,13 +88,10 @@ class WeatherDevice extends Device {
     }
 
     try {
-      this.log('Fetching SMHI SNOW forecast...');
       const data = await this.getWeatherData(settingsOverride);
       this.weatherData = data;
       this.lastFetchTime = currentTime;
-      this.log(`SMHI returned ${data.timeSeries.length} forecast entries`);
       await this.updateCapabilities(settingsOverride);
-      this.log('SMHI forecast updated successfully');
     } catch (error) {
       this.error('Failed to fetch SMHI data:', error);
     }
@@ -167,7 +162,6 @@ class WeatherDevice extends Device {
     const { lon, lat } = this.getCoordinatesFromSettings(settingsOverride);
     const url = `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
-    this.log(`SMHI SNOW URL: ${url}`);
     const data = await this.fetchJsonWithRetry(url);
 
     if (!data || !Array.isArray(data.timeSeries)) {
@@ -192,14 +186,6 @@ class WeatherDevice extends Device {
       return;
     }
 
-    this.log(
-      `Forecast selection: +${forecastHoursAhead}h -> ${closestDataPoint.time}`,
-    );
-    this.log(`Selected SNOW datapoint: ${JSON.stringify({
-      time: closestDataPoint.time,
-      intervalParametersStartTime: closestDataPoint.intervalParametersStartTime,
-      data: closestDataPoint.data,
-    })}`);
 
     await this.processForecastData(closestDataPoint);
   }

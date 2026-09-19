@@ -76,3 +76,16 @@ test('stabilization Flow cards are present', () => {
     assert.ok(conditionIds.has(id), `missing condition: ${id}`);
   }
 });
+
+test('custom capability definitions are all used by the weather driver', () => {
+  const composeDir = path.join(__dirname, '..', '.homeycompose', 'capabilities');
+  const capabilityFiles = new Set(
+    fs.readdirSync(composeDir)
+      .filter(file => file.endsWith('.json'))
+      .map(file => file.replace(/\.json$/, '')),
+  );
+  const driver = readJson('drivers/weather/driver.compose.json');
+  const driverCapabilities = new Set(driver.capabilities || []);
+
+  assert.deepEqual([...capabilityFiles].sort(), [...driverCapabilities].sort());
+});

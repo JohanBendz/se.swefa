@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Mean wave direction",
+    "sv": "Medelvågriktning",
+    "no": "Middel bølgeretning"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "°",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/waves.svg"
+}

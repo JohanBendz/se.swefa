@@ -134,7 +134,6 @@ class WavesDevice extends Device {
       name: String(this.getStoreValue('stationName') ?? ''),
       owner: String(this.getStoreValue('stationOwner') ?? ''),
       supportsMaximumWaveHeight: Boolean(this.getStoreValue('supportsMaximumWaveHeight')),
-      supportsMeanWaveDirection: Boolean(this.getStoreValue('supportsMeanWaveDirection')),
       supportsMeanWavePeriod: Boolean(this.getStoreValue('supportsMeanWavePeriod')),
     };
   }

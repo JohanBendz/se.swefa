@@ -190,3 +190,31 @@ test('warning driver is generated with its capabilities and Flow cards', () => {
     assert.ok(conditionIds.has(id), `missing warning condition: ${id}`);
   }
 });
+
+test('runtime JavaScript parses without syntax errors', () => {
+  const vm = require('node:vm');
+  const roots = [
+    path.join(__dirname, '..', 'app.js'),
+    path.join(__dirname, '..', 'drivers'),
+    path.join(__dirname, '..', 'lib'),
+  ];
+
+  const files = [];
+  const walk = (entry) => {
+    const stat = fs.statSync(entry);
+    if (stat.isDirectory()) {
+      for (const child of fs.readdirSync(entry)) walk(path.join(entry, child));
+    } else if (entry.endsWith('.js')) {
+      files.push(entry);
+    }
+  };
+  roots.forEach(walk);
+
+  for (const file of files) {
+    const source = fs.readFileSync(file, 'utf8');
+    assert.doesNotThrow(
+      () => new vm.Script(source, { filename: file }),
+      path.relative(path.join(__dirname, '..'), file),
+    );
+  }
+});

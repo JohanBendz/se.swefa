@@ -63,7 +63,7 @@ class WavesDevice extends Device {
 
       const [maximum, direction, period] = await Promise.all([
         this.optionalObservation('maximumWaveHeight', station.supportsMaximumWaveHeight),
-        this.optionalObservation('meanWaveDirection', station.supportsMeanWaveDirection),
+        this.waveDirectionObservation(),
         this.optionalObservation('meanWavePeriod', station.supportsMeanWavePeriod),
       ]);
 
@@ -86,6 +86,28 @@ class WavesDevice extends Device {
       this.error('Failed to update SMHI waves:', error);
       await this.setUnavailable('No recent SMHI wave observation').catch(err => this.error(err));
     }
+  }
+
+  async waveDirectionObservation() {
+    const stationId = this.getStation().id;
+
+    for (const name of ['meanWaveDirection', 'peakWaveDirection']) {
+      try {
+        const payload = await this.homey.app.getOcobsObservation(name, stationId, 'latest-day');
+        const observation = latestObservation(payload, { maxAgeMs: WAVE_MAX_AGE_MS });
+
+        if (observation) {
+          return {
+            ...observation,
+            parameter: name,
+          };
+        }
+      } catch (error) {
+        this.error(`Unable to update wave direction parameter ${name}:`, error);
+      }
+    }
+
+    return null;
   }
 
   async optionalObservation(name, supported) {

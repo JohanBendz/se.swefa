@@ -91,8 +91,21 @@ class WavesDevice extends Device {
   async waveDirectionObservation() {
     const stationId = this.getStation().id;
 
-    for (const name of ['meanWaveDirection', 'peakWaveDirection']) {
-      try {
+    try {
+      const [meanStations, peakStations] = await Promise.all([
+        this.homey.app.getOcobsStations('meanWaveDirection'),
+        this.homey.app.getOcobsStations('peakWaveDirection'),
+      ]);
+
+      const candidates = [];
+      if (meanStations.some(station => station.id === stationId)) {
+        candidates.push('meanWaveDirection');
+      }
+      if (peakStations.some(station => station.id === stationId)) {
+        candidates.push('peakWaveDirection');
+      }
+
+      for (const name of candidates) {
         const payload = await this.homey.app.getOcobsObservation(name, stationId, 'latest-day');
         const observation = latestObservation(payload, { maxAgeMs: WAVE_MAX_AGE_MS });
 
@@ -102,9 +115,9 @@ class WavesDevice extends Device {
             parameter: name,
           };
         }
-      } catch (error) {
-        this.error(`Unable to update wave direction parameter ${name}:`, error);
       }
+    } catch (error) {
+      this.error('Unable to update wave direction:', error);
     }
 
     return null;

@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Forecast approved",
+    "sv": "Prognos godkänd",
+    "no": "Prognose godkjent"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/calendarclock.svg"
+}

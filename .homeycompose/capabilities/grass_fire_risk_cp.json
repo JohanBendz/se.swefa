@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Grass fire risk",
+    "sv": "Gräsbrandsrisk",
+    "no": "Gressbrannrisiko"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/fire.svg"
+}

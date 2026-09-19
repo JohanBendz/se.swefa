@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Forest fuel dryness",
+    "sv": "Bränsleuttorkning skog",
+    "no": "Uttørking i skog"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/fire.svg"
+}

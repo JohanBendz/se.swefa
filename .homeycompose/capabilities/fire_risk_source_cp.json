@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Source",
+    "sv": "Källa",
+    "no": "Kilde"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/fire.svg"
+}

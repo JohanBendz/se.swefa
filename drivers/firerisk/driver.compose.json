@@ -1,0 +1,33 @@
+{
+  "name": {
+    "en": "SMHI Fire Risk",
+    "sv": "SMHI Brandrisk",
+    "no": "SMHI Brannrisiko"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "fire_risk_forecast_for_cp",
+    "forest_fire_risk_cp",
+    "grass_fire_risk_cp",
+    "forest_dryness_cp",
+    "fire_risk_approved_cp",
+    "fire_risk_source_cp"
+  ],
+  "images": {
+    "large": "/drivers/weather/assets/images/large.png",
+    "small": "/drivers/weather/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

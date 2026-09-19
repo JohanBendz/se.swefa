@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Forest fire risk",
+    "sv": "Skogsbrandsrisk",
+    "no": "Skogbrannrisiko"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/fire.svg"
+}

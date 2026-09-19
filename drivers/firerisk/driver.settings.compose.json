@@ -1,0 +1,102 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Fire risk settings",
+      "sv": "Brandriskinställningar",
+      "no": "Brannrisikoinnstillinger"
+    },
+    "children": [
+      {
+        "id": "forecastDay",
+        "type": "radio",
+        "label": {
+          "en": "Select forecast day",
+          "sv": "Välj prognosdag",
+          "no": "Velg prognosedag"
+        },
+        "value": "0",
+        "values": [
+          {
+            "id": "0",
+            "label": {
+              "en": "Today",
+              "sv": "Idag",
+              "no": "I dag"
+            }
+          },
+          {
+            "id": "1",
+            "label": {
+              "en": "Tomorrow",
+              "sv": "Imorgon",
+              "no": "I morgen"
+            }
+          },
+          {
+            "id": "2",
+            "label": {
+              "en": "In 2 days",
+              "sv": "Om 2 dagar",
+              "no": "Om 2 dager"
+            }
+          },
+          {
+            "id": "3",
+            "label": {
+              "en": "In 3 days",
+              "sv": "Om 3 dagar",
+              "no": "Om 3 dager"
+            }
+          },
+          {
+            "id": "4",
+            "label": {
+              "en": "In 4 days",
+              "sv": "Om 4 dagar",
+              "no": "Om 4 dager"
+            }
+          },
+          {
+            "id": "5",
+            "label": {
+              "en": "In 5 days",
+              "sv": "Om 5 dagar",
+              "no": "Om 5 dager"
+            }
+          }
+        ]
+      },
+      {
+        "id": "latitude",
+        "type": "text",
+        "value": "",
+        "label": {
+          "en": "Latitude",
+          "sv": "Latitud",
+          "no": "Breddegrad"
+        }
+      },
+      {
+        "id": "longitude",
+        "type": "text",
+        "value": "",
+        "label": {
+          "en": "Longitude",
+          "sv": "Longitud",
+          "no": "Lengdegrad"
+        }
+      },
+      {
+        "id": "usehomeylocation",
+        "type": "checkbox",
+        "value": true,
+        "label": {
+          "en": "Use Homey geolocation",
+          "sv": "Använd Homeys geolocation",
+          "no": "Bruk Homeys geolokasjon"
+        }
+      }
+    ]
+  }
+]

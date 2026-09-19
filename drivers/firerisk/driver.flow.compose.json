@@ -1,0 +1,518 @@
+{
+  "triggers": [
+    {
+      "id": "ForestFireRiskChangedTo",
+      "title": {
+        "en": "Forest fire risk changes to",
+        "sv": "Skogsbrandsrisken ändras till",
+        "no": "Skogbrannrisiko endres til"
+      },
+      "titleFormatted": {
+        "en": "Forest fire risk changes to [[risk_level]]",
+        "sv": "Skogsbrandsrisken ändras till [[risk_level]]",
+        "no": "Skogbrannrisiko endres til [[risk_level]]"
+      },
+      "tokens": [
+        {
+          "name": "risk_level_text",
+          "type": "string",
+          "title": {
+            "en": "Risk level",
+            "sv": "Risknivå",
+            "no": "Risikonivå"
+          }
+        },
+        {
+          "name": "risk_code",
+          "type": "string",
+          "title": {
+            "en": "Risk code",
+            "sv": "Riskkod",
+            "no": "Risikokode"
+          }
+        },
+        {
+          "name": "forecast_for",
+          "type": "string",
+          "title": {
+            "en": "Forecast for",
+            "sv": "Prognos för",
+            "no": "Prognose for"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "risk_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Very low risk",
+                "sv": "Mycket liten risk",
+                "no": "Svært liten risiko"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Low risk",
+                "sv": "Liten risk",
+                "no": "Liten risiko"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Moderate risk",
+                "sv": "Måttlig risk",
+                "no": "Moderat risiko"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "High risk",
+                "sv": "Stor risk",
+                "no": "Stor risiko"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Very high risk",
+                "sv": "Mycket stor risk",
+                "no": "Svært stor risiko"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Extreme risk (5E)",
+                "sv": "Extremt stor risk (5E)",
+                "no": "Ekstrem risiko (5E)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GrassFireRiskChangedTo",
+      "title": {
+        "en": "Grass fire risk changes to",
+        "sv": "Gräsbrandsrisken ändras till",
+        "no": "Gressbrannrisiko endres til"
+      },
+      "titleFormatted": {
+        "en": "Grass fire risk changes to [[risk_level]]",
+        "sv": "Gräsbrandsrisken ändras till [[risk_level]]",
+        "no": "Gressbrannrisiko endres til [[risk_level]]"
+      },
+      "tokens": [
+        {
+          "name": "risk_level_text",
+          "type": "string",
+          "title": {
+            "en": "Risk level",
+            "sv": "Risknivå",
+            "no": "Risikonivå"
+          }
+        },
+        {
+          "name": "risk_code",
+          "type": "string",
+          "title": {
+            "en": "Risk code",
+            "sv": "Riskkod",
+            "no": "Risikokode"
+          }
+        },
+        {
+          "name": "forecast_for",
+          "type": "string",
+          "title": {
+            "en": "Forecast for",
+            "sv": "Prognos för",
+            "no": "Prognose for"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "risk_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Snow-covered ground",
+                "sv": "Snötäckt mark",
+                "no": "Snødekt mark"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Grass fire season over",
+                "sv": "Gräsbrandssäsongen slut",
+                "no": "Gressbrannsesongen er over"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Low risk",
+                "sv": "Liten risk",
+                "no": "Liten risiko"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Moderate risk",
+                "sv": "Måttlig risk",
+                "no": "Moderat risiko"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "High risk",
+                "sv": "Stor risk",
+                "no": "Stor risiko"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Very high risk",
+                "sv": "Mycket stor risk",
+                "no": "Svært stor risiko"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ForestDrynessChangedTo",
+      "title": {
+        "en": "Forest fuel dryness changes to",
+        "sv": "Bränsleuttorkning skog ändras till",
+        "no": "Uttørking i skog endres til"
+      },
+      "titleFormatted": {
+        "en": "Forest fuel dryness changes to [[dryness_level]]",
+        "sv": "Bränsleuttorkning skog ändras till [[dryness_level]]",
+        "no": "Uttørking i skog endres til [[dryness_level]]"
+      },
+      "tokens": [
+        {
+          "name": "dryness_level_text",
+          "type": "string",
+          "title": {
+            "en": "Dryness level",
+            "sv": "Torrhetsnivå",
+            "no": "Tørrhetsnivå"
+          }
+        },
+        {
+          "name": "risk_code",
+          "type": "string",
+          "title": {
+            "en": "Dryness code",
+            "sv": "Torrhetskod",
+            "no": "Tørrhetskode"
+          }
+        },
+        {
+          "name": "forecast_for",
+          "type": "string",
+          "title": {
+            "en": "Forecast for",
+            "sv": "Prognos för",
+            "no": "Prognose for"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "dryness_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Very wet",
+                "sv": "Mycket blött",
+                "no": "Svært vått"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Wet",
+                "sv": "Blött",
+                "no": "Vått"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Moderately wet",
+                "sv": "Måttligt blött",
+                "no": "Moderat vått"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Dry",
+                "sv": "Torrt",
+                "no": "Tørt"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Very dry",
+                "sv": "Mycket torrt",
+                "no": "Svært tørt"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Extremely dry (5E)",
+                "sv": "Extremt torrt (5E)",
+                "no": "Ekstremt tørt (5E)"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "forest_fire_risk_at_least",
+      "title": {
+        "en": "Forest fire risk is at least",
+        "sv": "Skogsbrandsrisken är minst",
+        "no": "Skogbrannrisiko er minst"
+      },
+      "titleFormatted": {
+        "en": "Forest fire risk is at least [[risk_level]]",
+        "sv": "Skogsbrandsrisken är minst [[risk_level]]",
+        "no": "Skogbrannrisiko er minst [[risk_level]]"
+      },
+      "args": [
+        {
+          "name": "risk_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Very low risk",
+                "sv": "Mycket liten risk",
+                "no": "Svært liten risiko"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Low risk",
+                "sv": "Liten risk",
+                "no": "Liten risiko"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Moderate risk",
+                "sv": "Måttlig risk",
+                "no": "Moderat risiko"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "High risk",
+                "sv": "Stor risk",
+                "no": "Stor risiko"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Very high risk",
+                "sv": "Mycket stor risk",
+                "no": "Svært stor risiko"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Extreme risk (5E)",
+                "sv": "Extremt stor risk (5E)",
+                "no": "Ekstrem risiko (5E)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grass_fire_risk_at_least",
+      "title": {
+        "en": "Grass fire risk is at least",
+        "sv": "Gräsbrandsrisken är minst",
+        "no": "Gressbrannrisiko er minst"
+      },
+      "titleFormatted": {
+        "en": "Grass fire risk is at least [[risk_level]]",
+        "sv": "Gräsbrandsrisken är minst [[risk_level]]",
+        "no": "Gressbrannrisiko er minst [[risk_level]]"
+      },
+      "args": [
+        {
+          "name": "risk_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "3",
+              "label": {
+                "en": "Low risk",
+                "sv": "Liten risk",
+                "no": "Liten risiko"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Moderate risk",
+                "sv": "Måttlig risk",
+                "no": "Moderat risiko"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "High risk",
+                "sv": "Stor risk",
+                "no": "Stor risiko"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Very high risk",
+                "sv": "Mycket stor risk",
+                "no": "Svært stor risiko"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forest_dryness_at_least",
+      "title": {
+        "en": "Forest fuel dryness is at least",
+        "sv": "Bränsleuttorkning skog är minst",
+        "no": "Uttørking i skog er minst"
+      },
+      "titleFormatted": {
+        "en": "Forest fuel dryness is at least [[dryness_level]]",
+        "sv": "Bränsleuttorkning skog är minst [[dryness_level]]",
+        "no": "Uttørking i skog er minst [[dryness_level]]"
+      },
+      "args": [
+        {
+          "name": "dryness_level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "Very wet",
+                "sv": "Mycket blött",
+                "no": "Svært vått"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Wet",
+                "sv": "Blött",
+                "no": "Vått"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Moderately wet",
+                "sv": "Måttligt blött",
+                "no": "Moderat vått"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Dry",
+                "sv": "Torrt",
+                "no": "Tørt"
+              }
+            },
+            {
+              "id": "5",
+              "label": {
+                "en": "Very dry",
+                "sv": "Mycket torrt",
+                "no": "Svært tørt"
+              }
+            },
+            {
+              "id": "6",
+              "label": {
+                "en": "Extremely dry (5E)",
+                "sv": "Extremt torrt (5E)",
+                "no": "Ekstremt tørt (5E)"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -150,3 +150,24 @@ test('threshold crossing helpers only fire on actual crossings', () => {
   assert.equal(crossedBelow(20, 9, 10), true);
   assert.equal(crossedBelow(9, 8, 10), false);
 });
+
+test('sea-level freshness window accepts normal hourly publication lag', () => {
+  const now = Date.parse('2026-09-20T00:30:00Z');
+  const payload = {
+    value: [{ date: Date.parse('2026-09-19T23:05:00Z'), value: '27.4', quality: 'O' }],
+  };
+
+  const observation = latestObservation(payload, {
+    now,
+    maxAgeMs: 2 * 60 * 60 * 1000,
+  });
+
+  assert.ok(observation);
+  assert.equal(observation.value, 27.4);
+  assert.equal(observation.ageMinutes, 85);
+
+  assert.equal(latestObservation(payload, {
+    now: Date.parse('2026-09-20T01:10:00Z'),
+    maxAgeMs: 2 * 60 * 60 * 1000,
+  }), null);
+});

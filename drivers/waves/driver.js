@@ -42,18 +42,15 @@ class WavesDriver extends Driver {
     const [
       significantStations,
       maximumStations,
-      directionStations,
       periodStations,
     ] = await Promise.all([
       this.homey.app.getOcobsStations('significantWaveHeight'),
       this.homey.app.getOcobsStations('maximumWaveHeight'),
-      this.homey.app.getOcobsStations('meanWaveDirection'),
       this.homey.app.getOcobsStations('meanWavePeriod'),
     ]);
 
     const support = {
       maximum: new Set(maximumStations.map(station => station.id)),
-      direction: new Set(directionStations.map(station => station.id)),
       period: new Set(periodStations.map(station => station.id)),
     };
 
@@ -69,7 +66,6 @@ class WavesDriver extends Driver {
         stationLatitude: station.latitude,
         stationLongitude: station.longitude,
         supportsMaximumWaveHeight: support.maximum.has(station.id),
-        supportsMeanWaveDirection: support.direction.has(station.id),
         supportsMeanWavePeriod: support.period.has(station.id),
       },
     }));

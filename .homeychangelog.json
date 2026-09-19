@@ -63,5 +63,10 @@
     "en": "Added a separate SMHI Weather Warnings device using official Yellow, Orange and Red warnings with GeoJSON location matching, status/validity capabilities and Flow triggers for issued, updated and ended warnings. Added warning conditions and a clean-working-tree development guard.",
     "sv": "Lade till en separat SMHI Vädervarningar-enhet som använder officiella gula, orange och röda varningar med GeoJSON-matchning mot plats, status/giltighet och Flow-triggers för utfärdade, uppdaterade och avslutade varningar. Lade även till varningsvillkor och kontroll av ren arbetskatalog för utveckling.",
     "no": "La til en separat SMHI værvarsel-enhet som bruker offisielle gule, oransje og røde varsler med GeoJSON-matching mot sted, status/gyldighet og Flow-triggere for utstedte, oppdaterte og avsluttede varsler. La også til varslingsvilkår og kontroll av ren arbeidsmappe for utvikling."
+  },
+  "0.10.0": {
+    "en": "Added a separate SMHI Fire Risk device with daily forecasts up to five days ahead for forest fire risk, grass fire risk and forest fuel dryness. Added Flow triggers/conditions, dedicated fire-risk icons, freshness validation and safe unavailable handling when reliable data is missing. Fire risk is a forecast and is not an official fire ban.",
+    "sv": "Lade till en separat SMHI Brandrisk-enhet med dygnsprognoser upp till fem dagar framåt för skogsbrandsrisk, gräsbrandsrisk och bränsleuttorkning i skog. Lade till Flow-triggers/villkor, egna brandriskikoner, färskhetskontroll och säkert unavailable-läge när tillförlitlig data saknas. Brandrisk är en prognos och är inte ett officiellt eldningsförbud.",
+    "no": "La til en separat SMHI Brannrisiko-enhet med døgnprognoser opptil fem dager frem for skogbrannrisiko, gressbrannrisiko og uttørking i skog. La til Flow-triggere/vilkår, egne brannrisikoikoner, ferskhetskontroll og trygg unavailable-status når pålitelige data mangler. Brannrisiko er en prognose og er ikke et offisielt bålforbud."
   }
 }

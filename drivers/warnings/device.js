@@ -7,7 +7,7 @@ const {
   getWeatherWarningsForPoint,
   isWarningActiveNow,
   localizedOfficialText,
-  warningSignature,
+  diffWarnings,
 } = require('../../lib/warning-utils');
 
 class WarningDevice extends Device {
@@ -166,30 +166,26 @@ class WarningDevice extends Device {
   }
 
   async processWarningChanges(warnings, { resetBaseline = false } = {}) {
-    const next = new Map(warnings.map(warning => [warning.id, warning]));
-
     if (resetBaseline || this._knownWarnings === null) {
-      this._knownWarnings = next;
+      this._knownWarnings = warnings;
       return;
     }
 
-    for (const [id, warning] of next) {
-      const previous = this._knownWarnings.get(id);
+    const changes = diffWarnings(this._knownWarnings, warnings);
 
-      if (!previous) {
-        await this.triggerWarning(this._flowWarningIssued, warning);
-      } else if (warningSignature(previous) !== warningSignature(warning)) {
-        await this.triggerWarning(this._flowWarningUpdated, warning);
-      }
+    for (const warning of changes.issued) {
+      await this.triggerWarning(this._flowWarningIssued, warning);
     }
 
-    for (const [id, warning] of this._knownWarnings) {
-      if (!next.has(id)) {
-        await this.triggerWarning(this._flowWarningEnded, warning);
-      }
+    for (const warning of changes.updated) {
+      await this.triggerWarning(this._flowWarningUpdated, warning);
     }
 
-    this._knownWarnings = next;
+    for (const warning of changes.ended) {
+      await this.triggerWarning(this._flowWarningEnded, warning);
+    }
+
+    this._knownWarnings = warnings;
   }
 
   async triggerWarning(card, warning) {

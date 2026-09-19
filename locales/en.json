@@ -81,5 +81,8 @@
   "fire_risk_dryness_3": "Moderately wet",
   "fire_risk_dryness_4": "Dry",
   "fire_risk_dryness_5": "Very dry",
-  "fire_risk_dryness_6": "Extremely dry"
+  "fire_risk_dryness_6": "Extremely dry",
+  "ocean_quality_g": "G – Controlled and approved",
+  "ocean_quality_y": "Y – Coarsely checked / suspected / aggregated",
+  "ocean_quality_o": "O – Unchecked"
 }

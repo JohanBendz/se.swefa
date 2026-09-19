@@ -58,7 +58,7 @@ class SWEFA extends Homey.App {
         lastError = error;
 
         if (attempt < 3) {
-          await new Promise(resolve => setTimeout(resolve, 300 * (2 ** (attempt - 1))));
+          await new Promise(resolve => this.homey.setTimeout(resolve, 300 * (2 ** (attempt - 1))));
         }
       }
     }

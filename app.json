@@ -1517,6 +1517,342 @@
             "filter": "driver_id=warnings"
           }
         ]
+      },
+      {
+        "id": "ForestFireRiskChangedTo",
+        "title": {
+          "en": "Forest fire risk changes to",
+          "sv": "Skogsbrandsrisken ändras till",
+          "no": "Skogbrannrisiko endres til"
+        },
+        "titleFormatted": {
+          "en": "Forest fire risk changes to [[risk_level]]",
+          "sv": "Skogsbrandsrisken ändras till [[risk_level]]",
+          "no": "Skogbrannrisiko endres til [[risk_level]]"
+        },
+        "tokens": [
+          {
+            "name": "risk_level_text",
+            "type": "string",
+            "title": {
+              "en": "Risk level",
+              "sv": "Risknivå",
+              "no": "Risikonivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Risk code",
+              "sv": "Riskkod",
+              "no": "Risikokode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very low risk",
+                  "sv": "Mycket liten risk",
+                  "no": "Svært liten risiko"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extreme risk (5E)",
+                  "sv": "Extremt stor risk (5E)",
+                  "no": "Ekstrem risiko (5E)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "GrassFireRiskChangedTo",
+        "title": {
+          "en": "Grass fire risk changes to",
+          "sv": "Gräsbrandsrisken ändras till",
+          "no": "Gressbrannrisiko endres til"
+        },
+        "titleFormatted": {
+          "en": "Grass fire risk changes to [[risk_level]]",
+          "sv": "Gräsbrandsrisken ändras till [[risk_level]]",
+          "no": "Gressbrannrisiko endres til [[risk_level]]"
+        },
+        "tokens": [
+          {
+            "name": "risk_level_text",
+            "type": "string",
+            "title": {
+              "en": "Risk level",
+              "sv": "Risknivå",
+              "no": "Risikonivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Risk code",
+              "sv": "Riskkod",
+              "no": "Risikokode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Snow-covered ground",
+                  "sv": "Snötäckt mark",
+                  "no": "Snødekt mark"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Grass fire season over",
+                  "sv": "Gräsbrandssäsongen slut",
+                  "no": "Gressbrannsesongen er over"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ForestDrynessChangedTo",
+        "title": {
+          "en": "Forest fuel dryness changes to",
+          "sv": "Bränsleuttorkning skog ändras till",
+          "no": "Uttørking i skog endres til"
+        },
+        "titleFormatted": {
+          "en": "Forest fuel dryness changes to [[dryness_level]]",
+          "sv": "Bränsleuttorkning skog ändras till [[dryness_level]]",
+          "no": "Uttørking i skog endres til [[dryness_level]]"
+        },
+        "tokens": [
+          {
+            "name": "dryness_level_text",
+            "type": "string",
+            "title": {
+              "en": "Dryness level",
+              "sv": "Torrhetsnivå",
+              "no": "Tørrhetsnivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Dryness code",
+              "sv": "Torrhetskod",
+              "no": "Tørrhetskode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "dryness_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very wet",
+                  "sv": "Mycket blött",
+                  "no": "Svært vått"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Wet",
+                  "sv": "Blött",
+                  "no": "Vått"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderately wet",
+                  "sv": "Måttligt blött",
+                  "no": "Moderat vått"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Dry",
+                  "sv": "Torrt",
+                  "no": "Tørt"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very dry",
+                  "sv": "Mycket torrt",
+                  "no": "Svært tørt"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extremely dry (5E)",
+                  "sv": "Extremt torrt (5E)",
+                  "no": "Ekstremt tørt (5E)"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "conditions": [
@@ -2529,6 +2865,212 @@
             ]
           }
         ]
+      },
+      {
+        "id": "forest_fire_risk_at_least",
+        "title": {
+          "en": "Forest fire risk is at least",
+          "sv": "Skogsbrandsrisken är minst",
+          "no": "Skogbrannrisiko er minst"
+        },
+        "titleFormatted": {
+          "en": "Forest fire risk is at least [[risk_level]]",
+          "sv": "Skogsbrandsrisken är minst [[risk_level]]",
+          "no": "Skogbrannrisiko er minst [[risk_level]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very low risk",
+                  "sv": "Mycket liten risk",
+                  "no": "Svært liten risiko"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extreme risk (5E)",
+                  "sv": "Extremt stor risk (5E)",
+                  "no": "Ekstrem risiko (5E)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "grass_fire_risk_at_least",
+        "title": {
+          "en": "Grass fire risk is at least",
+          "sv": "Gräsbrandsrisken är minst",
+          "no": "Gressbrannrisiko er minst"
+        },
+        "titleFormatted": {
+          "en": "Grass fire risk is at least [[risk_level]]",
+          "sv": "Gräsbrandsrisken är minst [[risk_level]]",
+          "no": "Gressbrannrisiko er minst [[risk_level]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "3",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "forest_dryness_at_least",
+        "title": {
+          "en": "Forest fuel dryness is at least",
+          "sv": "Bränsleuttorkning skog är minst",
+          "no": "Uttørking i skog er minst"
+        },
+        "titleFormatted": {
+          "en": "Forest fuel dryness is at least [[dryness_level]]",
+          "sv": "Bränsleuttorkning skog är minst [[dryness_level]]",
+          "no": "Uttørking i skog er minst [[dryness_level]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "dryness_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very wet",
+                  "sv": "Mycket blött",
+                  "no": "Svært vått"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Wet",
+                  "sv": "Blött",
+                  "no": "Vått"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderately wet",
+                  "sv": "Måttligt blött",
+                  "no": "Moderat vått"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Dry",
+                  "sv": "Torrt",
+                  "no": "Tørt"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very dry",
+                  "sv": "Mycket torrt",
+                  "no": "Svært tørt"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extremely dry (5E)",
+                  "sv": "Extremt torrt (5E)",
+                  "no": "Ekstremt tørt (5E)"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -2777,6 +3319,142 @@
             "no": "Varslingssted"
           },
           "children": [
+            {
+              "id": "latitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Latitude",
+                "sv": "Latitud",
+                "no": "Breddegrad"
+              }
+            },
+            {
+              "id": "longitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Longitude",
+                "sv": "Longitud",
+                "no": "Lengdegrad"
+              }
+            },
+            {
+              "id": "usehomeylocation",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Use Homey geolocation",
+                "sv": "Använd Homeys geolocation",
+                "no": "Bruk Homeys geolokasjon"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "firerisk",
+      "name": {
+        "en": "SMHI Fire Risk",
+        "sv": "SMHI Brandrisk",
+        "no": "SMHI Brannrisiko"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "fire_risk_forecast_for_cp",
+        "forest_fire_risk_cp",
+        "grass_fire_risk_cp",
+        "forest_dryness_cp",
+        "fire_risk_approved_cp",
+        "fire_risk_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Fire risk settings",
+            "sv": "Brandriskinställningar",
+            "no": "Brannrisikoinnstillinger"
+          },
+          "children": [
+            {
+              "id": "forecastDay",
+              "type": "radio",
+              "label": {
+                "en": "Select forecast day",
+                "sv": "Välj prognosdag",
+                "no": "Velg prognosedag"
+              },
+              "value": "0",
+              "values": [
+                {
+                  "id": "0",
+                  "label": {
+                    "en": "Today",
+                    "sv": "Idag",
+                    "no": "I dag"
+                  }
+                },
+                {
+                  "id": "1",
+                  "label": {
+                    "en": "Tomorrow",
+                    "sv": "Imorgon",
+                    "no": "I morgen"
+                  }
+                },
+                {
+                  "id": "2",
+                  "label": {
+                    "en": "In 2 days",
+                    "sv": "Om 2 dagar",
+                    "no": "Om 2 dager"
+                  }
+                },
+                {
+                  "id": "3",
+                  "label": {
+                    "en": "In 3 days",
+                    "sv": "Om 3 dagar",
+                    "no": "Om 3 dager"
+                  }
+                },
+                {
+                  "id": "4",
+                  "label": {
+                    "en": "In 4 days",
+                    "sv": "Om 4 dagar",
+                    "no": "Om 4 dager"
+                  }
+                },
+                {
+                  "id": "5",
+                  "label": {
+                    "en": "In 5 days",
+                    "sv": "Om 5 dagar",
+                    "no": "Om 5 dager"
+                  }
+                }
+              ]
+            },
             {
               "id": "latitude",
               "type": "text",
@@ -3214,6 +3892,78 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/warning.svg"
+    },
+    "fire_risk_forecast_for_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forecast for",
+        "sv": "Prognos för",
+        "no": "Prognose for"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "forest_fire_risk_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forest fire risk",
+        "sv": "Skogsbrandsrisk",
+        "no": "Skogbrannrisiko"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
+    "grass_fire_risk_cp": {
+      "type": "string",
+      "title": {
+        "en": "Grass fire risk",
+        "sv": "Gräsbrandsrisk",
+        "no": "Gressbrannrisiko"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
+    "forest_dryness_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forest fuel dryness",
+        "sv": "Bränsleuttorkning skog",
+        "no": "Uttørking i skog"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
+    "fire_risk_approved_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forecast approved",
+        "sv": "Prognos godkänd",
+        "no": "Prognose godkjent"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "fire_risk_source_cp": {
+      "type": "string",
+      "title": {
+        "en": "Source",
+        "sv": "Källa",
+        "no": "Kilde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
     }
   }
 }

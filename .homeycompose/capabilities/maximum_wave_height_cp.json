@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Maximum wave height",
+    "sv": "Maximal våghöjd",
+    "no": "Maksimal bølgehøyde"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "m",
+  "decimals": 2,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/waves.svg"
+}

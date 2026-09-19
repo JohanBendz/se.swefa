@@ -40,12 +40,18 @@ Weather data is fetched from SMHI's SNOW1gv1 point forecast API. Each device ref
 
 Transient API/network failures are retried. If a fetch fails completely, the app keeps the last successfully received capability values and logs the error.
 
+## Dependency policy
+
+The app has **zero third-party runtime dependencies**. Network access uses Node's built-in HTTPS module and the feels-like calculation is implemented locally with regression tests.
+
+`package-lock.json` is intentionally kept even with zero dependencies so CI can verify the dependency graph deterministically. `.npmrc` uses `save-exact=true` so any future dependency must be added explicitly and pinned.
+
 ## Development
 
-Install dependencies and run the regression tests:
+Prepare npm metadata and run the regression tests:
 
 ```bash
-npm install
+npm ci
 npm test
 ```
 
@@ -61,6 +67,14 @@ homey app run
 - Bugs and feature requests: [GitHub Issues](https://github.com/JohanBendz/se.swefa/issues)
 
 ## Change log
+
+### v0.8.1
+
+- Removed all third-party runtime dependencies.
+- Replaced `node-fetch` with Node's built-in HTTPS module.
+- Replaced `feels` with a local implementation that preserves the previous formulas and outputs.
+- Added regression coverage for feels-like calculations and a CI guard enforcing zero runtime dependencies.
+- Updated to npm lockfile version 3 and added exact-version policy for any future dependencies.
 
 ### v0.8.0
 

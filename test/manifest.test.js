@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { builtinModules } = require('node:module');
 
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(__dirname, '..', relativePath), 'utf8'));
@@ -104,4 +105,45 @@ test('runtime dependency graph stays empty', () => {
     'utf8',
   );
   assert.doesNotMatch(deviceSource, /require\(['"](?:node-fetch|feels)['"]\)/);
+});
+
+test('runtime code imports only Node built-ins, Homey, or local modules', () => {
+  const allowedExternal = new Set([
+    ...builtinModules,
+    ...builtinModules.map(name => `node:${name}`),
+    'homey',
+  ]);
+
+  const roots = [
+    path.join(__dirname, '..', 'app.js'),
+    path.join(__dirname, '..', 'drivers'),
+    path.join(__dirname, '..', 'lib'),
+  ];
+
+  const files = [];
+  const walk = (entry) => {
+    const stat = fs.statSync(entry);
+    if (stat.isDirectory()) {
+      for (const child of fs.readdirSync(entry)) walk(path.join(entry, child));
+    } else if (entry.endsWith('.js')) {
+      files.push(entry);
+    }
+  };
+  roots.forEach(walk);
+
+  const externalImports = [];
+  const requirePattern = /require\(['"]([^'"]+)['"]\)/g;
+
+  for (const file of files) {
+    const source = fs.readFileSync(file, 'utf8');
+    let match;
+    while ((match = requirePattern.exec(source)) !== null) {
+      const specifier = match[1];
+      if (!specifier.startsWith('.') && !allowedExternal.has(specifier)) {
+        externalImports.push(`${path.relative(path.join(__dirname, '..'), file)} -> ${specifier}`);
+      }
+    }
+  }
+
+  assert.deepEqual(externalImports, []);
 });

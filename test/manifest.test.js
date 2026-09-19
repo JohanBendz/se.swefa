@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { builtinModules } = require('node:module');
 
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(__dirname, '..', relativePath), 'utf8'));
@@ -32,7 +33,7 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.8.0');
+  assert.equal(pkg.version, '0.8.1');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');
@@ -88,4 +89,61 @@ test('custom capability definitions are all used by the weather driver', () => {
   const driverCapabilities = new Set(driver.capabilities || []);
 
   assert.deepEqual([...capabilityFiles].sort(), [...driverCapabilities].sort());
+});
+
+test('runtime dependency graph stays empty', () => {
+  const pkg = readJson('package.json');
+  const lock = readJson('package-lock.json');
+
+  assert.deepEqual(pkg.dependencies || {}, {});
+  assert.equal(lock.lockfileVersion, 3);
+  assert.deepEqual(Object.keys(lock.packages || {}), ['']);
+  assert.deepEqual(lock.packages[''].dependencies || {}, {});
+
+  const deviceSource = fs.readFileSync(
+    path.join(__dirname, '..', 'drivers', 'weather', 'device.js'),
+    'utf8',
+  );
+  assert.doesNotMatch(deviceSource, /require\(['"](?:node-fetch|feels)['"]\)/);
+});
+
+test('runtime code imports only Node built-ins, Homey, or local modules', () => {
+  const allowedExternal = new Set([
+    ...builtinModules,
+    ...builtinModules.map(name => `node:${name}`),
+    'homey',
+  ]);
+
+  const roots = [
+    path.join(__dirname, '..', 'app.js'),
+    path.join(__dirname, '..', 'drivers'),
+    path.join(__dirname, '..', 'lib'),
+  ];
+
+  const files = [];
+  const walk = (entry) => {
+    const stat = fs.statSync(entry);
+    if (stat.isDirectory()) {
+      for (const child of fs.readdirSync(entry)) walk(path.join(entry, child));
+    } else if (entry.endsWith('.js')) {
+      files.push(entry);
+    }
+  };
+  roots.forEach(walk);
+
+  const externalImports = [];
+  const requirePattern = /require\(['"]([^'"]+)['"]\)/g;
+
+  for (const file of files) {
+    const source = fs.readFileSync(file, 'utf8');
+    let match;
+    while ((match = requirePattern.exec(source)) !== null) {
+      const specifier = match[1];
+      if (!specifier.startsWith('.') && !allowedExternal.has(specifier)) {
+        externalImports.push(`${path.relative(path.join(__dirname, '..'), file)} -> ${specifier}`);
+      }
+    }
+  }
+
+  assert.deepEqual(externalImports, []);
 });

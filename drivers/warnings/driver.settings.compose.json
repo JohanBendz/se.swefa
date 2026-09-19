@@ -1,0 +1,42 @@
+[
+  {
+    "type": "group",
+    "label": {
+      "en": "Warning location",
+      "sv": "Varningsplats",
+      "no": "Varslingssted"
+    },
+    "children": [
+      {
+        "id": "latitude",
+        "type": "text",
+        "value": "",
+        "label": {
+          "en": "Latitude",
+          "sv": "Latitud",
+          "no": "Breddegrad"
+        }
+      },
+      {
+        "id": "longitude",
+        "type": "text",
+        "value": "",
+        "label": {
+          "en": "Longitude",
+          "sv": "Longitud",
+          "no": "Lengdegrad"
+        }
+      },
+      {
+        "id": "usehomeylocation",
+        "type": "checkbox",
+        "value": true,
+        "label": {
+          "en": "Use Homey geolocation",
+          "sv": "Använd Homeys geolocation",
+          "no": "Bruk Homeys geolokasjon"
+        }
+      }
+    ]
+  }
+]

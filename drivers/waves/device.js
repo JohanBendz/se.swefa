@@ -3,6 +3,7 @@
 const { Device } = require('homey');
 const {
   latestObservation,
+  waveDirectionCandidates,
   compassDirection,
 } = require('../../lib/ocean-utils');
 const { WIND_DIRECTION_CODES } = require('../../lib/weather-utils');
@@ -97,15 +98,7 @@ class WavesDevice extends Device {
         this.homey.app.getOcobsStations('peakWaveDirection'),
       ]);
 
-      const candidates = [];
-      if (meanStations.some(station => station.id === stationId)) {
-        candidates.push('meanWaveDirection');
-      }
-      if (peakStations.some(station => station.id === stationId)) {
-        candidates.push('peakWaveDirection');
-      }
-
-      for (const name of candidates) {
+      for (const name of waveDirectionCandidates(stationId, meanStations, peakStations)) {
         const payload = await this.homey.app.getOcobsObservation(name, stationId, 'latest-day');
         const observation = latestObservation(payload, { maxAgeMs: WAVE_MAX_AGE_MS });
 

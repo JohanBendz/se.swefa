@@ -13,6 +13,7 @@ const {
   sortStationsByDistance,
   parseObservationDate,
   latestObservation,
+  waveDirectionCandidates,
   compassDirection,
   crossedAbove,
   crossedBelow,
@@ -170,4 +171,32 @@ test('sea-level freshness window accepts normal hourly publication lag', () => {
     now: Date.parse('2026-09-20T01:10:00Z'),
     maxAgeMs: 2 * 60 * 60 * 1000,
   }), null);
+});
+
+test('wave direction candidates prefer mean direction and fall back to peak direction', () => {
+  const meanStations = [{ id: 'A' }];
+  const peakStations = [{ id: 'A' }, { id: 'B' }];
+
+  assert.deepEqual(
+    waveDirectionCandidates('A', meanStations, peakStations),
+    ['meanWaveDirection', 'peakWaveDirection'],
+  );
+  assert.deepEqual(
+    waveDirectionCandidates('B', meanStations, peakStations),
+    ['peakWaveDirection'],
+  );
+  assert.deepEqual(
+    waveDirectionCandidates('C', meanStations, peakStations),
+    [],
+  );
+});
+
+test('peak-energy wave direction resolves from the current SMHI catalog title', () => {
+  const catalog = {
+    resource: [
+      { key: '8', title: 'Vågriktning vid Tp (energimax 30 min)' },
+    ],
+  };
+
+  assert.equal(resolveParameterKey(catalog, OCOBS_PARAMETERS.peakWaveDirection), '8');
 });

@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Wave direction",
+    "sv": "Vågriktning",
+    "no": "Bølgeretning"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/waves.svg"
+}

@@ -20,6 +20,9 @@ test('all JSON manifests and locales parse', () => {
     'drivers/warnings/driver.flow.compose.json',
     'drivers/warnings/driver.compose.json',
     'drivers/warnings/driver.settings.compose.json',
+    'drivers/firerisk/driver.flow.compose.json',
+    'drivers/firerisk/driver.compose.json',
+    'drivers/firerisk/driver.settings.compose.json',
     'locales/en.json',
     'locales/sv.json',
     'locales/no.json',
@@ -48,7 +51,7 @@ test('all Flow Compose cards exist in generated app.json', () => {
   const appTriggers = new Set((app.flow?.triggers || []).map(card => card.id));
   const appConditions = new Set((app.flow?.conditions || []).map(card => card.id));
 
-  for (const driverId of ['weather', 'warnings']) {
+  for (const driverId of ['weather', 'warnings', 'firerisk']) {
     const compose = readJson(`drivers/${driverId}/driver.flow.compose.json`);
 
     for (const trigger of compose.triggers || []) {
@@ -92,7 +95,7 @@ test('custom capability definitions are used by at least one driver', () => {
   );
 
   const driverCapabilities = new Set();
-  for (const driverId of ['weather', 'warnings']) {
+  for (const driverId of ['weather', 'warnings', 'firerisk']) {
     const driver = readJson(`drivers/${driverId}/driver.compose.json`);
     for (const capability of driver.capabilities || []) {
       driverCapabilities.add(capability);
@@ -245,6 +248,62 @@ test('warning capabilities use the dedicated warning icon', () => {
   ]) {
     const compose = readJson(`.homeycompose/capabilities/${id}.json`);
     assert.equal(compose.icon, '/assets/icons/warning.svg', `wrong compose icon for ${id}`);
+    assert.equal(app.capabilities[id]?.icon, compose.icon, `generated icon mismatch for ${id}`);
+  }
+});
+
+test('fire-risk driver is generated with its capabilities and Flow cards', () => {
+  const app = readJson('app.json');
+  const driver = (app.drivers || []).find(item => item.id === 'firerisk');
+
+  assert.ok(driver, 'missing generated firerisk driver');
+
+  for (const capability of [
+    'fire_risk_forecast_for_cp',
+    'forest_fire_risk_cp',
+    'grass_fire_risk_cp',
+    'forest_dryness_cp',
+    'fire_risk_approved_cp',
+    'fire_risk_source_cp',
+  ]) {
+    assert.ok(driver.capabilities.includes(capability), `missing fire-risk capability: ${capability}`);
+    assert.ok(app.capabilities[capability], `missing generated fire-risk capability definition: ${capability}`);
+  }
+
+  const triggerIds = new Set((app.flow?.triggers || []).map(card => card.id));
+  const conditionIds = new Set((app.flow?.conditions || []).map(card => card.id));
+
+  for (const id of [
+    'ForestFireRiskChangedTo',
+    'GrassFireRiskChangedTo',
+    'ForestDrynessChangedTo',
+  ]) {
+    assert.ok(triggerIds.has(id), `missing fire-risk trigger: ${id}`);
+  }
+
+  for (const id of [
+    'forest_fire_risk_at_least',
+    'grass_fire_risk_at_least',
+    'forest_dryness_at_least',
+  ]) {
+    assert.ok(conditionIds.has(id), `missing fire-risk condition: ${id}`);
+  }
+});
+
+test('fire-risk capabilities use the dedicated fire icon', () => {
+  const app = readJson('app.json');
+  const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'fire.svg');
+
+  assert.ok(fs.existsSync(iconPath), 'missing fire icon asset');
+
+  for (const id of [
+    'forest_fire_risk_cp',
+    'grass_fire_risk_cp',
+    'forest_dryness_cp',
+    'fire_risk_source_cp',
+  ]) {
+    const compose = readJson(`.homeycompose/capabilities/${id}.json`);
+    assert.equal(compose.icon, '/assets/icons/fire.svg', `wrong compose icon for ${id}`);
     assert.equal(app.capabilities[id]?.icon, compose.icon, `generated icon mismatch for ${id}`);
   }
 });

@@ -1,6 +1,6 @@
-# SMHI Weather Forecast for Homey
+# SMHI Weather Forecast & Warnings for Homey
 
-Weather forecasts from SMHI for Homey, using the current **SNOW1gv1** forecast API.
+Weather forecasts and official weather warnings from SMHI for Homey. Forecasts use the current **SNOW1gv1** API; warnings use SMHI's official impact-based warning feed.
 
 ## Features
 
@@ -16,8 +16,16 @@ Weather forecasts from SMHI for Homey, using the current **SNOW1gv1** forecast A
 - Flow triggers for weather changes and selected sensor changes.
 - Flow conditions for weather, temperature, wind, cloud cover and precipitation.
 - Forecast-oriented conditions such as rain, maximum wind speed and minimum temperature within the next hours.
+- A separate **SMHI Weather Warnings** device for official Yellow, Orange and Red warnings at the configured location.
+- Warning Flow triggers for issued, updated and ended warnings, plus conditions for current warning state and severity.
 
 The app is intended for locations within SMHI's SNOW forecast area and is primarily presented for Sweden, Norway, Denmark and Finland.
+
+## Weather warnings
+
+v0.9.0 adds a separate **SMHI Weather Warnings** device. It matches the configured/Homey coordinates against SMHI's actual GeoJSON warning areas and exposes the highest-priority matching warning, validity period, warning area, warning count and SMHI as the source.
+
+The driver intentionally handles official **Yellow, Orange and Red** weather warnings. SMHI `MESSAGE` entries are excluded from this device. Official warning text is shown from SMHI without machine translation or rewriting.
 
 ## Flow cards
 
@@ -73,6 +81,18 @@ homey app run
 - Bugs and feature requests: [GitHub Issues](https://github.com/JohanBendz/se.swefa/issues)
 
 ## Change log
+
+### v0.9.0
+
+- Added a separate **SMHI Weather Warnings** device.
+- Matches locations against SMHI GeoJSON warning polygons, including marine warning areas.
+- Supports official Yellow, Orange and Red warning levels.
+- Shows warning status, level, event, area, validity period, count and source.
+- Added Flow triggers for warning issued, updated and ended.
+- Added Flow conditions for warning present, active now and minimum warning level.
+- Added shared warning-feed caching and regression tests for geometry and state transitions.
+- Added dedicated warning icons.
+- Added `npm run clean-check` to prevent branch/test work from starting with a dirty working tree.
 
 ### v0.8.1
 

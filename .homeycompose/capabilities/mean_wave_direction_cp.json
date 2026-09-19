@@ -1,9 +1,9 @@
 {
   "type": "number",
   "title": {
-    "en": "Mean wave direction",
-    "sv": "Medelvågriktning",
-    "no": "Middel bølgeretning"
+    "en": "Wave direction",
+    "sv": "Vågriktning",
+    "no": "Bølgeretning"
   },
   "getable": true,
   "setable": false,

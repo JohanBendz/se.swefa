@@ -6,13 +6,13 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.9.0",
+  "version": "0.10.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
-    "en": "Weather forecasts and official weather warnings from SMHI for Homey",
-    "sv": "Väderprognoser och officiella vädervarningar från SMHI för Homey",
-    "no": "Værprognoser og offisielle værvarsler fra SMHI for Homey"
+    "en": "Weather forecasts, official weather warnings and fire-risk forecasts from SMHI for Homey",
+    "sv": "Väderprognoser, officiella vädervarningar och brandriskprognoser från SMHI för Homey",
+    "no": "Værprognoser, offisielle værvarsler og brannrisikoprognoser fra SMHI for Homey"
   },
   "tags": {
     "en": [
@@ -24,7 +24,8 @@
       "Norway",
       "Denmark",
       "Finland",
-      "Warnings"
+      "Warnings",
+      "Fire Risk"
     ],
     "sv": [
       "Klimat",
@@ -35,7 +36,8 @@
       "Norge",
       "Danmark",
       "Finland",
-      "Varningar"
+      "Varningar",
+      "Brandrisk"
     ],
     "no": [
       "Klima",
@@ -46,7 +48,8 @@
       "Norge",
       "Danmark",
       "Finland",
-      "Varsler"
+      "Varsler",
+      "Brannrisiko"
     ]
   },
   "author": {

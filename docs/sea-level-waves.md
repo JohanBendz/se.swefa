@@ -33,7 +33,7 @@ Capabilities:
 - SMHI quality code
 - Source
 
-The device polls every five minutes. The primary observation must be no more than 30 minutes old. Missing or stale primary data makes the device unavailable rather than presenting an old value as current.
+The device polls every five minutes and reads the latest-day feed so it can evaluate the actual newest observation timestamp. SMHI states that ocean observations are collected hourly and normally presented within 30 minutes, so the primary observation is accepted up to two hours old. Missing or older primary data makes the device unavailable rather than presenting stale values as current.
 
 Flow cards:
 

@@ -21,7 +21,8 @@ const {
 test('ocean parameter resolver prefers the catalog title over fallback IDs', () => {
   const catalog = {
     resource: [
-      { key: '99', title: 'Havsvattenstånd RH2000, minutvärde' },
+      { key: '99', title: 'Havsvattenstånd, minutvärde' },
+      { key: '14', title: 'Havsvattenstånd, RW minutvärde' },
       { key: '42', title: 'Våghöjd, signifikant 30 min' },
     ],
   };
@@ -33,10 +34,18 @@ test('ocean parameter resolver prefers the catalog title over fallback IDs', () 
 test('fallback parameter metadata must match the expected semantic title', () => {
   assert.equal(
     validateParameterMetadata(
-      { key: '13', title: 'Havsvattenstånd RH2000, minutvärde' },
+      { key: '13', title: 'Havsvattenstånd, minutvärde' },
       OCOBS_PARAMETERS.seaLevelRh2000,
     ),
     true,
+  );
+
+  assert.equal(
+    validateParameterMetadata(
+      { key: '14', title: 'Havsvattenstånd, RW minutvärde' },
+      OCOBS_PARAMETERS.seaLevelRh2000,
+    ),
+    false,
   );
 
   assert.equal(

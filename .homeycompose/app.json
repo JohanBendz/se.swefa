@@ -5,13 +5,13 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.8.1",
+  "version": "0.9.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
-    "en": "Weather information and prognoses for Sweden, Norway, Denmark and Finland",
-    "sv": "Väderinformation och prognoser för Sverige, Norge, Danmark och Finland",
-    "no": "Værinformasjon og prognoser for Sverige, Norge, Danmark og Finland"
+    "en": "Weather forecasts and official weather warnings from SMHI for Homey",
+    "sv": "Väderprognoser och officiella vädervarningar från SMHI för Homey",
+    "no": "Værprognoser og offisielle værvarsler fra SMHI for Homey"
   },
   "tags": {
     "en": [
@@ -22,7 +22,8 @@
       "Sweden",
       "Norway",
       "Denmark",
-      "Finland"
+      "Finland",
+      "Warnings"
     ],
     "sv": [
       "Klimat",
@@ -32,7 +33,8 @@
       "Sverige",
       "Norge",
       "Danmark",
-      "Finland"
+      "Finland",
+      "Varningar"
     ],
     "no": [
       "Klima",
@@ -42,7 +44,8 @@
       "Sverige",
       "Norge",
       "Danmark",
-      "Finland"
+      "Finland",
+      "Varsler"
     ]
   },
   "author": {

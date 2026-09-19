@@ -3125,7 +3125,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     },
     "smhi_warning_level_cp": {
       "type": "string",
@@ -3137,7 +3137,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     },
     "smhi_warning_event_cp": {
       "type": "string",
@@ -3149,7 +3149,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     },
     "smhi_warning_area_cp": {
       "type": "string",
@@ -3161,7 +3161,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     },
     "smhi_warning_valid_from_cp": {
       "type": "string",
@@ -3198,7 +3198,7 @@
       "setable": false,
       "decimals": 0,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     },
     "smhi_warning_source_cp": {
       "type": "string",
@@ -3210,7 +3210,7 @@
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
+      "icon": "/assets/icons/warning.svg"
     }
   }
 }

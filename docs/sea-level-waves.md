@@ -56,22 +56,22 @@ Optional measurements from the same station:
 
 - Maximum wave height — parameter 11
 - Mean wave period — parameter 10
-- Mean wave direction — parameter 7
+- Wave direction — prefers mean direction (parameter 7) and falls back to direction at Tp / peak energy (parameter 8) when that is the current direction series for the buoy
 
 Capabilities:
 
 - Significant wave height (m)
 - Maximum wave height (m), when supported
 - Mean wave period (s), when supported
-- Mean wave direction (degrees), when supported
-- Mean wave direction as compass heading
+- Wave direction (degrees), when supported
+- Wave direction as compass heading
 - Station
 - Observation time
 - Observation age
 - Quality
 - Source
 
-Wave observations are treated as station measurements. Direction is the direction **from which** the waves come, matching SMHI's convention.
+Wave observations are treated as station measurements. Direction is the direction **from which** the waves come, matching SMHI's convention. The device prefers the 30-minute mean direction when a buoy publishes a fresh value; otherwise it uses SMHI's direction at Tp (the direction at peak wave energy).
 
 The primary significant-wave-height observation must be no more than three hours old. Optional measurements may be absent or temporarily unavailable without making the whole Waves device unavailable.
 

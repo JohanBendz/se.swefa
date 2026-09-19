@@ -81,5 +81,8 @@
   "fire_risk_dryness_3": "Moderat vått",
   "fire_risk_dryness_4": "Tørt",
   "fire_risk_dryness_5": "Svært tørt",
-  "fire_risk_dryness_6": "Ekstremt tørt"
+  "fire_risk_dryness_6": "Ekstremt tørt",
+  "ocean_quality_g": "G – Kontrollert og godkjent",
+  "ocean_quality_y": "Y – Grovt kontrollert / mistenkt / aggregert",
+  "ocean_quality_o": "O – Ukontrollert"
 }

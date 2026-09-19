@@ -6,7 +6,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.7.1",
+  "version": "0.8.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -2622,30 +2622,6 @@
       "units": "%",
       "uiComponent": "sensor",
       "icon": "/assets/icons/pct.svg"
-    },
-    "precipitation_category_cp": {
-      "type": "number",
-      "title": {
-        "en": "Precipitation category",
-        "sv": "Nederbördskategori",
-        "no": "Nedbørskategori"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/pct.svg"
-    },
-    "weather_symbol_cp": {
-      "type": "number",
-      "title": {
-        "en": "Weather symbol",
-        "sv": "Vädersymbol",
-        "no": "Værsymbol"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icon.svg"
     },
     "wind_gust_speed_cp": {
       "type": "number",

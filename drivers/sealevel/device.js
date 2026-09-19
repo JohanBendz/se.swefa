@@ -70,12 +70,10 @@ class SeaLevelDevice extends Device {
   }
 
   getStation() {
-    const data = this.getData();
-
     return {
-      id: String(data.stationId ?? ''),
-      name: String(data.stationName ?? ''),
-      owner: String(data.stationOwner ?? ''),
+      id: String(this.getStoreValue('stationId') ?? ''),
+      name: String(this.getStoreValue('stationName') ?? ''),
+      owner: String(this.getStoreValue('stationOwner') ?? ''),
     };
   }
 

@@ -1,6 +1,6 @@
-# SMHI Weather Forecast & Warnings for Homey
+# SMHI Weather Forecast, Warnings & Fire Risk for Homey
 
-Weather forecasts and official weather warnings from SMHI for Homey. Forecasts use the current **SNOW1gv1** API; warnings use SMHI's official impact-based warning feed.
+Weather forecasts, official weather warnings and fire-risk forecasts from SMHI for Homey. Weather forecasts use **SNOW1gv1**, warnings use SMHI's official impact-based warning feed, and fire risk uses the daily **FWIF1G** point forecast.
 
 ## Features
 
@@ -18,6 +18,8 @@ Weather forecasts and official weather warnings from SMHI for Homey. Forecasts u
 - Forecast-oriented conditions such as rain, maximum wind speed and minimum temperature within the next hours.
 - A separate **SMHI Weather Warnings** device for official Yellow, Orange and Red warnings at the configured location.
 - Warning Flow triggers for issued, updated and ended warnings, plus conditions for current warning state and severity.
+- A separate **SMHI Fire Risk** device with daily forest fire risk, grass fire risk and forest fuel dryness forecasts from today through five days ahead.
+- Fire-risk Flow triggers for class changes and conditions for minimum risk/dryness levels.
 
 The app is intended for locations within SMHI's SNOW forecast area and is primarily presented for Sweden, Norway, Denmark and Finland.
 
@@ -26,6 +28,16 @@ The app is intended for locations within SMHI's SNOW forecast area and is primar
 v0.9.0 adds a separate **SMHI Weather Warnings** device. It matches the configured/Homey coordinates against SMHI's actual GeoJSON warning areas and exposes the highest-priority matching warning, validity period, warning area, warning count and SMHI as the source.
 
 The driver intentionally handles official **Yellow, Orange and Red** weather warnings. SMHI `MESSAGE` entries are excluded from this device. Official warning text is shown from SMHI without machine translation or rewriting.
+
+## Fire risk
+
+v0.10.0 adds a separate **SMHI Fire Risk** device using SMHI's daily FWIF1G point forecast. It keeps three SMHI concepts separate: **forest fire risk**, **grass fire risk** and **forest fuel dryness**.
+
+The device supports today through five days ahead, Homey's geolocation or custom coordinates, and displays the source approval time. Forest fire risk and forest fuel dryness preserve SMHI's **1–5E** presentation; API class `6` is displayed as `5E`. Missing/off-season model values are not treated as low risk.
+
+If a reliable forecast cannot be obtained for the selected location/day, the device becomes unavailable rather than presenting stale data as current.
+
+**Fire risk is a forecast, not an official fire ban.** Users must follow fire bans and restrictions issued by the responsible authorities.
 
 ## Flow cards
 
@@ -81,6 +93,18 @@ homey app run
 - Bugs and feature requests: [GitHub Issues](https://github.com/JohanBendz/se.swefa/issues)
 
 ## Change log
+
+### v0.10.0
+
+- Added a separate **SMHI Fire Risk** device.
+- Daily forecasts for today through five days ahead.
+- Shows forest fire risk, grass fire risk and forest fuel dryness as separate SMHI model outputs.
+- Preserves SMHI's 1–5E presentation for forest fire risk and fuel dryness.
+- Added Flow triggers when a fire-risk/dryness class changes to a selected level.
+- Added Flow conditions for minimum forest-fire risk, grass-fire risk and forest dryness.
+- Added point-response caching, source freshness validation and safe unavailable handling when reliable data is missing.
+- Added dedicated fire-risk icons and regression tests.
+- Fire-risk forecasts are explicitly kept separate from official fire bans.
 
 ### v0.9.0
 

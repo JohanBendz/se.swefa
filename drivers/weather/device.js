@@ -1,8 +1,8 @@
 'use strict';
 
 const { Device } = require('homey');
-const fetch = require('node-fetch');
-const Feels = require('feels');
+const { requestJson } = require('../../lib/http-json');
+const { calculateFeelsLike } = require('../../lib/feels-like');
 const {
   WIND_DIRECTION_CODES,
   formatCoordinate,
@@ -91,27 +91,8 @@ class WeatherDevice extends Device {
     let lastError = null;
 
     for (let attempt = 1; attempt <= retries; attempt += 1) {
-      const controller = new AbortController();
-      const timeout = this.homey.setTimeout(() => controller.abort(), timeoutMs);
-
       try {
-        const response = await fetch(url, {
-          signal: controller.signal,
-          headers: { Accept: 'application/json' },
-        });
-
-        if (!response.ok) {
-          const body = await response.text().catch(() => '');
-          throw new Error(`SMHI request failed: ${response.status} ${response.statusText} ${body.slice(0, 300)}`);
-        }
-
-        const contentType = response.headers.get('content-type') || '';
-        if (!contentType.includes('json')) {
-          const body = await response.text().catch(() => '');
-          throw new Error(`SMHI returned non-JSON: ${contentType} ${body.slice(0, 300)}`);
-        }
-
-        return await response.json();
+        return await requestJson(url, { timeoutMs });
       } catch (error) {
         lastError = error;
 
@@ -119,8 +100,6 @@ class WeatherDevice extends Device {
           this.log(`SMHI request attempt ${attempt} failed; retrying`);
           await new Promise(resolve => this.homey.setTimeout(resolve, 300 * (2 ** (attempt - 1))));
         }
-      } finally {
-        this.homey.clearTimeout(timeout);
       }
     }
 
@@ -257,14 +236,8 @@ class WeatherDevice extends Device {
       && typeof relativeHumidity === 'number'
       && typeof windSpeed === 'number'
     ) {
-      const config = {
-        temp: airTemperature,
-        humidity: relativeHumidity,
-        speed: windSpeed,
-        units: { temp: 'c', speed: 'mps' },
-      };
-
-      feelsLike = Math.round(new Feels(config).like() * 100) / 100;
+      const calculated = calculateFeelsLike(airTemperature, relativeHumidity, windSpeed);
+      feelsLike = calculated === null ? null : Math.round(calculated * 100) / 100;
     }
 
     const forecastFor = this.formatForecastTime(forecastData.time);

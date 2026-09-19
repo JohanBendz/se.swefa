@@ -218,3 +218,33 @@ test('runtime JavaScript parses without syntax errors', () => {
     );
   }
 });
+
+test('clean working tree guard is wired into npm scripts', () => {
+  const pkg = readJson('package.json');
+
+  assert.equal(pkg.scripts?.['clean-check'], 'node scripts/clean-check.js');
+  assert.ok(
+    fs.existsSync(path.join(__dirname, '..', 'scripts', 'clean-check.js')),
+    'missing scripts/clean-check.js',
+  );
+});
+
+test('warning capabilities use the dedicated warning icon', () => {
+  const app = readJson('app.json');
+  const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'warning.svg');
+
+  assert.ok(fs.existsSync(iconPath), 'missing warning icon asset');
+
+  for (const id of [
+    'smhi_warning_status_cp',
+    'smhi_warning_level_cp',
+    'smhi_warning_event_cp',
+    'smhi_warning_area_cp',
+    'smhi_warning_count_cp',
+    'smhi_warning_source_cp',
+  ]) {
+    const compose = readJson(`.homeycompose/capabilities/${id}.json`);
+    assert.equal(compose.icon, '/assets/icons/warning.svg', `wrong compose icon for ${id}`);
+    assert.equal(app.capabilities[id]?.icon, compose.icon, `generated icon mismatch for ${id}`);
+  }
+});

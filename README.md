@@ -48,7 +48,13 @@ The app has **zero third-party runtime dependencies**. Network access uses Node'
 
 ## Development
 
-Prepare npm metadata and run the regression tests:
+Before switching branches or starting a new test cycle, verify that the local working tree is clean:
+
+```bash
+npm run clean-check
+```
+
+Then prepare npm metadata and run the regression tests:
 
 ```bash
 npm ci

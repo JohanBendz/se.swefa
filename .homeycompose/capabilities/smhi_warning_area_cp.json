@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Warning area",
+    "sv": "Varningsområde",
+    "no": "Varslingsområde"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

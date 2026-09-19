@@ -3,7 +3,7 @@
 const { Device } = require('homey');
 const { latestObservation } = require('../../lib/ocean-utils');
 
-const SEA_LEVEL_MAX_AGE_MS = 30 * 60 * 1000;
+const SEA_LEVEL_MAX_AGE_MS = 2 * 60 * 60 * 1000;
 
 class SeaLevelDevice extends Device {
   constructor(...args) {
@@ -45,14 +45,18 @@ class SeaLevelDevice extends Device {
       const payload = await this.homey.app.getOcobsObservation(
         'seaLevelRh2000',
         station.id,
-        'latest-hour',
+        'latest-day',
       );
       const observation = latestObservation(payload, {
         maxAgeMs: SEA_LEVEL_MAX_AGE_MS,
       });
 
       if (!observation) {
-        throw new Error('No sufficiently recent RH2000 sea-level observation');
+        const latest = latestObservation(payload);
+        const age = latest ? `${latest.ageMinutes} min` : 'unknown';
+        throw new Error(
+          `No sufficiently recent RH2000 sea-level observation for ${station.name || station.id}; latest age: ${age}`,
+        );
       }
 
       await this.updateCapabilities(station, observation);

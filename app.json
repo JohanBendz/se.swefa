@@ -3967,6 +3967,153 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/fire.svg"
+    },
+    "ocean_station_cp": {
+      "type": "string",
+      "title": {
+        "en": "Station",
+        "sv": "Station",
+        "no": "Stasjon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "ocean_observed_at_cp": {
+      "type": "string",
+      "title": {
+        "en": "Observed at",
+        "sv": "Observerat",
+        "no": "Observert"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "ocean_observation_age_cp": {
+      "type": "number",
+      "title": {
+        "en": "Observation age",
+        "sv": "Observationens ålder",
+        "no": "Observasjonens alder"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "min",
+      "decimals": 0,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "ocean_quality_cp": {
+      "type": "string",
+      "title": {
+        "en": "Data quality",
+        "sv": "Datakvalitet",
+        "no": "Datakvalitet"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "ocean_source_cp": {
+      "type": "string",
+      "title": {
+        "en": "Source",
+        "sv": "Källa",
+        "no": "Kilde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "sea_level_rh2000_cp": {
+      "type": "number",
+      "title": {
+        "en": "Sea level RH2000",
+        "sv": "Havsvattenstånd RH2000",
+        "no": "Havnivå RH2000"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "cm",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/sea-level.svg"
+    },
+    "significant_wave_height_cp": {
+      "type": "number",
+      "title": {
+        "en": "Significant wave height",
+        "sv": "Signifikant våghöjd",
+        "no": "Signifikant bølgehøyde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "m",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "maximum_wave_height_cp": {
+      "type": "number",
+      "title": {
+        "en": "Maximum wave height",
+        "sv": "Maximal våghöjd",
+        "no": "Maksimal bølgehøyde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "m",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_period_cp": {
+      "type": "number",
+      "title": {
+        "en": "Mean wave period",
+        "sv": "Medelvågperiod",
+        "no": "Middel bølgeperiode"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "s",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_direction_cp": {
+      "type": "number",
+      "title": {
+        "en": "Mean wave direction",
+        "sv": "Medelvågriktning",
+        "no": "Middel bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "°",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_direction_heading_cp": {
+      "type": "string",
+      "title": {
+        "en": "Wave direction",
+        "sv": "Vågriktning",
+        "no": "Bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
     }
   }
 }

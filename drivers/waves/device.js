@@ -101,15 +101,13 @@ class WavesDevice extends Device {
   }
 
   getStation() {
-    const data = this.getData();
-
     return {
-      id: String(data.stationId ?? ''),
-      name: String(data.stationName ?? ''),
-      owner: String(data.stationOwner ?? ''),
-      supportsMaximumWaveHeight: Boolean(data.supportsMaximumWaveHeight),
-      supportsMeanWaveDirection: Boolean(data.supportsMeanWaveDirection),
-      supportsMeanWavePeriod: Boolean(data.supportsMeanWavePeriod),
+      id: String(this.getStoreValue('stationId') ?? ''),
+      name: String(this.getStoreValue('stationName') ?? ''),
+      owner: String(this.getStoreValue('stationOwner') ?? ''),
+      supportsMaximumWaveHeight: Boolean(this.getStoreValue('supportsMaximumWaveHeight')),
+      supportsMeanWaveDirection: Boolean(this.getStoreValue('supportsMeanWaveDirection')),
+      supportsMeanWavePeriod: Boolean(this.getStoreValue('supportsMeanWavePeriod')),
     };
   }
 

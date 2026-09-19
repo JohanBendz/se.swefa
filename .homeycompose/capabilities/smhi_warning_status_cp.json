@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Warning status",
+    "sv": "Varningsstatus",
+    "no": "Varslingsstatus"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

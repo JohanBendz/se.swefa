@@ -11,6 +11,7 @@ const {
   flattenWeatherWarnings,
   getWeatherWarningsForPoint,
   warningSignature,
+  diffWarnings,
 } = require('../lib/warning-utils');
 
 const square = {
@@ -140,4 +141,50 @@ test('warning signatures change when the published warning changes', () => {
   const second = { ...first, published: '2026-09-19T09:00:00Z' };
 
   assert.notEqual(warningSignature(first), warningSignature(second));
+});
+
+test('warning transition diff identifies issued, updated and ended warnings', () => {
+  const now = Date.parse('2026-09-19T12:00:00Z');
+
+  const first = flattenWeatherWarnings(payload('YELLOW'), now)[0];
+  const unchanged = { ...first };
+  const updated = {
+    ...first,
+    levelCode: 'ORANGE',
+    level: { ...first.level, code: 'ORANGE', en: 'Orange', sv: 'Orange' },
+    published: '2026-09-19T09:00:00Z',
+  };
+  const issued = {
+    ...first,
+    id: '201',
+    parentId: '101',
+  };
+  const ended = {
+    ...first,
+    id: '199',
+    parentId: '99',
+  };
+
+  const noChanges = diffWarnings([first], [unchanged]);
+  assert.deepEqual(noChanges, { issued: [], updated: [], ended: [] });
+
+  const changes = diffWarnings([first, ended], [updated, issued]);
+  assert.deepEqual(changes.issued.map(warning => warning.id), ['201']);
+  assert.deepEqual(changes.updated.map(warning => warning.id), ['200']);
+  assert.deepEqual(changes.ended.map(warning => warning.id), ['199']);
+});
+
+test('warning transition diff treats leaving the matched area as ended', () => {
+  const now = Date.parse('2026-09-19T12:00:00Z');
+  const warnings = payload('YELLOW');
+
+  const inside = getWeatherWarningsForPoint(warnings, 15, 60, now);
+  const outside = getWeatherWarningsForPoint(warnings, 25, 60, now);
+  const changes = diffWarnings(inside, outside);
+
+  assert.equal(inside.length, 1);
+  assert.equal(outside.length, 0);
+  assert.deepEqual(changes.issued, []);
+  assert.deepEqual(changes.updated, []);
+  assert.deepEqual(changes.ended.map(warning => warning.id), ['200']);
 });

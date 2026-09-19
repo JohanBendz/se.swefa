@@ -1,0 +1,204 @@
+{
+  "triggers": [
+    {
+      "id": "SeaLevelCrossedAbove",
+      "title": {
+        "en": "Sea level rises above",
+        "sv": "Havsvattenståndet stiger över",
+        "no": "Havnivå stiger over"
+      },
+      "titleFormatted": {
+        "en": "Sea level rises above [[cm]] cm RH2000",
+        "sv": "Havsvattenståndet stiger över [[cm]] cm RH2000",
+        "no": "Havnivå stiger over [[cm]] cm RH2000"
+      },
+      "hint": {
+        "en": "Triggers only when the measured level crosses the threshold from at or below it.",
+        "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller under den.",
+        "no": "Utløses bare når målt nivå krysser grensen nedenfra."
+      },
+      "tokens": [
+        {
+          "name": "sea_level",
+          "type": "number",
+          "title": {
+            "en": "Sea level",
+            "sv": "Havsvattenstånd",
+            "no": "Havnivå"
+          }
+        },
+        {
+          "name": "previous_sea_level",
+          "type": "number",
+          "title": {
+            "en": "Previous sea level",
+            "sv": "Föregående havsvattenstånd",
+            "no": "Forrige havnivå"
+          }
+        },
+        {
+          "name": "station",
+          "type": "string",
+          "title": {
+            "en": "Station",
+            "sv": "Station",
+            "no": "Stasjon"
+          }
+        },
+        {
+          "name": "observed_at",
+          "type": "string",
+          "title": {
+            "en": "Observed at",
+            "sv": "Observerat",
+            "no": "Observert"
+          }
+        },
+        {
+          "name": "quality",
+          "type": "string",
+          "title": {
+            "en": "Data quality",
+            "sv": "Datakvalitet",
+            "no": "Datakvalitet"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "cm",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "SeaLevelCrossedBelow",
+      "title": {
+        "en": "Sea level falls below",
+        "sv": "Havsvattenståndet sjunker under",
+        "no": "Havnivå faller under"
+      },
+      "titleFormatted": {
+        "en": "Sea level falls below [[cm]] cm RH2000",
+        "sv": "Havsvattenståndet sjunker under [[cm]] cm RH2000",
+        "no": "Havnivå faller under [[cm]] cm RH2000"
+      },
+      "hint": {
+        "en": "Triggers only when the measured level crosses the threshold from at or above it.",
+        "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller över den.",
+        "no": "Utløses bare når målt nivå krysser grensen ovenfra."
+      },
+      "tokens": [
+        {
+          "name": "sea_level",
+          "type": "number",
+          "title": {
+            "en": "Sea level",
+            "sv": "Havsvattenstånd",
+            "no": "Havnivå"
+          }
+        },
+        {
+          "name": "previous_sea_level",
+          "type": "number",
+          "title": {
+            "en": "Previous sea level",
+            "sv": "Föregående havsvattenstånd",
+            "no": "Forrige havnivå"
+          }
+        },
+        {
+          "name": "station",
+          "type": "string",
+          "title": {
+            "en": "Station",
+            "sv": "Station",
+            "no": "Stasjon"
+          }
+        },
+        {
+          "name": "observed_at",
+          "type": "string",
+          "title": {
+            "en": "Observed at",
+            "sv": "Observerat",
+            "no": "Observert"
+          }
+        },
+        {
+          "name": "quality",
+          "type": "string",
+          "title": {
+            "en": "Data quality",
+            "sv": "Datakvalitet",
+            "no": "Datakvalitet"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "cm",
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "sea_level_above",
+      "title": {
+        "en": "Sea level is above",
+        "sv": "Havsvattenståndet är över",
+        "no": "Havnivå er over"
+      },
+      "titleFormatted": {
+        "en": "Sea level is above [[cm]] cm RH2000",
+        "sv": "Havsvattenståndet är över [[cm]] cm RH2000",
+        "no": "Havnivå er over [[cm]] cm RH2000"
+      },
+      "args": [
+        {
+          "name": "cm",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "sea_level_below",
+      "title": {
+        "en": "Sea level is below",
+        "sv": "Havsvattenståndet är under",
+        "no": "Havnivå er under"
+      },
+      "titleFormatted": {
+        "en": "Sea level is below [[cm]] cm RH2000",
+        "sv": "Havsvattenståndet är under [[cm]] cm RH2000",
+        "no": "Havnivå er under [[cm]] cm RH2000"
+      },
+      "args": [
+        {
+          "name": "cm",
+          "type": "number"
+        }
+      ]
+    }
+  ]
+}

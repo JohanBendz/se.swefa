@@ -47,6 +47,8 @@ class SeaLevelDriver extends Driver {
       name: this.pairName('Sea Level', station),
       data: {
         id: `sealevel-${station.id}`,
+      },
+      store: {
         stationId: station.id,
         stationName: station.name,
         stationOwner: station.owner,

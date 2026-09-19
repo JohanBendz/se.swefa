@@ -14,7 +14,7 @@
       },
       "tokens": [
         {
-          "name": "risk_level",
+          "name": "risk_level_text",
           "type": "string",
           "title": {
             "en": "Risk level",
@@ -121,7 +121,7 @@
       },
       "tokens": [
         {
-          "name": "risk_level",
+          "name": "risk_level_text",
           "type": "string",
           "title": {
             "en": "Risk level",
@@ -228,7 +228,7 @@
       },
       "tokens": [
         {
-          "name": "dryness_level",
+          "name": "dryness_level_text",
           "type": "string",
           "title": {
             "en": "Dryness level",

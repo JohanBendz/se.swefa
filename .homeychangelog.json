@@ -49,9 +49,9 @@
     "sv": "Migrerade väderbackend från det avvecklade PMP3gv2-API:et till SMHI SNOW1gv1.",
     "no": "Migrerte vær-backend fra det avviklede PMP3gv2-API-et til SMHI SNOW1gv1."
   },
-  "0.7.1": {
-    "en": "Stabilized SNOW1gv1: fixed wind direction, cloud-cover units, precipitation mapping, Flow conditions/triggers, retries and Homey timezone handling. Added weather changed-to/from-to triggers and regression tests.",
-    "sv": "Stabiliserade SNOW1gv1: rättade vindriktning, molnenheter, nederbördsmappning, Flow-villkor/triggers, retries och Homeys tidszon. Lade till väder ändras-till/från-till samt regressionstester.",
-    "no": "Stabiliserte SNOW1gv1: rettet vindretning, skydekkeenheter, nedbørsmapping, Flow-vilkår/triggere, retries og Homeys tidssone. La til vær endres-til/fra-til og regresjonstester."
+  "0.8.0": {
+    "en": "Stabilized the SNOW1gv1 migration. Corrected wind headings, cloud cover and precipitation interpretation; fixed forecast settings lag; completed Flow conditions/triggers; improved retry/timezone handling and added regression tests. IMPORTANT: Flows adjusted to compensate for incorrect v0.7.0 wind headings or precipitation classification may need review.",
+    "sv": "Stabiliserade migreringen till SNOW1gv1. Rättade vindriktning, molnighet och nederbördstolkning; fixade eftersläpande prognosinställning; färdigställde Flow-villkor/triggers; förbättrade retry/tidszonshantering och lade till regressionstester. VIKTIGT: Flöden som anpassats för att kompensera felaktig vindriktning eller nederbördsklassning i v0.7.0 kan behöva ses över.",
+    "no": "Stabiliserte migreringen til SNOW1gv1. Rettet vindretning, skydekke og nedbørtolkning; fikset etterslep i prognoseinnstillingen; fullførte Flow-vilkår/triggere; forbedret retry/tidssonehåndtering og la til regresjonstester. VIKTIG: Flows som er tilpasset for å kompensere for feil vindretning eller nedbørsklassifisering i v0.7.0 kan måtte gjennomgås."
   }
 }

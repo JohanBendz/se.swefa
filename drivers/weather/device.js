@@ -21,9 +21,7 @@ class WeatherDevice extends Device {
     super(...args);
 
     this.weatherData = null;
-    this.lastFetchTime = 0;
     this.pollInterval = 1800000;
-    this.cacheDuration = 0;
 
     this._fetchPromise = null;
     this._lastPrecipitationCategory = 0;
@@ -61,7 +59,6 @@ class WeatherDevice extends Device {
 
   async onSettings({ newSettings, changedKeys }) {
     if (changedKeys?.length) {
-      this.lastFetchTime = 0;
       await this.fetchSMHIData(true, newSettings);
     }
   }
@@ -81,16 +78,9 @@ class WeatherDevice extends Device {
   }
 
   async _fetchSMHIData(force = false, settingsOverride = null) {
-    const currentTime = Date.now();
-
-    if (!force && this.cacheDuration > 0 && currentTime - this.lastFetchTime < this.cacheDuration && this.weatherData) {
-      return;
-    }
-
     try {
       const data = await this.getWeatherData(settingsOverride);
       this.weatherData = data;
-      this.lastFetchTime = currentTime;
       await this.updateCapabilities(settingsOverride);
     } catch (error) {
       this.error('Failed to fetch SMHI data:', error);

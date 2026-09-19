@@ -58,5 +58,9 @@
   "precipitation_situation7": "Hagel",
   "precipitation_situation8": "Iskorn",
   "precipitation_situation9": "Snöhagel",
-  "precipitation_situation10": "Åskväder"
+  "precipitation_situation10": "Åskväder",
+  "smhi_warning_status_none": "Ingen varning",
+  "smhi_warning_status_active": "Aktiv",
+  "smhi_warning_status_upcoming": "Kommande",
+  "smhi_warning_level_none": "Ingen"
 }

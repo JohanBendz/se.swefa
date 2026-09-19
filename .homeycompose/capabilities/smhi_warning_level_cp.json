@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Warning level",
+    "sv": "Varningsnivå",
+    "no": "Varslingsnivå"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/warning.svg"
+}

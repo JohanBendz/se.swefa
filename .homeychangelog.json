@@ -58,5 +58,10 @@
     "en": "Removed all third-party runtime dependencies. Replaced node-fetch with Node HTTPS and the feels package with a local, regression-tested implementation. Added a zero-dependency CI guard and modern npm lockfile.",
     "sv": "Tog bort alla externa runtime-beroenden. Ersatte node-fetch med Node HTTPS och feels-paketet med en lokal, regressionstestad implementation. Lade till CI-skydd för noll beroenden och modern npm-lockfil.",
     "no": "Fjernet alle eksterne runtime-avhengigheter. Erstattet node-fetch med Node HTTPS og feels-pakken med en lokal, regresjonstestet implementasjon. La til CI-vern for null avhengigheter og moderne npm-lockfil."
+  },
+  "0.9.0": {
+    "en": "Added a separate SMHI Weather Warnings device using official Yellow, Orange and Red warnings with GeoJSON location matching, status/validity capabilities and Flow triggers for issued, updated and ended warnings. Added warning conditions and a clean-working-tree development guard.",
+    "sv": "Lade till en separat SMHI Vädervarningar-enhet som använder officiella gula, orange och röda varningar med GeoJSON-matchning mot plats, status/giltighet och Flow-triggers för utfärdade, uppdaterade och avslutade varningar. Lade även till varningsvillkor och kontroll av ren arbetskatalog för utveckling.",
+    "no": "La til en separat SMHI værvarsel-enhet som bruker offisielle gule, oransje og røde varsler med GeoJSON-matching mot sted, status/gyldighet og Flow-triggere for utstedte, oppdaterte og avsluttede varsler. La også til varslingsvilkår og kontroll av ren arbeidsmappe for utvikling."
   }
 }

@@ -1,0 +1,35 @@
+{
+  "name": {
+    "en": "SMHI Weather Warnings",
+    "sv": "SMHI Vädervarningar",
+    "no": "SMHI værvarsler"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "smhi_warning_status_cp",
+    "smhi_warning_level_cp",
+    "smhi_warning_event_cp",
+    "smhi_warning_area_cp",
+    "smhi_warning_valid_from_cp",
+    "smhi_warning_valid_to_cp",
+    "smhi_warning_count_cp",
+    "smhi_warning_source_cp"
+  ],
+  "images": {
+    "large": "/drivers/weather/assets/images/large.png",
+    "small": "/drivers/weather/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

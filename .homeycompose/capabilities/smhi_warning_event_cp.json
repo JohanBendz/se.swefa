@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Warning",
+    "sv": "Varning",
+    "no": "Varsel"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/warning.svg"
+}

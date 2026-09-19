@@ -1,0 +1,13 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Warnings for location",
+    "sv": "Varningar för platsen",
+    "no": "Varsler for stedet"
+  },
+  "getable": true,
+  "setable": false,
+  "decimals": 0,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/warning.svg"
+}

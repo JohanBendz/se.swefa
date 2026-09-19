@@ -58,5 +58,9 @@
   "precipitation_situation7": "Hagl",
   "precipitation_situation8": "Iskorn",
   "precipitation_situation9": "Snøhagl",
-  "precipitation_situation10": "Tordenvær"
+  "precipitation_situation10": "Tordenvær",
+  "smhi_warning_status_none": "Ingen varsler",
+  "smhi_warning_status_active": "Aktivt",
+  "smhi_warning_status_upcoming": "Kommende",
+  "smhi_warning_level_none": "Ingen"
 }

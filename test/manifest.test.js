@@ -17,6 +17,9 @@ test('all JSON manifests and locales parse', () => {
     'drivers/weather/driver.flow.compose.json',
     'drivers/weather/driver.compose.json',
     'drivers/weather/driver.settings.compose.json',
+    'drivers/warnings/driver.flow.compose.json',
+    'drivers/warnings/driver.compose.json',
+    'drivers/warnings/driver.settings.compose.json',
     'locales/en.json',
     'locales/sv.json',
     'locales/no.json',
@@ -33,7 +36,7 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.8.1');
+  assert.equal(pkg.version, '0.9.0');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');
@@ -41,18 +44,20 @@ test('package, compose and generated app versions stay aligned', () => {
 });
 
 test('all Flow Compose cards exist in generated app.json', () => {
-  const compose = readJson('drivers/weather/driver.flow.compose.json');
   const app = readJson('app.json');
-
   const appTriggers = new Set((app.flow?.triggers || []).map(card => card.id));
   const appConditions = new Set((app.flow?.conditions || []).map(card => card.id));
 
-  for (const trigger of compose.triggers || []) {
-    assert.ok(appTriggers.has(trigger.id), `missing generated trigger: ${trigger.id}`);
-  }
+  for (const driverId of ['weather', 'warnings']) {
+    const compose = readJson(`drivers/${driverId}/driver.flow.compose.json`);
 
-  for (const condition of compose.conditions || []) {
-    assert.ok(appConditions.has(condition.id), `missing generated condition: ${condition.id}`);
+    for (const trigger of compose.triggers || []) {
+      assert.ok(appTriggers.has(trigger.id), `missing generated trigger: ${trigger.id}`);
+    }
+
+    for (const condition of compose.conditions || []) {
+      assert.ok(appConditions.has(condition.id), `missing generated condition: ${condition.id}`);
+    }
   }
 });
 
@@ -78,15 +83,21 @@ test('stabilization Flow cards are present', () => {
   }
 });
 
-test('custom capability definitions are all used by the weather driver', () => {
+test('custom capability definitions are used by at least one driver', () => {
   const composeDir = path.join(__dirname, '..', '.homeycompose', 'capabilities');
   const capabilityFiles = new Set(
     fs.readdirSync(composeDir)
       .filter(file => file.endsWith('.json'))
       .map(file => file.replace(/\.json$/, '')),
   );
-  const driver = readJson('drivers/weather/driver.compose.json');
-  const driverCapabilities = new Set(driver.capabilities || []);
+
+  const driverCapabilities = new Set();
+  for (const driverId of ['weather', 'warnings']) {
+    const driver = readJson(`drivers/${driverId}/driver.compose.json`);
+    for (const capability of driver.capabilities || []) {
+      driverCapabilities.add(capability);
+    }
+  }
 
   assert.deepEqual([...capabilityFiles].sort(), [...driverCapabilities].sort());
 });
@@ -146,4 +157,94 @@ test('runtime code imports only Node built-ins, Homey, or local modules', () => 
   }
 
   assert.deepEqual(externalImports, []);
+});
+
+test('warning driver is generated with its capabilities and Flow cards', () => {
+  const app = readJson('app.json');
+  const warningDriver = (app.drivers || []).find(driver => driver.id === 'warnings');
+
+  assert.ok(warningDriver, 'missing generated warnings driver');
+
+  for (const capability of [
+    'smhi_warning_status_cp',
+    'smhi_warning_level_cp',
+    'smhi_warning_event_cp',
+    'smhi_warning_area_cp',
+    'smhi_warning_valid_from_cp',
+    'smhi_warning_valid_to_cp',
+    'smhi_warning_count_cp',
+    'smhi_warning_source_cp',
+  ]) {
+    assert.ok(warningDriver.capabilities.includes(capability), `missing warning capability: ${capability}`);
+    assert.ok(app.capabilities[capability], `missing generated warning capability definition: ${capability}`);
+  }
+
+  const triggerIds = new Set((app.flow?.triggers || []).map(card => card.id));
+  const conditionIds = new Set((app.flow?.conditions || []).map(card => card.id));
+
+  for (const id of ['SmhiWarningIssued', 'SmhiWarningUpdated', 'SmhiWarningEnded']) {
+    assert.ok(triggerIds.has(id), `missing warning trigger: ${id}`);
+  }
+
+  for (const id of ['smhi_warning_present', 'smhi_warning_active_now', 'smhi_warning_level_at_least']) {
+    assert.ok(conditionIds.has(id), `missing warning condition: ${id}`);
+  }
+});
+
+test('runtime JavaScript parses without syntax errors', () => {
+  const vm = require('node:vm');
+  const roots = [
+    path.join(__dirname, '..', 'app.js'),
+    path.join(__dirname, '..', 'drivers'),
+    path.join(__dirname, '..', 'lib'),
+  ];
+
+  const files = [];
+  const walk = (entry) => {
+    const stat = fs.statSync(entry);
+    if (stat.isDirectory()) {
+      for (const child of fs.readdirSync(entry)) walk(path.join(entry, child));
+    } else if (entry.endsWith('.js')) {
+      files.push(entry);
+    }
+  };
+  roots.forEach(walk);
+
+  for (const file of files) {
+    const source = fs.readFileSync(file, 'utf8');
+    assert.doesNotThrow(
+      () => new vm.Script(source, { filename: file }),
+      path.relative(path.join(__dirname, '..'), file),
+    );
+  }
+});
+
+test('clean working tree guard is wired into npm scripts', () => {
+  const pkg = readJson('package.json');
+
+  assert.equal(pkg.scripts?.['clean-check'], 'node scripts/clean-check.js');
+  assert.ok(
+    fs.existsSync(path.join(__dirname, '..', 'scripts', 'clean-check.js')),
+    'missing scripts/clean-check.js',
+  );
+});
+
+test('warning capabilities use the dedicated warning icon', () => {
+  const app = readJson('app.json');
+  const iconPath = path.join(__dirname, '..', 'assets', 'icons', 'warning.svg');
+
+  assert.ok(fs.existsSync(iconPath), 'missing warning icon asset');
+
+  for (const id of [
+    'smhi_warning_status_cp',
+    'smhi_warning_level_cp',
+    'smhi_warning_event_cp',
+    'smhi_warning_area_cp',
+    'smhi_warning_count_cp',
+    'smhi_warning_source_cp',
+  ]) {
+    const compose = readJson(`.homeycompose/capabilities/${id}.json`);
+    assert.equal(compose.icon, '/assets/icons/warning.svg', `wrong compose icon for ${id}`);
+    assert.equal(app.capabilities[id]?.icon, compose.icon, `generated icon mismatch for ${id}`);
+  }
 });

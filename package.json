@@ -1,7 +1,7 @@
 {
   "name": "se.swefa",
-  "version": "0.8.1",
-  "description": "Weather Forecast from SMHI",
+  "version": "0.9.0",
+  "description": "Weather Forecasts and Warnings from SMHI",
   "main": "app.js",
   "keywords": [
     "SMHI",
@@ -10,7 +10,8 @@
   "author": "Johan Bendz",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "clean-check": "node scripts/clean-check.js"
   },
   "private": true
 }

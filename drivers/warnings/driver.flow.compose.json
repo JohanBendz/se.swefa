@@ -1,0 +1,365 @@
+{
+  "triggers": [
+    {
+      "id": "SmhiWarningIssued",
+      "title": {
+        "en": "SMHI weather warning issued",
+        "sv": "SMHI vädervarning utfärdad",
+        "no": "SMHI værvarsel utstedt"
+      },
+      "titleFormatted": {
+        "en": "An SMHI weather warning is issued",
+        "sv": "En SMHI-vädervarning utfärdas",
+        "no": "Et SMHI-værvarsel utstedes"
+      },
+      "tokens": [
+        {
+          "name": "warning_id",
+          "type": "string",
+          "title": {
+            "en": "Warning ID",
+            "sv": "Varnings-ID",
+            "no": "Varslings-ID"
+          }
+        },
+        {
+          "name": "warning_level",
+          "type": "string",
+          "title": {
+            "en": "Warning level",
+            "sv": "Varningsnivå",
+            "no": "Varslingsnivå"
+          }
+        },
+        {
+          "name": "warning_level_code",
+          "type": "string",
+          "title": {
+            "en": "Warning level code",
+            "sv": "Varningsnivåkod",
+            "no": "Varslingsnivåkode"
+          }
+        },
+        {
+          "name": "warning_event",
+          "type": "string",
+          "title": {
+            "en": "Warning",
+            "sv": "Varning",
+            "no": "Varsel"
+          }
+        },
+        {
+          "name": "warning_event_code",
+          "type": "string",
+          "title": {
+            "en": "Warning event code",
+            "sv": "Varningskod",
+            "no": "Varselkode"
+          }
+        },
+        {
+          "name": "warning_area",
+          "type": "string",
+          "title": {
+            "en": "Warning area",
+            "sv": "Varningsområde",
+            "no": "Varslingsområde"
+          }
+        },
+        {
+          "name": "warning_start",
+          "type": "string",
+          "title": {
+            "en": "Valid from",
+            "sv": "Gäller från",
+            "no": "Gyldig fra"
+          }
+        },
+        {
+          "name": "warning_end",
+          "type": "string",
+          "title": {
+            "en": "Valid until",
+            "sv": "Gäller till",
+            "no": "Gyldig til"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SmhiWarningUpdated",
+      "title": {
+        "en": "SMHI weather warning updated",
+        "sv": "SMHI vädervarning uppdaterad",
+        "no": "SMHI værvarsel oppdatert"
+      },
+      "titleFormatted": {
+        "en": "An SMHI weather warning is updated",
+        "sv": "En SMHI-vädervarning uppdateras",
+        "no": "Et SMHI-værvarsel oppdateres"
+      },
+      "tokens": [
+        {
+          "name": "warning_id",
+          "type": "string",
+          "title": {
+            "en": "Warning ID",
+            "sv": "Varnings-ID",
+            "no": "Varslings-ID"
+          }
+        },
+        {
+          "name": "warning_level",
+          "type": "string",
+          "title": {
+            "en": "Warning level",
+            "sv": "Varningsnivå",
+            "no": "Varslingsnivå"
+          }
+        },
+        {
+          "name": "warning_level_code",
+          "type": "string",
+          "title": {
+            "en": "Warning level code",
+            "sv": "Varningsnivåkod",
+            "no": "Varslingsnivåkode"
+          }
+        },
+        {
+          "name": "warning_event",
+          "type": "string",
+          "title": {
+            "en": "Warning",
+            "sv": "Varning",
+            "no": "Varsel"
+          }
+        },
+        {
+          "name": "warning_event_code",
+          "type": "string",
+          "title": {
+            "en": "Warning event code",
+            "sv": "Varningskod",
+            "no": "Varselkode"
+          }
+        },
+        {
+          "name": "warning_area",
+          "type": "string",
+          "title": {
+            "en": "Warning area",
+            "sv": "Varningsområde",
+            "no": "Varslingsområde"
+          }
+        },
+        {
+          "name": "warning_start",
+          "type": "string",
+          "title": {
+            "en": "Valid from",
+            "sv": "Gäller från",
+            "no": "Gyldig fra"
+          }
+        },
+        {
+          "name": "warning_end",
+          "type": "string",
+          "title": {
+            "en": "Valid until",
+            "sv": "Gäller till",
+            "no": "Gyldig til"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SmhiWarningEnded",
+      "title": {
+        "en": "SMHI weather warning ended",
+        "sv": "SMHI vädervarning avslutad",
+        "no": "SMHI værvarsel avsluttet"
+      },
+      "titleFormatted": {
+        "en": "An SMHI weather warning ends",
+        "sv": "En SMHI-vädervarning upphör",
+        "no": "Et SMHI-værvarsel avsluttes"
+      },
+      "tokens": [
+        {
+          "name": "warning_id",
+          "type": "string",
+          "title": {
+            "en": "Warning ID",
+            "sv": "Varnings-ID",
+            "no": "Varslings-ID"
+          }
+        },
+        {
+          "name": "warning_level",
+          "type": "string",
+          "title": {
+            "en": "Warning level",
+            "sv": "Varningsnivå",
+            "no": "Varslingsnivå"
+          }
+        },
+        {
+          "name": "warning_level_code",
+          "type": "string",
+          "title": {
+            "en": "Warning level code",
+            "sv": "Varningsnivåkod",
+            "no": "Varslingsnivåkode"
+          }
+        },
+        {
+          "name": "warning_event",
+          "type": "string",
+          "title": {
+            "en": "Warning",
+            "sv": "Varning",
+            "no": "Varsel"
+          }
+        },
+        {
+          "name": "warning_event_code",
+          "type": "string",
+          "title": {
+            "en": "Warning event code",
+            "sv": "Varningskod",
+            "no": "Varselkode"
+          }
+        },
+        {
+          "name": "warning_area",
+          "type": "string",
+          "title": {
+            "en": "Warning area",
+            "sv": "Varningsområde",
+            "no": "Varslingsområde"
+          }
+        },
+        {
+          "name": "warning_start",
+          "type": "string",
+          "title": {
+            "en": "Valid from",
+            "sv": "Gäller från",
+            "no": "Gyldig fra"
+          }
+        },
+        {
+          "name": "warning_end",
+          "type": "string",
+          "title": {
+            "en": "Valid until",
+            "sv": "Gäller till",
+            "no": "Gyldig til"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "smhi_warning_present",
+      "title": {
+        "en": "Is there an SMHI weather warning?",
+        "sv": "Finns en SMHI-vädervarning?",
+        "no": "Finnes det et SMHI-værvarsel?"
+      },
+      "titleFormatted": {
+        "en": "There !{{is|isn't}} an issued SMHI weather warning for this location",
+        "sv": "Det !{{finns|finns inte}} en utfärdad SMHI-vädervarning för platsen",
+        "no": "Det !{{finnes|finnes ikke}} et utstedt SMHI-værvarsel for stedet"
+      }
+    },
+    {
+      "id": "smhi_warning_active_now",
+      "title": {
+        "en": "Is an SMHI weather warning active now?",
+        "sv": "Är en SMHI-vädervarning aktiv nu?",
+        "no": "Er et SMHI-værvarsel aktivt nå?"
+      },
+      "titleFormatted": {
+        "en": "An SMHI weather warning !{{is|isn't}} active now",
+        "sv": "En SMHI-vädervarning !{{är|är inte}} aktiv nu",
+        "no": "Et SMHI-værvarsel !{{er|er ikke}} aktivt nå"
+      }
+    },
+    {
+      "id": "smhi_warning_level_at_least",
+      "title": {
+        "en": "SMHI warning level is at least",
+        "sv": "SMHI-varningsnivån är minst",
+        "no": "SMHI-varslingsnivå er minst"
+      },
+      "titleFormatted": {
+        "en": "Highest SMHI warning level is at least [[level]]",
+        "sv": "Högsta SMHI-varningsnivå är minst [[level]]",
+        "no": "Høyeste SMHI-varslingsnivå er minst [[level]]"
+      },
+      "args": [
+        {
+          "name": "level",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "YELLOW",
+              "label": {
+                "en": "Yellow",
+                "sv": "Gul",
+                "no": "Gul"
+              }
+            },
+            {
+              "id": "ORANGE",
+              "label": {
+                "en": "Orange",
+                "sv": "Orange",
+                "no": "Oransje"
+              }
+            },
+            {
+              "id": "RED",
+              "label": {
+                "en": "Red",
+                "sv": "Röd",
+                "no": "Rød"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

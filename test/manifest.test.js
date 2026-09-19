@@ -32,7 +32,7 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.8.0');
+  assert.equal(pkg.version, '0.8.1');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');
@@ -88,4 +88,20 @@ test('custom capability definitions are all used by the weather driver', () => {
   const driverCapabilities = new Set(driver.capabilities || []);
 
   assert.deepEqual([...capabilityFiles].sort(), [...driverCapabilities].sort());
+});
+
+test('runtime dependency graph stays empty', () => {
+  const pkg = readJson('package.json');
+  const lock = readJson('package-lock.json');
+
+  assert.deepEqual(pkg.dependencies || {}, {});
+  assert.equal(lock.lockfileVersion, 3);
+  assert.deepEqual(Object.keys(lock.packages || {}), ['']);
+  assert.deepEqual(lock.packages[''].dependencies || {}, {});
+
+  const deviceSource = fs.readFileSync(
+    path.join(__dirname, '..', 'drivers', 'weather', 'device.js'),
+    'utf8',
+  );
+  assert.doesNotMatch(deviceSource, /require\(['"](?:node-fetch|feels)['"]\)/);
 });

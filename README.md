@@ -1,120 +1,84 @@
-# SMHI Weather Forecast
+# SMHI Weather Forecast for Homey
 
-### This app adds support for SMHI Weather Data.
+Weather forecasts from SMHI for Homey, using the current **SNOW1gv1** forecast API.
 
-## Included devices/features:
-* 0-36 hours of Weather Forecast based on Homey geolocation.
+## Features
 
-## Feedback:
-* Please post requests in the [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/) topic on the Athom Community forum.
-* Please report any problems concerning the code in the [issues section](https://github.com/JohanBendz/se.swefa/issues) on Github.
+- Create multiple weather devices with independent settings.
+- Use Homey's geolocation or a custom latitude/longitude.
+- Select forecast offsets from **now up to 36 hours**.
+- Weather, temperature and feels-like temperature.
+- Wind direction, wind speed and gust speed.
+- Relative humidity, air pressure and visibility.
+- Thunderstorm probability.
+- Total, low, medium and high cloud cover.
+- Precipitation type and precipitation statistics.
+- Flow triggers for weather changes and selected sensor changes.
+- Flow conditions for weather, temperature, wind, cloud cover and precipitation.
+- Forecast-oriented conditions such as rain, maximum wind speed and minimum temperature within the next hours.
 
-## Change Log:
+The app is intended for locations within SMHI's SNOW forecast area and is primarily presented for Sweden, Norway, Denmark and Finland.
 
-### v 0.7.0
-* Major change in backend due to SMHI deprecating and shutting down the old pmp3g API used by the app. Switching to new SNOW API.
-### v 0.6.4
-* Added retry to the SMHI Data fetch functionality to mitigate events where incorrect data is shown due to SMHI API not responding. BREAKING CHANGE: Wind direction corrected! Check your flows!
-### v 0.6.3
-* Fix for precipitation category and weather situation conditional cards. BREAKING CHANGE: Wind direction corrected! Check your flows!
-### v 0.6.2
-* SDK 3 version, compatible with Homey Pro Early 2023
-### v 0.5.1
-* New Live version
-### v 0.5.0
-* Translation correction/completion
-### v 0.4.7
-* Pollen data removed due to Homey have been blocked from using the API's
-### v 0.4.6
-* Fix for lat/long decimal issue
-### v 0.4.5
-* Replaced Cron with setInterval to be compliant with firmware 5
-### v 0.4.4
-* Added Norwegian translation
-### v 0.4.3
-* Fix for Node.js update that broke time format
-* Removed pollen for Sweden as API has gone private 
-### v 0.4.2
-* Added Swedish language
-### v 0.4.1
-* Uppdated Alpha and Beta channel with Condition card fix
-### v 0.4.0
-* Alpha merged to Beta channel
-### v 0.3.9
-* Submission of Condition card fix
-### v 0.3.8
-* Fix for bug in Precipitation Condition card
-### v 0.3.7
-* Fix for SetInterval
-### v 0.3.6
-* Rewrite of settings
-### v 0.3.5
-* Settings fix
-### v 0.3.4
-* Added ability to set latitude and longitude. Fixed broken Trigger cards
-### v 0.3.3
-* Minor rewrite of code in onSettings
-### v 0.3.2
-* Fixed broken Condition cards
-### v 0.3.1
-* Typo in Wind Direction Heading selections
-### v 0.3.0
-* Remake of and fixed broken triggers 
-### v 0.2.9
-* Added insights to some sensors
-### v 0.2.8
-* Typo in Norwegian Pollen FlowCard code. Added Conditions for Low, Medium and High Level Cloud Cover.
-### v 0.2.7
-* Added Pollen Forecast for Norway
-### v 0.2.6
-* Enabling multiple devices with different settings
-### v 0.2.5
-* Typo in Cron code threw an error if task existed
-### v 0.2.4
-* Added Precipitation Trigger and Wind Direction Degrees as Token
-### v 0.2.3
-* Cosmetic update
-### v 0.2.2
-* Issue with setting forecast timeframe past 36 hours. Limiting to 36 hours until fixed.
-### v 0.2.1
-* Minor fixes and shortened date/time info in Weather forecast GUI. 
-### v 0.2.0
-* Beta release
-### v 0.1.9
-* Added info, images and stuff needed for release to Homey App Store
-### v 0.1.8
-* Code cleanup 
-### v 0.1.7
-* Added Condition Cards for Pollen Forecast
-### v 0.1.6
-* Added Trigger cards for Pollen Forecast
-### v 0.1.5
-* Added Automatic Update of Pollen Level data
-### v 0.1.4
-* Added Settings for Pollen Level Forecast
-### v 0.1.3
-* Added icons for Pollen Level Forecast
-### v 0.1.2
-* Added Pollen Level Forecast data
-### v 0.1.1
-* Code Cleanup
-### v 0.1.0
-* Trigger Cards for Weather Forecast added
-### v 0.0.9
-* Condition Cards for Weather Forecast added
-### v 0.0.8
-* Added code for Automatic Update of data
-### v 0.0.7
-* Added Weather Device
-### v 0.0.6
-* Added Settings
-### v 0.0.5
-* Added icons for Weather Forecast
-### v 0.0.4
-* Added Feels Like
-### v 0.0.3
-* Added Wind Heading
-### v 0.0.2
-* Added Weather Situation
-### v 0.0.1
-* Added Weather Forecast data
+## Flow cards
+
+Existing Flow card IDs and capability IDs are preserved for backwards compatibility. v0.8.0 also adds:
+
+- **Weather changes to ...**
+- **Weather changes from ... to ...**
+- Forecast conditions for rain, maximum wind speed and minimum temperature in the coming hours.
+- A **Severe weather condition** trigger based on forecast symbols. This is an app-level condition and **not an official SMHI weather warning**.
+
+## Important upgrade note for v0.8.0
+
+v0.8.0 corrects several interpretation problems introduced during the v0.7.0 migration to SNOW1gv1, including wind heading and precipitation classification.
+
+If you changed a Flow to compensate for incorrect values in v0.7.0, review that Flow after upgrading. For example, a wind direction that was previously shown with the wrong compass heading is now mapped correctly.
+
+## Data source and update behavior
+
+Weather data is fetched from SMHI's SNOW1gv1 point forecast API. Each device refreshes automatically and also refreshes immediately when its forecast time or location settings change.
+
+Transient API/network failures are retried. If a fetch fails completely, the app keeps the last successfully received capability values and logs the error.
+
+## Development
+
+Install dependencies and run the regression tests:
+
+```bash
+npm install
+npm test
+```
+
+Run the app on a connected Homey:
+
+```bash
+homey app run
+```
+
+## Feedback
+
+- Community discussion: [Swedish Weather Forecast](https://community.athom.com/t/swedish-weather-forecast/)
+- Bugs and feature requests: [GitHub Issues](https://github.com/JohanBendz/se.swefa/issues)
+
+## Change log
+
+### v0.8.0
+
+- Stabilized the SNOW1gv1 migration.
+- Corrected wind direction headings and precipitation type handling.
+- Corrected cloud-cover handling.
+- Fixed forecast settings being applied one change late.
+- Completed previously declared forecast Flow conditions and severe-weather trigger.
+- Added weather changed-to and changed-from/to triggers.
+- Improved retry, timeout, timer and timezone handling.
+- Added regression tests and GitHub Actions CI.
+- Removed committed dependencies from the repository.
+- **Compatibility note:** Flows created to compensate for incorrect v0.7.0 wind headings or precipitation classification may need review.
+
+### v0.7.0
+
+- Migrated the weather backend from the retired PMP3gv2 API to SMHI SNOW1gv1.
+
+### Earlier releases
+
+See the Git history and Homey changelog for older release notes.

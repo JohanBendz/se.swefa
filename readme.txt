@@ -1,3 +1,3 @@
-SMHI Weather data for Sweden, Norway, Denmark and Finland.
+SMHI weather forecasts for Homey using the SNOW1gv1 API.
 
-0-36 hours of Weather Forecast based on Homey geolocation or user defined Latitude/Longitude.
+Create multiple weather devices using Homey's location or custom coordinates, with forecast offsets from now up to 36 hours. Includes temperature, wind, humidity, pressure, visibility, cloud cover, precipitation and Flow cards.

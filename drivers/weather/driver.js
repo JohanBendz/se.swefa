@@ -1,120 +1,135 @@
 'use strict';
 
 const { Driver } = require('homey');
+const { isAbove } = require('../../lib/weather-utils');
 
 class WeatherDriver extends Driver {
   async onInit() {
     this.log('SMHI weather driver initiated');
+    this.registerFlowTriggers();
     this.registerFlowConditions();
+  }
+
+  registerFlowTriggers() {
+    this.homey.flow
+      .getDeviceTriggerCard('WeatherSituationChangedTo')
+      .registerRunListener(async ({ weather_situation_condition }, state) => {
+        return state?.toCode === weather_situation_condition;
+      });
+
+    this.homey.flow
+      .getDeviceTriggerCard('WeatherSituationChangedFromTo')
+      .registerRunListener(async ({ from_weather_situation, to_weather_situation }, state) => {
+        return state?.fromCode === from_weather_situation && state?.toCode === to_weather_situation;
+      });
   }
 
   registerFlowConditions() {
     this.homey.flow
-      .getConditionCard('will_rain_within_hours')
-      .registerRunListener(async ({ device, hours }) => {
-        return device.willItRainInNextHours(hours);
+      .getConditionCard('will_rain_in_next_hours')
+      .registerRunListener(async ({ device, hours }) => device.willItRainInNextHours(hours));
+
+    this.homey.flow
+      .getConditionCard('max_wind_speed_exceeds')
+      .registerRunListener(async ({ device, windSpeed, hours }) => {
+        const maximum = await device.getMaxWindSpeedInNextHours(hours);
+        return maximum !== null && isAbove(maximum, windSpeed);
       });
+
+    this.homey.flow
+      .getConditionCard('min_temperature_below')
+      .registerRunListener(async ({ device, temperature, hours }) => {
+        const minimum = await device.getMinTemperatureInNextHours(hours);
+        return minimum !== null && isAbove(temperature, minimum);
+      });
+
+    this.homey.flow
+      .getConditionCard('will_rain_within_hours')
+      .registerRunListener(async ({ device, hours }) => device.willItPrecipitateInNextHours(hours));
 
     this.homey.flow
       .getConditionCard('measure_weather_situation_cp')
       .registerRunListener(async ({ device, weather_situation_condition }) => {
-        return device.getCapabilityValue('measure_weather_situation_cp') === weather_situation_condition;
+        return device.matchesWeatherCondition(weather_situation_condition);
       });
 
     this.homey.flow
       .getConditionCard('measure_air_temperature_cp')
       .registerRunListener(async ({ device, degree }) => {
-        return device.getCapabilityValue('measure_air_temperature_cp') > degree;
+        return isAbove(device.getCapabilityValue('measure_air_temperature_cp'), degree);
       });
 
     this.homey.flow
       .getConditionCard('measure_wind_speed_cp')
       .registerRunListener(async ({ device, mps }) => {
-        return device.getCapabilityValue('measure_wind_speed_cp') > mps;
+        return isAbove(device.getCapabilityValue('measure_wind_speed_cp'), mps);
       });
 
     this.homey.flow
       .getConditionCard('measure_wind_direction_heading_cp')
       .registerRunListener(async ({ device, direction }) => {
-        return device.getCapabilityValue('measure_wind_direction_heading_cp') === direction;
+        return device.matchesWindDirection(direction);
       });
 
     this.homey.flow
       .getConditionCard('measure_wind_direction_cp')
       .registerRunListener(async ({ device, degree }) => {
-        return device.getCapabilityValue('measure_wind_direction_cp') > degree;
+        return isAbove(device.getCapabilityValue('measure_wind_direction_cp'), degree);
       });
 
     this.homey.flow
       .getConditionCard('measure_relative_humidity_cp')
       .registerRunListener(async ({ device, percent }) => {
-        return device.getCapabilityValue('measure_relative_humidity_cp') > percent;
+        return isAbove(device.getCapabilityValue('measure_relative_humidity_cp'), percent);
       });
 
     this.homey.flow
       .getConditionCard('measure_air_pressure_cp')
       .registerRunListener(async ({ device, hpa }) => {
-        return device.getCapabilityValue('measure_air_pressure_cp') > hpa;
+        return isAbove(device.getCapabilityValue('measure_air_pressure_cp'), hpa);
       });
 
     this.homey.flow
       .getConditionCard('measure_thunder_probability_cp')
       .registerRunListener(async ({ device, percent }) => {
-        return device.getCapabilityValue('measure_thunder_probability_cp') > percent;
+        return isAbove(device.getCapabilityValue('measure_thunder_probability_cp'), percent);
       });
 
-    this.homey.flow
-      .getConditionCard('mean_value_of_total_cloud_cover_cp')
-      .registerRunListener(async ({ device, octas }) => {
-        return device.getCapabilityValue('mean_value_of_total_cloud_cover_cp') > octas;
-      });
-
-    this.homey.flow
-      .getConditionCard('mean_value_of_low_level_cloud_cover_cp')
-      .registerRunListener(async ({ device, octas }) => {
-        return device.getCapabilityValue('mean_value_of_low_level_cloud_cover_cp') > octas;
-      });
-
-    this.homey.flow
-      .getConditionCard('mean_value_of_medium_level_cloud_cover_cp')
-      .registerRunListener(async ({ device, octas }) => {
-        return device.getCapabilityValue('mean_value_of_medium_level_cloud_cover_cp') > octas;
-      });
-
-    this.homey.flow
-      .getConditionCard('mean_value_of_high_level_cloud_cover_cp')
-      .registerRunListener(async ({ device, octas }) => {
-        return device.getCapabilityValue('mean_value_of_high_level_cloud_cover_cp') > octas;
-      });
+    for (const id of [
+      'mean_value_of_total_cloud_cover_cp',
+      'mean_value_of_low_level_cloud_cover_cp',
+      'mean_value_of_medium_level_cloud_cover_cp',
+      'mean_value_of_high_level_cloud_cover_cp',
+    ]) {
+      this.homey.flow
+        .getConditionCard(id)
+        .registerRunListener(async ({ device, octas }) => {
+          return isAbove(device.getCapabilityValue(id), octas);
+        });
+    }
 
     this.homey.flow
       .getConditionCard('wind_gust_speed_cp')
       .registerRunListener(async ({ device, mps }) => {
-        return device.getCapabilityValue('wind_gust_speed_cp') > mps;
+        return isAbove(device.getCapabilityValue('wind_gust_speed_cp'), mps);
       });
 
     this.homey.flow
       .getConditionCard('horizontal_visibility_cp')
       .registerRunListener(async ({ device, km }) => {
-        return device.getCapabilityValue('horizontal_visibility_cp') > km;
+        return isAbove(device.getCapabilityValue('horizontal_visibility_cp'), km);
       });
 
     this.homey.flow
       .getConditionCard('measure_precipitation_situation_cp')
       .registerRunListener(async ({ device, precipitation }) => {
-        const category = device._lastPrecipitationCategory ?? 0;
-
-        if (precipitation === 'RainSnow') return category > 0;
-        if (precipitation === 'Snow') return [1, 2].includes(category);
-        if (precipitation === 'Rain') return [2, 3, 4, 5, 6].includes(category);
-
-        return false;
+        return device.matchesPrecipitation(precipitation);
       });
 
     this.homey.flow
       .getConditionCard('mean_precipitation_intensity_cp')
       .registerRunListener(async ({ device, mmh }) => {
-        return device.getCapabilityValue('mean_precipitation_intensity_cp') > mmh;
+        return isAbove(device.getCapabilityValue('mean_precipitation_intensity_cp'), mmh);
       });
   }
 

@@ -3,33 +3,49 @@
 const { Device } = require('homey');
 const fetch = require('node-fetch');
 const Feels = require('feels');
+const {
+  WIND_DIRECTION_CODES,
+  formatCoordinate,
+  normalizeOctas,
+  getWeatherConditionCode,
+  getWindDirectionCode,
+  getPrecipitationTranslationKey,
+  isPrecipitationMatch,
+  precipitationAmountToHourlyRate,
+  findClosestForecastPoint,
+  isSevereWeatherSymbol,
+} = require('../../lib/weather-utils');
 
 class WeatherDevice extends Device {
   constructor(...args) {
     super(...args);
 
     this.weatherData = null;
-    this.lastFetchTime = 0;
+    this.pollInterval = 1800000;
 
-    this.pollInterval = 1800000; // 30 minutes
-    this.cacheDuration = 0;      // Always fetch fresh point data on poll/settings
+    this._fetchPromise = null;
     this._lastPrecipitationCategory = 0;
+    this._lastPrecipitationRate = 0;
+    this._lastWeatherSymbol = null;
+    this._lastWeatherConditionCode = null;
+    this._lastWindDirectionHeadingCode = null;
   }
 
   async onInit() {
     this.log('SMHI Weather Device initialized');
 
     this.registerFlowTriggers();
-
     await this.fetchSMHIData(true);
 
-    this._fetchInterval = setInterval(() => {
+    this._fetchInterval = this.homey.setInterval(() => {
       this.fetchSMHIData().catch(err => this.error(err));
     }, this.pollInterval);
   }
 
   registerFlowTriggers() {
     this._flowTriggerWeatherSituationChange = this.homey.flow.getDeviceTriggerCard('WeatherSituationChange');
+    this._flowTriggerWeatherSituationChangedTo = this.homey.flow.getDeviceTriggerCard('WeatherSituationChangedTo');
+    this._flowTriggerWeatherSituationChangedFromTo = this.homey.flow.getDeviceTriggerCard('WeatherSituationChangedFromTo');
     this._flowTriggerAirTemperatureChange = this.homey.flow.getDeviceTriggerCard('AirTemperatureChange');
     this._flowTriggerPrecipitationSituationChange = this.homey.flow.getDeviceTriggerCard('PrecipitationSituationChange');
     this._flowTriggerWindSpeedChange = this.homey.flow.getDeviceTriggerCard('WindSpeedChange');
@@ -38,69 +54,85 @@ class WeatherDevice extends Device {
     this._flowTriggerAirPressureChange = this.homey.flow.getDeviceTriggerCard('AirPressureChange');
     this._flowTriggerThunderProbabilityChange = this.homey.flow.getDeviceTriggerCard('ThunderProbabilityChange');
     this._flowTriggerMeanValueOfTotalCloudCoverChange = this.homey.flow.getDeviceTriggerCard('MeanValueOfTotalCloudCoverChange');
+    this._flowTriggerExtremeWeather = this.homey.flow.getDeviceTriggerCard('extreme_weather');
   }
 
-  async onSettings({ changedKeys }) {
-    this.log('Settings changed:', changedKeys);
-
-    if (changedKeys && changedKeys.length) {
-      this.lastFetchTime = 0;
-
-      try {
-        await this.fetchSMHIData(true);
-      } catch (error) {
-        this.error('Failed to refresh weather data after settings change:', error);
-      }
+  async onSettings({ newSettings, changedKeys }) {
+    if (changedKeys?.length) {
+      await this.fetchSMHIData(true, newSettings);
     }
   }
 
-  async fetchSMHIData(force = false) {
-    const currentTime = Date.now();
-
-    if (!force && this.cacheDuration > 0 && currentTime - this.lastFetchTime < this.cacheDuration && this.weatherData) {
-      return;
+  async fetchSMHIData(force = false, settingsOverride = null) {
+    if (this._fetchPromise) {
+      if (!force) return this._fetchPromise;
+      await this._fetchPromise;
     }
 
+    this._fetchPromise = this._fetchSMHIData(force, settingsOverride)
+      .finally(() => {
+        this._fetchPromise = null;
+      });
+
+    return this._fetchPromise;
+  }
+
+  async _fetchSMHIData(force = false, settingsOverride = null) {
     try {
-      this.weatherData = await this.getWeatherData();
-      this.lastFetchTime = currentTime;
-      await this.updateCapabilities();
+      const data = await this.getWeatherData(settingsOverride);
+      this.weatherData = data;
+      await this.updateCapabilities(settingsOverride);
     } catch (error) {
       this.error('Failed to fetch SMHI data:', error);
     }
   }
 
-  async getCreatedTime() {
-    const url = 'https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/createdtime.json';
-    const response = await fetch(url);
+  async fetchJsonWithRetry(url, { retries = 3, timeoutMs = 10000 } = {}) {
+    let lastError = null;
 
-    if (!response.ok) {
-      throw new Error(`SMHI createdtime failed: ${response.status} ${response.statusText}`);
+    for (let attempt = 1; attempt <= retries; attempt += 1) {
+      const controller = new AbortController();
+      const timeout = this.homey.setTimeout(() => controller.abort(), timeoutMs);
+
+      try {
+        const response = await fetch(url, {
+          signal: controller.signal,
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) {
+          const body = await response.text().catch(() => '');
+          throw new Error(`SMHI request failed: ${response.status} ${response.statusText} ${body.slice(0, 300)}`);
+        }
+
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.includes('json')) {
+          const body = await response.text().catch(() => '');
+          throw new Error(`SMHI returned non-JSON: ${contentType} ${body.slice(0, 300)}`);
+        }
+
+        return await response.json();
+      } catch (error) {
+        lastError = error;
+
+        if (attempt < retries) {
+          this.log(`SMHI request attempt ${attempt} failed; retrying`);
+          await new Promise(resolve => this.homey.setTimeout(resolve, 300 * (2 ** (attempt - 1))));
+        }
+      } finally {
+        this.homey.clearTimeout(timeout);
+      }
     }
 
-    const data = await response.json();
-
-    return (
-      data.createdTime?.[0] ??
-      data.createdTime ??
-      data.createdtime?.[0] ??
-      data.createdtime ??
-      null
-    );
+    throw lastError ?? new Error('SMHI request failed');
   }
 
   normalizeCoordinate(value, label) {
-    const num = Number(value);
-
-    if (!Number.isFinite(num)) {
-      throw new Error(`Invalid ${label}: ${value}`);
-    }
-
-    return num.toFixed(6);
+    return formatCoordinate(value, label);
   }
 
-  getCoordinatesFromSettings() {
-    const settings = this.getSettings();
+  getCoordinatesFromSettings(settingsOverride = null) {
+    const settings = settingsOverride || this.getSettings();
 
     const longitude = settings.usehomeylocation
       ? this.homey.geolocation.getLongitude()
@@ -116,91 +148,36 @@ class WeatherDevice extends Device {
     };
   }
 
-  async getWeatherData() {
-    const { lon, lat } = this.getCoordinatesFromSettings();
-
+  async getWeatherData(settingsOverride = null) {
+    const { lon, lat } = this.getCoordinatesFromSettings(settingsOverride);
     const url = `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
-    this.log(`Fetching SMHI data from: ${url}`);
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      const body = await response.text().catch(() => '');
-      throw new Error(`SMHI point failed: ${response.status} ${response.statusText} ${body.slice(0, 300)}`);
-    }
-
-    const contentType = response.headers.get('content-type') || '';
-    if (!contentType.includes('json')) {
-      const body = await response.text().catch(() => '');
-      throw new Error(`SMHI point returned non-JSON: ${contentType} ${body.slice(0, 300)}`);
-    }
-
-    const data = await response.json();
+    const data = await this.fetchJsonWithRetry(url);
 
     if (!data || !Array.isArray(data.timeSeries)) {
-      this.error('SMHI response keys:', data ? Object.keys(data) : null);
       throw new Error('SMHI response did not contain timeSeries');
     }
 
     if (data.timeSeries.length === 0) {
-      this.error('SMHI returned empty timeSeries for URL:', url);
       throw new Error('SMHI response contained empty timeSeries');
     }
-
-    this.log(`SMHI returned ${data.timeSeries.length} forecast entries`);
-    this.log(`First forecast time: ${data.timeSeries[0]?.time}`);
 
     return data;
   }
 
-  async updateCapabilities() {
-    const settings = this.getSettings();
-    const forecastHoursAhead = parseInt(settings.fcTime, 10) || 0;
-    const now = new Date();
-    const targetTime = new Date(now.getTime() + forecastHoursAhead * 3600 * 1000);
+  async updateCapabilities(settingsOverride = null) {
+    const settings = settingsOverride || this.getSettings();
+    const forecastHoursAhead = Number.parseInt(settings.fcTime, 10) || 0;
+    const targetTime = new Date(Date.now() + forecastHoursAhead * 3600000);
 
-    this.log(`fcTime setting: ${settings.fcTime}`);
-    this.log(`Now local: ${now.toString()}`);
-    this.log(`Now ISO: ${now.toISOString()}`);
-    this.log(`Target local: ${targetTime.toString()}`);
-    this.log(`Target ISO: ${targetTime.toISOString()}`);
-
-    const closestDataPoint = this.findClosestForecastDataPoint(targetTime);
-
+    const closestDataPoint = findClosestForecastPoint(this.weatherData?.timeSeries, targetTime);
     if (!closestDataPoint) {
       this.error('No forecast data available for the specified time.');
       return;
     }
 
-    this.log(`Chosen forecast time: ${closestDataPoint.time}`);
 
     await this.processForecastData(closestDataPoint);
-  }
-
-  findClosestForecastDataPoint(targetTime) {
-    if (!this.weatherData || !Array.isArray(this.weatherData.timeSeries) || this.weatherData.timeSeries.length === 0) {
-      return null;
-    }
-
-    let closestDataPoint = null;
-    let smallestTimeDiff = Infinity;
-
-    for (const dataPoint of this.weatherData.timeSeries) {
-      const forecastTime = new Date(dataPoint.time);
-      const timeDiff = Math.abs(forecastTime.getTime() - targetTime.getTime());
-
-      if (!Number.isNaN(timeDiff) && timeDiff < smallestTimeDiff) {
-        smallestTimeDiff = timeDiff;
-        closestDataPoint = dataPoint;
-      }
-    }
-
-    if (closestDataPoint) {
-      this.log(`Closest forecast diff hours: ${(smallestTimeDiff / 3600000).toFixed(2)}`);
-    }
-
-    return closestDataPoint;
   }
 
   indexParameters(forecastData) {
@@ -213,8 +190,9 @@ class WeatherDevice extends Device {
 
   pick(parameters, names, fallback = null) {
     for (const name of names) {
-      if (parameters[name] !== undefined && parameters[name] !== null && parameters[name] !== 9999) {
-        return parameters[name];
+      const value = parameters[name];
+      if (value !== undefined && value !== null && value !== 9999) {
+        return value;
       }
     }
 
@@ -231,24 +209,47 @@ class WeatherDevice extends Device {
     const windSpeed = this.pick(parameters, ['wind_speed'], null);
     const relativeHumidity = this.pick(parameters, ['relative_humidity'], null);
     const thunderProbability = this.pick(parameters, ['thunderstorm_probability'], 0);
-    const totalCloud = this.pick(parameters, ['cloud_area_fraction'], null);
-    const lowCloud = this.pick(parameters, ['low_type_cloud_area_fraction'], null);
-    const mediumCloud = this.pick(parameters, ['medium_type_cloud_area_fraction'], null);
-    const highCloud = this.pick(parameters, ['high_type_cloud_area_fraction'], null);
+
+    const totalCloud = normalizeOctas(this.pick(parameters, ['cloud_area_fraction'], null));
+    const lowCloud = normalizeOctas(this.pick(parameters, ['low_type_cloud_area_fraction'], null));
+    const mediumCloud = normalizeOctas(this.pick(parameters, ['medium_type_cloud_area_fraction'], null));
+    const highCloud = normalizeOctas(this.pick(parameters, ['high_type_cloud_area_fraction'], null));
+
     const windGust = this.pick(parameters, ['wind_speed_of_gust'], null);
 
-    const pmin = this.pick(parameters, ['precipitation_amount_min'], 0);
-    const pmax = this.pick(parameters, ['precipitation_amount_max'], 0);
-    const pmean = this.pick(parameters, ['precipitation_amount_mean'], 0);
-    const pmedian = this.pick(parameters, ['precipitation_amount_median'], 0);
+    const pmin = precipitationAmountToHourlyRate(
+      this.pick(parameters, ['precipitation_amount_min'], 0),
+      forecastData,
+    );
+    const pmax = precipitationAmountToHourlyRate(
+      this.pick(parameters, ['precipitation_amount_max'], 0),
+      forecastData,
+    );
+    const pmean = precipitationAmountToHourlyRate(
+      this.pick(parameters, ['precipitation_amount_mean'], 0),
+      forecastData,
+    );
+    const pmedian = precipitationAmountToHourlyRate(
+      this.pick(parameters, ['precipitation_amount_median'], 0),
+      forecastData,
+    );
 
     const frozenPartRaw = this.pick(parameters, ['precipitation_frozen_part'], 0);
-    const frozenPart = frozenPartRaw < 0 ? 0 : frozenPartRaw;
+    const frozenPart = typeof frozenPartRaw === 'number' && frozenPartRaw > 0 ? frozenPartRaw : 0;
 
     const precipitationCategory = this.pick(parameters, ['predominant_precipitation_type_at_surface'], 0);
     const weatherSymbol = this.pick(parameters, ['symbol_code'], null);
 
+    const previousWeatherConditionCode = this._lastWeatherConditionCode;
+
+    const weatherConditionCode = getWeatherConditionCode(weatherSymbol);
+    const windDirectionHeadingCode = getWindDirectionCode(windDirection);
+
     this._lastPrecipitationCategory = precipitationCategory;
+    this._lastPrecipitationRate = pmean;
+    this._lastWeatherSymbol = weatherSymbol;
+    this._lastWeatherConditionCode = weatherConditionCode;
+    this._lastWindDirectionHeadingCode = windDirectionHeadingCode;
 
     let feelsLike = null;
     if (
@@ -256,17 +257,14 @@ class WeatherDevice extends Device {
       && typeof relativeHumidity === 'number'
       && typeof windSpeed === 'number'
     ) {
-      const feelsLikeConfig = {
+      const config = {
         temp: airTemperature,
         humidity: relativeHumidity,
         speed: windSpeed,
-        units: {
-          temp: 'c',
-          speed: 'mps',
-        },
+        units: { temp: 'c', speed: 'mps' },
       };
 
-      feelsLike = Math.round(new Feels(feelsLikeConfig).like() * 100) / 100;
+      feelsLike = Math.round(new Feels(config).like() * 100) / 100;
     }
 
     const forecastFor = this.formatForecastTime(forecastData.time);
@@ -274,13 +272,13 @@ class WeatherDevice extends Device {
     const precipitationSituation = this.getPrecipitationSituationFromSnow({
       precipitationCategory,
       pmean,
-      frozenPart,
     });
     const windDirectionHeading = this.getWindDirectionHeading(windDirection);
 
     await this.updateLegacyCapabilities({
       forecastFor,
       weatherSituation,
+      weatherConditionCode,
       airPressure,
       airTemperature,
       horizontalVisibility,
@@ -301,32 +299,17 @@ class WeatherDevice extends Device {
       pmedian,
       precipitationSituation,
       feelsLike,
+    }, {
+      previousWeatherConditionCode,
     });
   }
 
-  getPrecipitationSituationFromSnow({ precipitationCategory, pmean, frozenPart }) {
-    if (!pmean || pmean <= 0) {
-      return this.homey.__('precipitation_situation0'); // No precipitation
-    }
-
-    if (frozenPart >= 80) {
-      return this.homey.__('precipitation_situation1'); // Snow
-    }
-
-    if (frozenPart > 0 && frozenPart < 80) {
-      return this.homey.__('precipitation_situation2'); // Snow and rain
-    }
-
-    // Liquid precipitation fallback
-    // SNOW's predominant_precipitation_type_at_surface does not map 1:1 to old pcat semantics
-    if ([5, 6].includes(precipitationCategory)) {
-      return this.homey.__('precipitation_situation5'); // Freezing rain
-    }
-
-    return this.homey.__('precipitation_situation3'); // Rain
+  getPrecipitationSituationFromSnow({ precipitationCategory, pmean }) {
+    const translationKey = getPrecipitationTranslationKey(precipitationCategory, pmean);
+    return this.homey.__(translationKey);
   }
 
-  async updateLegacyCapabilities(values) {
+  async updateLegacyCapabilities(values, previousCodes) {
     const previous = {
       weatherSituation: this.getCapabilityValue('measure_weather_situation_cp'),
       airTemperature: this.getCapabilityValue('measure_air_temperature_cp'),
@@ -362,69 +345,90 @@ class WeatherDevice extends Device {
     await this.setCapabilityValue('measure_precipitation_situation_cp', values.precipitationSituation).catch(err => this.error(err));
     await this.setCapabilityValue('air_temperature_feels_like_cp', values.feelsLike).catch(err => this.error(err));
 
-    if (previous.weatherSituation !== values.weatherSituation) {
-      await this._flowTriggerWeatherSituationChange
-        .trigger(this, { measure_weather_situation_cp: values.weatherSituation }, { measure_weather_situation_cp: values.weatherSituation })
-        .catch(err => this.error(err));
+    const weatherCodeChanged = previousCodes.previousWeatherConditionCode !== null
+      && previousCodes.previousWeatherConditionCode !== values.weatherConditionCode;
+
+    if (weatherCodeChanged) {
+      const tokens = {
+        measure_weather_situation_cp: values.weatherSituation,
+        previous_weather_situation: previous.weatherSituation ?? '',
+        weather_situation_code: values.weatherConditionCode ?? '',
+        previous_weather_situation_code: previousCodes.previousWeatherConditionCode ?? '',
+      };
+      const state = {
+        fromCode: previousCodes.previousWeatherConditionCode,
+        toCode: values.weatherConditionCode,
+      };
+
+      await this._flowTriggerWeatherSituationChange.trigger(this, tokens, state).catch(err => this.error(err));
+      await this._flowTriggerWeatherSituationChangedTo.trigger(this, tokens, state).catch(err => this.error(err));
+      await this._flowTriggerWeatherSituationChangedFromTo.trigger(this, tokens, state).catch(err => this.error(err));
+
+      if (isSevereWeatherSymbol(this._lastWeatherSymbol)) {
+        await this._flowTriggerExtremeWeather
+          .trigger(this, {
+            weather_condition: values.weatherSituation,
+            weather_condition_code: values.weatherConditionCode ?? '',
+          }, state)
+          .catch(err => this.error(err));
+      }
     }
 
-    if (previous.airTemperature !== values.airTemperature) {
+    if (previous.airTemperature !== null && previous.airTemperature !== values.airTemperature) {
       await this._flowTriggerAirTemperatureChange
-        .trigger(this, { measure_air_temperature_cp: values.airTemperature }, { measure_air_temperature_cp: values.airTemperature })
+        .trigger(this, { measure_air_temperature_cp: values.airTemperature }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.windSpeed !== values.windSpeed) {
+    if (previous.windSpeed !== null && previous.windSpeed !== values.windSpeed) {
       await this._flowTriggerWindSpeedChange
-        .trigger(this, { measure_wind_speed_cp: values.windSpeed }, { measure_wind_speed_cp: values.windSpeed })
+        .trigger(this, { measure_wind_speed_cp: values.windSpeed }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.windDirectionHeading !== values.windDirectionHeading) {
+    if (previous.windDirectionHeading !== null && previous.windDirectionHeading !== values.windDirectionHeading) {
       await this._flowTriggerWindDirectionHeadingChange
         .trigger(this, {
           measure_wind_direction_heading_cp: values.windDirectionHeading,
           measure_wind_direction_cp: values.windDirection,
-        }, {
-          measure_wind_direction_heading_cp: values.windDirectionHeading,
-          measure_wind_direction_cp: values.windDirection,
-        })
+        }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.relativeHumidity !== values.relativeHumidity) {
+    if (previous.relativeHumidity !== null && previous.relativeHumidity !== values.relativeHumidity) {
       await this._flowTriggerRelativeHumidityChange
-        .trigger(this, { measure_relative_humidity_cp: values.relativeHumidity }, { measure_relative_humidity_cp: values.relativeHumidity })
+        .trigger(this, { measure_relative_humidity_cp: values.relativeHumidity }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.airPressure !== values.airPressure) {
+    if (previous.airPressure !== null && previous.airPressure !== values.airPressure) {
       await this._flowTriggerAirPressureChange
-        .trigger(this, { measure_air_pressure_cp: values.airPressure }, { measure_air_pressure_cp: values.airPressure })
+        .trigger(this, { measure_air_pressure_cp: values.airPressure }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.thunderProbability !== values.thunderProbability) {
+    if (previous.thunderProbability !== null && previous.thunderProbability !== values.thunderProbability) {
       await this._flowTriggerThunderProbabilityChange
-        .trigger(this, { measure_thunder_probability_cp: values.thunderProbability }, { measure_thunder_probability_cp: values.thunderProbability })
+        .trigger(this, { measure_thunder_probability_cp: values.thunderProbability }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.precipitationSituation !== values.precipitationSituation) {
+    if (previous.precipitationSituation !== null && previous.precipitationSituation !== values.precipitationSituation) {
       await this._flowTriggerPrecipitationSituationChange
-        .trigger(this, { measure_precipitation_situation_cp: values.precipitationSituation }, { measure_precipitation_situation_cp: values.precipitationSituation })
+        .trigger(this, { measure_precipitation_situation_cp: values.precipitationSituation }, {})
         .catch(err => this.error(err));
     }
 
-    if (previous.totalCloud !== values.totalCloud) {
+    if (previous.totalCloud !== null && previous.totalCloud !== values.totalCloud) {
       await this._flowTriggerMeanValueOfTotalCloudCoverChange
-        .trigger(this, { mean_value_of_total_cloud_cover_cp: values.totalCloud }, { mean_value_of_total_cloud_cover_cp: values.totalCloud })
+        .trigger(this, { mean_value_of_total_cloud_cover_cp: values.totalCloud }, {})
         .catch(err => this.error(err));
     }
   }
 
   async getForecastDataForNextHours(hoursAhead) {
-    const endTime = new Date(Date.now() + hoursAhead * 3600 * 1000);
+    const startTime = new Date();
+    const endTime = new Date(startTime.getTime() + Number(hoursAhead) * 3600000);
 
     if (!this.weatherData) {
       await this.fetchSMHIData();
@@ -436,98 +440,101 @@ class WeatherDevice extends Device {
 
     return this.weatherData.timeSeries.filter((dataPoint) => {
       const forecastTime = new Date(dataPoint.time);
-      return forecastTime >= new Date() && forecastTime <= endTime;
+      return forecastTime >= startTime && forecastTime <= endTime;
+    });
+  }
+
+  async willItPrecipitateInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
+
+    return forecastData.some((dataPoint) => {
+      const parameters = this.indexParameters(dataPoint);
+      const pmean = this.pick(parameters, ['precipitation_amount_mean'], 0);
+      return Number(pmean) > 0;
     });
   }
 
   async willItRainInNextHours(hoursAhead) {
     const forecastData = await this.getForecastDataForNextHours(hoursAhead);
 
-    if (forecastData.length === 0) {
-      this.error('No forecast data available for the specified time range.');
-      return false;
-    }
-
     return forecastData.some((dataPoint) => {
       const parameters = this.indexParameters(dataPoint);
-      const pmean = this.pick(parameters, ['precipitation_amount_mean'], 0);
-      return pmean > 0;
+      const amount = this.pick(parameters, ['precipitation_amount_mean'], 0);
+      const category = this.pick(parameters, ['predominant_precipitation_type_at_surface'], 0);
+      return isPrecipitationMatch(category, 'Rain', amount);
     });
+  }
+
+  async getMaxWindSpeedInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
+    const values = forecastData
+      .map(point => this.pick(this.indexParameters(point), ['wind_speed'], null))
+      .filter(value => typeof value === 'number');
+
+    return values.length ? Math.max(...values) : null;
+  }
+
+  async getMinTemperatureInNextHours(hoursAhead) {
+    const forecastData = await this.getForecastDataForNextHours(hoursAhead);
+    const values = forecastData
+      .map(point => this.pick(this.indexParameters(point), ['air_temperature'], null))
+      .filter(value => typeof value === 'number');
+
+    return values.length ? Math.min(...values) : null;
+  }
+
+  matchesWeatherCondition(conditionCode) {
+    return this._lastWeatherConditionCode === conditionCode;
+  }
+
+  matchesWindDirection(directionCode) {
+    return this._lastWindDirectionHeadingCode === directionCode;
+  }
+
+  matchesPrecipitation(selection) {
+    return isPrecipitationMatch(
+      this._lastPrecipitationCategory,
+      selection,
+      this._lastPrecipitationRate,
+    );
   }
 
   formatForecastTime(time) {
     const date = new Date(time);
+    const language = this.homey.i18n.getLanguage();
+    const locale = { en: 'en-GB', sv: 'sv-SE', no: 'nb-NO' }[language] ?? 'en-GB';
 
-    const formatter = new Intl.DateTimeFormat('en-GB', {
-      timeZone: 'Europe/Stockholm',
+    return new Intl.DateTimeFormat(locale, {
+      timeZone: this.homey.clock.getTimezone(),
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
-    });
-
-    const parts = formatter.formatToParts(date);
-
-    const monthText = parts.find(p => p.type === 'month')?.value ?? '';
-    const day = parts.find(p => p.type === 'day')?.value ?? '';
-    const hour = parts.find(p => p.type === 'hour')?.value ?? '00';
-    const minute = parts.find(p => p.type === 'minute')?.value ?? '00';
-
-    const monthMap = {
-      Jan: this.homey.__('month1'),
-      Feb: this.homey.__('month2'),
-      Mar: this.homey.__('month3'),
-      Apr: this.homey.__('month4'),
-      May: this.homey.__('month5'),
-      Jun: this.homey.__('month6'),
-      Jul: this.homey.__('month7'),
-      Aug: this.homey.__('month8'),
-      Sept: this.homey.__('month9'),
-      Sep: this.homey.__('month9'),
-      Oct: this.homey.__('month10'),
-      Nov: this.homey.__('month11'),
-      Dec: this.homey.__('month12'),
-    };
-
-    const month = monthMap[monthText] || monthText;
-
-    return `${month} ${day} ${hour}:${minute}`;
+    }).format(date);
   }
 
   getWeatherSituation(weatherSymbol) {
-    if (typeof weatherSymbol === 'number') {
-      return this.homey.__(`weather_situation${weatherSymbol}`) || this.homey.__('weather_situation');
+    if (typeof weatherSymbol === 'number' && weatherSymbol >= 1 && weatherSymbol <= 27) {
+      return this.homey.__(`weather_situation${weatherSymbol}`);
     }
 
-    this.log('Unhandled weather symbol format from SNOW:', weatherSymbol);
     return this.homey.__('weather_situation');
   }
 
   getWindDirectionHeading(angle) {
-    if (typeof angle !== 'number') {
-      return null;
-    }
+    const code = getWindDirectionCode(angle);
+    if (!code) return null;
 
-    const directions = [
-      this.homey.__('direction1'),
-      this.homey.__('direction2'),
-      this.homey.__('direction3'),
-      this.homey.__('direction4'),
-      this.homey.__('direction5'),
-      this.homey.__('direction6'),
-      this.homey.__('direction7'),
-      this.homey.__('direction8'),
-    ];
-
-    return directions[Math.round((((angle % 360) < 0 ? angle + 360 : angle) / 45)) % 8];
+    const index = WIND_DIRECTION_CODES.indexOf(code);
+    return this.homey.__(`direction${index + 1}`);
   }
 
   onDeleted() {
     this.log('Device deleted');
 
     if (this._fetchInterval) {
-      clearInterval(this._fetchInterval);
+      this.homey.clearInterval(this._fetchInterval);
       this._fetchInterval = null;
     }
   }

@@ -39,7 +39,7 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.9.0');
+  assert.equal(pkg.version, '0.10.0');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');

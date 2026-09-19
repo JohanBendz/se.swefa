@@ -9,5 +9,5 @@
   "setable": false,
   "decimals": 0,
   "uiComponent": "sensor",
-  "icon": "/assets/icon.svg"
+  "icon": "/assets/icons/warning.svg"
 }

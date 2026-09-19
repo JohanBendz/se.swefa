@@ -61,6 +61,8 @@ class WavesDriver extends Driver {
       name: this.pairName('Waves', station),
       data: {
         id: `waves-${station.id}`,
+      },
+      store: {
         stationId: station.id,
         stationName: station.name,
         stationOwner: station.owner,

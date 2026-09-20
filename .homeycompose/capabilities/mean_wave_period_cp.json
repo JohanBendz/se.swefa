@@ -1,0 +1,14 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Mean wave period",
+    "sv": "Medelvågperiod",
+    "no": "Middel bølgeperiode"
+  },
+  "getable": true,
+  "setable": false,
+  "units": "s",
+  "decimals": 2,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/waves.svg"
+}

@@ -23,6 +23,10 @@ test('all JSON manifests and locales parse', () => {
     'drivers/firerisk/driver.flow.compose.json',
     'drivers/firerisk/driver.compose.json',
     'drivers/firerisk/driver.settings.compose.json',
+    'drivers/sealevel/driver.flow.compose.json',
+    'drivers/sealevel/driver.compose.json',
+    'drivers/waves/driver.flow.compose.json',
+    'drivers/waves/driver.compose.json',
     'locales/en.json',
     'locales/sv.json',
     'locales/no.json',
@@ -39,7 +43,7 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.10.0');
+  assert.equal(pkg.version, '0.11.0');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');
@@ -51,7 +55,7 @@ test('all Flow Compose cards exist in generated app.json', () => {
   const appTriggers = new Set((app.flow?.triggers || []).map(card => card.id));
   const appConditions = new Set((app.flow?.conditions || []).map(card => card.id));
 
-  for (const driverId of ['weather', 'warnings', 'firerisk']) {
+  for (const driverId of ['weather', 'warnings', 'firerisk', 'sealevel', 'waves']) {
     const compose = readJson(`drivers/${driverId}/driver.flow.compose.json`);
 
     for (const trigger of compose.triggers || []) {
@@ -95,7 +99,7 @@ test('custom capability definitions are used by at least one driver', () => {
   );
 
   const driverCapabilities = new Set();
-  for (const driverId of ['weather', 'warnings', 'firerisk']) {
+  for (const driverId of ['weather', 'warnings', 'firerisk', 'sealevel', 'waves']) {
     const driver = readJson(`drivers/${driverId}/driver.compose.json`);
     for (const capability of driver.capabilities || []) {
       driverCapabilities.add(capability);
@@ -305,5 +309,93 @@ test('fire-risk capabilities use the dedicated fire icon', () => {
     const compose = readJson(`.homeycompose/capabilities/${id}.json`);
     assert.equal(compose.icon, '/assets/icons/fire.svg', `wrong compose icon for ${id}`);
     assert.equal(app.capabilities[id]?.icon, compose.icon, `generated icon mismatch for ${id}`);
+  }
+});
+
+test('sea-level and waves drivers are generated with their Flow cards', () => {
+  const app = readJson('app.json');
+
+  const seaLevel = (app.drivers || []).find(driver => driver.id === 'sealevel');
+  const waves = (app.drivers || []).find(driver => driver.id === 'waves');
+
+  assert.ok(seaLevel, 'missing generated sealevel driver');
+  assert.ok(waves, 'missing generated waves driver');
+
+  for (const capability of [
+    'sea_level_rh2000_cp',
+    'ocean_station_cp',
+    'ocean_observed_at_cp',
+    'ocean_observation_age_cp',
+    'ocean_quality_cp',
+    'ocean_source_cp',
+  ]) {
+    assert.ok(seaLevel.capabilities.includes(capability), `missing sea-level capability: ${capability}`);
+    assert.ok(app.capabilities[capability], `missing generated ocean capability: ${capability}`);
+  }
+
+  for (const capability of [
+    'significant_wave_height_cp',
+    'maximum_wave_height_cp',
+    'mean_wave_period_cp',
+    'mean_wave_direction_cp',
+    'mean_wave_direction_heading_cp',
+    'ocean_station_cp',
+    'ocean_observed_at_cp',
+    'ocean_observation_age_cp',
+    'ocean_quality_cp',
+    'ocean_source_cp',
+  ]) {
+    assert.ok(waves.capabilities.includes(capability), `missing waves capability: ${capability}`);
+    assert.ok(app.capabilities[capability], `missing generated wave capability: ${capability}`);
+  }
+
+  const triggerIds = new Set((app.flow?.triggers || []).map(card => card.id));
+  const conditionIds = new Set((app.flow?.conditions || []).map(card => card.id));
+
+  for (const id of [
+    'SeaLevelCrossedAbove',
+    'SeaLevelCrossedBelow',
+    'SignificantWaveHeightCrossedAbove',
+    'MaximumWaveHeightCrossedAbove',
+  ]) {
+    assert.ok(triggerIds.has(id), `missing ocean trigger: ${id}`);
+  }
+
+  for (const id of [
+    'sea_level_above',
+    'sea_level_below',
+    'significant_wave_height_above',
+    'maximum_wave_height_above',
+  ]) {
+    assert.ok(conditionIds.has(id), `missing ocean condition: ${id}`);
+  }
+});
+
+test('ocean capabilities use dedicated icons', () => {
+  const app = readJson('app.json');
+
+  for (const icon of ['ocean.svg', 'sea-level.svg', 'waves.svg']) {
+    assert.ok(
+      fs.existsSync(path.join(__dirname, '..', 'assets', 'icons', icon)),
+      `missing ocean icon: ${icon}`,
+    );
+  }
+
+  const expected = {
+    ocean_station_cp: '/assets/icons/ocean.svg',
+    ocean_quality_cp: '/assets/icons/ocean.svg',
+    ocean_source_cp: '/assets/icons/ocean.svg',
+    sea_level_rh2000_cp: '/assets/icons/sea-level.svg',
+    significant_wave_height_cp: '/assets/icons/waves.svg',
+    maximum_wave_height_cp: '/assets/icons/waves.svg',
+    mean_wave_period_cp: '/assets/icons/waves.svg',
+    mean_wave_direction_cp: '/assets/icons/waves.svg',
+    mean_wave_direction_heading_cp: '/assets/icons/waves.svg',
+  };
+
+  for (const [id, icon] of Object.entries(expected)) {
+    const compose = readJson(`.homeycompose/capabilities/${id}.json`);
+    assert.equal(compose.icon, icon, `wrong compose icon for ${id}`);
+    assert.equal(app.capabilities[id]?.icon, icon, `generated icon mismatch for ${id}`);
   }
 });

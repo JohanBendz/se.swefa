@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Significant wave height",
+    "sv": "Signifikant våghöjd",
+    "no": "Signifikant bølgehøyde"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "m",
+  "decimals": 2,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/waves.svg"
+}

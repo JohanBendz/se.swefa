@@ -6,13 +6,13 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.10.0",
+  "version": "0.11.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
-    "en": "Weather forecasts, official weather warnings and fire-risk forecasts from SMHI for Homey",
-    "sv": "Väderprognoser, officiella vädervarningar och brandriskprognoser från SMHI för Homey",
-    "no": "Værprognoser, offisielle værvarsler og brannrisikoprognoser fra SMHI for Homey"
+    "en": "Weather forecasts, official warnings, fire-risk forecasts and ocean observations from SMHI for Homey",
+    "sv": "Väderprognoser, officiella varningar, brandriskprognoser och havsobservationer från SMHI för Homey",
+    "no": "Værprognoser, offisielle varsler, brannrisikoprognoser og havobservasjoner fra SMHI for Homey"
   },
   "tags": {
     "en": [
@@ -1856,6 +1856,336 @@
             ]
           }
         ]
+      },
+      {
+        "id": "SeaLevelCrossedAbove",
+        "title": {
+          "en": "Sea level rises above",
+          "sv": "Havsvattenståndet stiger över",
+          "no": "Havnivå stiger over"
+        },
+        "titleFormatted": {
+          "en": "Sea level rises above [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet stiger över [[cm]] cm RH2000",
+          "no": "Havnivå stiger over [[cm]] cm RH2000"
+        },
+        "hint": {
+          "en": "Triggers only when the measured level crosses the threshold from at or below it.",
+          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller under den.",
+          "no": "Utløses bare når målt nivå krysser grensen nedenfra."
+        },
+        "tokens": [
+          {
+            "name": "sea_level",
+            "type": "number",
+            "title": {
+              "en": "Sea level",
+              "sv": "Havsvattenstånd",
+              "no": "Havnivå"
+            }
+          },
+          {
+            "name": "previous_sea_level",
+            "type": "number",
+            "title": {
+              "en": "Previous sea level",
+              "sv": "Föregående havsvattenstånd",
+              "no": "Forrige havnivå"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "SeaLevelCrossedBelow",
+        "title": {
+          "en": "Sea level falls below",
+          "sv": "Havsvattenståndet sjunker under",
+          "no": "Havnivå faller under"
+        },
+        "titleFormatted": {
+          "en": "Sea level falls below [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet sjunker under [[cm]] cm RH2000",
+          "no": "Havnivå faller under [[cm]] cm RH2000"
+        },
+        "hint": {
+          "en": "Triggers only when the measured level crosses the threshold from at or above it.",
+          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller över den.",
+          "no": "Utløses bare når målt nivå krysser grensen ovenfra."
+        },
+        "tokens": [
+          {
+            "name": "sea_level",
+            "type": "number",
+            "title": {
+              "en": "Sea level",
+              "sv": "Havsvattenstånd",
+              "no": "Havnivå"
+            }
+          },
+          {
+            "name": "previous_sea_level",
+            "type": "number",
+            "title": {
+              "en": "Previous sea level",
+              "sv": "Föregående havsvattenstånd",
+              "no": "Forrige havnivå"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "SignificantWaveHeightCrossedAbove",
+        "title": {
+          "en": "Significant wave height rises above",
+          "sv": "Signifikant våghöjd stiger över",
+          "no": "Signifikant bølgehøyde stiger over"
+        },
+        "titleFormatted": {
+          "en": "Significant wave height rises above [[meters]] m",
+          "sv": "Signifikant våghöjd stiger över [[meters]] m",
+          "no": "Signifikant bølgehøyde stiger over [[meters]] m"
+        },
+        "tokens": [
+          {
+            "name": "wave_height",
+            "type": "number",
+            "title": {
+              "en": "Wave height",
+              "sv": "Våghöjd",
+              "no": "Bølgehøyde"
+            }
+          },
+          {
+            "name": "previous_wave_height",
+            "type": "number",
+            "title": {
+              "en": "Previous wave height",
+              "sv": "Föregående våghöjd",
+              "no": "Forrige bølgehøyde"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "MaximumWaveHeightCrossedAbove",
+        "title": {
+          "en": "Maximum wave height rises above",
+          "sv": "Maximal våghöjd stiger över",
+          "no": "Maksimal bølgehøyde stiger over"
+        },
+        "titleFormatted": {
+          "en": "Maximum wave height rises above [[meters]] m",
+          "sv": "Maximal våghöjd stiger över [[meters]] m",
+          "no": "Maksimal bølgehøyde stiger over [[meters]] m"
+        },
+        "tokens": [
+          {
+            "name": "wave_height",
+            "type": "number",
+            "title": {
+              "en": "Wave height",
+              "sv": "Våghöjd",
+              "no": "Bølgehøyde"
+            }
+          },
+          {
+            "name": "previous_wave_height",
+            "type": "number",
+            "title": {
+              "en": "Previous wave height",
+              "sv": "Föregående våghöjd",
+              "no": "Forrige bølgehøyde"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
       }
     ],
     "conditions": [
@@ -3074,6 +3404,102 @@
             ]
           }
         ]
+      },
+      {
+        "id": "sea_level_above",
+        "title": {
+          "en": "Sea level is above",
+          "sv": "Havsvattenståndet är över",
+          "no": "Havnivå er over"
+        },
+        "titleFormatted": {
+          "en": "Sea level is above [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet är över [[cm]] cm RH2000",
+          "no": "Havnivå er over [[cm]] cm RH2000"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "sea_level_below",
+        "title": {
+          "en": "Sea level is below",
+          "sv": "Havsvattenståndet är under",
+          "no": "Havnivå er under"
+        },
+        "titleFormatted": {
+          "en": "Sea level is below [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet är under [[cm]] cm RH2000",
+          "no": "Havnivå er under [[cm]] cm RH2000"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "significant_wave_height_above",
+        "title": {
+          "en": "Significant wave height is above",
+          "sv": "Signifikant våghöjd är över",
+          "no": "Signifikant bølgehøyde er over"
+        },
+        "titleFormatted": {
+          "en": "Significant wave height is above [[meters]] m",
+          "sv": "Signifikant våghöjd är över [[meters]] m",
+          "no": "Signifikant bølgehøyde er over [[meters]] m"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "maximum_wave_height_above",
+        "title": {
+          "en": "Maximum wave height is above",
+          "sv": "Maximal våghöjd är över",
+          "no": "Maksimal bølgehøyde er over"
+        },
+        "titleFormatted": {
+          "en": "Maximum wave height is above [[meters]] m",
+          "sv": "Maximal våghöjd är över [[meters]] m",
+          "no": "Maksimal bølgehøyde er over [[meters]] m"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
       }
     ]
   },
@@ -3489,6 +3915,78 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "sealevel",
+      "name": {
+        "en": "SMHI Sea Level",
+        "sv": "SMHI Havsvattenstånd",
+        "no": "SMHI Havnivå"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "sea_level_rh2000_cp",
+        "ocean_station_cp",
+        "ocean_observed_at_cp",
+        "ocean_observation_age_cp",
+        "ocean_quality_cp",
+        "ocean_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ]
+    },
+    {
+      "id": "waves",
+      "name": {
+        "en": "SMHI Waves",
+        "sv": "SMHI Vågor",
+        "no": "SMHI Bølger"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "significant_wave_height_cp",
+        "maximum_wave_height_cp",
+        "mean_wave_period_cp",
+        "mean_wave_direction_cp",
+        "mean_wave_direction_heading_cp",
+        "ocean_station_cp",
+        "ocean_observed_at_cp",
+        "ocean_observation_age_cp",
+        "ocean_quality_cp",
+        "ocean_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
         }
       ]
     }
@@ -3967,6 +4465,153 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/fire.svg"
+    },
+    "ocean_station_cp": {
+      "type": "string",
+      "title": {
+        "en": "Station",
+        "sv": "Station",
+        "no": "Stasjon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "ocean_observed_at_cp": {
+      "type": "string",
+      "title": {
+        "en": "Observed at",
+        "sv": "Observerat",
+        "no": "Observert"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "ocean_observation_age_cp": {
+      "type": "number",
+      "title": {
+        "en": "Observation age",
+        "sv": "Observationens ålder",
+        "no": "Observasjonens alder"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "min",
+      "decimals": 0,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "ocean_quality_cp": {
+      "type": "string",
+      "title": {
+        "en": "Data quality",
+        "sv": "Datakvalitet",
+        "no": "Datakvalitet"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "ocean_source_cp": {
+      "type": "string",
+      "title": {
+        "en": "Source",
+        "sv": "Källa",
+        "no": "Kilde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "sea_level_rh2000_cp": {
+      "type": "number",
+      "title": {
+        "en": "Sea level RH2000",
+        "sv": "Havsvattenstånd RH2000",
+        "no": "Havnivå RH2000"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "cm",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/sea-level.svg"
+    },
+    "significant_wave_height_cp": {
+      "type": "number",
+      "title": {
+        "en": "Significant wave height",
+        "sv": "Signifikant våghöjd",
+        "no": "Signifikant bølgehøyde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "m",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "maximum_wave_height_cp": {
+      "type": "number",
+      "title": {
+        "en": "Maximum wave height",
+        "sv": "Maximal våghöjd",
+        "no": "Maksimal bølgehøyde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "m",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_period_cp": {
+      "type": "number",
+      "title": {
+        "en": "Mean wave period",
+        "sv": "Medelvågperiod",
+        "no": "Middel bølgeperiode"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "s",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_direction_cp": {
+      "type": "number",
+      "title": {
+        "en": "Wave direction",
+        "sv": "Vågriktning",
+        "no": "Bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "°",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_direction_heading_cp": {
+      "type": "string",
+      "title": {
+        "en": "Wave direction",
+        "sv": "Vågriktning",
+        "no": "Bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
     }
   }
 }

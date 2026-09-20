@@ -1,0 +1,194 @@
+{
+  "triggers": [
+    {
+      "id": "SignificantWaveHeightCrossedAbove",
+      "title": {
+        "en": "Significant wave height rises above",
+        "sv": "Signifikant våghöjd stiger över",
+        "no": "Signifikant bølgehøyde stiger over"
+      },
+      "titleFormatted": {
+        "en": "Significant wave height rises above [[meters]] m",
+        "sv": "Signifikant våghöjd stiger över [[meters]] m",
+        "no": "Signifikant bølgehøyde stiger over [[meters]] m"
+      },
+      "tokens": [
+        {
+          "name": "wave_height",
+          "type": "number",
+          "title": {
+            "en": "Wave height",
+            "sv": "Våghöjd",
+            "no": "Bølgehøyde"
+          }
+        },
+        {
+          "name": "previous_wave_height",
+          "type": "number",
+          "title": {
+            "en": "Previous wave height",
+            "sv": "Föregående våghöjd",
+            "no": "Forrige bølgehøyde"
+          }
+        },
+        {
+          "name": "station",
+          "type": "string",
+          "title": {
+            "en": "Station",
+            "sv": "Station",
+            "no": "Stasjon"
+          }
+        },
+        {
+          "name": "observed_at",
+          "type": "string",
+          "title": {
+            "en": "Observed at",
+            "sv": "Observerat",
+            "no": "Observert"
+          }
+        },
+        {
+          "name": "quality",
+          "type": "string",
+          "title": {
+            "en": "Data quality",
+            "sv": "Datakvalitet",
+            "no": "Datakvalitet"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "meters",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "MaximumWaveHeightCrossedAbove",
+      "title": {
+        "en": "Maximum wave height rises above",
+        "sv": "Maximal våghöjd stiger över",
+        "no": "Maksimal bølgehøyde stiger over"
+      },
+      "titleFormatted": {
+        "en": "Maximum wave height rises above [[meters]] m",
+        "sv": "Maximal våghöjd stiger över [[meters]] m",
+        "no": "Maksimal bølgehøyde stiger over [[meters]] m"
+      },
+      "tokens": [
+        {
+          "name": "wave_height",
+          "type": "number",
+          "title": {
+            "en": "Wave height",
+            "sv": "Våghöjd",
+            "no": "Bølgehøyde"
+          }
+        },
+        {
+          "name": "previous_wave_height",
+          "type": "number",
+          "title": {
+            "en": "Previous wave height",
+            "sv": "Föregående våghöjd",
+            "no": "Forrige bølgehøyde"
+          }
+        },
+        {
+          "name": "station",
+          "type": "string",
+          "title": {
+            "en": "Station",
+            "sv": "Station",
+            "no": "Stasjon"
+          }
+        },
+        {
+          "name": "observed_at",
+          "type": "string",
+          "title": {
+            "en": "Observed at",
+            "sv": "Observerat",
+            "no": "Observert"
+          }
+        },
+        {
+          "name": "quality",
+          "type": "string",
+          "title": {
+            "en": "Data quality",
+            "sv": "Datakvalitet",
+            "no": "Datakvalitet"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "meters",
+          "type": "number"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "significant_wave_height_above",
+      "title": {
+        "en": "Significant wave height is above",
+        "sv": "Signifikant våghöjd är över",
+        "no": "Signifikant bølgehøyde er over"
+      },
+      "titleFormatted": {
+        "en": "Significant wave height is above [[meters]] m",
+        "sv": "Signifikant våghöjd är över [[meters]] m",
+        "no": "Signifikant bølgehøyde er over [[meters]] m"
+      },
+      "args": [
+        {
+          "name": "meters",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "maximum_wave_height_above",
+      "title": {
+        "en": "Maximum wave height is above",
+        "sv": "Maximal våghöjd är över",
+        "no": "Maksimal bølgehøyde er over"
+      },
+      "titleFormatted": {
+        "en": "Maximum wave height is above [[meters]] m",
+        "sv": "Maximal våghöjd är över [[meters]] m",
+        "no": "Maksimal bølgehøyde er over [[meters]] m"
+      },
+      "args": [
+        {
+          "name": "meters",
+          "type": "number"
+        }
+      ]
+    }
+  ]
+}

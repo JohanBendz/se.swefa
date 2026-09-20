@@ -68,5 +68,10 @@
     "en": "Added a separate SMHI Fire Risk device with daily forecasts up to five days ahead for forest fire risk, grass fire risk and forest fuel dryness. Added Flow triggers/conditions, dedicated fire-risk icons, freshness validation and safe unavailable handling when reliable data is missing. Fire risk is a forecast and is not an official fire ban.",
     "sv": "Lade till en separat SMHI Brandrisk-enhet med dygnsprognoser upp till fem dagar framåt för skogsbrandsrisk, gräsbrandsrisk och bränsleuttorkning i skog. Lade till Flow-triggers/villkor, egna brandriskikoner, färskhetskontroll och säkert unavailable-läge när tillförlitlig data saknas. Brandrisk är en prognos och är inte ett officiellt eldningsförbud.",
     "no": "La til en separat SMHI Brannrisiko-enhet med døgnprognoser opptil fem dager frem for skogbrannrisiko, gressbrannrisiko og uttørking i skog. La til Flow-triggere/vilkår, egne brannrisikoikoner, ferskhetskontroll og trygg unavailable-status når pålitelige data mangler. Brannrisiko er en prognose og er ikke et offisielt bålforbud."
+  },
+  "0.11.0": {
+    "en": "Added separate SMHI Sea Level and SMHI Waves devices using named ocean observation stations. Sea Level shows RH2000 observations with age and quality; Waves shows significant/max wave height, period and wave direction where available. Added threshold Flow cards, station-aware pairing, freshness checks and dedicated ocean icons.",
+    "sv": "Lade till separata enheter för SMHI Havsvattenstånd och SMHI Vågor baserade på namngivna havsobservationsstationer. Havsvattenstånd visar RH2000 med ålder och kvalitet; Vågor visar signifikant/maximal våghöjd, period och vågriktning där data finns. Lade även till tröskelbaserade Flow-kort, stationsval, färskhetskontroller och egna havsikoner.",
+    "no": "La til separate enheter for SMHI Havnivå og SMHI Bølger basert på navngitte havobservasjonsstasjoner. Havnivå viser RH2000 med alder og kvalitet; Bølger viser signifikant/maksimal bølgehøyde, periode og bølgeretning der data finnes. La også til terskelbaserte Flow-kort, stasjonsvalg, ferskhetskontroller og egne havikoner."
   }
 }

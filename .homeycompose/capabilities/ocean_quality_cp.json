@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Data quality",
+    "sv": "Datakvalitet",
+    "no": "Datakvalitet"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/ocean.svg"
+}

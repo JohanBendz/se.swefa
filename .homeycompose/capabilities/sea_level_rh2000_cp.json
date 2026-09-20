@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "title": {
+    "en": "Sea level RH2000",
+    "sv": "Havsvattenstånd RH2000",
+    "no": "Havnivå RH2000"
+  },
+  "getable": true,
+  "setable": false,
+  "insights": true,
+  "units": "cm",
+  "decimals": 1,
+  "uiComponent": "sensor",
+  "icon": "/assets/icons/sea-level.svg"
+}

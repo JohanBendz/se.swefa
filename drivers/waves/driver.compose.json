@@ -1,0 +1,37 @@
+{
+  "name": {
+    "en": "SMHI Waves",
+    "sv": "SMHI Vågor",
+    "no": "SMHI Bølger"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "significant_wave_height_cp",
+    "maximum_wave_height_cp",
+    "mean_wave_period_cp",
+    "mean_wave_direction_cp",
+    "mean_wave_direction_heading_cp",
+    "ocean_station_cp",
+    "ocean_observed_at_cp",
+    "ocean_observation_age_cp",
+    "ocean_quality_cp",
+    "ocean_source_cp"
+  ],
+  "images": {
+    "large": "/drivers/weather/assets/images/large.png",
+    "small": "/drivers/weather/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

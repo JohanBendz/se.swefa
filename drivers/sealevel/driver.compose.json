@@ -1,0 +1,33 @@
+{
+  "name": {
+    "en": "SMHI Sea Level",
+    "sv": "SMHI Havsvattenstånd",
+    "no": "SMHI Havnivå"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "sea_level_rh2000_cp",
+    "ocean_station_cp",
+    "ocean_observed_at_cp",
+    "ocean_observation_age_cp",
+    "ocean_quality_cp",
+    "ocean_source_cp"
+  ],
+  "images": {
+    "large": "/drivers/weather/assets/images/large.png",
+    "small": "/drivers/weather/assets/images/small.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

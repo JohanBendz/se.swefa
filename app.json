@@ -6,7 +6,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.11.0",
+  "version": "0.11.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -76,6 +76,981 @@
   "flow": {
     "triggers": [
       {
+        "id": "ForestFireRiskChangedTo",
+        "title": {
+          "en": "Forest fire risk changes to",
+          "sv": "Skogsbrandsrisken ändras till",
+          "no": "Skogbrannrisiko endres til"
+        },
+        "titleFormatted": {
+          "en": "Forest fire risk changes to [[risk_level]]",
+          "sv": "Skogsbrandsrisken ändras till [[risk_level]]",
+          "no": "Skogbrannrisiko endres til [[risk_level]]"
+        },
+        "tokens": [
+          {
+            "name": "risk_level_text",
+            "type": "string",
+            "title": {
+              "en": "Risk level",
+              "sv": "Risknivå",
+              "no": "Risikonivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Risk code",
+              "sv": "Riskkod",
+              "no": "Risikokode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very low risk",
+                  "sv": "Mycket liten risk",
+                  "no": "Svært liten risiko"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extreme risk (5E)",
+                  "sv": "Extremt stor risk (5E)",
+                  "no": "Ekstrem risiko (5E)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "GrassFireRiskChangedTo",
+        "title": {
+          "en": "Grass fire risk changes to",
+          "sv": "Gräsbrandsrisken ändras till",
+          "no": "Gressbrannrisiko endres til"
+        },
+        "titleFormatted": {
+          "en": "Grass fire risk changes to [[risk_level]]",
+          "sv": "Gräsbrandsrisken ändras till [[risk_level]]",
+          "no": "Gressbrannrisiko endres til [[risk_level]]"
+        },
+        "tokens": [
+          {
+            "name": "risk_level_text",
+            "type": "string",
+            "title": {
+              "en": "Risk level",
+              "sv": "Risknivå",
+              "no": "Risikonivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Risk code",
+              "sv": "Riskkod",
+              "no": "Risikokode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "risk_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Snow-covered ground",
+                  "sv": "Snötäckt mark",
+                  "no": "Snødekt mark"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Grass fire season over",
+                  "sv": "Gräsbrandssäsongen slut",
+                  "no": "Gressbrannsesongen er over"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Low risk",
+                  "sv": "Liten risk",
+                  "no": "Liten risiko"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Moderate risk",
+                  "sv": "Måttlig risk",
+                  "no": "Moderat risiko"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "High risk",
+                  "sv": "Stor risk",
+                  "no": "Stor risiko"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Very high risk",
+                  "sv": "Mycket stor risk",
+                  "no": "Svært stor risiko"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ForestDrynessChangedTo",
+        "title": {
+          "en": "Forest fuel dryness changes to",
+          "sv": "Bränsleuttorkning skog ändras till",
+          "no": "Uttørking i skog endres til"
+        },
+        "titleFormatted": {
+          "en": "Forest fuel dryness changes to [[dryness_level]]",
+          "sv": "Bränsleuttorkning skog ändras till [[dryness_level]]",
+          "no": "Uttørking i skog endres til [[dryness_level]]"
+        },
+        "tokens": [
+          {
+            "name": "dryness_level_text",
+            "type": "string",
+            "title": {
+              "en": "Dryness level",
+              "sv": "Torrhetsnivå",
+              "no": "Tørrhetsnivå"
+            }
+          },
+          {
+            "name": "risk_code",
+            "type": "string",
+            "title": {
+              "en": "Dryness code",
+              "sv": "Torrhetskod",
+              "no": "Tørrhetskode"
+            }
+          },
+          {
+            "name": "forecast_for",
+            "type": "string",
+            "title": {
+              "en": "Forecast for",
+              "sv": "Prognos för",
+              "no": "Prognose for"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=firerisk"
+          },
+          {
+            "name": "dryness_level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "Very wet",
+                  "sv": "Mycket blött",
+                  "no": "Svært vått"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Wet",
+                  "sv": "Blött",
+                  "no": "Vått"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Moderately wet",
+                  "sv": "Måttligt blött",
+                  "no": "Moderat vått"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Dry",
+                  "sv": "Torrt",
+                  "no": "Tørt"
+                }
+              },
+              {
+                "id": "5",
+                "label": {
+                  "en": "Very dry",
+                  "sv": "Mycket torrt",
+                  "no": "Svært tørt"
+                }
+              },
+              {
+                "id": "6",
+                "label": {
+                  "en": "Extremely dry (5E)",
+                  "sv": "Extremt torrt (5E)",
+                  "no": "Ekstremt tørt (5E)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "SeaLevelCrossedAbove",
+        "title": {
+          "en": "Sea level rises above",
+          "sv": "Havsvattenståndet stiger över",
+          "no": "Havnivå stiger over"
+        },
+        "titleFormatted": {
+          "en": "Sea level rises above [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet stiger över [[cm]] cm RH2000",
+          "no": "Havnivå stiger over [[cm]] cm RH2000"
+        },
+        "hint": {
+          "en": "Triggers only when the measured level crosses the threshold from at or below it.",
+          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller under den.",
+          "no": "Utløses bare når målt nivå krysser grensen nedenfra."
+        },
+        "tokens": [
+          {
+            "name": "sea_level",
+            "type": "number",
+            "title": {
+              "en": "Sea level",
+              "sv": "Havsvattenstånd",
+              "no": "Havnivå"
+            }
+          },
+          {
+            "name": "previous_sea_level",
+            "type": "number",
+            "title": {
+              "en": "Previous sea level",
+              "sv": "Föregående havsvattenstånd",
+              "no": "Forrige havnivå"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "SeaLevelCrossedBelow",
+        "title": {
+          "en": "Sea level falls below",
+          "sv": "Havsvattenståndet sjunker under",
+          "no": "Havnivå faller under"
+        },
+        "titleFormatted": {
+          "en": "Sea level falls below [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet sjunker under [[cm]] cm RH2000",
+          "no": "Havnivå faller under [[cm]] cm RH2000"
+        },
+        "hint": {
+          "en": "Triggers only when the measured level crosses the threshold from at or above it.",
+          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller över den.",
+          "no": "Utløses bare når målt nivå krysser grensen ovenfra."
+        },
+        "tokens": [
+          {
+            "name": "sea_level",
+            "type": "number",
+            "title": {
+              "en": "Sea level",
+              "sv": "Havsvattenstånd",
+              "no": "Havnivå"
+            }
+          },
+          {
+            "name": "previous_sea_level",
+            "type": "number",
+            "title": {
+              "en": "Previous sea level",
+              "sv": "Föregående havsvattenstånd",
+              "no": "Forrige havnivå"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=sealevel"
+          },
+          {
+            "name": "cm",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "SmhiWarningIssued",
+        "title": {
+          "en": "SMHI weather warning issued",
+          "sv": "SMHI vädervarning utfärdad",
+          "no": "SMHI værvarsel utstedt"
+        },
+        "titleFormatted": {
+          "en": "An SMHI weather warning is issued",
+          "sv": "En SMHI-vädervarning utfärdas",
+          "no": "Et SMHI-værvarsel utstedes"
+        },
+        "tokens": [
+          {
+            "name": "warning_id",
+            "type": "string",
+            "title": {
+              "en": "Warning ID",
+              "sv": "Varnings-ID",
+              "no": "Varslings-ID"
+            }
+          },
+          {
+            "name": "warning_level",
+            "type": "string",
+            "title": {
+              "en": "Warning level",
+              "sv": "Varningsnivå",
+              "no": "Varslingsnivå"
+            }
+          },
+          {
+            "name": "warning_level_code",
+            "type": "string",
+            "title": {
+              "en": "Warning level code",
+              "sv": "Varningsnivåkod",
+              "no": "Varslingsnivåkode"
+            }
+          },
+          {
+            "name": "warning_event",
+            "type": "string",
+            "title": {
+              "en": "Warning",
+              "sv": "Varning",
+              "no": "Varsel"
+            }
+          },
+          {
+            "name": "warning_event_code",
+            "type": "string",
+            "title": {
+              "en": "Warning event code",
+              "sv": "Varningskod",
+              "no": "Varselkode"
+            }
+          },
+          {
+            "name": "warning_area",
+            "type": "string",
+            "title": {
+              "en": "Warning area",
+              "sv": "Varningsområde",
+              "no": "Varslingsområde"
+            }
+          },
+          {
+            "name": "warning_start",
+            "type": "string",
+            "title": {
+              "en": "Valid from",
+              "sv": "Gäller från",
+              "no": "Gyldig fra"
+            }
+          },
+          {
+            "name": "warning_end",
+            "type": "string",
+            "title": {
+              "en": "Valid until",
+              "sv": "Gäller till",
+              "no": "Gyldig til"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
+          }
+        ]
+      },
+      {
+        "id": "SmhiWarningUpdated",
+        "title": {
+          "en": "SMHI weather warning updated",
+          "sv": "SMHI vädervarning uppdaterad",
+          "no": "SMHI værvarsel oppdatert"
+        },
+        "titleFormatted": {
+          "en": "An SMHI weather warning is updated",
+          "sv": "En SMHI-vädervarning uppdateras",
+          "no": "Et SMHI-værvarsel oppdateres"
+        },
+        "tokens": [
+          {
+            "name": "warning_id",
+            "type": "string",
+            "title": {
+              "en": "Warning ID",
+              "sv": "Varnings-ID",
+              "no": "Varslings-ID"
+            }
+          },
+          {
+            "name": "warning_level",
+            "type": "string",
+            "title": {
+              "en": "Warning level",
+              "sv": "Varningsnivå",
+              "no": "Varslingsnivå"
+            }
+          },
+          {
+            "name": "warning_level_code",
+            "type": "string",
+            "title": {
+              "en": "Warning level code",
+              "sv": "Varningsnivåkod",
+              "no": "Varslingsnivåkode"
+            }
+          },
+          {
+            "name": "warning_event",
+            "type": "string",
+            "title": {
+              "en": "Warning",
+              "sv": "Varning",
+              "no": "Varsel"
+            }
+          },
+          {
+            "name": "warning_event_code",
+            "type": "string",
+            "title": {
+              "en": "Warning event code",
+              "sv": "Varningskod",
+              "no": "Varselkode"
+            }
+          },
+          {
+            "name": "warning_area",
+            "type": "string",
+            "title": {
+              "en": "Warning area",
+              "sv": "Varningsområde",
+              "no": "Varslingsområde"
+            }
+          },
+          {
+            "name": "warning_start",
+            "type": "string",
+            "title": {
+              "en": "Valid from",
+              "sv": "Gäller från",
+              "no": "Gyldig fra"
+            }
+          },
+          {
+            "name": "warning_end",
+            "type": "string",
+            "title": {
+              "en": "Valid until",
+              "sv": "Gäller till",
+              "no": "Gyldig til"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
+          }
+        ]
+      },
+      {
+        "id": "SmhiWarningEnded",
+        "title": {
+          "en": "SMHI weather warning ended",
+          "sv": "SMHI vädervarning avslutad",
+          "no": "SMHI værvarsel avsluttet"
+        },
+        "titleFormatted": {
+          "en": "An SMHI weather warning ends",
+          "sv": "En SMHI-vädervarning upphör",
+          "no": "Et SMHI-værvarsel avsluttes"
+        },
+        "tokens": [
+          {
+            "name": "warning_id",
+            "type": "string",
+            "title": {
+              "en": "Warning ID",
+              "sv": "Varnings-ID",
+              "no": "Varslings-ID"
+            }
+          },
+          {
+            "name": "warning_level",
+            "type": "string",
+            "title": {
+              "en": "Warning level",
+              "sv": "Varningsnivå",
+              "no": "Varslingsnivå"
+            }
+          },
+          {
+            "name": "warning_level_code",
+            "type": "string",
+            "title": {
+              "en": "Warning level code",
+              "sv": "Varningsnivåkod",
+              "no": "Varslingsnivåkode"
+            }
+          },
+          {
+            "name": "warning_event",
+            "type": "string",
+            "title": {
+              "en": "Warning",
+              "sv": "Varning",
+              "no": "Varsel"
+            }
+          },
+          {
+            "name": "warning_event_code",
+            "type": "string",
+            "title": {
+              "en": "Warning event code",
+              "sv": "Varningskod",
+              "no": "Varselkode"
+            }
+          },
+          {
+            "name": "warning_area",
+            "type": "string",
+            "title": {
+              "en": "Warning area",
+              "sv": "Varningsområde",
+              "no": "Varslingsområde"
+            }
+          },
+          {
+            "name": "warning_start",
+            "type": "string",
+            "title": {
+              "en": "Valid from",
+              "sv": "Gäller från",
+              "no": "Gyldig fra"
+            }
+          },
+          {
+            "name": "warning_end",
+            "type": "string",
+            "title": {
+              "en": "Valid until",
+              "sv": "Gäller till",
+              "no": "Gyldig til"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
+          }
+        ]
+      },
+      {
+        "id": "SignificantWaveHeightCrossedAbove",
+        "title": {
+          "en": "Significant wave height rises above",
+          "sv": "Signifikant våghöjd stiger över",
+          "no": "Signifikant bølgehøyde stiger over"
+        },
+        "titleFormatted": {
+          "en": "Significant wave height rises above [[meters]] m",
+          "sv": "Signifikant våghöjd stiger över [[meters]] m",
+          "no": "Signifikant bølgehøyde stiger over [[meters]] m"
+        },
+        "tokens": [
+          {
+            "name": "wave_height",
+            "type": "number",
+            "title": {
+              "en": "Wave height",
+              "sv": "Våghöjd",
+              "no": "Bølgehøyde"
+            }
+          },
+          {
+            "name": "previous_wave_height",
+            "type": "number",
+            "title": {
+              "en": "Previous wave height",
+              "sv": "Föregående våghöjd",
+              "no": "Forrige bølgehøyde"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "MaximumWaveHeightCrossedAbove",
+        "title": {
+          "en": "Maximum wave height rises above",
+          "sv": "Maximal våghöjd stiger över",
+          "no": "Maksimal bølgehøyde stiger over"
+        },
+        "titleFormatted": {
+          "en": "Maximum wave height rises above [[meters]] m",
+          "sv": "Maximal våghöjd stiger över [[meters]] m",
+          "no": "Maksimal bølgehøyde stiger over [[meters]] m"
+        },
+        "tokens": [
+          {
+            "name": "wave_height",
+            "type": "number",
+            "title": {
+              "en": "Wave height",
+              "sv": "Våghöjd",
+              "no": "Bølgehøyde"
+            }
+          },
+          {
+            "name": "previous_wave_height",
+            "type": "number",
+            "title": {
+              "en": "Previous wave height",
+              "sv": "Föregående våghöjd",
+              "no": "Forrige bølgehøyde"
+            }
+          },
+          {
+            "name": "station",
+            "type": "string",
+            "title": {
+              "en": "Station",
+              "sv": "Station",
+              "no": "Stasjon"
+            }
+          },
+          {
+            "name": "observed_at",
+            "type": "string",
+            "title": {
+              "en": "Observed at",
+              "sv": "Observerat",
+              "no": "Observert"
+            }
+          },
+          {
+            "name": "quality",
+            "type": "string",
+            "title": {
+              "en": "Data quality",
+              "sv": "Datakvalitet",
+              "no": "Datakvalitet"
+            }
+          },
+          {
+            "name": "source",
+            "type": "string",
+            "title": {
+              "en": "Source",
+              "sv": "Källa",
+              "no": "Kilde"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=waves"
+          },
+          {
+            "name": "meters",
+            "type": "number"
+          }
+        ]
+      },
+      {
         "id": "WeatherSituationChange",
         "title": {
           "en": "Weather change",
@@ -122,303 +1097,6 @@
               "en": "Previous weather situation code",
               "sv": "Föregående vädersituationskod",
               "no": "Forrige værsituasjonskode"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "AirTemperatureChange",
-        "title": {
-          "en": "Air temperature change",
-          "sv": "Förändrad lufttemperatur",
-          "no": "Endring av lufttemperatur"
-        },
-        "titleFormatted": {
-          "en": "Air temperature change",
-          "sv": "Förändring av lufttemperatur",
-          "no": "Endring av lufttemperatur"
-        },
-        "tokens": [
-          {
-            "name": "measure_air_temperature_cp",
-            "type": "number",
-            "title": {
-              "en": "Air temperature",
-              "sv": "Lufttemperatur",
-              "no": "Lufttemperatur"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "PrecipitationSituationChange",
-        "title": {
-          "en": "Precipitation situation change",
-          "sv": "Förändrad nederbörssituation",
-          "no": "Nedbørssituasjon endres"
-        },
-        "titleFormatted": {
-          "en": "Precipitation situation change",
-          "sv": "Förändring av nederbörssituation",
-          "no": "Endring av nedbørssituasjon"
-        },
-        "tokens": [
-          {
-            "name": "measure_precipitation_situation_cp",
-            "type": "string",
-            "title": {
-              "en": "Precipitation situation",
-              "sv": "Nederbördssituation",
-              "no": "Nedbørssituasjon"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "WindSpeedChange",
-        "title": {
-          "en": "Wind speed change",
-          "sv": "Förändrad vindhastighet",
-          "no": "Endring av vindhastighet"
-        },
-        "titleFormatted": {
-          "en": "Wind speed change",
-          "sv": "Förändring av vindhastighet",
-          "no": "Endring av vindhastighet"
-        },
-        "tokens": [
-          {
-            "name": "measure_wind_speed_cp",
-            "type": "number",
-            "title": {
-              "en": "Wind speed",
-              "sv": "Vindhastighet",
-              "no": "Vindstyrke"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "WindDirectionHeadingChange",
-        "title": {
-          "en": "Wind direction change",
-          "sv": "Förändrad vindriktning",
-          "no": "Endret vindretning"
-        },
-        "titleFormatted": {
-          "en": "Wind direction change",
-          "sv": "Förändring av vindriktning",
-          "no": "Endring av vindretning"
-        },
-        "tokens": [
-          {
-            "name": "measure_wind_direction_heading_cp",
-            "type": "string",
-            "title": {
-              "en": "Wind direction",
-              "sv": "Vindriktning",
-              "no": "Vindretning"
-            }
-          },
-          {
-            "name": "measure_wind_direction_cp",
-            "type": "number",
-            "title": {
-              "en": "Wind direction °",
-              "sv": "Vindriktning °",
-              "no": "Vindretning °"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "RelativeHumidityChange",
-        "title": {
-          "en": "Relative humidity change",
-          "sv": "Förändrad relativ luftfuktighet",
-          "no": "Endret relativ luftfuktighet"
-        },
-        "titleFormatted": {
-          "en": "Relative humidity change",
-          "sv": "Förändring av relativ luftfuktighet",
-          "no": "Endring av relativ luftfuktighet"
-        },
-        "tokens": [
-          {
-            "name": "measure_relative_humidity_cp",
-            "type": "number",
-            "title": {
-              "en": "Relative humidity",
-              "sv": "Relativ luftfuktighet",
-              "no": "Relativ luftfuktighet"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "AirPressureChange",
-        "title": {
-          "en": "Air pressure change",
-          "sv": "Förändrat lufttryck",
-          "no": "Endret lufttrykk"
-        },
-        "titleFormatted": {
-          "en": "Air pressure change",
-          "sv": "Förändring av lufttryck",
-          "no": "Endring av lufttrykk"
-        },
-        "tokens": [
-          {
-            "name": "measure_air_pressure_cp",
-            "type": "number",
-            "title": {
-              "en": "Air pressure",
-              "sv": "Lufttryck",
-              "no": "Lufttrykk"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "ThunderProbabilityChange",
-        "title": {
-          "en": "Thunderstorm probability change",
-          "sv": "Förändrad risk för åska",
-          "no": "Endret fare for torden"
-        },
-        "titleFormatted": {
-          "en": "Thunderstorm probability change",
-          "sv": "Förändring av risk för åska",
-          "no": "Endring av fare for torden"
-        },
-        "tokens": [
-          {
-            "name": "measure_thunder_probability_cp",
-            "type": "number",
-            "title": {
-              "en": "Thunderstorm probability",
-              "sv": "Risk för åska",
-              "no": "Fare for torden"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "MeanValueOfTotalCloudCoverChange",
-        "title": {
-          "en": "Cloud cover change",
-          "sv": "Förändrad molntäthet",
-          "no": "Endret skytetthet"
-        },
-        "titleFormatted": {
-          "en": "Cloud cover change",
-          "sv": "Förändring av molntäthet",
-          "no": "Endring av skytetthet"
-        },
-        "tokens": [
-          {
-            "name": "mean_value_of_total_cloud_cover_cp",
-            "type": "number",
-            "title": {
-              "en": "Cloud cover",
-              "sv": "Molntäthet",
-              "no": "Skytetthet"
-            }
-          }
-        ],
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=weather"
-          }
-        ]
-      },
-      {
-        "id": "extreme_weather",
-        "title": {
-          "en": "Severe weather condition",
-          "sv": "Kraftigt väderförhållande",
-          "no": "Kraftig værtilstand"
-        },
-        "titleFormatted": {
-          "en": "A severe weather condition is detected",
-          "sv": "Ett kraftigt väderförhållande upptäcks",
-          "no": "En kraftig værtilstand oppdages"
-        },
-        "tokens": [
-          {
-            "name": "weather_condition",
-            "type": "string",
-            "title": {
-              "en": "Weather condition",
-              "sv": "Väderförhållande",
-              "no": "Værforhold"
-            }
-          },
-          {
-            "name": "weather_condition_code",
-            "type": "string",
-            "title": {
-              "en": "Weather condition code",
-              "sv": "Väderkod",
-              "no": "Værkode"
             }
           }
         ],
@@ -1213,97 +1891,25 @@
         ]
       },
       {
-        "id": "SmhiWarningIssued",
+        "id": "AirTemperatureChange",
         "title": {
-          "en": "SMHI weather warning issued",
-          "sv": "SMHI vädervarning utfärdad",
-          "no": "SMHI værvarsel utstedt"
+          "en": "Air temperature change",
+          "sv": "Förändrad lufttemperatur",
+          "no": "Endring av lufttemperatur"
         },
         "titleFormatted": {
-          "en": "An SMHI weather warning is issued",
-          "sv": "En SMHI-vädervarning utfärdas",
-          "no": "Et SMHI-værvarsel utstedes"
+          "en": "Air temperature change",
+          "sv": "Förändring av lufttemperatur",
+          "no": "Endring av lufttemperatur"
         },
         "tokens": [
           {
-            "name": "warning_id",
-            "type": "string",
+            "name": "measure_air_temperature_cp",
+            "type": "number",
             "title": {
-              "en": "Warning ID",
-              "sv": "Varnings-ID",
-              "no": "Varslings-ID"
-            }
-          },
-          {
-            "name": "warning_level",
-            "type": "string",
-            "title": {
-              "en": "Warning level",
-              "sv": "Varningsnivå",
-              "no": "Varslingsnivå"
-            }
-          },
-          {
-            "name": "warning_level_code",
-            "type": "string",
-            "title": {
-              "en": "Warning level code",
-              "sv": "Varningsnivåkod",
-              "no": "Varslingsnivåkode"
-            }
-          },
-          {
-            "name": "warning_event",
-            "type": "string",
-            "title": {
-              "en": "Warning",
-              "sv": "Varning",
-              "no": "Varsel"
-            }
-          },
-          {
-            "name": "warning_event_code",
-            "type": "string",
-            "title": {
-              "en": "Warning event code",
-              "sv": "Varningskod",
-              "no": "Varselkode"
-            }
-          },
-          {
-            "name": "warning_area",
-            "type": "string",
-            "title": {
-              "en": "Warning area",
-              "sv": "Varningsområde",
-              "no": "Varslingsområde"
-            }
-          },
-          {
-            "name": "warning_start",
-            "type": "string",
-            "title": {
-              "en": "Valid from",
-              "sv": "Gäller från",
-              "no": "Gyldig fra"
-            }
-          },
-          {
-            "name": "warning_end",
-            "type": "string",
-            "title": {
-              "en": "Valid until",
-              "sv": "Gäller till",
-              "no": "Gyldig til"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
+              "en": "Air temperature",
+              "sv": "Lufttemperatur",
+              "no": "Lufttemperatur"
             }
           }
         ],
@@ -1311,102 +1917,30 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=warnings"
+            "filter": "driver_id=weather"
           }
         ]
       },
       {
-        "id": "SmhiWarningUpdated",
+        "id": "PrecipitationSituationChange",
         "title": {
-          "en": "SMHI weather warning updated",
-          "sv": "SMHI vädervarning uppdaterad",
-          "no": "SMHI værvarsel oppdatert"
+          "en": "Precipitation situation change",
+          "sv": "Förändrad nederbörssituation",
+          "no": "Nedbørssituasjon endres"
         },
         "titleFormatted": {
-          "en": "An SMHI weather warning is updated",
-          "sv": "En SMHI-vädervarning uppdateras",
-          "no": "Et SMHI-værvarsel oppdateres"
+          "en": "Precipitation situation change",
+          "sv": "Förändring av nederbörssituation",
+          "no": "Endring av nedbørssituasjon"
         },
         "tokens": [
           {
-            "name": "warning_id",
+            "name": "measure_precipitation_situation_cp",
             "type": "string",
             "title": {
-              "en": "Warning ID",
-              "sv": "Varnings-ID",
-              "no": "Varslings-ID"
-            }
-          },
-          {
-            "name": "warning_level",
-            "type": "string",
-            "title": {
-              "en": "Warning level",
-              "sv": "Varningsnivå",
-              "no": "Varslingsnivå"
-            }
-          },
-          {
-            "name": "warning_level_code",
-            "type": "string",
-            "title": {
-              "en": "Warning level code",
-              "sv": "Varningsnivåkod",
-              "no": "Varslingsnivåkode"
-            }
-          },
-          {
-            "name": "warning_event",
-            "type": "string",
-            "title": {
-              "en": "Warning",
-              "sv": "Varning",
-              "no": "Varsel"
-            }
-          },
-          {
-            "name": "warning_event_code",
-            "type": "string",
-            "title": {
-              "en": "Warning event code",
-              "sv": "Varningskod",
-              "no": "Varselkode"
-            }
-          },
-          {
-            "name": "warning_area",
-            "type": "string",
-            "title": {
-              "en": "Warning area",
-              "sv": "Varningsområde",
-              "no": "Varslingsområde"
-            }
-          },
-          {
-            "name": "warning_start",
-            "type": "string",
-            "title": {
-              "en": "Valid from",
-              "sv": "Gäller från",
-              "no": "Gyldig fra"
-            }
-          },
-          {
-            "name": "warning_end",
-            "type": "string",
-            "title": {
-              "en": "Valid until",
-              "sv": "Gäller till",
-              "no": "Gyldig til"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
+              "en": "Precipitation situation",
+              "sv": "Nederbördssituation",
+              "no": "Nedbørssituasjon"
             }
           }
         ],
@@ -1414,102 +1948,30 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=warnings"
+            "filter": "driver_id=weather"
           }
         ]
       },
       {
-        "id": "SmhiWarningEnded",
+        "id": "WindSpeedChange",
         "title": {
-          "en": "SMHI weather warning ended",
-          "sv": "SMHI vädervarning avslutad",
-          "no": "SMHI værvarsel avsluttet"
+          "en": "Wind speed change",
+          "sv": "Förändrad vindhastighet",
+          "no": "Endring av vindhastighet"
         },
         "titleFormatted": {
-          "en": "An SMHI weather warning ends",
-          "sv": "En SMHI-vädervarning upphör",
-          "no": "Et SMHI-værvarsel avsluttes"
+          "en": "Wind speed change",
+          "sv": "Förändring av vindhastighet",
+          "no": "Endring av vindhastighet"
         },
         "tokens": [
           {
-            "name": "warning_id",
-            "type": "string",
+            "name": "measure_wind_speed_cp",
+            "type": "number",
             "title": {
-              "en": "Warning ID",
-              "sv": "Varnings-ID",
-              "no": "Varslings-ID"
-            }
-          },
-          {
-            "name": "warning_level",
-            "type": "string",
-            "title": {
-              "en": "Warning level",
-              "sv": "Varningsnivå",
-              "no": "Varslingsnivå"
-            }
-          },
-          {
-            "name": "warning_level_code",
-            "type": "string",
-            "title": {
-              "en": "Warning level code",
-              "sv": "Varningsnivåkod",
-              "no": "Varslingsnivåkode"
-            }
-          },
-          {
-            "name": "warning_event",
-            "type": "string",
-            "title": {
-              "en": "Warning",
-              "sv": "Varning",
-              "no": "Varsel"
-            }
-          },
-          {
-            "name": "warning_event_code",
-            "type": "string",
-            "title": {
-              "en": "Warning event code",
-              "sv": "Varningskod",
-              "no": "Varselkode"
-            }
-          },
-          {
-            "name": "warning_area",
-            "type": "string",
-            "title": {
-              "en": "Warning area",
-              "sv": "Varningsområde",
-              "no": "Varslingsområde"
-            }
-          },
-          {
-            "name": "warning_start",
-            "type": "string",
-            "title": {
-              "en": "Valid from",
-              "sv": "Gäller från",
-              "no": "Gyldig fra"
-            }
-          },
-          {
-            "name": "warning_end",
-            "type": "string",
-            "title": {
-              "en": "Valid until",
-              "sv": "Gäller till",
-              "no": "Gyldig til"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
+              "en": "Wind speed",
+              "sv": "Vindhastighet",
+              "no": "Vindstyrke"
             }
           }
         ],
@@ -1517,60 +1979,228 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=warnings"
+            "filter": "driver_id=weather"
           }
         ]
       },
       {
-        "id": "ForestFireRiskChangedTo",
+        "id": "WindDirectionHeadingChange",
         "title": {
-          "en": "Forest fire risk changes to",
-          "sv": "Skogsbrandsrisken ändras till",
-          "no": "Skogbrannrisiko endres til"
+          "en": "Wind direction change",
+          "sv": "Förändrad vindriktning",
+          "no": "Endret vindretning"
         },
         "titleFormatted": {
-          "en": "Forest fire risk changes to [[risk_level]]",
-          "sv": "Skogsbrandsrisken ändras till [[risk_level]]",
-          "no": "Skogbrannrisiko endres til [[risk_level]]"
+          "en": "Wind direction change",
+          "sv": "Förändring av vindriktning",
+          "no": "Endring av vindretning"
         },
         "tokens": [
           {
-            "name": "risk_level_text",
+            "name": "measure_wind_direction_heading_cp",
             "type": "string",
             "title": {
-              "en": "Risk level",
-              "sv": "Risknivå",
-              "no": "Risikonivå"
+              "en": "Wind direction",
+              "sv": "Vindriktning",
+              "no": "Vindretning"
             }
           },
           {
-            "name": "risk_code",
-            "type": "string",
+            "name": "measure_wind_direction_cp",
+            "type": "number",
             "title": {
-              "en": "Risk code",
-              "sv": "Riskkod",
-              "no": "Risikokode"
-            }
-          },
-          {
-            "name": "forecast_for",
-            "type": "string",
-            "title": {
-              "en": "Forecast for",
-              "sv": "Prognos för",
-              "no": "Prognose for"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
+              "en": "Wind direction °",
+              "sv": "Vindriktning °",
+              "no": "Vindretning °"
             }
           }
         ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "RelativeHumidityChange",
+        "title": {
+          "en": "Relative humidity change",
+          "sv": "Förändrad relativ luftfuktighet",
+          "no": "Endret relativ luftfuktighet"
+        },
+        "titleFormatted": {
+          "en": "Relative humidity change",
+          "sv": "Förändring av relativ luftfuktighet",
+          "no": "Endring av relativ luftfuktighet"
+        },
+        "tokens": [
+          {
+            "name": "measure_relative_humidity_cp",
+            "type": "number",
+            "title": {
+              "en": "Relative humidity",
+              "sv": "Relativ luftfuktighet",
+              "no": "Relativ luftfuktighet"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "AirPressureChange",
+        "title": {
+          "en": "Air pressure change",
+          "sv": "Förändrat lufttryck",
+          "no": "Endret lufttrykk"
+        },
+        "titleFormatted": {
+          "en": "Air pressure change",
+          "sv": "Förändring av lufttryck",
+          "no": "Endring av lufttrykk"
+        },
+        "tokens": [
+          {
+            "name": "measure_air_pressure_cp",
+            "type": "number",
+            "title": {
+              "en": "Air pressure",
+              "sv": "Lufttryck",
+              "no": "Lufttrykk"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "ThunderProbabilityChange",
+        "title": {
+          "en": "Thunderstorm probability change",
+          "sv": "Förändrad risk för åska",
+          "no": "Endret fare for torden"
+        },
+        "titleFormatted": {
+          "en": "Thunderstorm probability change",
+          "sv": "Förändring av risk för åska",
+          "no": "Endring av fare for torden"
+        },
+        "tokens": [
+          {
+            "name": "measure_thunder_probability_cp",
+            "type": "number",
+            "title": {
+              "en": "Thunderstorm probability",
+              "sv": "Risk för åska",
+              "no": "Fare for torden"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "MeanValueOfTotalCloudCoverChange",
+        "title": {
+          "en": "Cloud cover change",
+          "sv": "Förändrad molntäthet",
+          "no": "Endret skytetthet"
+        },
+        "titleFormatted": {
+          "en": "Cloud cover change",
+          "sv": "Förändring av molntäthet",
+          "no": "Endring av skytetthet"
+        },
+        "tokens": [
+          {
+            "name": "mean_value_of_total_cloud_cover_cp",
+            "type": "number",
+            "title": {
+              "en": "Cloud cover",
+              "sv": "Molntäthet",
+              "no": "Skytetthet"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      },
+      {
+        "id": "extreme_weather",
+        "title": {
+          "en": "Severe weather condition",
+          "sv": "Kraftigt väderförhållande",
+          "no": "Kraftig værtilstand"
+        },
+        "titleFormatted": {
+          "en": "A severe weather condition is detected",
+          "sv": "Ett kraftigt väderförhållande upptäcks",
+          "no": "En kraftig værtilstand oppdages"
+        },
+        "tokens": [
+          {
+            "name": "weather_condition",
+            "type": "string",
+            "title": {
+              "en": "Weather condition",
+              "sv": "Väderförhållande",
+              "no": "Værforhold"
+            }
+          },
+          {
+            "name": "weather_condition_code",
+            "type": "string",
+            "title": {
+              "en": "Weather condition code",
+              "sv": "Väderkod",
+              "no": "Værkode"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=weather"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "forest_fire_risk_at_least",
+        "title": {
+          "en": "Forest fire risk is at least",
+          "sv": "Skogsbrandsrisken är minst",
+          "no": "Skogbrannrisiko er minst"
+        },
+        "titleFormatted": {
+          "en": "Forest fire risk is at least [[risk_level]]",
+          "sv": "Skogsbrandsrisken är minst [[risk_level]]",
+          "no": "Skogbrannrisiko er minst [[risk_level]]"
+        },
         "args": [
           {
             "type": "device",
@@ -1634,55 +2264,17 @@
         ]
       },
       {
-        "id": "GrassFireRiskChangedTo",
+        "id": "grass_fire_risk_at_least",
         "title": {
-          "en": "Grass fire risk changes to",
-          "sv": "Gräsbrandsrisken ändras till",
-          "no": "Gressbrannrisiko endres til"
+          "en": "Grass fire risk is at least",
+          "sv": "Gräsbrandsrisken är minst",
+          "no": "Gressbrannrisiko er minst"
         },
         "titleFormatted": {
-          "en": "Grass fire risk changes to [[risk_level]]",
-          "sv": "Gräsbrandsrisken ändras till [[risk_level]]",
-          "no": "Gressbrannrisiko endres til [[risk_level]]"
+          "en": "Grass fire risk is at least [[risk_level]]",
+          "sv": "Gräsbrandsrisken är minst [[risk_level]]",
+          "no": "Gressbrannrisiko er minst [[risk_level]]"
         },
-        "tokens": [
-          {
-            "name": "risk_level_text",
-            "type": "string",
-            "title": {
-              "en": "Risk level",
-              "sv": "Risknivå",
-              "no": "Risikonivå"
-            }
-          },
-          {
-            "name": "risk_code",
-            "type": "string",
-            "title": {
-              "en": "Risk code",
-              "sv": "Riskkod",
-              "no": "Risikokode"
-            }
-          },
-          {
-            "name": "forecast_for",
-            "type": "string",
-            "title": {
-              "en": "Forecast for",
-              "sv": "Prognos för",
-              "no": "Prognose for"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -1693,22 +2285,6 @@
             "name": "risk_level",
             "type": "dropdown",
             "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "Snow-covered ground",
-                  "sv": "Snötäckt mark",
-                  "no": "Snødekt mark"
-                }
-              },
-              {
-                "id": "2",
-                "label": {
-                  "en": "Grass fire season over",
-                  "sv": "Gräsbrandssäsongen slut",
-                  "no": "Gressbrannsesongen er over"
-                }
-              },
               {
                 "id": "3",
                 "label": {
@@ -1746,55 +2322,17 @@
         ]
       },
       {
-        "id": "ForestDrynessChangedTo",
+        "id": "forest_dryness_at_least",
         "title": {
-          "en": "Forest fuel dryness changes to",
-          "sv": "Bränsleuttorkning skog ändras till",
-          "no": "Uttørking i skog endres til"
+          "en": "Forest fuel dryness is at least",
+          "sv": "Bränsleuttorkning skog är minst",
+          "no": "Uttørking i skog er minst"
         },
         "titleFormatted": {
-          "en": "Forest fuel dryness changes to [[dryness_level]]",
-          "sv": "Bränsleuttorkning skog ändras till [[dryness_level]]",
-          "no": "Uttørking i skog endres til [[dryness_level]]"
+          "en": "Forest fuel dryness is at least [[dryness_level]]",
+          "sv": "Bränsleuttorkning skog är minst [[dryness_level]]",
+          "no": "Uttørking i skog er minst [[dryness_level]]"
         },
-        "tokens": [
-          {
-            "name": "dryness_level_text",
-            "type": "string",
-            "title": {
-              "en": "Dryness level",
-              "sv": "Torrhetsnivå",
-              "no": "Tørrhetsnivå"
-            }
-          },
-          {
-            "name": "risk_code",
-            "type": "string",
-            "title": {
-              "en": "Dryness code",
-              "sv": "Torrhetskod",
-              "no": "Tørrhetskode"
-            }
-          },
-          {
-            "name": "forecast_for",
-            "type": "string",
-            "title": {
-              "en": "Forecast for",
-              "sv": "Prognos för",
-              "no": "Prognose for"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -1858,78 +2396,17 @@
         ]
       },
       {
-        "id": "SeaLevelCrossedAbove",
+        "id": "sea_level_above",
         "title": {
-          "en": "Sea level rises above",
-          "sv": "Havsvattenståndet stiger över",
-          "no": "Havnivå stiger over"
+          "en": "Sea level is above",
+          "sv": "Havsvattenståndet är över",
+          "no": "Havnivå er over"
         },
         "titleFormatted": {
-          "en": "Sea level rises above [[cm]] cm RH2000",
-          "sv": "Havsvattenståndet stiger över [[cm]] cm RH2000",
-          "no": "Havnivå stiger over [[cm]] cm RH2000"
+          "en": "Sea level is above [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet är över [[cm]] cm RH2000",
+          "no": "Havnivå er over [[cm]] cm RH2000"
         },
-        "hint": {
-          "en": "Triggers only when the measured level crosses the threshold from at or below it.",
-          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller under den.",
-          "no": "Utløses bare når målt nivå krysser grensen nedenfra."
-        },
-        "tokens": [
-          {
-            "name": "sea_level",
-            "type": "number",
-            "title": {
-              "en": "Sea level",
-              "sv": "Havsvattenstånd",
-              "no": "Havnivå"
-            }
-          },
-          {
-            "name": "previous_sea_level",
-            "type": "number",
-            "title": {
-              "en": "Previous sea level",
-              "sv": "Föregående havsvattenstånd",
-              "no": "Forrige havnivå"
-            }
-          },
-          {
-            "name": "station",
-            "type": "string",
-            "title": {
-              "en": "Station",
-              "sv": "Station",
-              "no": "Stasjon"
-            }
-          },
-          {
-            "name": "observed_at",
-            "type": "string",
-            "title": {
-              "en": "Observed at",
-              "sv": "Observerat",
-              "no": "Observert"
-            }
-          },
-          {
-            "name": "quality",
-            "type": "string",
-            "title": {
-              "en": "Data quality",
-              "sv": "Datakvalitet",
-              "no": "Datakvalitet"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -1943,78 +2420,17 @@
         ]
       },
       {
-        "id": "SeaLevelCrossedBelow",
+        "id": "sea_level_below",
         "title": {
-          "en": "Sea level falls below",
-          "sv": "Havsvattenståndet sjunker under",
-          "no": "Havnivå faller under"
+          "en": "Sea level is below",
+          "sv": "Havsvattenståndet är under",
+          "no": "Havnivå er under"
         },
         "titleFormatted": {
-          "en": "Sea level falls below [[cm]] cm RH2000",
-          "sv": "Havsvattenståndet sjunker under [[cm]] cm RH2000",
-          "no": "Havnivå faller under [[cm]] cm RH2000"
+          "en": "Sea level is below [[cm]] cm RH2000",
+          "sv": "Havsvattenståndet är under [[cm]] cm RH2000",
+          "no": "Havnivå er under [[cm]] cm RH2000"
         },
-        "hint": {
-          "en": "Triggers only when the measured level crosses the threshold from at or above it.",
-          "sv": "Triggar bara när det uppmätta vattenståndet passerar gränsen från eller över den.",
-          "no": "Utløses bare når målt nivå krysser grensen ovenfra."
-        },
-        "tokens": [
-          {
-            "name": "sea_level",
-            "type": "number",
-            "title": {
-              "en": "Sea level",
-              "sv": "Havsvattenstånd",
-              "no": "Havnivå"
-            }
-          },
-          {
-            "name": "previous_sea_level",
-            "type": "number",
-            "title": {
-              "en": "Previous sea level",
-              "sv": "Föregående havsvattenstånd",
-              "no": "Forrige havnivå"
-            }
-          },
-          {
-            "name": "station",
-            "type": "string",
-            "title": {
-              "en": "Station",
-              "sv": "Station",
-              "no": "Stasjon"
-            }
-          },
-          {
-            "name": "observed_at",
-            "type": "string",
-            "title": {
-              "en": "Observed at",
-              "sv": "Observerat",
-              "no": "Observert"
-            }
-          },
-          {
-            "name": "quality",
-            "type": "string",
-            "title": {
-              "en": "Data quality",
-              "sv": "Datakvalitet",
-              "no": "Datakvalitet"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -2028,73 +2444,107 @@
         ]
       },
       {
-        "id": "SignificantWaveHeightCrossedAbove",
+        "id": "smhi_warning_present",
         "title": {
-          "en": "Significant wave height rises above",
-          "sv": "Signifikant våghöjd stiger över",
-          "no": "Signifikant bølgehøyde stiger over"
+          "en": "Is there an SMHI weather warning?",
+          "sv": "Finns en SMHI-vädervarning?",
+          "no": "Finnes det et SMHI-værvarsel?"
         },
         "titleFormatted": {
-          "en": "Significant wave height rises above [[meters]] m",
-          "sv": "Signifikant våghöjd stiger över [[meters]] m",
-          "no": "Signifikant bølgehøyde stiger over [[meters]] m"
+          "en": "There !{{is|isn't}} an issued SMHI weather warning for this location",
+          "sv": "Det !{{finns|finns inte}} en utfärdad SMHI-vädervarning för platsen",
+          "no": "Det !{{finnes|finnes ikke}} et utstedt SMHI-værvarsel for stedet"
         },
-        "tokens": [
+        "args": [
           {
-            "name": "wave_height",
-            "type": "number",
-            "title": {
-              "en": "Wave height",
-              "sv": "Våghöjd",
-              "no": "Bølgehøyde"
-            }
-          },
-          {
-            "name": "previous_wave_height",
-            "type": "number",
-            "title": {
-              "en": "Previous wave height",
-              "sv": "Föregående våghöjd",
-              "no": "Forrige bølgehøyde"
-            }
-          },
-          {
-            "name": "station",
-            "type": "string",
-            "title": {
-              "en": "Station",
-              "sv": "Station",
-              "no": "Stasjon"
-            }
-          },
-          {
-            "name": "observed_at",
-            "type": "string",
-            "title": {
-              "en": "Observed at",
-              "sv": "Observerat",
-              "no": "Observert"
-            }
-          },
-          {
-            "name": "quality",
-            "type": "string",
-            "title": {
-              "en": "Data quality",
-              "sv": "Datakvalitet",
-              "no": "Datakvalitet"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
           }
-        ],
+        ]
+      },
+      {
+        "id": "smhi_warning_active_now",
+        "title": {
+          "en": "Is an SMHI weather warning active now?",
+          "sv": "Är en SMHI-vädervarning aktiv nu?",
+          "no": "Er et SMHI-værvarsel aktivt nå?"
+        },
+        "titleFormatted": {
+          "en": "An SMHI weather warning !{{is|isn't}} active now",
+          "sv": "En SMHI-vädervarning !{{är|är inte}} aktiv nu",
+          "no": "Et SMHI-værvarsel !{{er|er ikke}} aktivt nå"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
+          }
+        ]
+      },
+      {
+        "id": "smhi_warning_level_at_least",
+        "title": {
+          "en": "SMHI warning level is at least",
+          "sv": "SMHI-varningsnivån är minst",
+          "no": "SMHI-varslingsnivå er minst"
+        },
+        "titleFormatted": {
+          "en": "Highest SMHI warning level is at least [[level]]",
+          "sv": "Högsta SMHI-varningsnivå är minst [[level]]",
+          "no": "Høyeste SMHI-varslingsnivå er minst [[level]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=warnings"
+          },
+          {
+            "name": "level",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "YELLOW",
+                "label": {
+                  "en": "Yellow",
+                  "sv": "Gul",
+                  "no": "Gul"
+                }
+              },
+              {
+                "id": "ORANGE",
+                "label": {
+                  "en": "Orange",
+                  "sv": "Orange",
+                  "no": "Oransje"
+                }
+              },
+              {
+                "id": "RED",
+                "label": {
+                  "en": "Red",
+                  "sv": "Röd",
+                  "no": "Rød"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "significant_wave_height_above",
+        "title": {
+          "en": "Significant wave height is above",
+          "sv": "Signifikant våghöjd är över",
+          "no": "Signifikant bølgehøyde er over"
+        },
+        "titleFormatted": {
+          "en": "Significant wave height is above [[meters]] m",
+          "sv": "Signifikant våghöjd är över [[meters]] m",
+          "no": "Signifikant bølgehøyde er over [[meters]] m"
+        },
         "args": [
           {
             "type": "device",
@@ -2108,73 +2558,17 @@
         ]
       },
       {
-        "id": "MaximumWaveHeightCrossedAbove",
+        "id": "maximum_wave_height_above",
         "title": {
-          "en": "Maximum wave height rises above",
-          "sv": "Maximal våghöjd stiger över",
-          "no": "Maksimal bølgehøyde stiger over"
+          "en": "Maximum wave height is above",
+          "sv": "Maximal våghöjd är över",
+          "no": "Maksimal bølgehøyde er over"
         },
         "titleFormatted": {
-          "en": "Maximum wave height rises above [[meters]] m",
-          "sv": "Maximal våghöjd stiger över [[meters]] m",
-          "no": "Maksimal bølgehøyde stiger over [[meters]] m"
+          "en": "Maximum wave height is above [[meters]] m",
+          "sv": "Maximal våghöjd är över [[meters]] m",
+          "no": "Maksimal bølgehøyde er over [[meters]] m"
         },
-        "tokens": [
-          {
-            "name": "wave_height",
-            "type": "number",
-            "title": {
-              "en": "Wave height",
-              "sv": "Våghöjd",
-              "no": "Bølgehøyde"
-            }
-          },
-          {
-            "name": "previous_wave_height",
-            "type": "number",
-            "title": {
-              "en": "Previous wave height",
-              "sv": "Föregående våghöjd",
-              "no": "Forrige bølgehøyde"
-            }
-          },
-          {
-            "name": "station",
-            "type": "string",
-            "title": {
-              "en": "Station",
-              "sv": "Station",
-              "no": "Stasjon"
-            }
-          },
-          {
-            "name": "observed_at",
-            "type": "string",
-            "title": {
-              "en": "Observed at",
-              "sv": "Observerat",
-              "no": "Observert"
-            }
-          },
-          {
-            "name": "quality",
-            "type": "string",
-            "title": {
-              "en": "Data quality",
-              "sv": "Datakvalitet",
-              "no": "Datakvalitet"
-            }
-          },
-          {
-            "name": "source",
-            "type": "string",
-            "title": {
-              "en": "Source",
-              "sv": "Källa",
-              "no": "Kilde"
-            }
-          }
-        ],
         "args": [
           {
             "type": "device",
@@ -2186,9 +2580,7 @@
             "type": "number"
           }
         ]
-      }
-    ],
-    "conditions": [
+      },
       {
         "id": "will_rain_in_next_hours",
         "title": {
@@ -3108,402 +3500,296 @@
             "type": "number"
           }
         ]
-      },
-      {
-        "id": "smhi_warning_present",
-        "title": {
-          "en": "Is there an SMHI weather warning?",
-          "sv": "Finns en SMHI-vädervarning?",
-          "no": "Finnes det et SMHI-værvarsel?"
-        },
-        "titleFormatted": {
-          "en": "There !{{is|isn't}} an issued SMHI weather warning for this location",
-          "sv": "Det !{{finns|finns inte}} en utfärdad SMHI-vädervarning för platsen",
-          "no": "Det !{{finnes|finnes ikke}} et utstedt SMHI-værvarsel for stedet"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=warnings"
-          }
-        ]
-      },
-      {
-        "id": "smhi_warning_active_now",
-        "title": {
-          "en": "Is an SMHI weather warning active now?",
-          "sv": "Är en SMHI-vädervarning aktiv nu?",
-          "no": "Er et SMHI-værvarsel aktivt nå?"
-        },
-        "titleFormatted": {
-          "en": "An SMHI weather warning !{{is|isn't}} active now",
-          "sv": "En SMHI-vädervarning !{{är|är inte}} aktiv nu",
-          "no": "Et SMHI-værvarsel !{{er|er ikke}} aktivt nå"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=warnings"
-          }
-        ]
-      },
-      {
-        "id": "smhi_warning_level_at_least",
-        "title": {
-          "en": "SMHI warning level is at least",
-          "sv": "SMHI-varningsnivån är minst",
-          "no": "SMHI-varslingsnivå er minst"
-        },
-        "titleFormatted": {
-          "en": "Highest SMHI warning level is at least [[level]]",
-          "sv": "Högsta SMHI-varningsnivå är minst [[level]]",
-          "no": "Høyeste SMHI-varslingsnivå er minst [[level]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=warnings"
-          },
-          {
-            "name": "level",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "YELLOW",
-                "label": {
-                  "en": "Yellow",
-                  "sv": "Gul",
-                  "no": "Gul"
-                }
-              },
-              {
-                "id": "ORANGE",
-                "label": {
-                  "en": "Orange",
-                  "sv": "Orange",
-                  "no": "Oransje"
-                }
-              },
-              {
-                "id": "RED",
-                "label": {
-                  "en": "Red",
-                  "sv": "Röd",
-                  "no": "Rød"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "forest_fire_risk_at_least",
-        "title": {
-          "en": "Forest fire risk is at least",
-          "sv": "Skogsbrandsrisken är minst",
-          "no": "Skogbrannrisiko er minst"
-        },
-        "titleFormatted": {
-          "en": "Forest fire risk is at least [[risk_level]]",
-          "sv": "Skogsbrandsrisken är minst [[risk_level]]",
-          "no": "Skogbrannrisiko er minst [[risk_level]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=firerisk"
-          },
-          {
-            "name": "risk_level",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "Very low risk",
-                  "sv": "Mycket liten risk",
-                  "no": "Svært liten risiko"
-                }
-              },
-              {
-                "id": "2",
-                "label": {
-                  "en": "Low risk",
-                  "sv": "Liten risk",
-                  "no": "Liten risiko"
-                }
-              },
-              {
-                "id": "3",
-                "label": {
-                  "en": "Moderate risk",
-                  "sv": "Måttlig risk",
-                  "no": "Moderat risiko"
-                }
-              },
-              {
-                "id": "4",
-                "label": {
-                  "en": "High risk",
-                  "sv": "Stor risk",
-                  "no": "Stor risiko"
-                }
-              },
-              {
-                "id": "5",
-                "label": {
-                  "en": "Very high risk",
-                  "sv": "Mycket stor risk",
-                  "no": "Svært stor risiko"
-                }
-              },
-              {
-                "id": "6",
-                "label": {
-                  "en": "Extreme risk (5E)",
-                  "sv": "Extremt stor risk (5E)",
-                  "no": "Ekstrem risiko (5E)"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "grass_fire_risk_at_least",
-        "title": {
-          "en": "Grass fire risk is at least",
-          "sv": "Gräsbrandsrisken är minst",
-          "no": "Gressbrannrisiko er minst"
-        },
-        "titleFormatted": {
-          "en": "Grass fire risk is at least [[risk_level]]",
-          "sv": "Gräsbrandsrisken är minst [[risk_level]]",
-          "no": "Gressbrannrisiko er minst [[risk_level]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=firerisk"
-          },
-          {
-            "name": "risk_level",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "3",
-                "label": {
-                  "en": "Low risk",
-                  "sv": "Liten risk",
-                  "no": "Liten risiko"
-                }
-              },
-              {
-                "id": "4",
-                "label": {
-                  "en": "Moderate risk",
-                  "sv": "Måttlig risk",
-                  "no": "Moderat risiko"
-                }
-              },
-              {
-                "id": "5",
-                "label": {
-                  "en": "High risk",
-                  "sv": "Stor risk",
-                  "no": "Stor risiko"
-                }
-              },
-              {
-                "id": "6",
-                "label": {
-                  "en": "Very high risk",
-                  "sv": "Mycket stor risk",
-                  "no": "Svært stor risiko"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "forest_dryness_at_least",
-        "title": {
-          "en": "Forest fuel dryness is at least",
-          "sv": "Bränsleuttorkning skog är minst",
-          "no": "Uttørking i skog er minst"
-        },
-        "titleFormatted": {
-          "en": "Forest fuel dryness is at least [[dryness_level]]",
-          "sv": "Bränsleuttorkning skog är minst [[dryness_level]]",
-          "no": "Uttørking i skog er minst [[dryness_level]]"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=firerisk"
-          },
-          {
-            "name": "dryness_level",
-            "type": "dropdown",
-            "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "Very wet",
-                  "sv": "Mycket blött",
-                  "no": "Svært vått"
-                }
-              },
-              {
-                "id": "2",
-                "label": {
-                  "en": "Wet",
-                  "sv": "Blött",
-                  "no": "Vått"
-                }
-              },
-              {
-                "id": "3",
-                "label": {
-                  "en": "Moderately wet",
-                  "sv": "Måttligt blött",
-                  "no": "Moderat vått"
-                }
-              },
-              {
-                "id": "4",
-                "label": {
-                  "en": "Dry",
-                  "sv": "Torrt",
-                  "no": "Tørt"
-                }
-              },
-              {
-                "id": "5",
-                "label": {
-                  "en": "Very dry",
-                  "sv": "Mycket torrt",
-                  "no": "Svært tørt"
-                }
-              },
-              {
-                "id": "6",
-                "label": {
-                  "en": "Extremely dry (5E)",
-                  "sv": "Extremt torrt (5E)",
-                  "no": "Ekstremt tørt (5E)"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "sea_level_above",
-        "title": {
-          "en": "Sea level is above",
-          "sv": "Havsvattenståndet är över",
-          "no": "Havnivå er over"
-        },
-        "titleFormatted": {
-          "en": "Sea level is above [[cm]] cm RH2000",
-          "sv": "Havsvattenståndet är över [[cm]] cm RH2000",
-          "no": "Havnivå er over [[cm]] cm RH2000"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=sealevel"
-          },
-          {
-            "name": "cm",
-            "type": "number"
-          }
-        ]
-      },
-      {
-        "id": "sea_level_below",
-        "title": {
-          "en": "Sea level is below",
-          "sv": "Havsvattenståndet är under",
-          "no": "Havnivå er under"
-        },
-        "titleFormatted": {
-          "en": "Sea level is below [[cm]] cm RH2000",
-          "sv": "Havsvattenståndet är under [[cm]] cm RH2000",
-          "no": "Havnivå er under [[cm]] cm RH2000"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=sealevel"
-          },
-          {
-            "name": "cm",
-            "type": "number"
-          }
-        ]
-      },
-      {
-        "id": "significant_wave_height_above",
-        "title": {
-          "en": "Significant wave height is above",
-          "sv": "Signifikant våghöjd är över",
-          "no": "Signifikant bølgehøyde er over"
-        },
-        "titleFormatted": {
-          "en": "Significant wave height is above [[meters]] m",
-          "sv": "Signifikant våghöjd är över [[meters]] m",
-          "no": "Signifikant bølgehøyde er over [[meters]] m"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=waves"
-          },
-          {
-            "name": "meters",
-            "type": "number"
-          }
-        ]
-      },
-      {
-        "id": "maximum_wave_height_above",
-        "title": {
-          "en": "Maximum wave height is above",
-          "sv": "Maximal våghöjd är över",
-          "no": "Maksimal bølgehøyde er over"
-        },
-        "titleFormatted": {
-          "en": "Maximum wave height is above [[meters]] m",
-          "sv": "Maximal våghöjd är över [[meters]] m",
-          "no": "Maksimal bølgehøyde er over [[meters]] m"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=waves"
-          },
-          {
-            "name": "meters",
-            "type": "number"
-          }
-        ]
       }
     ]
   },
   "drivers": [
+    {
+      "name": {
+        "en": "SMHI Fire Risk",
+        "sv": "SMHI Brandrisk",
+        "no": "SMHI Brannrisiko"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "fire_risk_forecast_for_cp",
+        "forest_fire_risk_cp",
+        "grass_fire_risk_cp",
+        "forest_dryness_cp",
+        "fire_risk_approved_cp",
+        "fire_risk_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "firerisk",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Fire risk settings",
+            "sv": "Brandriskinställningar",
+            "no": "Brannrisikoinnstillinger"
+          },
+          "children": [
+            {
+              "id": "forecastDay",
+              "type": "radio",
+              "label": {
+                "en": "Select forecast day",
+                "sv": "Välj prognosdag",
+                "no": "Velg prognosedag"
+              },
+              "value": "0",
+              "values": [
+                {
+                  "id": "0",
+                  "label": {
+                    "en": "Today",
+                    "sv": "Idag",
+                    "no": "I dag"
+                  }
+                },
+                {
+                  "id": "1",
+                  "label": {
+                    "en": "Tomorrow",
+                    "sv": "Imorgon",
+                    "no": "I morgen"
+                  }
+                },
+                {
+                  "id": "2",
+                  "label": {
+                    "en": "In 2 days",
+                    "sv": "Om 2 dagar",
+                    "no": "Om 2 dager"
+                  }
+                },
+                {
+                  "id": "3",
+                  "label": {
+                    "en": "In 3 days",
+                    "sv": "Om 3 dagar",
+                    "no": "Om 3 dager"
+                  }
+                },
+                {
+                  "id": "4",
+                  "label": {
+                    "en": "In 4 days",
+                    "sv": "Om 4 dagar",
+                    "no": "Om 4 dager"
+                  }
+                },
+                {
+                  "id": "5",
+                  "label": {
+                    "en": "In 5 days",
+                    "sv": "Om 5 dagar",
+                    "no": "Om 5 dager"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "latitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Latitude",
+                "sv": "Latitud",
+                "no": "Breddegrad"
+              }
+            },
+            {
+              "id": "longitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Longitude",
+                "sv": "Longitud",
+                "no": "Lengdegrad"
+              }
+            },
+            {
+              "id": "usehomeylocation",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Use Homey geolocation",
+                "sv": "Använd Homeys geolocation",
+                "no": "Bruk Homeys geolokasjon"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "SMHI Sea Level",
+        "sv": "SMHI Havsvattenstånd",
+        "no": "SMHI Havnivå"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "sea_level_rh2000_cp",
+        "ocean_station_cp",
+        "ocean_observed_at_cp",
+        "ocean_observation_age_cp",
+        "ocean_quality_cp",
+        "ocean_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "sealevel"
+    },
+    {
+      "name": {
+        "en": "SMHI Weather Warnings",
+        "sv": "SMHI Vädervarningar",
+        "no": "SMHI værvarsler"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "smhi_warning_status_cp",
+        "smhi_warning_level_cp",
+        "smhi_warning_event_cp",
+        "smhi_warning_area_cp",
+        "smhi_warning_valid_from_cp",
+        "smhi_warning_valid_to_cp",
+        "smhi_warning_count_cp",
+        "smhi_warning_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "warnings",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Warning location",
+            "sv": "Varningsplats",
+            "no": "Varslingssted"
+          },
+          "children": [
+            {
+              "id": "latitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Latitude",
+                "sv": "Latitud",
+                "no": "Breddegrad"
+              }
+            },
+            {
+              "id": "longitude",
+              "type": "text",
+              "value": "",
+              "label": {
+                "en": "Longitude",
+                "sv": "Longitud",
+                "no": "Lengdegrad"
+              }
+            },
+            {
+              "id": "usehomeylocation",
+              "type": "checkbox",
+              "value": true,
+              "label": {
+                "en": "Use Homey geolocation",
+                "sv": "Använd Homeys geolocation",
+                "no": "Bruk Homeys geolokasjon"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "SMHI Waves",
+        "sv": "SMHI Vågor",
+        "no": "SMHI Bølger"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "significant_wave_height_cp",
+        "maximum_wave_height_cp",
+        "mean_wave_period_cp",
+        "mean_wave_direction_cp",
+        "mean_wave_direction_heading_cp",
+        "ocean_station_cp",
+        "ocean_observed_at_cp",
+        "ocean_observation_age_cp",
+        "ocean_quality_cp",
+        "ocean_source_cp"
+      ],
+      "images": {
+        "large": "/drivers/weather/assets/images/large.png",
+        "small": "/drivers/weather/assets/images/small.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "waves"
+    },
     {
       "name": {
         "en": "Weather Forecast from SMHI",
@@ -3703,292 +3989,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "warnings",
-      "name": {
-        "en": "SMHI Weather Warnings",
-        "sv": "SMHI Vädervarningar",
-        "no": "SMHI værvarsler"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "smhi_warning_status_cp",
-        "smhi_warning_level_cp",
-        "smhi_warning_event_cp",
-        "smhi_warning_area_cp",
-        "smhi_warning_valid_from_cp",
-        "smhi_warning_valid_to_cp",
-        "smhi_warning_count_cp",
-        "smhi_warning_source_cp"
-      ],
-      "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Warning location",
-            "sv": "Varningsplats",
-            "no": "Varslingssted"
-          },
-          "children": [
-            {
-              "id": "latitude",
-              "type": "text",
-              "value": "",
-              "label": {
-                "en": "Latitude",
-                "sv": "Latitud",
-                "no": "Breddegrad"
-              }
-            },
-            {
-              "id": "longitude",
-              "type": "text",
-              "value": "",
-              "label": {
-                "en": "Longitude",
-                "sv": "Longitud",
-                "no": "Lengdegrad"
-              }
-            },
-            {
-              "id": "usehomeylocation",
-              "type": "checkbox",
-              "value": true,
-              "label": {
-                "en": "Use Homey geolocation",
-                "sv": "Använd Homeys geolocation",
-                "no": "Bruk Homeys geolokasjon"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "firerisk",
-      "name": {
-        "en": "SMHI Fire Risk",
-        "sv": "SMHI Brandrisk",
-        "no": "SMHI Brannrisiko"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "fire_risk_forecast_for_cp",
-        "forest_fire_risk_cp",
-        "grass_fire_risk_cp",
-        "forest_dryness_cp",
-        "fire_risk_approved_cp",
-        "fire_risk_source_cp"
-      ],
-      "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "settings": [
-        {
-          "type": "group",
-          "label": {
-            "en": "Fire risk settings",
-            "sv": "Brandriskinställningar",
-            "no": "Brannrisikoinnstillinger"
-          },
-          "children": [
-            {
-              "id": "forecastDay",
-              "type": "radio",
-              "label": {
-                "en": "Select forecast day",
-                "sv": "Välj prognosdag",
-                "no": "Velg prognosedag"
-              },
-              "value": "0",
-              "values": [
-                {
-                  "id": "0",
-                  "label": {
-                    "en": "Today",
-                    "sv": "Idag",
-                    "no": "I dag"
-                  }
-                },
-                {
-                  "id": "1",
-                  "label": {
-                    "en": "Tomorrow",
-                    "sv": "Imorgon",
-                    "no": "I morgen"
-                  }
-                },
-                {
-                  "id": "2",
-                  "label": {
-                    "en": "In 2 days",
-                    "sv": "Om 2 dagar",
-                    "no": "Om 2 dager"
-                  }
-                },
-                {
-                  "id": "3",
-                  "label": {
-                    "en": "In 3 days",
-                    "sv": "Om 3 dagar",
-                    "no": "Om 3 dager"
-                  }
-                },
-                {
-                  "id": "4",
-                  "label": {
-                    "en": "In 4 days",
-                    "sv": "Om 4 dagar",
-                    "no": "Om 4 dager"
-                  }
-                },
-                {
-                  "id": "5",
-                  "label": {
-                    "en": "In 5 days",
-                    "sv": "Om 5 dagar",
-                    "no": "Om 5 dager"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "latitude",
-              "type": "text",
-              "value": "",
-              "label": {
-                "en": "Latitude",
-                "sv": "Latitud",
-                "no": "Breddegrad"
-              }
-            },
-            {
-              "id": "longitude",
-              "type": "text",
-              "value": "",
-              "label": {
-                "en": "Longitude",
-                "sv": "Longitud",
-                "no": "Lengdegrad"
-              }
-            },
-            {
-              "id": "usehomeylocation",
-              "type": "checkbox",
-              "value": true,
-              "label": {
-                "en": "Use Homey geolocation",
-                "sv": "Använd Homeys geolocation",
-                "no": "Bruk Homeys geolokasjon"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "sealevel",
-      "name": {
-        "en": "SMHI Sea Level",
-        "sv": "SMHI Havsvattenstånd",
-        "no": "SMHI Havnivå"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "sea_level_rh2000_cp",
-        "ocean_station_cp",
-        "ocean_observed_at_cp",
-        "ocean_observation_age_cp",
-        "ocean_quality_cp",
-        "ocean_source_cp"
-      ],
-      "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ]
-    },
-    {
-      "id": "waves",
-      "name": {
-        "en": "SMHI Waves",
-        "sv": "SMHI Vågor",
-        "no": "SMHI Bølger"
-      },
-      "class": "sensor",
-      "capabilities": [
-        "significant_wave_height_cp",
-        "maximum_wave_height_cp",
-        "mean_wave_period_cp",
-        "mean_wave_direction_cp",
-        "mean_wave_direction_heading_cp",
-        "ocean_station_cp",
-        "ocean_observed_at_cp",
-        "ocean_observation_age_cp",
-        "ocean_quality_cp",
-        "ocean_source_cp"
-      ],
-      "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
-      },
-      "pair": [
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ]
     }
   ],
   "capabilities": {
@@ -4006,6 +4006,42 @@
       "uiComponent": "sensor",
       "icon": "/assets/icons/thermometer.svg"
     },
+    "fire_risk_approved_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forecast approved",
+        "sv": "Prognos godkänd",
+        "no": "Prognose godkjent"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "fire_risk_forecast_for_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forecast for",
+        "sv": "Prognos för",
+        "no": "Prognose for"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "fire_risk_source_cp": {
+      "type": "string",
+      "title": {
+        "en": "Source",
+        "sv": "Källa",
+        "no": "Kilde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
     "forecast_for_cp": {
       "type": "string",
       "title": {
@@ -4017,6 +4053,42 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/calendarclock.svg"
+    },
+    "forest_dryness_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forest fuel dryness",
+        "sv": "Bränsleuttorkning skog",
+        "no": "Uttørking i skog"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
+    "forest_fire_risk_cp": {
+      "type": "string",
+      "title": {
+        "en": "Forest fire risk",
+        "sv": "Skogsbrandsrisk",
+        "no": "Skogbrannrisiko"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
+    },
+    "grass_fire_risk_cp": {
+      "type": "string",
+      "title": {
+        "en": "Grass fire risk",
+        "sv": "Gräsbrandsrisk",
+        "no": "Gressbrannrisiko"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/fire.svg"
     },
     "horizontal_visibility_cp": {
       "type": "number",
@@ -4046,6 +4118,21 @@
       "decimals": 1,
       "uiComponent": "sensor",
       "icon": "/assets/icons/pct.svg"
+    },
+    "maximum_wave_height_cp": {
+      "type": "number",
+      "title": {
+        "en": "Maximum wave height",
+        "sv": "Maximal våghöjd",
+        "no": "Maksimal bølgehøyde"
+      },
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "units": "m",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
     },
     "mean_precipitation_intensity_cp": {
       "type": "number",
@@ -4117,6 +4204,46 @@
       "units": "(0-8)",
       "uiComponent": "sensor",
       "icon": "/assets/icon.svg"
+    },
+    "mean_wave_direction_cp": {
+      "type": "number",
+      "title": {
+        "en": "Wave direction",
+        "sv": "Vågriktning",
+        "no": "Bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "°",
+      "decimals": 1,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_direction_heading_cp": {
+      "type": "string",
+      "title": {
+        "en": "Wave direction",
+        "sv": "Vågriktning",
+        "no": "Bølgeretning"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
+    },
+    "mean_wave_period_cp": {
+      "type": "number",
+      "title": {
+        "en": "Mean wave period",
+        "sv": "Medelvågperiod",
+        "no": "Middel bølgeperiode"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "s",
+      "decimals": 2,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/waves.svg"
     },
     "measure_air_pressure_cp": {
       "type": "number",
@@ -4269,227 +4396,6 @@
       "uiComponent": "sensor",
       "icon": "/assets/icons/pct.svg"
     },
-    "percent_of_precipitation_in_frozen_form_cp": {
-      "type": "number",
-      "title": {
-        "en": "Precipitation in frozen form",
-        "sv": "Nederbörd i frusen form",
-        "no": "Nedbør i frossen form"
-      },
-      "getable": true,
-      "setable": false,
-      "units": "%",
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/pct.svg"
-    },
-    "wind_gust_speed_cp": {
-      "type": "number",
-      "title": {
-        "en": "Wind gust speed",
-        "sv": "Vindbyarnas hastighet",
-        "no": "Hastigheten på vindkastene"
-      },
-      "getable": true,
-      "setable": false,
-      "insights": true,
-      "units": "m/s",
-      "decimals": 1,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/gust.svg"
-    },
-    "smhi_warning_status_cp": {
-      "type": "string",
-      "title": {
-        "en": "Warning status",
-        "sv": "Varningsstatus",
-        "no": "Varslingsstatus"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "smhi_warning_level_cp": {
-      "type": "string",
-      "title": {
-        "en": "Warning level",
-        "sv": "Varningsnivå",
-        "no": "Varslingsnivå"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "smhi_warning_event_cp": {
-      "type": "string",
-      "title": {
-        "en": "Warning",
-        "sv": "Varning",
-        "no": "Varsel"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "smhi_warning_area_cp": {
-      "type": "string",
-      "title": {
-        "en": "Warning area",
-        "sv": "Varningsområde",
-        "no": "Varslingsområde"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "smhi_warning_valid_from_cp": {
-      "type": "string",
-      "title": {
-        "en": "Valid from",
-        "sv": "Gäller från",
-        "no": "Gyldig fra"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/calendarclock.svg"
-    },
-    "smhi_warning_valid_to_cp": {
-      "type": "string",
-      "title": {
-        "en": "Valid until",
-        "sv": "Gäller till",
-        "no": "Gyldig til"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/calendarclock.svg"
-    },
-    "smhi_warning_count_cp": {
-      "type": "number",
-      "title": {
-        "en": "Warnings for location",
-        "sv": "Varningar för platsen",
-        "no": "Varsler for stedet"
-      },
-      "getable": true,
-      "setable": false,
-      "decimals": 0,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "smhi_warning_source_cp": {
-      "type": "string",
-      "title": {
-        "en": "Source",
-        "sv": "Källa",
-        "no": "Kilde"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/warning.svg"
-    },
-    "fire_risk_forecast_for_cp": {
-      "type": "string",
-      "title": {
-        "en": "Forecast for",
-        "sv": "Prognos för",
-        "no": "Prognose for"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/calendarclock.svg"
-    },
-    "forest_fire_risk_cp": {
-      "type": "string",
-      "title": {
-        "en": "Forest fire risk",
-        "sv": "Skogsbrandsrisk",
-        "no": "Skogbrannrisiko"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/fire.svg"
-    },
-    "grass_fire_risk_cp": {
-      "type": "string",
-      "title": {
-        "en": "Grass fire risk",
-        "sv": "Gräsbrandsrisk",
-        "no": "Gressbrannrisiko"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/fire.svg"
-    },
-    "forest_dryness_cp": {
-      "type": "string",
-      "title": {
-        "en": "Forest fuel dryness",
-        "sv": "Bränsleuttorkning skog",
-        "no": "Uttørking i skog"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/fire.svg"
-    },
-    "fire_risk_approved_cp": {
-      "type": "string",
-      "title": {
-        "en": "Forecast approved",
-        "sv": "Prognos godkänd",
-        "no": "Prognose godkjent"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/calendarclock.svg"
-    },
-    "fire_risk_source_cp": {
-      "type": "string",
-      "title": {
-        "en": "Source",
-        "sv": "Källa",
-        "no": "Kilde"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/fire.svg"
-    },
-    "ocean_station_cp": {
-      "type": "string",
-      "title": {
-        "en": "Station",
-        "sv": "Station",
-        "no": "Stasjon"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/ocean.svg"
-    },
-    "ocean_observed_at_cp": {
-      "type": "string",
-      "title": {
-        "en": "Observed at",
-        "sv": "Observerat",
-        "no": "Observert"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/calendarclock.svg"
-    },
     "ocean_observation_age_cp": {
       "type": "number",
       "title": {
@@ -4501,6 +4407,18 @@
       "setable": false,
       "units": "min",
       "decimals": 0,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "ocean_observed_at_cp": {
+      "type": "string",
+      "title": {
+        "en": "Observed at",
+        "sv": "Observerat",
+        "no": "Observert"
+      },
+      "getable": true,
+      "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/calendarclock.svg"
     },
@@ -4527,6 +4445,31 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/icons/ocean.svg"
+    },
+    "ocean_station_cp": {
+      "type": "string",
+      "title": {
+        "en": "Station",
+        "sv": "Station",
+        "no": "Stasjon"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/ocean.svg"
+    },
+    "percent_of_precipitation_in_frozen_form_cp": {
+      "type": "number",
+      "title": {
+        "en": "Precipitation in frozen form",
+        "sv": "Nederbörd i frusen form",
+        "no": "Nedbør i frossen form"
+      },
+      "getable": true,
+      "setable": false,
+      "units": "%",
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/pct.svg"
     },
     "sea_level_rh2000_cp": {
       "type": "number",
@@ -4558,60 +4501,117 @@
       "uiComponent": "sensor",
       "icon": "/assets/icons/waves.svg"
     },
-    "maximum_wave_height_cp": {
+    "smhi_warning_area_cp": {
+      "type": "string",
+      "title": {
+        "en": "Warning area",
+        "sv": "Varningsområde",
+        "no": "Varslingsområde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_count_cp": {
       "type": "number",
       "title": {
-        "en": "Maximum wave height",
-        "sv": "Maximal våghöjd",
-        "no": "Maksimal bølgehøyde"
+        "en": "Warnings for location",
+        "sv": "Varningar för platsen",
+        "no": "Varsler for stedet"
+      },
+      "getable": true,
+      "setable": false,
+      "decimals": 0,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_event_cp": {
+      "type": "string",
+      "title": {
+        "en": "Warning",
+        "sv": "Varning",
+        "no": "Varsel"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_level_cp": {
+      "type": "string",
+      "title": {
+        "en": "Warning level",
+        "sv": "Varningsnivå",
+        "no": "Varslingsnivå"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_source_cp": {
+      "type": "string",
+      "title": {
+        "en": "Source",
+        "sv": "Källa",
+        "no": "Kilde"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_status_cp": {
+      "type": "string",
+      "title": {
+        "en": "Warning status",
+        "sv": "Varningsstatus",
+        "no": "Varslingsstatus"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/warning.svg"
+    },
+    "smhi_warning_valid_from_cp": {
+      "type": "string",
+      "title": {
+        "en": "Valid from",
+        "sv": "Gäller från",
+        "no": "Gyldig fra"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "smhi_warning_valid_to_cp": {
+      "type": "string",
+      "title": {
+        "en": "Valid until",
+        "sv": "Gäller till",
+        "no": "Gyldig til"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icons/calendarclock.svg"
+    },
+    "wind_gust_speed_cp": {
+      "type": "number",
+      "title": {
+        "en": "Wind gust speed",
+        "sv": "Vindbyarnas hastighet",
+        "no": "Hastigheten på vindkastene"
       },
       "getable": true,
       "setable": false,
       "insights": true,
-      "units": "m",
-      "decimals": 2,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/waves.svg"
-    },
-    "mean_wave_period_cp": {
-      "type": "number",
-      "title": {
-        "en": "Mean wave period",
-        "sv": "Medelvågperiod",
-        "no": "Middel bølgeperiode"
-      },
-      "getable": true,
-      "setable": false,
-      "units": "s",
-      "decimals": 2,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/waves.svg"
-    },
-    "mean_wave_direction_cp": {
-      "type": "number",
-      "title": {
-        "en": "Wave direction",
-        "sv": "Vågriktning",
-        "no": "Bølgeretning"
-      },
-      "getable": true,
-      "setable": false,
-      "units": "°",
+      "units": "m/s",
       "decimals": 1,
       "uiComponent": "sensor",
-      "icon": "/assets/icons/waves.svg"
-    },
-    "mean_wave_direction_heading_cp": {
-      "type": "string",
-      "title": {
-        "en": "Wave direction",
-        "sv": "Vågriktning",
-        "no": "Bølgeretning"
-      },
-      "getable": true,
-      "setable": false,
-      "uiComponent": "sensor",
-      "icon": "/assets/icons/waves.svg"
+      "icon": "/assets/icons/gust.svg"
     }
   }
 }

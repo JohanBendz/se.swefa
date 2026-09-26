@@ -73,5 +73,10 @@
     "en": "Added separate SMHI Sea Level and SMHI Waves devices using named ocean observation stations. Sea Level shows RH2000 observations with age and quality; Waves shows significant/max wave height, period and wave direction where available. Added threshold Flow cards, station-aware pairing, freshness checks and dedicated ocean icons.",
     "sv": "Lade till separata enheter för SMHI Havsvattenstånd och SMHI Vågor baserade på namngivna havsobservationsstationer. Havsvattenstånd visar RH2000 med ålder och kvalitet; Vågor visar signifikant/maximal våghöjd, period och vågriktning där data finns. Lade även till tröskelbaserade Flow-kort, stationsval, färskhetskontroller och egna havsikoner.",
     "no": "La til separate enheter for SMHI Havnivå og SMHI Bølger basert på navngitte havobservasjonsstasjoner. Havnivå viser RH2000 med alder og kvalitet; Bølger viser signifikant/maksimal bølgehøyde, periode og bølgeretning der data finnes. La også til terskelbaserte Flow-kort, stasjonsvalg, ferskhetskontroller og egne havikoner."
+  },
+  "0.11.1": {
+    "en": "Improved App Store description and README text.",
+    "sv": "Förbättrad App Store-beskrivning och README-text.",
+    "no": "Forbedret App Store-beskrivelse og README-tekst."
   }
 }

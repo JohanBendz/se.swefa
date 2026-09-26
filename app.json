@@ -10,9 +10,9 @@
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
-    "en": "Weather forecasts, official warnings, fire-risk forecasts and ocean observations from SMHI for Homey",
-    "sv": "Väderprognoser, officiella varningar, brandriskprognoser och havsobservationer från SMHI för Homey",
-    "no": "Værprognoser, offisielle varsler, brannrisikoprognoser og havobservasjoner fra SMHI for Homey"
+    "en": "Weather, warnings and conditions, straight from SMHI.",
+    "sv": "Väder, varningar och förhållanden, direkt från SMHI.",
+    "no": "Vær, varsler og forhold, direkte fra SMHI."
   },
   "tags": {
     "en": [

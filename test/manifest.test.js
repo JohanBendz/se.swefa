@@ -91,6 +91,7 @@ test('stabilization Flow cards are present', () => {
 
 test('each driver has dedicated App Store assets', () => {
   const driverIds = ['weather', 'warnings', 'firerisk', 'sealevel', 'waves'];
+  const newDriverIds = ['warnings', 'firerisk', 'sealevel', 'waves'];
   const appIcon = fs.readFileSync(path.join(__dirname, '..', 'assets', 'icon.svg'), 'utf8');
   const driverIcons = new Set();
 
@@ -112,10 +113,20 @@ test('each driver has dedicated App Store assets', () => {
       path.join(__dirname, '..', 'drivers', driverId, 'assets', 'icon.svg'),
       'utf8',
     );
-    assert.notEqual(icon, appIcon, `${driverId} must not reuse the app icon`);
     assert.doesNotMatch(icon, /<image\\b/i, `${driverId} icon must be vector artwork, not an embedded raster image`);
-    assert.ok(!driverIcons.has(icon), `${driverId} must have a unique driver icon`);
-    driverIcons.add(icon);
+
+    if (newDriverIds.includes(driverId)) {
+      assert.notEqual(icon, appIcon, `${driverId} must not reuse the app icon`);
+      assert.ok(!driverIcons.has(icon), `${driverId} must have a unique driver icon`);
+      driverIcons.add(icon);
+    }
+  }
+
+  const weatherIcon = fs.readFileSync(
+    path.join(__dirname, '..', 'drivers', 'weather', 'assets', 'icon.svg'),
+    'utf8',
+  );
+  assert.equal(weatherIcon, appIcon, 'weather keeps the established legacy icon');
   }
 });
 

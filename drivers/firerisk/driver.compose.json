@@ -14,8 +14,8 @@
     "fire_risk_source_cp"
   ],
   "images": {
-    "large": "/drivers/weather/assets/images/large.png",
-    "small": "/drivers/weather/assets/images/small.png"
+    "large": "/drivers/firerisk/assets/images/large.png",
+    "small": "/drivers/firerisk/assets/images/small.png"
   },
   "pair": [
     {

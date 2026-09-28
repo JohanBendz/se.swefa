@@ -14,8 +14,8 @@
     "ocean_source_cp"
   ],
   "images": {
-    "large": "/drivers/weather/assets/images/large.png",
-    "small": "/drivers/weather/assets/images/small.png"
+    "large": "/drivers/sealevel/assets/images/large.png",
+    "small": "/drivers/sealevel/assets/images/small.png"
   },
   "pair": [
     {

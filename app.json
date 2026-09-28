@@ -6,7 +6,7 @@
     "sv": "Väderprognos från SMHI",
     "no": "Værvarsel fra SMHI"
   },
-  "version": "0.11.1",
+  "version": "0.11.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "description": {
@@ -3520,8 +3520,8 @@
         "fire_risk_source_cp"
       ],
       "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
+        "large": "/drivers/firerisk/assets/images/large.png",
+        "small": "/drivers/firerisk/assets/images/small.png"
       },
       "pair": [
         {
@@ -3656,8 +3656,8 @@
         "ocean_source_cp"
       ],
       "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
+        "large": "/drivers/sealevel/assets/images/large.png",
+        "small": "/drivers/sealevel/assets/images/small.png"
       },
       "pair": [
         {
@@ -3692,8 +3692,8 @@
         "smhi_warning_source_cp"
       ],
       "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
+        "large": "/drivers/warnings/assets/images/large.png",
+        "small": "/drivers/warnings/assets/images/small.png"
       },
       "pair": [
         {
@@ -3772,8 +3772,8 @@
         "ocean_source_cp"
       ],
       "images": {
-        "large": "/drivers/weather/assets/images/large.png",
-        "small": "/drivers/weather/assets/images/small.png"
+        "large": "/drivers/waves/assets/images/large.png",
+        "small": "/drivers/waves/assets/images/small.png"
       },
       "pair": [
         {

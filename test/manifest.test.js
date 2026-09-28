@@ -127,7 +127,6 @@ test('each driver has dedicated App Store assets', () => {
     'utf8',
   );
   assert.equal(weatherIcon, appIcon, 'weather keeps the established legacy icon');
-  }
 });
 
 test('custom capability definitions are used by at least one driver', () => {

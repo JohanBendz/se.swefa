@@ -78,5 +78,10 @@
     "en": "Improved App Store description and README text.",
     "sv": "Förbättrad App Store-beskrivning och README-text.",
     "no": "Forbedret App Store-beskrivelse og README-tekst."
+  },
+  "0.11.2": {
+    "en": "Updated App Store and driver images, added unique driver icons, and aligned release metadata for certification.",
+    "sv": "Uppdaterade App Store- och driverbilder, lade till unika driverikoner och synkroniserade release-metadata för certifiering.",
+    "no": "Oppdaterte App Store- og driverbilder, la til unike driverikoner og synkroniserte release-metadata for sertifisering."
   }
 }

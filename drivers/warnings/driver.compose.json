@@ -16,8 +16,8 @@
     "smhi_warning_source_cp"
   ],
   "images": {
-    "large": "/drivers/weather/assets/images/large.png",
-    "small": "/drivers/weather/assets/images/small.png"
+    "large": "/drivers/warnings/assets/images/large.png",
+    "small": "/drivers/warnings/assets/images/small.png"
   },
   "pair": [
     {

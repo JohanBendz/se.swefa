@@ -18,8 +18,8 @@
     "ocean_source_cp"
   ],
   "images": {
-    "large": "/drivers/weather/assets/images/large.png",
-    "small": "/drivers/weather/assets/images/small.png"
+    "large": "/drivers/waves/assets/images/large.png",
+    "small": "/drivers/waves/assets/images/small.png"
   },
   "pair": [
     {

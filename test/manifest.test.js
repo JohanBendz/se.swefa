@@ -43,7 +43,6 @@ test('package, compose and generated app versions stay aligned', () => {
   const compose = readJson('.homeycompose/app.json');
   const app = readJson('app.json');
 
-  assert.equal(pkg.version, '0.11.0');
   assert.equal(compose.version, pkg.version);
   assert.equal(app.version, pkg.version);
   assert.equal(compose.category, 'climate');
@@ -90,6 +89,36 @@ test('stabilization Flow cards are present', () => {
   }
 });
 
+test('each driver has dedicated App Store assets', () => {
+  const driverIds = ['weather', 'warnings', 'firerisk', 'sealevel', 'waves'];
+  const appIcon = fs.readFileSync(path.join(__dirname, '..', 'assets', 'icon.svg'), 'utf8');
+  const driverIcons = new Set();
+
+  for (const driverId of driverIds) {
+    const driver = readJson(`drivers/${driverId}/driver.compose.json`);
+    assert.deepEqual(driver.images, {
+      large: `/drivers/${driverId}/assets/images/large.png`,
+      small: `/drivers/${driverId}/assets/images/small.png`,
+    });
+
+    for (const asset of ['icon.svg', 'images/large.png', 'images/small.png']) {
+      assert.ok(
+        fs.existsSync(path.join(__dirname, '..', 'drivers', driverId, 'assets', asset)),
+        `missing App Store asset for ${driverId}: ${asset}`,
+      );
+    }
+
+    const icon = fs.readFileSync(
+      path.join(__dirname, '..', 'drivers', driverId, 'assets', 'icon.svg'),
+      'utf8',
+    );
+    assert.notEqual(icon, appIcon, `${driverId} must not reuse the app icon`);
+    assert.doesNotMatch(icon, /<image\\b/i, `${driverId} icon must be vector artwork, not an embedded raster image`);
+    assert.ok(!driverIcons.has(icon), `${driverId} must have a unique driver icon`);
+    driverIcons.add(icon);
+  }
+});
+
 test('custom capability definitions are used by at least one driver', () => {
   const composeDir = path.join(__dirname, '..', '.homeycompose', 'capabilities');
   const capabilityFiles = new Set(
@@ -114,6 +143,8 @@ test('runtime dependency graph stays empty', () => {
   const lock = readJson('package-lock.json');
 
   assert.deepEqual(pkg.dependencies || {}, {});
+  assert.equal(lock.version, pkg.version);
+  assert.equal(lock.packages[''].version, pkg.version);
   assert.equal(lock.lockfileVersion, 3);
   assert.deepEqual(Object.keys(lock.packages || {}), ['']);
   assert.deepEqual(lock.packages[''].dependencies || {}, {});

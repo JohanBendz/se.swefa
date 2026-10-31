@@ -8,6 +8,7 @@ class WeatherDriver extends Driver {
     this.log('SMHI weather driver initiated');
     this.registerFlowTriggers();
     this.registerFlowConditions();
+    this.registerFlowActions();
   }
 
   registerFlowTriggers() {
@@ -21,6 +22,15 @@ class WeatherDriver extends Driver {
       .getDeviceTriggerCard('WeatherSituationChangedFromTo')
       .registerRunListener(async ({ from_weather_situation, to_weather_situation }, state) => {
         return state?.fromCode === from_weather_situation && state?.toCode === to_weather_situation;
+      });
+  }
+
+  registerFlowActions() {
+    this.homey.flow.getActionCard('get_rolling_hourly_forecast')
+      .registerRunListener(async ({ device, hours = 1 }) => device.getRollingHourlyForecast(hours));
+    this.homey.flow.getActionCard('get_daytime_hourly_forecast')
+      .registerRunListener(async ({ device, start_hour = 0, end_hour = 23 }) => {
+        return device.getHourlyForecast(start_hour, end_hour);
       });
   }
 

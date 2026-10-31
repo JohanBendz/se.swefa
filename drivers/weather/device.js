@@ -1,8 +1,10 @@
 'use strict';
 
 const { Device } = require('homey');
+const { getLocale } = require('../../lib/i18n-utils');
 const { requestJson } = require('../../lib/http-json');
 const { calculateFeelsLike } = require('../../lib/feels-like');
+const { getHourlyForecast, getRollingHourlyForecast } = require('../../lib/hourly-forecast');
 const {
   WIND_DIRECTION_CODES,
   formatCoordinate,
@@ -142,6 +144,22 @@ class WeatherDevice extends Device {
     }
 
     return data;
+  }
+
+  async getHourlyForecast(startHour = 0, endHour = 23) {
+    if (!this.weatherData) await this.fetchSMHIData(true);
+    return getHourlyForecast(this.weatherData, {
+      startHour, endHour, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),
+      missingForecastText: this.homey.__('hourly_forecast_missing'),
+    });
+  }
+
+  async getRollingHourlyForecast(hours = 1) {
+    if (!this.weatherData) await this.fetchSMHIData(true);
+    return getRollingHourlyForecast(this.weatherData, {
+      hours, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),
+      missingForecastText: this.homey.__('hourly_forecast_missing'),
+    });
   }
 
   async updateCapabilities(settingsOverride = null) {
@@ -474,8 +492,7 @@ class WeatherDevice extends Device {
 
   formatForecastTime(time) {
     const date = new Date(time);
-    const language = this.homey.i18n.getLanguage();
-    const locale = { en: 'en-GB', sv: 'sv-SE', no: 'nb-NO' }[language] ?? 'en-GB';
+    const locale = getLocale(this.homey.i18n.getLanguage());
 
     return new Intl.DateTimeFormat(locale, {
       timeZone: this.homey.clock.getTimezone(),
